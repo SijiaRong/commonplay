@@ -16,6 +16,7 @@ An open-source 3D party racing and obstacle-course game project started at AI Ha
 
 - **[当前方向与派对游戏调研](docs/party-racing-research.zh-CN.md)**：已确认事项、10 款竞品、机制比较、原型建议和待决策项。
 - **[Lost Marbles 技术拆解](docs/lost-marbles-tech-analysis.zh-CN.md)**：根据公开加载源码确认渲染、物理、赛道生成、联机与资源方案。
+- **[Lost Marbles 赛道生成机制](docs/lost-marbles-course-generation.zh-CN.md)**：生成流程图、五关参数、22 类普通模块、特殊段与岔路规则，以及真实种子的拼装示例。
 - 首版先验证操控、障碍、胜负与重开闭环；小人数房间、机器人补位、分轮淘汰或积分、局内升级均为待评估建议。
 - Hi3D 可用于外观和装饰；碰撞体、关键赛道尺寸与玩法逻辑应单独控制。
 

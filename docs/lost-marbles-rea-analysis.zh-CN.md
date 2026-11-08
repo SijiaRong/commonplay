@@ -67,6 +67,8 @@ flowchart TD
 
 ### 3.1 程序化赛道
 
+更详细的流程图、参数、权重及模块对应见 [赛道随机生成机制](lost-marbles-course-generation.zh-CN.md)。
+
 `buildShow(seed)` 根据同一随机种子构建五段赛道。一个 stage 同时输出：
 
 - `colliders`：物理碰撞体；
