@@ -1,0 +1,49 @@
+.party-lobby #world { overflow:hidden; background:#796349 }
+.party-lobby #world::after {
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(0deg,#18292b61,transparent 48%),url("./party-station.jpg") 60% center / cover;
+  animation:station-drift 18s ease-in-out infinite alternate;
+}
+@keyframes station-drift {
+  from { transform:scale(1.012) }
+  to { transform:scale(1.04) translateX(-.45%) }
+}
+@media (prefers-reduced-motion:reduce) {
+  .party-lobby #world::after { animation:none }
+}
+.party-lobby:has(#character-picker[open]) #world::after { visibility:hidden }
+.party-lobby :is(footer,#progress), html:not(.party-lobby) #party-dock>h2 { display:none }
+.party-lobby #party-dock {
+  position:absolute; left:clamp(20px,5vw,90px); bottom:clamp(24px,7vh,82px);
+  width:min(365px,calc(100vw - 32px)); max-height:calc(100dvh - 116px);
+  overflow:auto; padding:20px; border:1px solid #fff6d7; border-radius:22px;
+  color:#294039; background:#fff7e8f2; box-shadow:0 10px 36px #442d2636;
+}
+.party-lobby #party-dock h2 { margin:0 0 14px; font-size:24px; letter-spacing:.04em }
+.party-lobby #party-dock :is(#launch,#room-panel) {
+  position:static; transform:none; width:100%; margin:0; padding:0;
+  align-items:stretch; text-align:left; max-height:none; overflow:visible;
+}
+.party-lobby #party-dock :is(#launch-menu,.party-entry,#room-panel) {
+  background:transparent; border:0; box-shadow:none; padding:0; border-radius:0;
+}
+.party-lobby #party-dock :is(.character-summary,#result:empty) { margin:0 }
+.party-lobby #party-dock #choose-character {
+  background:#fffaf1; color:#294039; text-shadow:none; box-shadow:none; border-color:#ccbe9f;
+}
+.party-lobby #party-dock .character-summary { justify-content:flex-start }
+.party-lobby #party-dock #launch-menu { align-items:stretch; margin:5px 0 }
+.party-lobby #party-dock .name-field input { flex:1; min-width:0 }
+.party-lobby #party-dock .party-entry { flex-wrap:wrap }
+.party-lobby .party-entry #create-room { background:#285840; color:white }
+.party-lobby #party-dock #room-panel { padding-top:12px }
+.party-lobby #party-dock .room-members { grid-template-columns:repeat(4,minmax(0,1fr)) }
+.party-lobby #party-dock .room-head { flex-wrap:wrap }
+@media(max-width:680px) {
+  .party-lobby #world::after { background-position:72% center }
+  .party-lobby #party-dock { left:50%; transform:translateX(-50%); bottom:max(12px,env(safe-area-inset-bottom)); padding:15px }
+  .party-lobby #party-dock h2 { font-size:20px; margin-bottom:10px }
+}
+@media(max-height:500px) {
+  .party-lobby #party-dock { max-height:calc(100dvh - 84px); bottom:8px }
+}

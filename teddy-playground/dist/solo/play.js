@@ -118,7 +118,12 @@ export async function startSolo(host){
   $('#launch').insertBefore(menu,$('#result'));
   $('#launch').append(partyRow,notice);
   const roomPanel=element('section',{id:'room-panel',hidden:true});
-  document.body.append(roomPanel);
+  if(partyOnly){
+    const dock=element('section',{id:'party-dock',ariaLabel:'多人房间'});
+    const launch=$('#launch');
+    launch.before(dock);
+    dock.append(element('h2',{textContent:'多人房间'}),launch,roomPanel);
+  }else document.body.append(roomPanel);
   function setNotice(text){notice.textContent=text||''}
   function renderMenu(){
     for(const b of botRow.querySelectorAll('button'))b.setAttribute('aria-pressed',String(Number(b.dataset.bots)===soloBots));
@@ -232,6 +237,7 @@ export async function startSolo(host){
     change.hidden=partyOnly;$('#reset').lastChild.textContent=' 重来';
     courseID.textContent='单人 · 种子 '+seed;
     if(partyOnly){
+      document.documentElement.classList.add('party-lobby');
       link=null;
       rosterToken++;clearRemotes();roster=[];
       document.body.classList.remove('in-race');
@@ -282,6 +288,7 @@ export async function startSolo(host){
   function renderRoom(){
     if(!room)return;
     const racing=room.inGame;
+    if(partyOnly)document.documentElement.classList.toggle('party-lobby',!racing);
     menu.hidden=true;partyRow.hidden=true;$('#go').hidden=true;change.hidden=true;
     $('#reset').lastChild.textContent=' 离开房间';
     roomPanel.hidden=racing;$('#launch').hidden=racing;
@@ -321,7 +328,7 @@ export async function startSolo(host){
     roomPanel.replaceChildren(
       element('div',{className:'room-head'},element('small',{textContent:'房间码'}),element('strong',{textContent:room.code}),copy),
       list,bots,
-      element('p',{className:'room-hint',textContent:'同一 Wi-Fi 下打开邀请链接，或在首页输入房间码加入。共 '+field+' 名选手。'}),
+      element('p',{className:'room-hint',textContent:'好友可打开邀请链接，或在多人大厅输入房间码加入。共 '+field+' 名选手。'}),
       startButton);
   }
   function sendBots(count){link.postMessage({type:'bots',count})}
@@ -583,6 +590,6 @@ export async function startSolo(host){
   return {
     reset:()=>mode==='party'?leaveRoom():connectSolo(),
     start,
-    picked(){sendProfile()}
+    picked(){sendProfile();if(partyOnly&&!state)film.render(0)}
   };
 }

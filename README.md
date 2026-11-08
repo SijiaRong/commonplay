@@ -4,7 +4,7 @@
 
 An open-source 3D party racing and obstacle-course game project started at AI Hacker House, researching games such as Lost Marbles and Eggy Party.
 
-“Commonplay” 是中性工作名称，暂不限定世界观、美术风格或最终玩法。
+Commonplay 是项目名称，主线游戏定名为《泡泡星港》。
 
 ## 当前状态
 
@@ -15,6 +15,8 @@ An open-source 3D party racing and obstacle-course game project started at AI Ha
 此前条件为开发时间半天、Hi3D 生成额度充足、团队可使用 Godot 或 Three.js；暂作为规划背景保留，不能据此承诺完整多人游戏的交付时间。此前 Godot 双人搬运、1v1 弹道对战等方案归档为历史候选，不再代表当前方向。
 
 ## 队友本地试玩
+
+[泡泡星港 试玩与开服说明](bubblecity-teddy-slide/README.md)
 
 - **小熊滑滑梯 · 多人派对版**：按[局域网服务器说明](teddy-playground/server/README.md)在一台电脑上运行 `npm install && npm start`，同一 Wi-Fi 下的手机和电脑打开终端里的地址，创建房间或输入房间码加入。1～4 人（可配到 16 人），可加机器人补位，五关积分制，支持手机触控。
 - **小熊滑滑梯 · 单人**：在仓库根目录运行 `python3 -m http.server 8080 --directory teddy-playground/dist`，打开 [localhost:8080](http://localhost:8080)。可选机器人陪跑；WASD 移动、空格跳跃、R 复位。第一关「玩具门廊」从软垫起跑，穿过移门和积木桩，沿直滑梯下到钟摆锤廊和波浪地板，再绕 180° 回旋滑梯下到矮栏和终点门廊。[关卡拆解与里程](docs/fall-beans-course.zh-CN.md)记录了参考来源。顶部「经典滑梯」可进入原版滑行。在起点点「换个人物」可从[十只玩偶](assets/toy-town-personas/README.md)中选择。
@@ -33,6 +35,11 @@ An open-source 3D party racing and obstacle-course game project started at AI Ha
 | 泡泡星港设施建模参考、零件图片与打包文件 | [参考目录](assets/bubbleport-model-references/README.md) · [参考图 ZIP](assets/bubbleport-model-references.zip) · [零件 ZIP](assets/bubbleport-components-v2.zip) |
 | 宽版赛道原始模型、预览与验证结论 | [资源目录](assets/track-redesign-validation/) · [验证文档](docs/track-redesign-validation.zh-CN.md) |
 | 宣传片脚本、分镜、参考截图与整片渲染脚本 | [宣传片](promo/README.md) · [分镜](promo/storyboard.zh-CN.md) |
+| 赛道资源、可下载素材包与校验值 | [赛道素材](assets/bubbleport-course-resources/) · [ZIP](assets/bubbleport-course-resources-v1.zip) · [SHA-256](assets/bubbleport-course-resources-v1.zip.sha256) |
+| 公用模型、材质和音乐 | [模型库](assets/model-library/) · [材质库](assets/material-library/) · [音乐](assets/bubbleport-music/) |
+| 素材浏览、编辑与制作工具 | [材质图集](material-atlas/) · [模型编辑器](model-editor/) · [制作脚本](tools/) |
+| 滑道、环线和赛段原型代码 | [泡泡星城滑道](bubblecity-teddy-slide/) · [环线](bubbleport-circuit/) · [赛段设计](bubbleport-segment-designs/) · [土星滑道](saturn-slide-mvp/) |
+| 材质与界面实验代码 | [材质实验](bubbleport-material-lab/) · [界面实验](bubbleport-ui-lab/) |
 | 玩具市场与材质方向调研 | [市场调研](docs/toy-market-research.zh-CN.md) · [毛绒](docs/toy-design-plush.zh-CN.md) · [机器人](docs/toy-design-robot.zh-CN.md) · [软胶](docs/toy-design-vinyl.zh-CN.md) · [泡泡星港](docs/bubbleport-toy-research.zh-CN.md) |
 
 模型、图片和试玩运行资源随仓库保存。旧小熊和初代模型目录中的相对软链接指向本仓库的角色档案；运行时所需文件仍保留在各 demo 的 `dist/` 内。下载时请保留目录结构；原始高精度模型和参考图片会增加克隆体积。

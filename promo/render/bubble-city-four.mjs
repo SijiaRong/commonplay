@@ -5,7 +5,7 @@ import path from 'node:path';
 // The HTTP root must include both games so CityPartyShow can import the shared party rules.
 const url=process.argv[2],out=process.argv[3];
 if(!url || !out)throw Error('Pass the Bubble City game URL and frame output directory.');
-const shots=['摩天轮','土星地标','玻璃穹顶馆','弧面商店','星港总站'].map((landmark,i)=>({stage:i+1,landmark,frames:90}));
+let shots=['摩天轮','土星地标','玻璃穹顶馆','弧面商店','星港总站'].map((landmark,i)=>({stage:i+1,landmark,frames:90}));
 const race=[
   [1,2,.12,.60],[1,24,2.85,.56],[1,54,-.62,.51],[1,76,3.02,1.05],[1,143,-.24,.42],
   [2,15,-.23,.63],[2,37,2.96,.54,true],[2,156,-.6,.52],[2,475,3.12,1.15],[2,503,-.28,.7],
@@ -14,6 +14,15 @@ const race=[
   [5,33,.24,.86,true,true],[5,442,-.48,.75,true,true],[5,'finish',3.15,.32]
 ];
 shots.push(...race.map(([stage,s,bearing,lift,jump,slow])=>({stage,s,bearing,lift,jump,slow,zoom:1,frames:120})));
+if(process.argv.includes('--short')) {
+  const cut=(id,frames)=>({...shots[id-1],frames});
+  shots=[
+    ...[1,2,3,4,5].map(id=>cut(id,60)),
+    ...[6,8,10,12].map(id=>cut(id,75)),
+    {stage:3,s:203,cannon:true,slow:true,frames:180,bearing:0,lift:.5,zoom:1},
+    ...[19,20,22,23].map(id=>cut(id,75)),cut(25,120)
+  ];
+}
 const first=Number(process.env.FIRST_SHOT||1),last=Number(process.env.LAST_SHOT||shots.length);
 const preview=process.env.PREVIEW==='1';
 const selected=process.env.SHOTS?.split(',').map(Number);

@@ -44,7 +44,7 @@ const server=createServer(async(req,res)=>{
     if(path===resolve(root,'index.html')){
       const html=await readFile(path,'utf8');
       const lanHost=lanAddresses().find(ip=>/^(192\.168\.|10\.|172\.(1[6-9]|2\d|3[01])\.)/.test(ip))||'';
-      res.end(html.replace('<head>',`<head><meta name="party-lan-host" content="${lanHost}"><meta name="party-endpoint" content="/party"><meta name="party-max" content="${MAX_PLAYERS}">`));
+      res.end(html.replace('<head>',`<head><meta name="party-lan-host" content="${lanHost}"><meta name="party-endpoint" content="./party"><meta name="party-max" content="${MAX_PLAYERS}">`));
     }else createReadStream(path).on('error',()=>res.destroy()).pipe(res);
   }catch{res.writeHead(404).end()}
 });
@@ -240,10 +240,10 @@ wss.on('connection',(ws)=>{
 });
 setInterval(()=>{for(const ws of wss.clients){if(!ws.isAlive){ws.terminate();continue}ws.isAlive=false;ws.ping()}},10e3);
 
-server.listen(PORT,'0.0.0.0',()=>{
+server.listen(PORT,process.env.HOST||'0.0.0.0',()=>{
   const port=server.address().port;
   const addresses=lanAddresses();
-  console.log(`${city ? "泡泡星城" : "小熊滑滑梯"}派对服务器已启动（每个房间最多 ${MAX_PLAYERS} 人，含机器人最多 ${MAX_FIELD} 名选手）`);
+  console.log(`${city ? "泡泡星港" : "小熊滑滑梯"}派对服务器已启动（每个房间最多 ${MAX_PLAYERS} 人，含机器人最多 ${MAX_FIELD} 名选手）`);
   console.log(`  本机打开:   http://localhost:${port}`);
   for(const a of addresses)console.log(`  同一 Wi-Fi: http://${a}:${port}`);
 });

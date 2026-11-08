@@ -81,12 +81,27 @@ async function setup() {
       riders[id].motion.reset();riders[id].rider.reset();
       riders[id].root.rotation.y=Math.atan2(path.tx[i],path.tz[i])+(shot.s==='finish'?Math.PI:0);
     }
+    if(shot.cannon){
+      const fork=show.stage.forks.find(f=>f.cannon);
+      if(!fork)throw Error('No cannon on selected stage');
+      shot.breech=new T.Vector3(...fork.cannon.breech);
+      shot.direction=new T.Vector3(...fork.cannon.d).setY(0).normalize();
+      shot.launched=false;
+      const bear=show.players[0],i=fork.cannon.air[0]-5;
+      Object.assign(bear.body,{x:path.x[i],y:path.y[i]+bear.body.r+.04,z:path.z[i],vx:0,vy:0,vz:0});
+      bear.s=bear.safeS=path.s[i];bear.sampleIdx=i;bear.branchOf[fork.id]=fork.cannon.br;
+    }
     if(shot.s==='finish')show.scoreStage();
   }
   function laneFor(player) {return [-3.3,-1.1,1.1,3.3][(player.id+shot.stage)%4];}
   function tick(frame) {
     const path=show.stage.path;
     for(const p of show.players) {
+      if(shot.cannon && p.id===0){
+        const input=shot.launched?0:.82;
+        show.setInput(0,shot.direction.x*input,shot.direction.z*input,0);
+        continue;
+      }
       const i=nearest(p.s+4),lane=laneFor(p);
       const dx=path.x[i]+path.tz[i]*lane-p.body.x,dz=path.z[i]-path.tx[i]*lane-p.body.z;
       const length=Math.max(.001,Math.hypot(dx,dz));
@@ -95,6 +110,7 @@ async function setup() {
       show.setInput(p.id,pressure*dx/length,pressure*dz/length,Number(jump));
     }
     show.step();
+    if(shot.cannon && show.players[0].body.vy>25)shot.launched=true;
   }
   function draw(frame,render=true) {
     const t=frame/(shot.frames-1),path=show.stage.path;
@@ -152,6 +168,15 @@ async function setup() {
       const extent=bounds.getSize(new T.Vector3()).length();
       const distance=Math.max(8.3,extent*.84+3)*shot.zoom;
       camera.position.copy(focus).add(new T.Vector3(Math.sin(orbit)*distance,distance*shot.lift,Math.cos(orbit)*distance));
+    }
+    if(shot.cannon){
+      const bear=riders[0].root.position.clone().addScaledVector(up,1.25);
+      const muzzle=shot.breech.clone().addScaledVector(shot.direction,3.3).addScaledVector(up,5.25);
+      const weight=shot.launched?.76:.27;
+      focus=muzzle.clone().lerp(bear,weight);
+      const side=new T.Vector3(-shot.direction.z,0,shot.direction.x);
+      camera.position.copy(focus).addScaledVector(side,17).addScaledVector(shot.direction,6).addScaledVector(up,5);
+      if(frame===shot.frames-1&&!shot.launched)throw Error('Bear did not trigger the cannon');
     }
     if(render) {
       camera.lookAt(focus);

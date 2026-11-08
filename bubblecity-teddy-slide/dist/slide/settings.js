@@ -12,7 +12,7 @@ export async function installSettings({scene,sun,renderer,fill}, materials, musi
   dialog.innerHTML=`<div class="appearance-title"><h2 id="settings-title">场景设置</h2><button type="button" aria-label="关闭设置" data-close>×</button></div>
     <label for="background-music">背景音乐<input id="background-music" type="checkbox"></label>
     <div data-environment></div>
-    ${materials ? '<label for="lamp-bright">航标灯亮度 <output></output></label><input id="lamp-bright" type="range" min="0" max="180"><fieldset><legend>赛道材质包</legend><button data-pack="city">泡泡星城</button> <button data-pack="lost">Lost Marbles</button></fieldset><p>随包切换：路面、支架、饰条和涂色护栏。</p><p>固定：工作室背景、角色、软胶与软垫、星港灯具和装饰、赛道标记、布局与碰撞。</p>' : '<p>自由练习使用工作室背景和角色；赛道材质可在闯关或经典滑梯中切换。</p>'}
+    ${materials ? '<label for="lamp-bright">航标灯亮度 <output></output></label><input id="lamp-bright" type="range" min="0" max="180"><fieldset><legend>赛道材质包</legend><button data-pack="city">泡泡星港</button> <button data-pack="lost">Lost Marbles</button></fieldset><p>随包切换：路面、支架、饰条和涂色护栏。</p><p>固定：工作室背景、角色、软胶与软垫、星港灯具和装饰、赛道标记、布局与碰撞。</p>' : '<p>自由练习使用工作室背景和角色；赛道材质可在闯关或经典滑梯中切换。</p>'}
     <label for="touch-size">触控按钮大小 <output></output></label><input id="touch-size" type="range" min="85" max="125">
     <p role="status"></p><button type="button" data-reset>恢复默认</button>`;
   document.body.append(dialog);
