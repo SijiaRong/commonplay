@@ -1,0 +1,299 @@
+{
+  "errors": [],
+  "mobileOverflow": false,
+  "baseline": {
+    "selected": "road",
+    "mode": "studio",
+    "finishVersion": "v2",
+    "softScale": [
+      [
+        1.1007017055155328,
+        0.7844961614833625,
+        1.1007017055155328
+      ],
+      [
+        1.0290675478517368,
+        0.9471499129968423,
+        1.0290675478517368
+      ]
+    ],
+    "view": "overview",
+    "softMotion": true,
+    "scatter": 0.32,
+    "bloom": true,
+    "lamps": true,
+    "spill": true,
+    "lightsVisible": 5,
+    "materials": {
+      "road": {
+        "roughness": 0.16,
+        "metalness": 0,
+        "clearcoat": 1,
+        "clearcoatRoughness": 0.065,
+        "transmission": 0,
+        "emissiveIntensity": 1
+      },
+      "mint": {
+        "roughness": 0.29,
+        "metalness": 0,
+        "clearcoat": 0.48,
+        "clearcoatRoughness": 0.22,
+        "transmission": 0,
+        "emissiveIntensity": 1
+      },
+      "peach": {
+        "roughness": 0.39,
+        "metalness": 0,
+        "clearcoat": 0.025,
+        "clearcoatRoughness": 0.38,
+        "transmission": 0,
+        "emissiveIntensity": 1
+      },
+      "brass": {
+        "roughness": 0.26,
+        "metalness": 1,
+        "clearcoat": 0.08,
+        "clearcoatRoughness": 0.25,
+        "transmission": 0,
+        "emissiveIntensity": 1
+      },
+      "silver": {
+        "roughness": 0.34,
+        "metalness": 1,
+        "clearcoat": 0,
+        "clearcoatRoughness": 0.3,
+        "transmission": 0,
+        "emissiveIntensity": 1
+      },
+      "acrylic": {
+        "roughness": 0.09,
+        "metalness": 0,
+        "clearcoat": 1,
+        "clearcoatRoughness": 0.1,
+        "transmission": 0.94,
+        "emissiveIntensity": 1
+      },
+      "amber": {
+        "roughness": 0.22,
+        "metalness": 0,
+        "clearcoat": 0.2,
+        "clearcoatRoughness": 0,
+        "transmission": 0,
+        "emissiveIntensity": 4
+      },
+      "signal": {
+        "roughness": 0.18,
+        "metalness": 0,
+        "clearcoat": 0.3,
+        "clearcoatRoughness": 0,
+        "transmission": 0,
+        "emissiveIntensity": 3.2
+      }
+    },
+    "render": {
+      "calls": 370,
+      "triangles": 442634
+    }
+  },
+  "altered": {
+    "selected": "brass",
+    "mode": "night",
+    "finishVersion": "v2",
+    "softScale": [
+      [
+        1.0862019605019646,
+        0.8060888553563814,
+        1.0862019605019646
+      ],
+      [
+        1.0132800318828412,
+        0.9758544874857433,
+        1.0132800318828412
+      ]
+    ],
+    "view": "overview",
+    "softMotion": true,
+    "scatter": 0.32,
+    "bloom": true,
+    "lamps": true,
+    "spill": true,
+    "lightsVisible": 5,
+    "materials": {
+      "road": {
+        "roughness": 0.16,
+        "metalness": 0,
+        "clearcoat": 1,
+        "clearcoatRoughness": 0.065,
+        "transmission": 0,
+        "emissiveIntensity": 1
+      },
+      "mint": {
+        "roughness": 0.29,
+        "metalness": 0,
+        "clearcoat": 0.48,
+        "clearcoatRoughness": 0.22,
+        "transmission": 0,
+        "emissiveIntensity": 1
+      },
+      "peach": {
+        "roughness": 0.39,
+        "metalness": 0,
+        "clearcoat": 0.025,
+        "clearcoatRoughness": 0.38,
+        "transmission": 0,
+        "emissiveIntensity": 1
+      },
+      "brass": {
+        "roughness": 0.7,
+        "metalness": 1,
+        "clearcoat": 0.08,
+        "clearcoatRoughness": 0.25,
+        "transmission": 0,
+        "emissiveIntensity": 1
+      },
+      "silver": {
+        "roughness": 0.34,
+        "metalness": 1,
+        "clearcoat": 0,
+        "clearcoatRoughness": 0.3,
+        "transmission": 0,
+        "emissiveIntensity": 1
+      },
+      "acrylic": {
+        "roughness": 0.09,
+        "metalness": 0,
+        "clearcoat": 1,
+        "clearcoatRoughness": 0.1,
+        "transmission": 0.94,
+        "emissiveIntensity": 1
+      },
+      "amber": {
+        "roughness": 0.22,
+        "metalness": 0,
+        "clearcoat": 0.2,
+        "clearcoatRoughness": 0,
+        "transmission": 0,
+        "emissiveIntensity": 4
+      },
+      "signal": {
+        "roughness": 0.18,
+        "metalness": 0,
+        "clearcoat": 0.3,
+        "clearcoatRoughness": 0,
+        "transmission": 0,
+        "emissiveIntensity": 3.2
+      }
+    },
+    "render": {
+      "calls": 370,
+      "triangles": 442634
+    }
+  },
+  "unlit": {
+    "selected": "amber",
+    "mode": "studio",
+    "finishVersion": "v2",
+    "softScale": [
+      [
+        1.1056995885952374,
+        0.7770534265075255,
+        1.1056995885952374
+      ],
+      [
+        1.0526000866930634,
+        0.9043634787398847,
+        1.0526000866930634
+      ]
+    ],
+    "view": "detail",
+    "softMotion": true,
+    "scatter": 0.32,
+    "bloom": false,
+    "lamps": false,
+    "spill": false,
+    "lightsVisible": 0,
+    "materials": {
+      "road": {
+        "roughness": 0.16,
+        "metalness": 0,
+        "clearcoat": 1,
+        "clearcoatRoughness": 0.065,
+        "transmission": 0,
+        "emissiveIntensity": 1
+      },
+      "mint": {
+        "roughness": 0.29,
+        "metalness": 0,
+        "clearcoat": 0.48,
+        "clearcoatRoughness": 0.22,
+        "transmission": 0,
+        "emissiveIntensity": 1
+      },
+      "peach": {
+        "roughness": 0.39,
+        "metalness": 0,
+        "clearcoat": 0.025,
+        "clearcoatRoughness": 0.38,
+        "transmission": 0,
+        "emissiveIntensity": 1
+      },
+      "brass": {
+        "roughness": 0.26,
+        "metalness": 1,
+        "clearcoat": 0.08,
+        "clearcoatRoughness": 0.25,
+        "transmission": 0,
+        "emissiveIntensity": 1
+      },
+      "silver": {
+        "roughness": 0.34,
+        "metalness": 1,
+        "clearcoat": 0,
+        "clearcoatRoughness": 0.3,
+        "transmission": 0,
+        "emissiveIntensity": 1
+      },
+      "acrylic": {
+        "roughness": 0.09,
+        "metalness": 0,
+        "clearcoat": 1,
+        "clearcoatRoughness": 0.1,
+        "transmission": 0.94,
+        "emissiveIntensity": 1
+      },
+      "amber": {
+        "roughness": 0.22,
+        "metalness": 0,
+        "clearcoat": 0.2,
+        "clearcoatRoughness": 0,
+        "transmission": 0,
+        "emissiveIntensity": 0
+      },
+      "signal": {
+        "roughness": 0.18,
+        "metalness": 0,
+        "clearcoat": 0.3,
+        "clearcoatRoughness": 0,
+        "transmission": 0,
+        "emissiveIntensity": 0
+      }
+    },
+    "render": {
+      "calls": 193,
+      "triangles": 224173
+    }
+  },
+  "checks": [
+    "8 materials render",
+    "studio/night",
+    "material edit isolation and reset",
+    "clearcoat/transmission zero-crossing shader updates",
+    "detail/top/overview views",
+    "emission, spill, bloom independently toggle",
+    "PNG export",
+    "390px mobile layout",
+    "V1/V2 same-light comparison",
+    "soft scattering independent toggle",
+    "soft sample deformation"
+  ]
+}

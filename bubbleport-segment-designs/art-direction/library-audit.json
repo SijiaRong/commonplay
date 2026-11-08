@@ -1,0 +1,224 @@
+{
+  "date": "2026-11-08",
+  "scope": "Workspace model files, reference library and prior generation records. Recent Hi3D MCP task list cross-checked; this is not a full audit of every asset in the remote web account.",
+  "facilityReferences": [
+    {
+      "id": "01-saturn-landmark",
+      "name": "土星地标",
+      "reference": "assets/bubbleport-model-references/01-saturn-landmark/three-quarter.png",
+      "referenceExists": true,
+      "modelFiles": []
+    },
+    {
+      "id": "02-ferris-wheel",
+      "name": "摩天轮",
+      "reference": "assets/bubbleport-model-references/02-ferris-wheel/three-quarter.png",
+      "referenceExists": true,
+      "modelFiles": []
+    },
+    {
+      "id": "03-soda-cafe",
+      "name": "汽水店",
+      "reference": "assets/bubbleport-model-references/03-soda-cafe/three-quarter.png",
+      "referenceExists": true,
+      "modelFiles": []
+    },
+    {
+      "id": "04-moon-observatory",
+      "name": "月牙观测塔",
+      "reference": "assets/bubbleport-model-references/04-moon-observatory/three-quarter.png",
+      "referenceExists": true,
+      "modelFiles": []
+    },
+    {
+      "id": "05-glass-dome-pavilion",
+      "name": "玻璃穹顶馆",
+      "reference": "assets/bubbleport-model-references/05-glass-dome-pavilion/three-quarter.png",
+      "referenceExists": true,
+      "modelFiles": []
+    },
+    {
+      "id": "06-curved-shop",
+      "name": "弧形商铺模块",
+      "reference": "assets/bubbleport-model-references/06-curved-shop/three-quarter.png",
+      "referenceExists": true,
+      "modelFiles": []
+    },
+    {
+      "id": "07-terminal-station",
+      "name": "终点站房",
+      "reference": "assets/bubbleport-model-references/07-terminal-station/three-quarter.png",
+      "referenceExists": true,
+      "modelFiles": []
+    },
+    {
+      "id": "08-service-robot",
+      "name": "服务机器人",
+      "reference": "assets/bubbleport-model-references/08-service-robot/three-quarter.png",
+      "referenceExists": true,
+      "modelFiles": []
+    },
+    {
+      "id": "09-bench",
+      "name": "长椅",
+      "reference": "assets/bubbleport-model-references/09-bench/three-quarter.png",
+      "referenceExists": true,
+      "modelFiles": []
+    },
+    {
+      "id": "10-lamp",
+      "name": "路灯",
+      "reference": "assets/bubbleport-model-references/10-lamp/three-quarter.png",
+      "referenceExists": true,
+      "modelFiles": []
+    },
+    {
+      "id": "11-planter",
+      "name": "花箱",
+      "reference": "assets/bubbleport-model-references/11-planter/three-quarter.png",
+      "referenceExists": true,
+      "modelFiles": []
+    },
+    {
+      "id": "12-umbrella-table",
+      "name": "遮阳伞桌",
+      "reference": "assets/bubbleport-model-references/12-umbrella-table/three-quarter.png",
+      "referenceExists": true,
+      "modelFiles": []
+    },
+    {
+      "id": "13-cafe-chair",
+      "name": "咖啡椅",
+      "reference": "assets/bubbleport-model-references/13-cafe-chair/three-quarter.png",
+      "referenceExists": true,
+      "modelFiles": []
+    },
+    {
+      "id": "14-rocket-gantry",
+      "name": "火箭装饰门架",
+      "reference": "assets/bubbleport-model-references/14-rocket-gantry/three-quarter.png",
+      "referenceExists": true,
+      "modelFiles": []
+    },
+    {
+      "id": "15-ornamental-tree",
+      "name": "观赏小树",
+      "reference": "assets/bubbleport-model-references/15-ornamental-tree/three-quarter.png",
+      "referenceExists": true,
+      "modelFiles": []
+    },
+    {
+      "id": "16-plaza-railing",
+      "name": "广场围栏",
+      "reference": "assets/bubbleport-model-references/16-plaza-railing/three-quarter.png",
+      "referenceExists": true,
+      "modelFiles": []
+    }
+  ],
+  "characterSources": [
+    {
+      "id": "apex-pacer",
+      "model": "assets/toy-town-personas/apex-pacer/models/original.glb",
+      "bytes": 49340148
+    },
+    {
+      "id": "arc-keeper",
+      "model": "assets/toy-town-personas/arc-keeper/models/original.glb",
+      "bytes": 51377268
+    },
+    {
+      "id": "crab",
+      "model": "assets/toy-town-personas/crab/models/original.glb",
+      "bytes": 48544520
+    },
+    {
+      "id": "duck",
+      "model": "assets/toy-town-personas/duck/models/original.glb",
+      "bytes": 48764840
+    },
+    {
+      "id": "echo-diver",
+      "model": "assets/toy-town-personas/echo-diver/models/original.glb",
+      "bytes": 49921440
+    },
+    {
+      "id": "elephant",
+      "model": "assets/toy-town-personas/elephant/models/original.glb",
+      "bytes": 49435004
+    },
+    {
+      "id": "gecko",
+      "model": "assets/toy-town-personas/gecko/models/original.glb",
+      "bytes": 48291988
+    },
+    {
+      "id": "hedgehog",
+      "model": "assets/toy-town-personas/hedgehog/models/original.glb",
+      "bytes": 47937244
+    },
+    {
+      "id": "pip",
+      "model": "assets/toy-town-personas/pip/models/original.glb",
+      "bytes": 48205524
+    },
+    {
+      "id": "ratchet-goalie",
+      "model": "assets/toy-town-personas/ratchet-goalie/models/original.glb",
+      "bytes": 50284304
+    },
+    {
+      "id": "ray",
+      "model": "assets/toy-town-personas/ray/models/original.glb",
+      "bytes": 49381472
+    },
+    {
+      "id": "reel-climber",
+      "model": "assets/toy-town-personas/reel-climber/models/original.glb",
+      "bytes": 49306000
+    },
+    {
+      "id": "rivet-press",
+      "model": "assets/toy-town-personas/rivet-press/models/original.glb",
+      "bytes": 50723924
+    },
+    {
+      "id": "signal-beetle",
+      "model": "assets/toy-town-personas/signal-beetle/models/original.glb",
+      "bytes": 48980476
+    },
+    {
+      "id": "teddy",
+      "model": "assets/toy-town-personas/teddy/models/original.glb",
+      "bytes": 47939952
+    },
+    {
+      "id": "tik",
+      "model": "assets/toy-town-personas/tik/models/original.glb",
+      "bytes": 48347392
+    },
+    {
+      "id": "wob",
+      "model": "assets/toy-town-personas/wob/models/original.glb",
+      "bytes": 47001056
+    }
+  ],
+  "runtimeBubbleportProps": [
+    {
+      "file": "bubbleport-demo/dist/assets/mallet-head.glb",
+      "bytes": 501808,
+      "triangles": 11999,
+      "animations": 0
+    },
+    {
+      "file": "bubbleport-demo/dist/assets/obstacle-capsule.glb",
+      "bytes": 471240,
+      "triangles": 12000,
+      "animations": 0
+    }
+  ],
+  "rejectedWholeCourseSources": [
+    "assets/track-redesign-validation/slalom-raw.glb",
+    "assets/track-redesign-validation/hammers-raw.glb",
+    "assets/track-redesign-validation/loop-raw.glb"
+  ]
+}

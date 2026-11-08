@@ -1,0 +1,23 @@
+window.PT=(s)=>{const P=__cap.course.stage.path;let i=0;while(i<P.n-1&&P.s[i+1]<s)i++;return {i,x:P.x[i],y:P.y[i],z:P.z[i],tx:P.tx[i],tz:P.tz[i],hw:P.hw[i]}};
+window.PIECE=(n)=>__cap.course.stage.pieces.find(p=>p.name===n);
+// back: distance behind along tangent, side: lateral (+ = right), up: height; lookAhead: aim further along
+window.SHOT=(s,{back=14,side=6,up=8,ahead=4,fov=45,r=1,lift=0}={})=>{const a=PT(s),b=PT(s+ahead);const nx=a.tz,nz=-a.tx;
+ const eye=[a.x-a.tx*back+nx*side,a.y+up,a.z-a.tz*back+nz*side];const at=[b.x,b.y+lift,b.z];window.__cam={eye,at,fov,r};return {eye,at}};
+window.FREE=(eye,at,fov=45,r=1)=>{window.__cam={eye,at,fov,r};return 1};
+window.OFF=()=>{window.__cam=null;return 1};
+window.BOUNDS=()=>__cap.course.stage.bounds;
+window.CLEAN=(on=true)=>{let st=document.getElementById('cleancss');if(!st){st=document.createElement('style');st.id='cleancss';document.head.append(st)}st.textContent=on?'body>*:not(main){visibility:hidden!important} .tag,[class*=tag]{visibility:visible}':'';return on};
+window.L=(m)=>{__cap.link.postMessage(m);return 1};
+window.FREEZE=(v=true)=>L({type:'freeze',value:v});
+window.ADV=(sec)=>L({type:'advance',ticks:Math.round(sec*60)});
+window.WEVAL=async(code)=>{window.__evalr=undefined;L({type:'eval',code});for(let i=0;i<100&&window.__evalr===undefined;i++)await new Promise(r=>setTimeout(r,50));return window.__evalr};
+window.RUN=(id)=>{const r=__cap.sampled.get(id);return r?{x:r.x,y:r.y,z:r.z,s:r.s,sample:r.sample,vx:r.vx,vz:r.vz}:null};
+window.ALL=()=>[...__cap.sampled.entries()].map(([id,r])=>[id,+r.s?.toFixed?.(1),+r.x.toFixed(1),+r.y.toFixed(1),+r.z.toFixed(1)]);
+window.UNTIL=async(target,which='lead',maxSec=60)=>{for(let k=0;k<maxSec*4;k++){const rows=[...__cap.sampled.values()].filter(r=>r.s>=0).map(r=>r.s).sort((a,b)=>b-a);const v=which==='lead'?rows[0]:which==='mid'?rows[rows.length>>1]:rows[rows.length-1];if(v>=target)return JSON.stringify({k,v,ph:__cap.state.phase,t:__cap.state.clock});ADV(0.25);await new Promise(r=>setTimeout(r,120));}return 'timeout '+JSON.stringify(ALL())};
+window.NEAR=(s)=>[...__cap.sampled.entries()].sort((a,b)=>Math.abs(a[1].s-s)-Math.abs(b[1].s-s)).slice(0,5).map(([id,r])=>[id,+r.s.toFixed(1),+r.x.toFixed(1),+r.y.toFixed(1),+r.z.toFixed(1)]);
+window.ALL=()=>__cap.state.runners.map(r=>[r[0],+r[10].toFixed(1),+r[1].toFixed(1),+r[2].toFixed(1),+r[3].toFixed(1),r[8]]);
+window.SS=(which='lead')=>{const rows=__cap.state.runners.map(r=>r[10]).filter(v=>v>=0).sort((a,b)=>b-a);return which==='lead'?rows[0]:which==='mid'?rows[rows.length>>1]:rows[rows.length-1]};
+window.UNTIL=async(target,which='lead',maxSec=60)=>{for(let k=0;k<maxSec*10;k++){const v=SS(which);if(v>=target)return JSON.stringify({k,v,ph:__cap.state.phase,t:__cap.state.clock});const tk=__cap.state.tick;ADV(0.1);for(let j=0;j<40&&__cap.state.tick===tk;j++)await new Promise(r=>setTimeout(r,25));}return 'timeout '+JSON.stringify(ALL())};
+window.UNTILPH=async(pred,maxSec=60)=>{for(let k=0;k<maxSec*4;k++){if(eval(pred))return JSON.stringify({k,ph:__cap.state.phase,stage:__cap.state.stage,t:__cap.state.clock});const tk=__cap.state.tick;ADV(0.25);for(let j=0;j<40&&__cap.state.tick===tk;j++)await new Promise(r=>setTimeout(r,25));}return 'timeout '+__cap.state.phase};
+window.FALLERS=(d=2.5)=>ALL().filter(r=>r[1]>=0&&r[5]!==7&&r[3]<PT(r[1]).y-d).map(r=>[...r,+PT(r[1]).y.toFixed(1)]);
+window.FOLLOW=(id,back=4.2,up=2.2,fov=50)=>{const r=__cap.state.runners.find(x=>x[0]===id);const a=PT(r[10]);const eye=[r[1]-a.tx*back,r[2]+up,r[3]-a.tz*back];window.__cam={eye,at:[r[1]+a.tx*2,r[2]+0.6,r[3]+a.tz*2],fov,r:1,focus:[r[1],r[2],r[3]]};return 1};

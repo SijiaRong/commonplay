@@ -13,8 +13,10 @@ import {randomBytes,randomInt} from 'node:crypto';
 import {WebSocketServer,WebSocket} from 'ws';
 import {PartySession,MAX_FIELD} from '../dist/solo/party.js';
 
-const root=fileURLToPath(new URL('../dist/',import.meta.url));
-const PORT=Number(process.env.PORT||4180);
+const city = process.argv.includes('--bubblecity');
+const root = fileURLToPath(new URL(city ? '../../bubblecity-teddy-slide/dist/' : '../dist/', import.meta.url));
+const ShowClass = city ? (await import('../../bubblecity-teddy-slide/dist/solo/city-party.js')).CityPartyShow : undefined;
+const PORT=Number(process.env.PORT||(city ? 4181 : 4180));
 const configuredPlayers=Number(process.env.MAX_PLAYERS||4);
 if(!Number.isInteger(configuredPlayers))throw new Error('MAX_PLAYERS must be an integer');
 const MAX_PLAYERS=Math.max(1,Math.min(MAX_FIELD,configuredPlayers));
@@ -25,19 +27,24 @@ const characterIds=new Set(catalog.filter(c=>c.ready).map(c=>c.id));
 const pool=[...characterIds];
 
 const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript','.mjs':'text/javascript','.json':'application/json',
-  '.css':'text/css','.glb':'model/gltf-binary','.jpg':'image/jpeg','.png':'image/png','.hdr':'application/octet-stream','.svg':'image/svg+xml'};
+  '.css':'text/css','.glb':'model/gltf-binary','.jpg':'image/jpeg','.png':'image/png','.hdr':'application/octet-stream','.svg':'image/svg+xml','.m4a':'audio/mp4','.mp3':'audio/mpeg','.webp':'image/webp'};
+function lanAddresses(){
+  return Object.values(networkInterfaces()).flat().filter(a=>a&&a.family==='IPv4'&&!a.internal).map(a=>a.address);
+}
 const server=createServer(async(req,res)=>{
   try{
     const url=new URL(req.url,'http://localhost');
-    const path=resolve(root,'.'+decodeURIComponent(url.pathname==='/'?'/index.html':url.pathname));
+    let path=resolve(root,'.'+decodeURIComponent(url.pathname==='/'?'/index.html':url.pathname));
     if(!path.startsWith(resolve(root)+sep)||!['GET','HEAD'].includes(req.method)){res.writeHead(403).end();return}
+    if(url.pathname.endsWith('/') && url.pathname !== '/')path=resolve(path,'index.html');
     if(!(await stat(path)).isFile()){res.writeHead(404).end();return}
     res.setHeader('Content-Type',mime[extname(path)]||'application/octet-stream');
     res.setHeader('Cache-Control',extname(path)==='.html'||extname(path)==='.js'?'no-cache':'public, max-age=3600');
     if(req.method==='HEAD'){res.end();return}
     if(path===resolve(root,'index.html')){
       const html=await readFile(path,'utf8');
-      res.end(html.replace('<head>',`<head><meta name="party-endpoint" content="/party"><meta name="party-max" content="${MAX_PLAYERS}">`));
+      const lanHost=lanAddresses().find(ip=>/^(192\.168\.|10\.|172\.(1[6-9]|2\d|3[01])\.)/.test(ip))||'';
+      res.end(html.replace('<head>',`<head><meta name="party-lan-host" content="${lanHost}"><meta name="party-endpoint" content="/party"><meta name="party-max" content="${MAX_PLAYERS}">`));
     }else createReadStream(path).on('error',()=>res.destroy()).pipe(res);
   }catch{res.writeHead(404).end()}
 });
@@ -138,7 +145,7 @@ class Room{
     if(!racers.length)return;
     for(const m of this.members)m.seat=-1;
     racers.forEach((m,i)=>{m.seat=i;m.stageSent=-1});
-    this.session=new PartySession({seed:randomInt(0xffffffff),bots:Math.min(this.bots,MAX_FIELD-racers.length),pool,
+    this.session=new PartySession({ShowClass,seed:randomInt(0xffffffff),bots:Math.min(this.bots,MAX_FIELD-racers.length),pool,
       entrants:racers.map(m=>({name:m.name,character:m.character}))});
     this.session.start();
     this.lastResults=null;
@@ -235,8 +242,8 @@ setInterval(()=>{for(const ws of wss.clients){if(!ws.isAlive){ws.terminate();con
 
 server.listen(PORT,'0.0.0.0',()=>{
   const port=server.address().port;
-  const addresses=Object.values(networkInterfaces()).flat().filter(a=>a&&a.family==='IPv4'&&!a.internal).map(a=>a.address);
-  console.log(`小熊滑滑梯派对服务器已启动（每个房间最多 ${MAX_PLAYERS} 人，含机器人最多 ${MAX_FIELD} 名选手）`);
+  const addresses=lanAddresses();
+  console.log(`${city ? "泡泡星城" : "小熊滑滑梯"}派对服务器已启动（每个房间最多 ${MAX_PLAYERS} 人，含机器人最多 ${MAX_FIELD} 名选手）`);
   console.log(`  本机打开:   http://localhost:${port}`);
   for(const a of addresses)console.log(`  同一 Wi-Fi: http://${a}:${port}`);
 });

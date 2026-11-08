@@ -3,7 +3,7 @@ import {TICK_DT,stepWorld} from './shared/physics.js';
 import {BTN_JUMP,controlStep} from './shared/control.js';
 import {CARD_BY_ID} from './shared/cards.js';
 import {makeRng} from './shared/rng.js';
-import {enableRunnerHandling,plantFeet} from './runner-handling.js';
+import {plantFeet} from './runner-handling.js';
 
 // A points race for 1–16 runners on the teddy course. Everyone runs all five stages: nobody is cut.
 // Each stage scores by finishing order, the final counts double, and the podium ranks the totals.
@@ -23,7 +23,7 @@ export function stagePoints(order, racers, final) {
   return final ? base * 2 : base;
 }
 
-class PartyShow extends Show {
+export const withPartyRules = BaseShow => class PartyShow extends BaseShow {
   constructor(options) {
     super(options);
     this.untimed = options.untimed;
@@ -153,7 +153,8 @@ class PartyShow extends Show {
 
   atFinish(player) {
     const {bowl, finish, penHeading, path} = this.stage;
-    if (bowl) return super.atFinish(player);
+    if (bowl && bowl.finishInDrain !== false) return super.atFinish(player);
+    if (bowl && !player.passedDrain) return false;
     const b = player.body, dx = b.x - finish.c[0], dz = b.z - finish.c[2];
     const fx = Math.sin(penHeading), fz = Math.cos(penHeading);
     const forward = dx * fx + dz * fz, side = dx * fz - dz * fx;
@@ -164,7 +165,8 @@ class PartyShow extends Show {
 
   qualify(player) {
     const {finish, penHeading, bowl, penCenter, path} = this.stage, b = player.body;
-    if (!bowl && player.human) {
+    const finishInDrain = bowl && bowl.finishInDrain !== false;
+    if (!finishInDrain && player.human) {
       const fx = Math.sin(penHeading), fz = Math.cos(penHeading);
       const beyond = (b.x - finish.c[0]) * fx + (b.z - finish.c[2]) * fz;
       // Carry a humanoid runner clear of the 1.6-unit stripe before it stops to celebrate.
@@ -178,7 +180,7 @@ class PartyShow extends Show {
     player.finishingRun = false;
     super.qualify(player);
     b.vx = b.vz = 0;
-    if (bowl) {
+    if (finishInDrain) {
       // The finish trigger is inside the drain. Celebrate on its exit platform, spread out by finishing order.
       const k = player.finishOrder, j = k % 5, side = ((j + 1) >> 1) * (j % 2 ? 1 : -1) * 1.4, back = Math.floor(k / 5) * 1.4;
       const fx = Math.sin(penHeading), fz = Math.cos(penHeading);
@@ -189,7 +191,16 @@ class PartyShow extends Show {
     }
   }
 
+  prepareRunner(player) {
+    plantFeet(player);
+  }
+
   simulate(frozen) {
+    if (!frozen && this.phase === PHASE.RACE) {
+      for (const p of this.players) {
+        if (p.human && p.connected && p.alive && p.body.active && p.finishOrder < 0) this.prepareRunner(p);
+      }
+    }
     if (!(frozen && (this.phase === PHASE.INTRO || this.phase === PHASE.COUNTDOWN))) return super.simulate(frozen);
     // Behind the gate runners may walk and hop about the start platform.
     const st = this.stage, gate = st.colliders[st.gate], path = st.path;
@@ -209,19 +220,20 @@ class PartyShow extends Show {
   }
 }
 
+const PartyShow = withPartyRules(Show);
+
 // entrants: [{name, character}] humans in seat order. bots: extra AI runners. untimed: a lone human with no
 // bots may stop anywhere to look around (the original solo validation mode).
 export class PartySession {
   // pool: character ids bots may wear.
-  constructor({seed, entrants, bots = 0, pool = []}) {
+  constructor({seed, entrants, bots = 0, pool = [], ShowClass = PartyShow}) {
     const humans = entrants.slice(0, MAX_FIELD);
     const fieldSize = Math.min(MAX_FIELD, humans.length + Math.max(0, bots | 0));
     this.characters = [];
-    this.show = new PartyShow({
+    this.show = new ShowClass({
       seed, fieldSize, untimed: fieldSize === 1,
       entrants: humans.map(e => ({name: e.name, loadout: {deck: HUMAN_DECK}})),
     });
-    enableRunnerHandling(this.show);
     // Bots get a friendly name and wear one of the playable characters so the field looks like a party.
     const rng = makeRng(seed ^ 0x51ed270b), names = rng.shuffle(BOT_NAMES.slice()), taken = new Set(humans.map(h => h.name));
     this.show.players.forEach((p, i) => {
@@ -308,7 +320,7 @@ export class PartySession {
     const runners = !started ? [] : s.players.map(p => {
       const b = p.body;
       return [p.id, r2(b.x), r2(b.y), r2(b.z), r2(b.vx), r2(b.vy), r2(b.vz), b.tp,
-        (b.groundT < .1 ? 1 : 0) | (b.active ? 2 : 0) | (p.finishOrder >= 0 ? 4 : 0) | (p.connected ? 8 : 0),
+        (b.groundT < .1 ? 1 : 0) | (b.active ? 2 : 0) | (p.finishOrder >= 0 ? 4 : 0) | (p.connected ? 8 : 0) | (p.slideMode?.sliding ? 16 : 0),
         p.sampleIdx ?? 0, Math.round(p.s * 10) / 10, r2(b.gnx), r2(b.gny), r2(b.gnz), r2(b.r)];
     });
     const state = {

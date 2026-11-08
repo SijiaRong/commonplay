@@ -1,0 +1,76 @@
+{
+  "source": "bubbleport-material-lab/lab.mjs",
+  "toneMapping": "AgX",
+  "exposure": 1,
+  "environment": {
+    "method": "RoomEnvironment -> PMREMGenerator.fromScene(room,0.025); three long luminous reflection panels",
+    "source": "source/RoomEnvironment.js",
+    "externalHDR": false,
+    "reflectionPanels": [
+      {
+        "position": [
+          0,
+          9,
+          -2
+        ],
+        "size": [
+          16,
+          0.1,
+          2.4
+        ]
+      },
+      {
+        "position": [
+          -9,
+          7,
+          2
+        ],
+        "size": [
+          2.5,
+          0.1,
+          13
+        ]
+      },
+      {
+        "position": [
+          -9,
+          10,
+          -12
+        ],
+        "size": [
+          7,
+          0.12,
+          13
+        ]
+      }
+    ]
+  },
+  "bloom": {
+    "threshold": 2.4,
+    "radius": 0.35,
+    "studioStrength": 0.12,
+    "nightStrength": 0.24
+  },
+  "studio": {
+    "environmentIntensity": 0.75,
+    "hemisphereIntensity": 0.7,
+    "keyIntensity": 2.2,
+    "fillIntensity": 0.85,
+    "backingColor": "#c5bfae"
+  },
+  "night": {
+    "environmentIntensity": 0.3,
+    "hemisphereIntensity": 0.2,
+    "keyIntensity": 0.35,
+    "fillIntensity": 0.25,
+    "backingColor": "#263b35"
+  },
+  "pointLights": {
+    "sampleIntensity": 26,
+    "sampleRange": 8,
+    "stripIntensity": 9,
+    "stripRange": 5,
+    "decay": 2
+  },
+  "note": "Art presets, not measured photometric values. Emission, PointLight spill and Bloom are separate systems."
+}

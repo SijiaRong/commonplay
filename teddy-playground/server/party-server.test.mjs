@@ -5,8 +5,8 @@ import {createInterface} from 'node:readline';
 import test from 'node:test';
 import WebSocket from 'ws';
 
-test('bad origins are rejected while racers can join, spectate and reconnect', {timeout:15000}, async t=>{
-  const server=spawn(process.execPath,['party-server.mjs'],{
+for (const variant of ['teddy','bubblecity']) test(variant+' rooms reject bad origins and support racing, spectators and reconnection', {timeout:15000}, async t=>{
+  const server=spawn(process.execPath,['party-server.mjs', ...(variant==='bubblecity' ? ['--bubblecity'] : [])],{
     cwd:new URL('./',import.meta.url),env:{...process.env,PORT:'0',MAX_PLAYERS:'4'},stdio:['ignore','pipe','inherit']
   });
   t.after(()=>server.kill());
@@ -16,6 +16,12 @@ test('bad origins are rejected while racers can join, spectate and reconnect', {
     if(match){address='127.0.0.1:'+match[1];break}
   }
   assert.ok(address,'server started');
+  if(variant==='bubblecity'){
+    const page=await fetch('http://'+address).then(r=>r.text());
+    assert.match(page,/<title>泡泡星城/);
+    assert.match(page,/name="party-endpoint"/);
+    assert.equal((await fetch('http://'+address+'/editor/')).status,200);
+  }
   const endpoint='ws://'+address+'/party';
   const invalid=new WebSocket(endpoint,{origin:'null'});
   const [error]=await once(invalid,'error');

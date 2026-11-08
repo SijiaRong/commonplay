@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#342d25"><title>泡泡星港 · UI 实验室</title><link rel="stylesheet" href="style.css"></head>
+<body data-stage="lobby"><div class="scene"></div><div class="shade"></div>
+<header><div class="brand"><i class="brandmark" aria-hidden="true">◒</i><span>Commonplay<small>UI 实验室</small></span></div>
+<nav class="glass" aria-label="预览状态"><button data-stage="lobby">准备</button><button data-stage="race">竞速</button><button data-stage="finish">结算</button></nav>
+<button class="glass tune" id="tune" aria-expanded="false" aria-controls="settings">☷ <span>调节效果</span></button></header>
+<aside id="settings" class="glass" hidden><h2>效果调节</h2><label>清透玻璃 <input type="checkbox" id="glass" checked></label><label>背景模糊 <output id="value">0 px</output></label><input aria-label="背景模糊" type="range" id="blur" min="0" max="32" value="0"><label>悬浮动效 <input type="checkbox" id="motion" checked></label></aside>
+<main><section id="lobby" class="panel">
+<div class="eyebrow"><i></i>BUBBLEPORT CIRCUIT</div><h1>Bubble<br><em>Port<span>.</span></em></h1><h2 class="course">泡泡星港 <b>/</b> 环港线</h2>
+<button class="start glass mint-action" id="start">开始试跑 <span>↗</span></button></section>
+<section id="race" class="panel" hidden><div class="glass stat"><div class="eyebrow">当前名次</div><strong id="place">3</strong> / 4</div><div class="glass board"><h2>实时排名</h2><ol id="ranking"></ol></div><div class="glass meter"><div><b>赛道进度</b><output id="pct"></output></div><progress max="100" value="0"></progress><button class="boost glass mint-action" id="boost">冲刺加速 ↑</button></div></section>
+<section id="finish" class="panel" hidden><div class="eyebrow"><i></i>RACE COMPLETE</div><h1>Finish<span>.</span></h1><h2 class="course">环港线完赛</h2><div class="glass score"><span>最终名次 <b id="result"></b></span><span>用时 <b id="time"></b></span></div><button class="start glass mint-action" id="again">再跑一次 <span>↻</span></button></section></main>
+<footer><div class="glass player"><i class="marble"></i><div><small>当前选手</small><b>薄荷汽水</b></div></div><div class="location"><i></i> 泡泡星港 <span>／</span> 环港线</div></footer><svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs id="lenses"></defs></svg><script src="glass.js"></script><script src="lab.js"></script></body></html>

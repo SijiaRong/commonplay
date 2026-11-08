@@ -3,6 +3,6 @@
   "private": true,
   "type": "module",
   "engines": { "node": ">=20" },
-  "scripts": { "start": "node party-server.mjs" },
+  "scripts": { "start": "node party-server.mjs", "bubblecity": "node party-server.mjs --bubblecity" },
   "dependencies": { "ws": "^8.18.0" }
 }
