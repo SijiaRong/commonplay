@@ -357,7 +357,7 @@ export async function startSolo(host){
     const label=ph==='countdown'?'起跑 '+state.remaining:ph==='cut'?'本关完成':!active&&ph==='race'?'检查点复位':(ph==='race'&&trackLabel)||stageNames[state.stage];
     $('#section').textContent=(state.stage+1)+'/5 · '+label;
     const pct=placed?100:course?clamp(Math.floor(s/course.stage.path.finishS*100),0,99):0;
-    $('#percent').textContent=pct+'%';$('progress').value=pct;
+    $('#percent').textContent=pct+'%';$('#progress progress').value=pct;
     // Live position in the race and the points table.
     const liveIndex=state.live.indexOf(you);
     rankLine.hidden=!many||!['race','countdown','intro'].includes(ph)||liveIndex<0;

@@ -6,7 +6,7 @@ import {createRider} from './rider.js';
 import {restoreCourseMaterials} from './course-materials.js';
 
 const $=s=>document.querySelector(s);
-const go=$('#go'), launch=$('#launch'), meter=$('progress');
+const go=$('#go'), launch=$('#launch'), meter=$('#progress progress');
 const clamp=T.MathUtils.clamp, mix=T.MathUtils.lerp;
 const smooth=(rate,dt)=>1-Math.exp(-rate*dt);
 
