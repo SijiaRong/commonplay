@@ -106,4 +106,5 @@ export function dressPlush(bear) {
     pile.castShadow = false;
     mesh.parent.add(pile);
   }
+  return () => nap.dispose();
 }

@@ -1,0 +1,13 @@
+{
+  "id": "wob",
+  "taskId": "091bd72af5d1482ca821eae096f8b059",
+  "modelPage": "https://www.hi3d.ai/3d-model/091bd72af5d1482ca821eae096f8b059",
+  "points": 45,
+  "parameters": {
+    "version": "v3.0",
+    "quality": "high_quality",
+    "pbr": true,
+    "license": "private"
+  },
+  "reference": "references/wob.png"
+}

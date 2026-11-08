@@ -1,0 +1,13 @@
+{
+  "taskId": "13b95f25785e47d589efa878320f9c3f",
+  "modelPage": "https://www.hi3d.ai/3d-model/13b95f25785e47d589efa878320f9c3f",
+  "points": 45,
+  "parameters": {
+    "version": "v3.0",
+    "quality": "high_quality",
+    "pbr": true,
+    "license": "private"
+  },
+  "reference": "../references/hi3d-input.jpg",
+  "prompt": "A single original toy: terracotta hermit crab carrying wooden specimen drawer shell with round window, brass gear and small label. Match the supplied reference; complete full body, no ground or base."
+}

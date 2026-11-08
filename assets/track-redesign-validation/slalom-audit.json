@@ -1,0 +1,72 @@
+{
+  "key": "slalom",
+  "file": "/Users/cyberlingke/software/commonplay/assets/track-redesign-validation/slalom-raw.glb",
+  "bytes": 46765640,
+  "vertices": 1013592,
+  "triangles": 1929264,
+  "meshes": 1,
+  "primitives": 1,
+  "nodes": 2,
+  "nodeNames": [
+    "world",
+    "geometry_0"
+  ],
+  "materials": 1,
+  "textures": 2,
+  "animations": [],
+  "missingNormals": 1,
+  "missingUVs": 0,
+  "localBounds": {
+    "min": [
+      -0.28855663537979126,
+      -0.06059693917632103,
+      -0.5000457763671875
+    ],
+    "max": [
+      0.28812265396118164,
+      0.06078512966632843,
+      0.5000454187393188
+    ]
+  },
+  "basicStructurePassed": true,
+  "gameReady": false,
+  "notes": [
+    "High polygon source: simplify before runtime use.",
+    "Explicit vertex normals absent; generate normals during preparation.",
+    "One mesh: no semantic separation of deck, guardrails and moving obstacles.",
+    "No supplied motion: pivots and obstacle animation still require implementation.",
+    "Basic structure checks do not verify road continuity, exact dimensions, collision or physics."
+  ],
+  "browser": {
+    "ready": true,
+    "initialBounds": [
+      0.5766792893409729,
+      0.12138206884264946,
+      1.0000911951065063
+    ],
+    "normalizedBounds": [
+      5.766267038073048,
+      1.2137100040134108,
+      10
+    ],
+    "textureDimensions": [
+      {
+        "width": 8192,
+        "height": 8192
+      },
+      {
+        "width": 8192,
+        "height": 8192
+      }
+    ],
+    "animations": 0
+  },
+  "visualReview": {
+    "visual": "路面和统一风格可辨认；但要求六块错位障碍，结果只有三块，且基本排在中线，未保留原定绕行节奏。",
+    "verdict": "需重新布置障碍并重做准确路面。"
+  },
+  "playabilityVerified": false,
+  "sha256": "8b3097e274f7e3287d8344116220fb5a342d9daf00ae67c3f8d5911e0181accf",
+  "targetLength": 30,
+  "outerWidthAtTargetLength": 17.298801114219142
+}

@@ -1,0 +1,95 @@
+{
+  "characters": [
+    {
+      "id": "teddy",
+      "name": "缝线小熊",
+      "tagline": "熟悉的小伙伴，一起滑滑梯",
+      "ready": true,
+      "model": "./teddy-bear-animated.glb",
+      "scale": 3.1,
+      "material": "teddy-plush",
+      "preview": "./characters/teddy.jpg"
+    },
+    {
+      "id": "pip",
+      "name": "兜兜飞鼠 PIP",
+      "tagline": "软乎乎的滑翔冒险家",
+      "ready": true,
+      "preview": "./characters/pip.jpg",
+      "model": "./characters/pip-animated.glb",
+      "scale": 3.1
+    },
+    {
+      "id": "tik",
+      "name": "滴克 TIK",
+      "tagline": "认真又笨拙的发条维修员",
+      "ready": true,
+      "preview": "./characters/tik.jpg",
+      "model": "./characters/tik-animated.glb",
+      "scale": 3.1
+    },
+    {
+      "id": "wob",
+      "name": "歪团 WOB",
+      "tagline": "有点紧张，还是想试一试",
+      "ready": true,
+      "preview": "./characters/wob.jpg",
+      "model": "./characters/wob-animated.glb",
+      "scale": 3.1
+    },
+    {
+      "id": "duck",
+      "name": "阿扣 · 旧雨衣小鸭",
+      "tagline": "戴着蓝扣雨帽，摇摇摆摆出发",
+      "ready": true,
+      "model": "./characters/duck-animated.glb",
+      "scale": 3.1,
+      "preview": "./characters/duck.jpg"
+    },
+    {
+      "id": "ray",
+      "name": "翻面 · 双面亮片鳐",
+      "tagline": "展开亮片双翼，贴着木坡滑翔",
+      "ready": true,
+      "model": "./characters/ray-animated.glb",
+      "scale": 3.1,
+      "preview": "./characters/ray.jpg"
+    },
+    {
+      "id": "elephant",
+      "name": "碰铃 · 半副镲片小象",
+      "tagline": "卷起黄铜镲，踏着小步上场",
+      "ready": true,
+      "model": "./characters/elephant-animated.glb",
+      "scale": 3.1,
+      "preview": "./characters/elephant.jpg"
+    },
+    {
+      "id": "gecko",
+      "name": "准星 · 水平仪壁虎",
+      "tagline": "贴地压弯，张开脚掌落地",
+      "ready": true,
+      "model": "./characters/gecko-animated.glb",
+      "scale": 3.1,
+      "preview": "./characters/gecko.jpg"
+    },
+    {
+      "id": "hedgehog",
+      "name": "一圈 · 滚章小刺猬",
+      "tagline": "翻上滚章，顺着木坡滑下",
+      "ready": true,
+      "model": "./characters/hedgehog-animated.glb",
+      "scale": 3.1,
+      "preview": "./characters/hedgehog.jpg"
+    },
+    {
+      "id": "crab",
+      "name": "屉屉 · 标本柜寄居蟹",
+      "tagline": "背着钟楼坡的收藏，迈小步上场",
+      "ready": true,
+      "model": "./characters/crab-animated.glb",
+      "scale": 3.1,
+      "preview": "./characters/crab.jpg"
+    }
+  ]
+}

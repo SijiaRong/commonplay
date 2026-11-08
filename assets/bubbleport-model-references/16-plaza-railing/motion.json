@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "id": "16-plaza-railing",
+  "status": "static_skipped",
+  "reason": "固定广场围栏，无活动机构；跳过动态设计。"
+}

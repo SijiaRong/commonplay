@@ -1,0 +1,13 @@
+{
+  "taskId": "ed513a9e0af54d6db1eb93de7500629c",
+  "modelPage": "https://www.hi3d.ai/3d-model/ed513a9e0af54d6db1eb93de7500629c",
+  "points": 45,
+  "parameters": {
+    "version": "v3.0",
+    "quality": "high_quality",
+    "pbr": true,
+    "license": "private"
+  },
+  "reference": "../references/hi3d-input.jpg",
+  "prompt": "A single original toy: blue-gray cloth circus elephant, trunk holding exactly one round brass cymbal. Match the supplied reference; complete full body, no ground or base."
+}

@@ -1,0 +1,139 @@
+{
+  "scope": "Authorized first three-module validation; one 3D attempt each",
+  "actualSubmittedPoints": 153,
+  "records": [
+    {
+      "key": "slalom",
+      "label": "宽版错位障碍路段",
+      "prompt": "Create an ORIGINAL game-ready modular toy race track design reference, not based on any existing game or copyrighted screenshot. Single isolated complete modular road section, neutral light gray background, soft studio light, high oblique three-quarter view with every endpoint and complete route visible, no cropping, no text, no watermark, no collage, no characters. Design language: clean continuous ivory molded-polymer deck, solid muted petrol-teal rounded guardrails, pale yellow connectors, coral foam obstacles; no wooden planks, no rainbow-block fences. Precise usable flat road surfaces and clearly separated moving pieces; restrained simple chunky toy shapes. Track travel from back to front. Working design proportions: 19.2 units clear usable width, about 30 units long. Show underside thickness and small low support feet. An original wide slalom obstacle section: a single straight continuous wide road, six staggered low capsule-shaped foam bumpers arranged as three alternating pairs, broad readable gaps between them, low solid continuous sidewalls. Smooth ramp-free connections at both ends. Each coral capsule bumper has a pale-yellow recessed endcap, no spikes or peg forest. Entire object should look manufacturable and easy to reconstruct as simple collision shapes.",
+      "image": {
+        "view": "task",
+        "task_id": "76b1b3926d2f476aab9dd8e834f8e582",
+        "task_type": "image2d",
+        "status": "succeeded",
+        "stage": "succeeded",
+        "progress": 100,
+        "summary": "TEXT_TO_IMAGE",
+        "created_at": "2026-11-08T05:05:13.443Z",
+        "next_poll_after": 10,
+        "actual_points": 6,
+        "preview_url": "https://hitem3dstatic.zaohaowu.net/image-edit/target/c_683ed8fbf0334cfda4663b01b5b86cae/20261108/76b1b3926d2f476aab9dd8e834f8e582/0.png",
+        "model_page_url": null,
+        "assets": [
+          {
+            "name": "0.png",
+            "format": "PNG",
+            "url": "https://hitem3dstatic.zaohaowu.net/image-edit/target/c_683ed8fbf0334cfda4663b01b5b86cae/20261108/76b1b3926d2f476aab9dd8e834f8e582/0.png",
+            "expires_at": null
+          }
+        ],
+        "error": null,
+        "notice": "本次生成费用 6 积分，按积分文档计算。",
+        "schema_version": "2",
+        "request_id": "req_TZG8-i7yusAjQ5Zv3LlIlMacAVPqP_ZHWVsCpjojJsM",
+        "trace_id": "req_TZG8-i7yusAjQ5Zv3LlIlMacAVPqP_ZHWVsCpjojJsM"
+      },
+      "model": {
+        "task_id": "56d562bdba534e439dad96f603998d4d",
+        "task_type": "model3d",
+        "status": "succeeded",
+        "actual_points": 45,
+        "model_page_url": "https://www.hi3d.ai/3d-model/56d562bdba534e439dad96f603998d4d",
+        "created_at": "2026-11-08T05:06:13.303Z",
+        "localFile": "slalom-raw.glb"
+      },
+      "reviewFile": "slalom-review.jpg",
+      "auditFile": "slalom-audit.json",
+      "verdict": "需重新布置障碍并重做准确路面。"
+    },
+    {
+      "key": "hammers",
+      "label": "宽版摆锤路段",
+      "prompt": "Create an ORIGINAL game-ready modular toy race track design reference, not based on any existing game or copyrighted screenshot. Single isolated complete modular road section, neutral light gray background, soft studio light, high oblique three-quarter view with every endpoint and complete route visible, no cropping, no text, no watermark, no collage, no characters. Design language: clean continuous ivory molded-polymer deck, solid muted petrol-teal rounded guardrails, pale yellow connectors, coral foam obstacles; no wooden planks, no rainbow-block fences. Precise usable flat road surfaces and clearly separated moving pieces; restrained simple chunky toy shapes. Track travel from back to front. Working design proportions: 19.2 units clear usable width, about 30 units long. Show underside thickness and small low support feet. An original pendulum-mallet road module: straight wide road with TWO distinct overhead rounded portal frames, each with one suspended coral padded oval mallet. Strong visible pivots mounted above the route and separate hanging arms; one mallet slightly swung left, the other slightly right. Maintain open space under frames and a connected unobstructed flat floor. Supports stay outside usable road. No extra obstacle groups. Make pivots and mallet separation obvious for later rigging.",
+      "image": {
+        "view": "task",
+        "task_id": "335079185a1f42f69976d49f7bf92959",
+        "task_type": "image2d",
+        "status": "succeeded",
+        "stage": "succeeded",
+        "progress": 100,
+        "summary": "TEXT_TO_IMAGE",
+        "created_at": "2026-11-08T05:05:14.634Z",
+        "next_poll_after": 10,
+        "actual_points": 6,
+        "preview_url": "https://hitem3dstatic.zaohaowu.net/image-edit/target/c_683ed8fbf0334cfda4663b01b5b86cae/20261108/335079185a1f42f69976d49f7bf92959/0.png",
+        "model_page_url": null,
+        "assets": [
+          {
+            "name": "0.png",
+            "format": "PNG",
+            "url": "https://hitem3dstatic.zaohaowu.net/image-edit/target/c_683ed8fbf0334cfda4663b01b5b86cae/20261108/335079185a1f42f69976d49f7bf92959/0.png",
+            "expires_at": null
+          }
+        ],
+        "error": null,
+        "notice": "本次生成费用 6 积分，按积分文档计算。",
+        "schema_version": "2",
+        "request_id": "req_La_N2Rdhn03j-IzNXI5GxlLtMGKqboIUpK3uU7Y-AKg",
+        "trace_id": "req_La_N2Rdhn03j-IzNXI5GxlLtMGKqboIUpK3uU7Y-AKg"
+      },
+      "model": {
+        "task_id": "29055da0d0cc4053bd5a14eda7c6fe75",
+        "task_type": "model3d",
+        "status": "succeeded",
+        "actual_points": 45,
+        "model_page_url": "https://www.hi3d.ai/3d-model/29055da0d0cc4053bd5a14eda7c6fe75",
+        "created_at": "2026-11-08T05:06:14.484Z",
+        "localFile": "hammers-raw.glb"
+      },
+      "reviewFile": "hammers-review.jpg",
+      "auditFile": "hammers-audit.json",
+      "verdict": "需拆分/重建机关、设置转轴和动画。"
+    },
+    {
+      "key": "loop",
+      "label": "宽版回环与平缓备选岔路",
+      "prompt": "Create an ORIGINAL game-ready modular toy race track design reference, not based on any existing game or copyrighted screenshot. Single isolated complete modular road section, neutral light gray background, soft studio light, high oblique three-quarter view with every endpoint and complete route visible, no cropping, no text, no watermark, no collage, no characters. Design language: clean continuous ivory molded-polymer deck, solid muted petrol-teal rounded guardrails, pale yellow connectors, coral foam obstacles; no wooden planks, no rainbow-block fences. Precise usable flat road surfaces and clearly separated moving pieces; restrained simple chunky toy shapes. Track travel from back to front. Working design proportions: 19.2 units clear usable width, about 30 units long. Show underside thickness and small low support feet. An original two-choice fork module. A wide approach road splits visibly into TWO parallel routes then merges back into one equally wide exit. Left branch includes exactly one complete vertical loop-the-loop in the direction of travel, with continuous visible curved running surface and safety lips. Right branch is a calm low flat bypass without obstacles. Overall module is about 50 units long; each branch has about 7.2 units of clear width. Show both branches, entrance split and exit merge in full. Two low independent teal structural cradle supports under loop. No jumps or missing floor. Ensure the circular loop is a functional continuous road strip, not a decorative ring beside the road.",
+      "image": {
+        "view": "task",
+        "task_id": "34675b1025c446f19e5c588ad8d37724",
+        "task_type": "image2d",
+        "status": "succeeded",
+        "stage": "succeeded",
+        "progress": 100,
+        "summary": "TEXT_TO_IMAGE",
+        "created_at": "2026-11-08T05:05:15.928Z",
+        "next_poll_after": 10,
+        "actual_points": 6,
+        "preview_url": "https://hitem3dstatic.zaohaowu.net/image-edit/target/c_683ed8fbf0334cfda4663b01b5b86cae/20261108/34675b1025c446f19e5c588ad8d37724/0.png",
+        "model_page_url": null,
+        "assets": [
+          {
+            "name": "0.png",
+            "format": "PNG",
+            "url": "https://hitem3dstatic.zaohaowu.net/image-edit/target/c_683ed8fbf0334cfda4663b01b5b86cae/20261108/34675b1025c446f19e5c588ad8d37724/0.png",
+            "expires_at": null
+          }
+        ],
+        "error": null,
+        "notice": "本次生成费用 6 积分，按积分文档计算。",
+        "schema_version": "2",
+        "request_id": "req_1YRjZYn-P17djVF4kBV1mWrMtyTNHk_Z1OXbXI9o6Dk",
+        "trace_id": "req_1YRjZYn-P17djVF4kBV1mWrMtyTNHk_Z1OXbXI9o6Dk"
+      },
+      "model": {
+        "task_id": "86a4eccf0d7b4082929cb986bda456b0",
+        "task_type": "model3d",
+        "status": "succeeded",
+        "actual_points": 45,
+        "model_page_url": "https://www.hi3d.ai/3d-model/86a4eccf0d7b4082929cb986bda456b0",
+        "created_at": "2026-11-08T05:06:15.568Z",
+        "localFile": "loop-raw.glb"
+      },
+      "reviewFile": "loop-review.jpg",
+      "auditFile": "loop-audit.json",
+      "verdict": "需精确重建路面和碰撞，进行动力学验证。"
+    }
+  ],
+  "allModelTasksSucceeded": true
+}

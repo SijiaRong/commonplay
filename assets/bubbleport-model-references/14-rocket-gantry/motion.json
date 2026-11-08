@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "id": "14-rocket-gantry",
+  "status": "designed_not_implemented",
+  "coordinate_system": "+Y up; +Z front; +X object right. Angles use local joint axes.",
+  "parts": [
+    "gantry_static",
+    "rocket_red_lamps",
+    "rocket_amber_lamps",
+    "rocket_green_lamps",
+    "sign_backlight"
+  ],
+  "cycle_seconds": 8,
+  "playback": "event_driven; no automatic red/amber/green loop",
+  "notes": "红、黄、绿灯按事件状态切换，默认不自动循环倒计时；图示顺序是状态比较。",
+  "states": [
+    {
+      "id": "off",
+      "name": "关闭",
+      "illustration_cell": 0,
+      "parameters": {
+        "red": 0,
+        "amber": 0,
+        "green": 0,
+        "sign": 0
+      },
+      "visual_description": "All rocket indicator bulbs and blank sign backlight off.",
+      "image": "states/v1/off.png"
+    },
+    {
+      "id": "hold_red",
+      "name": "等待·红灯",
+      "illustration_cell": 1,
+      "parameters": {
+        "red": 0.8,
+        "amber": 0,
+        "green": 0,
+        "sign": 0.3
+      },
+      "visual_description": "Only TOP round bulb on each rocket upright glows soft red, other bulbs unlit. Blank sign softly lit.",
+      "image": "states/v1/hold_red.png"
+    },
+    {
+      "id": "ready_amber",
+      "name": "准备·黄灯",
+      "illustration_cell": 2,
+      "parameters": {
+        "red": 0,
+        "amber": 0.8,
+        "green": 0,
+        "sign": 0.5
+      },
+      "visual_description": "Only MIDDLE round bulb on each rocket glows amber; other bulbs off. Same blank sign.",
+      "image": "states/v1/ready_amber.png"
+    },
+    {
+      "id": "go_green",
+      "name": "出发·绿灯",
+      "illustration_cell": 3,
+      "parameters": {
+        "red": 0,
+        "amber": 0,
+        "green": 0.9,
+        "sign": 0.7
+      },
+      "visual_description": "Only BOTTOM round bulb on each rocket glows mint green; other bulbs off. Blank sign softly mint backlit. No added text.",
+      "image": "states/v1/go_green.png"
+    }
+  ],
+  "reference_sheet": "states/v1/state-comparison.png",
+  "state_image_dir": "states/v1",
+  "interpolation": "step",
+  "generation_policy": "生成3D使用baseline中性造型，动态状态仅用于灯光/关节/形变设定；不对各状态分别生成模型。",
+  "comparison_layout": [
+    "top_left",
+    "top_right",
+    "bottom_left",
+    "bottom_right"
+  ],
+  "reference_accuracy": "AI概念关键帧；角度与关节约束以参数为准，不是同一3D网格的精确渲染。",
+  "clip_preview": "目录页的关键帧轮播，不是骨骼动画或物理动画。",
+  "event_sequence": [
+    {
+      "from": "off",
+      "to": "hold_red",
+      "on": "power_on_event"
+    },
+    {
+      "from": "hold_red",
+      "to": "ready_amber",
+      "on": "race_ready_event"
+    },
+    {
+      "from": "ready_amber",
+      "to": "go_green",
+      "on": "race_start_event",
+      "suggested_amber_hold_seconds": 2
+    },
+    {
+      "from": "*",
+      "to": "off",
+      "on": "power_off_event"
+    }
+  ]
+}

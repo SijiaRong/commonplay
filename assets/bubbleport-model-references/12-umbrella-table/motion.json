@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "id": "12-umbrella-table",
+  "status": "designed_not_implemented",
+  "coordinate_system": "+Y up; +Z front; +X object right. Angles use local joint axes.",
+  "parts": [
+    "table_and_pole_static",
+    "canopy_rotor",
+    "canopy_rib_assembly"
+  ],
+  "cycle_seconds": 24,
+  "playback": "loop_with_off_state",
+  "notes": "伞顶加入轴承式旋转的设计设定；不是暗示普通固定遮阳伞会持续自转。桌面、伞杆、底盘不转。",
+  "states": [
+    {
+      "id": "angle_0",
+      "name": "伞面0°",
+      "illustration_cell": 0,
+      "parameters": {
+        "canopy_yaw_deg": 0
+      },
+      "visual_description": "Canopy orientation 0 degrees about vertical umbrella pole.",
+      "image": "states/v1/angle_0.png"
+    },
+    {
+      "id": "angle_22",
+      "name": "伞面22.5°",
+      "illustration_cell": 1,
+      "parameters": {
+        "canopy_yaw_deg": 22.5
+      },
+      "visual_description": "ONLY striped umbrella canopy with its ribs rotates 22.5 degrees around the stationary vertical pole. Table and foot unchanged.",
+      "image": "states/v1/angle_22.png"
+    },
+    {
+      "id": "angle_45",
+      "name": "伞面45°",
+      "illustration_cell": 2,
+      "parameters": {
+        "canopy_yaw_deg": 45
+      },
+      "visual_description": "Same canopy rotates 45 degrees from initial orientation, alternating peach and cream panels shift visibly. Table stays fixed.",
+      "image": "states/v1/angle_45.png"
+    },
+    {
+      "id": "angle_67",
+      "name": "伞面67.5°",
+      "illustration_cell": 3,
+      "parameters": {
+        "canopy_yaw_deg": 67.5
+      },
+      "visual_description": "Same canopy rotates 67.5 degrees about pole, keep identical canopy shape and stripe count, no folding or tilting.",
+      "image": "states/v1/angle_67.png"
+    }
+  ],
+  "reference_sheet": "states/v1/state-comparison.png",
+  "state_image_dir": "states/v1",
+  "interpolation": "smoothstep; lamps fade over 0.3-0.8 seconds",
+  "generation_policy": "生成3D使用baseline中性造型，动态状态仅用于灯光/关节/形变设定；不对各状态分别生成模型。",
+  "comparison_layout": [
+    "top_left",
+    "top_right",
+    "bottom_left",
+    "bottom_right"
+  ],
+  "reference_accuracy": "AI概念关键帧；角度与关节约束以参数为准，不是同一3D网格的精确渲染。",
+  "clip_preview": "目录页的关键帧轮播，不是骨骼动画或物理动画。",
+  "rotation_loop": {
+    "full_turn_seconds": 24,
+    "angular_velocity_deg_per_sec": 15.0,
+    "interpolation": "linear; wrap 360 to 0",
+    "note": "四张图是角度采样，不是一个完整旋转周期的四等分。"
+  },
+  "constraints": [
+    "新增轴承式旋转伞顶",
+    "只转伞面及伞骨；伞杆、桌面和底座固定",
+    "不折叠、不倾斜"
+  ]
+}

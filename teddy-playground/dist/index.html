@@ -2,6 +2,7 @@
 <main id="world" aria-label="小熊的木制滑梯赛道"></main>
 <header><div class="logo"><i aria-hidden="true">✳</i><div><small>COMMONPLAY</small><h1>小熊滑滑梯</h1></div></div><nav><a href="./practice.html">自由练习</a><button id="reset" aria-label="重新开始">↺<span> 重来</span></button></nav></header>
 <aside id="progress"><div><strong id="section">起点</strong><output id="percent">0%</output></div><progress max="100" value="0" aria-label="赛道进度"></progress></aside>
-<section id="launch"><p id="result" aria-live="polite"></p><button id="go" disabled>正在准备滑梯…</button></section>
+<section id="launch"><div class="character-summary"><span id="character-name">缝线小熊</span><button id="choose-character" type="button" aria-haspopup="dialog" aria-controls="character-picker">换个人物</button></div><p id="result" aria-live="polite"></p><button id="go" disabled>正在准备滑梯…</button></section>
+<dialog id="character-picker" aria-labelledby="character-title"><div class="picker-heading"><div><small>TOY TOWN</small><h2 id="character-title">选个伙伴去滑梯</h2></div><button id="close-character-picker" type="button" aria-label="关闭人物选择">×</button></div><div id="character-options" class="character-options"></div><p id="character-status" role="status" aria-live="polite"></p></dialog>
 <footer><div class="keys"><span><kbd>A</kbd><kbd>D</kbd> 转向</span><span><kbd>W</kbd> 加速</span><span><kbd>S</kbd> 减速</span><span><kbd>空格</kbd> 跳跃</span></div><div class="pad"><div><button data-key="KeyA" aria-label="向左">◀</button><button data-key="KeyD" aria-label="向右">▶</button></div><div><button data-key="KeyS">减速</button><button data-key="KeyW">加速</button><button data-key="Space">跳跃</button></div></div></footer>
 <script type="module" src="./slide/ride.js"></script></body></html>

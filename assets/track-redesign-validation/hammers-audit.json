@@ -1,0 +1,72 @@
+{
+  "key": "hammers",
+  "file": "/Users/cyberlingke/software/commonplay/assets/track-redesign-validation/hammers-raw.glb",
+  "bytes": 47281644,
+  "vertices": 1033651,
+  "triangles": 1953630,
+  "meshes": 1,
+  "primitives": 1,
+  "nodes": 2,
+  "nodeNames": [
+    "world",
+    "geometry_0"
+  ],
+  "materials": 1,
+  "textures": 2,
+  "animations": [],
+  "missingNormals": 1,
+  "missingUVs": 0,
+  "localBounds": {
+    "min": [
+      -0.500077486038208,
+      -0.1819411814212799,
+      -0.18804195523262024
+    ],
+    "max": [
+      0.500059187412262,
+      0.18164995312690735,
+      0.18809399008750916
+    ]
+  },
+  "basicStructurePassed": true,
+  "gameReady": false,
+  "notes": [
+    "High polygon source: simplify before runtime use.",
+    "Explicit vertex normals absent; generate normals during preparation.",
+    "One mesh: no semantic separation of deck, guardrails and moving obstacles.",
+    "No supplied motion: pivots and obstacle animation still require implementation.",
+    "Basic structure checks do not verify road continuity, exact dimensions, collision or physics."
+  ],
+  "browser": {
+    "ready": true,
+    "initialBounds": [
+      1.00013667345047,
+      0.36359113454818726,
+      0.3761359453201294
+    ],
+    "normalizedBounds": [
+      3.7608454454775773,
+      3.6354144808408875,
+      10
+    ],
+    "textureDimensions": [
+      {
+        "width": 8192,
+        "height": 8192
+      },
+      {
+        "width": 8192,
+        "height": 8192
+      }
+    ],
+    "animations": 0
+  },
+  "visualReview": {
+    "visual": "两只摆锤和支架外观保留；生成结果没有可单独驱动的锤头、摆臂或转轴节点。",
+    "verdict": "需拆分/重建机关、设置转轴和动画。"
+  },
+  "playabilityVerified": false,
+  "sha256": "725927cf58dd6b8eb4ec9fbcf3aab0787fdaec2d910361976300755302766a7c",
+  "targetLength": 30,
+  "outerWidthAtTargetLength": 11.28253633643273
+}

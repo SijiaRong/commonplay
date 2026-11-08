@@ -1,0 +1,54 @@
+{
+  "source": "assets/toy-town-models/originals/tik-original.glb",
+  "output": "assets/toy-town-models/tik-game.glb",
+  "sourceTriangles": 2000000,
+  "triangles": 23999,
+  "meshes": 1,
+  "normalizedDimensionsXYZ": [
+    0.9412429332733154,
+    0.6014275252819061,
+    1.0001928831334226
+  ],
+  "yawDegrees": 0,
+  "sourceImages": [
+    {
+      "name": "Image_0",
+      "size": [
+        8192,
+        8192
+      ]
+    },
+    {
+      "name": "Image_1",
+      "size": [
+        8192,
+        8192
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Image_0",
+      "size": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "name": "Image_1",
+      "size": [
+        2048,
+        2048
+      ]
+    }
+  ],
+  "geometryChecksPassed": true,
+  "visualReviewPassed": true,
+  "note": "Automated checks do not replace front/side/back visual review. No animation or character-specific action has been added.",
+  "smoothNormals": true,
+  "uvSeamsWelded": true,
+  "tailRepair": "shortened wind-up shaft to 28%",
+  "visualReviewNotes": "Reviewed front/back/side/three-quarter. Smooth normals; compact wind-up shaft; head, hands, feet, button and texture present.",
+  "animationReviewPassed": true,
+  "animationReviewNotes": "Shared nine-clip export passed GLB structural checks; slide and jump inspected; full classic slide, jump, steer, finish and reset exercised in browser."
+}

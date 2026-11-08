@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "id": "08-service-robot",
+  "status": "designed_not_implemented",
+  "coordinate_system": "+Y up; +Z front; +X object right. Angles use local joint axes.",
+  "parts": [
+    "torso",
+    "head_yaw_joint",
+    "head_pitch_joint",
+    "left_shoulder",
+    "right_shoulder",
+    "visor_eyes",
+    "antenna_light"
+  ],
+  "cycle_seconds": 8,
+  "playback": "event_driven_with_idle_loop",
+  "notes": "姿势为表演关键帧；模型生成仍使用中性A姿势。不要用不同状态重建多个机器人模型。",
+  "states": [
+    {
+      "id": "idle",
+      "name": "待机",
+      "illustration_cell": 0,
+      "parameters": {
+        "head_yaw_deg": 0,
+        "head_pitch_deg": 0,
+        "right_arm_lift_deg": 0,
+        "left_arm_lift_deg": 0,
+        "eyes": "cyan",
+        "antenna": 0.4
+      },
+      "visual_description": "Neutral relaxed A-pose as reference, cyan oval eyes, soft antenna light.",
+      "image": "states/v1/idle.png"
+    },
+    {
+      "id": "wave",
+      "name": "挥手迎宾",
+      "illustration_cell": 1,
+      "parameters": {
+        "head_yaw_deg": 15,
+        "head_pitch_deg": 0,
+        "right_arm_lift_deg": 75,
+        "left_arm_lift_deg": 0,
+        "eyes": "cyan",
+        "antenna": 0.8
+      },
+      "visual_description": "Raise robot's RIGHT arm in greeting with elbow slightly bent, head yaw 15 degrees toward that hand, bright cyan eyes, warm antenna.",
+      "image": "states/v1/wave.png"
+    },
+    {
+      "id": "point",
+      "name": "指路",
+      "illustration_cell": 2,
+      "parameters": {
+        "head_yaw_deg": -25,
+        "head_pitch_deg": 0,
+        "right_arm_lift_deg": 0,
+        "left_arm_lift_deg": 70,
+        "eyes": "mint",
+        "antenna": 0.6
+      },
+      "visual_description": "Robot's LEFT arm extends sideways to point with same C-shaped gripper, head yaw minus 25 degrees following arm. Body and feet anchored.",
+      "image": "states/v1/point.png"
+    },
+    {
+      "id": "sleep",
+      "name": "休眠",
+      "illustration_cell": 3,
+      "parameters": {
+        "head_yaw_deg": 0,
+        "head_pitch_deg": 12,
+        "right_arm_lift_deg": 0,
+        "left_arm_lift_deg": 0,
+        "eyes": "dim-slit",
+        "antenna": 0
+      },
+      "visual_description": "Arms relaxed, head tilted slightly downward, visor eyes become two short dim blue horizontal sleeping slits, antenna off. Feet unchanged.",
+      "image": "states/v1/sleep.png"
+    }
+  ],
+  "reference_sheet": "states/v1/state-comparison.png",
+  "state_image_dir": "states/v1",
+  "interpolation": "smoothstep; lamps fade over 0.3-0.8 seconds",
+  "generation_policy": "生成3D使用baseline中性造型，动态状态仅用于灯光/关节/形变设定；不对各状态分别生成模型。",
+  "comparison_layout": [
+    "top_left",
+    "top_right",
+    "bottom_left",
+    "bottom_right"
+  ],
+  "reference_accuracy": "AI概念关键帧；角度与关节约束以参数为准，不是同一3D网格的精确渲染。",
+  "clip_preview": "目录页的关键帧轮播，不是骨骼动画或物理动画。",
+  "gesture_clips": {
+    "wave_seconds": 2.4,
+    "wave_repetitions": 2,
+    "point_hold_seconds": 2,
+    "head_follow_delay_seconds": 0.15,
+    "feet_locked": true
+  }
+}

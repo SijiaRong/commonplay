@@ -1,0 +1,1 @@
+../../../../tools/blender/rig_teddy.py

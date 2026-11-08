@@ -1,0 +1,60 @@
+{
+  "createdDate": "2026-11-08",
+  "totalPoints": 135,
+  "tasks": [
+    {
+      "id": "pip",
+      "view": "task",
+      "task_id": "c7e67ae289454e80a8221774c469b914",
+      "task_type": "model3d",
+      "status": "succeeded",
+      "stage": "succeeded",
+      "progress": 100,
+      "summary": "Single original plush flying squirrel toy PIP, teal gliding membranes, cream belly, hazelnut fur, short curled tail. Complete full body, neutral pose, no props or base.",
+      "created_at": "2026-11-08T04:15:45.559Z",
+      "actual_points": 45,
+      "preview_url": null,
+      "model_page_url": "https://www.hi3d.ai/3d-model/c7e67ae289454e80a8221774c469b914",
+      "assets": [],
+      "error": null,
+      "notice": "本次生成费用 45 积分，按积分文档计算。",
+      "schema_version": "2"
+    },
+    {
+      "id": "tik",
+      "view": "task",
+      "task_id": "2cbf0120e832472c90b46638b1ddaaa4",
+      "task_type": "model3d",
+      "status": "succeeded",
+      "stage": "succeeded",
+      "progress": 100,
+      "summary": "Single wooden windup toy robot TIK, brick-red head, honey wood barrel body, mint button, navy short feet, compact brass windup key. Full body neutral pose, no base or props.",
+      "created_at": "2026-11-08T04:15:46.367Z",
+      "actual_points": 45,
+      "preview_url": null,
+      "model_page_url": "https://www.hi3d.ai/3d-model/2cbf0120e832472c90b46638b1ddaaa4",
+      "assets": [],
+      "error": null,
+      "notice": "本次生成费用 45 积分，按积分文档计算。",
+      "schema_version": "2"
+    },
+    {
+      "id": "wob",
+      "view": "task",
+      "task_id": "091bd72af5d1482ca821eae096f8b059",
+      "task_type": "model3d",
+      "status": "succeeded",
+      "stage": "succeeded",
+      "progress": 100,
+      "summary": "Single soft vinyl toy WOB, pale purple rounded bean body, asymmetric low folded top crest, tiny cream feet, nervous crooked mouth, peach cheek. Smooth matte vinyl not plush, full body, no props or base.",
+      "created_at": "2026-11-08T04:15:47.193Z",
+      "actual_points": 45,
+      "preview_url": null,
+      "model_page_url": "https://www.hi3d.ai/3d-model/091bd72af5d1482ca821eae096f8b059",
+      "assets": [],
+      "error": null,
+      "notice": "本次生成费用 45 积分，按积分文档计算。",
+      "schema_version": "2"
+    }
+  ]
+}

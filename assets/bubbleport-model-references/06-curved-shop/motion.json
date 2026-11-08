@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "id": "06-curved-shop",
+  "status": "designed_not_implemented",
+  "coordinate_system": "+Y up; +Z front; +X object right. Angles use local joint axes.",
+  "parts": [
+    "building_static",
+    "window_light_zone_a",
+    "window_light_zone_b",
+    "cornice_light"
+  ],
+  "cycle_seconds": 10,
+  "playback": "loop_with_off_state",
+  "notes": "不让建筑本体转动；橱窗分A/B组轮亮。灯条为设计新增材质区。",
+  "states": [
+    {
+      "id": "closed",
+      "name": "闭店",
+      "illustration_cell": 0,
+      "parameters": {
+        "zone_a": 0,
+        "zone_b": 0,
+        "cornice": 0
+      },
+      "visual_description": "All interior display windows and cornice lighting off. Same fixed building.",
+      "image": "states/v1/closed.png"
+    },
+    {
+      "id": "warm",
+      "name": "营业暖光",
+      "illustration_cell": 1,
+      "parameters": {
+        "zone_a": 0.65,
+        "zone_b": 0.65,
+        "cornice": 0.25
+      },
+      "visual_description": "All display windows softly warm amber, subtle warm cornice strip.",
+      "image": "states/v1/warm.png"
+    },
+    {
+      "id": "sequence_a",
+      "name": "橱窗轮亮A",
+      "illustration_cell": 2,
+      "parameters": {
+        "zone_a": 0.9,
+        "zone_b": 0.2,
+        "cornice": 0.4
+      },
+      "visual_description": "Alternating existing arched windows: first, third and fifth warm amber bright, second and fourth dim.",
+      "image": "states/v1/sequence_a.png"
+    },
+    {
+      "id": "sequence_b",
+      "name": "橱窗轮亮B",
+      "illustration_cell": 3,
+      "parameters": {
+        "zone_a": 0.2,
+        "zone_b": 0.9,
+        "cornice": 0.4
+      },
+      "visual_description": "Opposite existing windows second and fourth pale cyan bright, first third fifth dim warm. Same architecture.",
+      "image": "states/v1/sequence_b.png"
+    }
+  ],
+  "reference_sheet": "states/v1/state-comparison.png",
+  "state_image_dir": "states/v1",
+  "interpolation": "smoothstep; lamps fade over 0.3-0.8 seconds",
+  "generation_policy": "生成3D使用baseline中性造型，动态状态仅用于灯光/关节/形变设定；不对各状态分别生成模型。",
+  "comparison_layout": [
+    "top_left",
+    "top_right",
+    "bottom_left",
+    "bottom_right"
+  ],
+  "reference_accuracy": "AI概念关键帧；角度与关节约束以参数为准，不是同一3D网格的精确渲染。",
+  "clip_preview": "目录页的关键帧轮播，不是骨骼动画或物理动画。",
+  "lighting_clips": {
+    "alternating_groups": [
+      "A",
+      "B"
+    ],
+    "phase_seconds": 1.6,
+    "fade_seconds": 0.5,
+    "off_is_separate_power_state": true
+  }
+}

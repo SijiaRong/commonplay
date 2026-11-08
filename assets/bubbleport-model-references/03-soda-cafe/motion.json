@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "id": "03-soda-cafe",
+  "status": "designed_not_implemented",
+  "coordinate_system": "+Y up; +Z front; +X object right. Angles use local joint axes.",
+  "parts": [
+    "building_static",
+    "sign_light",
+    "interior_left_light",
+    "interior_right_light",
+    "awning_bulbs"
+  ],
+  "cycle_seconds": 8,
+  "playback": "loop_with_off_state",
+  "notes": "建筑无刚体运动，只有招牌、室内分区和檐口灯分组控制。",
+  "states": [
+    {
+      "id": "closed",
+      "name": "闭店·灯灭",
+      "illustration_cell": 0,
+      "parameters": {
+        "sign": 0,
+        "windows": 0
+      },
+      "visual_description": "All sign, window and awning lamps off, neutral studio-lit surfaces and unchanged doors.",
+      "image": "states/v1/closed.png"
+    },
+    {
+      "id": "open_warm",
+      "name": "营业·暖光",
+      "illustration_cell": 1,
+      "parameters": {
+        "sign": 0.8,
+        "windows": 0.7,
+        "color": "#FFD29A"
+      },
+      "visual_description": "Warm amber soda pictogram and soft warm interior window lights.",
+      "image": "states/v1/open_warm.png"
+    },
+    {
+      "id": "chase_a",
+      "name": "招徕·闪灯A",
+      "illustration_cell": 2,
+      "parameters": {
+        "sign": 1,
+        "left": 0.8,
+        "right": 0.25,
+        "awning_phase": 0
+      },
+      "visual_description": "Soda pictogram glowing peach, left window warm brighter than right, every other existing small awning bulb lit amber.",
+      "image": "states/v1/chase_a.png"
+    },
+    {
+      "id": "chase_b",
+      "name": "招徕·闪灯B",
+      "illustration_cell": 3,
+      "parameters": {
+        "sign": 0.35,
+        "left": 0.25,
+        "right": 0.8,
+        "awning_phase": 1
+      },
+      "visual_description": "Same geometry, right window warm brighter than left, opposite awning bulbs lit pale cyan, sign dims.",
+      "image": "states/v1/chase_b.png"
+    }
+  ],
+  "reference_sheet": "states/v1/state-comparison.png",
+  "state_image_dir": "states/v1",
+  "interpolation": "smoothstep; lamps fade over 0.3-0.8 seconds",
+  "generation_policy": "生成3D使用baseline中性造型，动态状态仅用于灯光/关节/形变设定；不对各状态分别生成模型。",
+  "comparison_layout": [
+    "top_left",
+    "top_right",
+    "bottom_left",
+    "bottom_right"
+  ],
+  "reference_accuracy": "AI概念关键帧；角度与关节约束以参数为准，不是同一3D网格的精确渲染。",
+  "clip_preview": "目录页的关键帧轮播，不是骨骼动画或物理动画。",
+  "lighting_clips": {
+    "alternating_groups": [
+      "A",
+      "B"
+    ],
+    "phase_seconds": 1.6,
+    "fade_seconds": 0.5,
+    "off_is_separate_power_state": true
+  }
+}

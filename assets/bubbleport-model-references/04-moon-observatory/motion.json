@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "id": "04-moon-observatory",
+  "status": "designed_not_implemented",
+  "coordinate_system": "+Y up; +Z front; +X object right. Angles use local joint axes.",
+  "parts": [
+    "lower_building_static",
+    "balcony_static",
+    "upper_observation_turret",
+    "window_lights",
+    "moon_light"
+  ],
+  "cycle_seconds": 24,
+  "playback": "loop_with_off_state",
+  "notes": "上部观测舱为新增运动设计；与下层阳台分网格。月牙随顶舱旋转，楼体固定。",
+  "states": [
+    {
+      "id": "off_0",
+      "name": "暂停·顶舱灯灭",
+      "illustration_cell": 0,
+      "parameters": {
+        "turret_yaw_deg": 0,
+        "upper_light_intensity": 0,
+        "lower_light_intensity": 0.5
+      },
+      "visual_description": "Upper observation turret at yaw 0 with its lights off; lower windows remain softly warm.",
+      "image": "states/v1/off_0.png"
+    },
+    {
+      "id": "scan_30",
+      "name": "巡视·30°",
+      "illustration_cell": 1,
+      "parameters": {
+        "turret_yaw_deg": 30,
+        "lights": 0.6,
+        "color": "#FFD49B"
+      },
+      "visual_description": "Only the small upper observation room, its dome and crescent rotate together 30 degrees about tower vertical axis; balcony railing and lower building stay fixed. Warm windows.",
+      "image": "states/v1/scan_30.png"
+    },
+    {
+      "id": "scan_60",
+      "name": "巡视·60°",
+      "illustration_cell": 2,
+      "parameters": {
+        "turret_yaw_deg": 60,
+        "lights": 0.8,
+        "color": "#9ADFE8"
+      },
+      "visual_description": "Upper turret yaw 60 degrees, pale cyan upper observation window lights and softly lit crescent, unchanged lower structure.",
+      "image": "states/v1/scan_60.png"
+    },
+    {
+      "id": "scan_90",
+      "name": "巡视·90°",
+      "illustration_cell": 3,
+      "parameters": {
+        "turret_yaw_deg": 90,
+        "lights": 0.5,
+        "color": "#E0C3EE"
+      },
+      "visual_description": "Upper turret yaw 90 degrees, subtle lavender upper window glow. Lower windows warm.",
+      "image": "states/v1/scan_90.png"
+    }
+  ],
+  "reference_sheet": "states/v1/state-comparison.png",
+  "state_image_dir": "states/v1",
+  "interpolation": "smoothstep; lamps fade over 0.3-0.8 seconds",
+  "generation_policy": "生成3D使用baseline中性造型，动态状态仅用于灯光/关节/形变设定；不对各状态分别生成模型。",
+  "comparison_layout": [
+    "top_left",
+    "top_right",
+    "bottom_left",
+    "bottom_right"
+  ],
+  "reference_accuracy": "AI概念关键帧；角度与关节约束以参数为准，不是同一3D网格的精确渲染。",
+  "clip_preview": "目录页的关键帧轮播，不是骨骼动画或物理动画。"
+}

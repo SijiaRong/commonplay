@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lost Marbles · Play Room</title>
+<style>*{margin:0}canvas{display:block;width:100vw;height:100dvh;cursor:grab;touch-action:none}canvas:active{cursor:grabbing}</style>
+<canvas aria-label="Play Room 空场，拖动环视"></canvas>
+<script type="importmap">{"imports":{"three":"../../vendor/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import {GroundedSkybox} from './GroundedSkybox.js';
+const canvas = document.querySelector('canvas');
+const renderer = new THREE.WebGLRenderer({canvas, antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(65, 1, 0.1, 1000);
+camera.position.y = 64;
+const photo = await new THREE.TextureLoader().loadAsync('room_bg.jpg');
+photo.colorSpace = THREE.SRGBColorSpace;
+photo.mapping = THREE.EquirectangularReflectionMapping;
+photo.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+photo.generateMipmaps = true;
+photo.minFilter = THREE.LinearMipmapLinearFilter;
+const sky = new GroundedSkybox(photo, 64, 520, 96);
+sky.position.y = 63.98;
+sky.material.color.setScalar(1.05);
+sky.material.depthWrite = true;
+sky.renderOrder = -1;
+scene.add(sky);
+let yaw = 0.28, pitch = -0.10;
+function draw() {
+  camera.lookAt(Math.cos(yaw)*Math.cos(pitch), 64 + Math.sin(pitch), Math.sin(yaw)*Math.cos(pitch));
+  renderer.render(scene, camera);
+}
+function resize() {
+  renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+  camera.aspect = canvas.clientWidth / canvas.clientHeight;
+  camera.updateProjectionMatrix();
+  draw();
+}
+canvas.onpointerdown = e => canvas.setPointerCapture(e.pointerId);
+canvas.onpointermove = e => {
+  if (!canvas.hasPointerCapture(e.pointerId)) return;
+  yaw -= e.movementX * 0.003;
+  pitch = THREE.MathUtils.clamp(pitch + e.movementY * 0.003, -1.52, 1.52);
+  draw();
+};
+addEventListener('resize', resize);
+resize();
+document.documentElement.dataset.ready='true';
+</script></html>

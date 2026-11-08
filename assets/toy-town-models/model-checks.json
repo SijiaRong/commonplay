@@ -1,0 +1,189 @@
+{
+  "models": [
+    {
+      "file": "teddy-playground/dist/characters/pip-animated.glb",
+      "bytes": 5674080,
+      "triangles": 23999,
+      "vertices": 15360,
+      "meshes": 1,
+      "textures": 2,
+      "animations": [
+        {
+          "name": "Idle",
+          "duration": 3.0333333015441895
+        },
+        {
+          "name": "Run",
+          "duration": 0.8333333134651184
+        },
+        {
+          "name": "Jump",
+          "duration": 1.0333333015441895
+        },
+        {
+          "name": "Slide",
+          "duration": 3.2333333492279053
+        },
+        {
+          "name": "SlideLeft",
+          "duration": 3.2333333492279053
+        },
+        {
+          "name": "SlideRight",
+          "duration": 3.2333333492279053
+        },
+        {
+          "name": "SitDown",
+          "duration": 1.0333333015441895
+        },
+        {
+          "name": "StandUp",
+          "duration": 1.2333333492279053
+        },
+        {
+          "name": "FinishWave",
+          "duration": 1.4333332777023315
+        }
+      ],
+      "passed": true,
+      "sha256": "829fc2a58f5140c56c0d6dba460d34aaa24db46b8058f0b3c32551ace02c8aa6"
+    },
+    {
+      "file": "teddy-playground/dist/characters/tik-animated.glb",
+      "bytes": 6954720,
+      "triangles": 23999,
+      "vertices": 17937,
+      "meshes": 1,
+      "textures": 2,
+      "animations": [
+        {
+          "name": "Idle",
+          "duration": 3.0333333015441895
+        },
+        {
+          "name": "Run",
+          "duration": 0.8333333134651184
+        },
+        {
+          "name": "Jump",
+          "duration": 1.0333333015441895
+        },
+        {
+          "name": "Slide",
+          "duration": 3.2333333492279053
+        },
+        {
+          "name": "SlideLeft",
+          "duration": 3.2333333492279053
+        },
+        {
+          "name": "SlideRight",
+          "duration": 3.2333333492279053
+        },
+        {
+          "name": "SitDown",
+          "duration": 1.0333333015441895
+        },
+        {
+          "name": "StandUp",
+          "duration": 1.2333333492279053
+        },
+        {
+          "name": "FinishWave",
+          "duration": 1.4333332777023315
+        }
+      ],
+      "passed": true,
+      "sha256": "ca7679b4b838dd9ea8e15006907e161dfcc989d0629d1c72be7e96306b36cf49"
+    },
+    {
+      "file": "teddy-playground/dist/characters/wob-animated.glb",
+      "bytes": 3910084,
+      "triangles": 21889,
+      "vertices": 17153,
+      "meshes": 1,
+      "textures": 2,
+      "animations": [
+        {
+          "name": "Idle",
+          "duration": 3.0333333015441895
+        },
+        {
+          "name": "Run",
+          "duration": 0.8333333134651184
+        },
+        {
+          "name": "Jump",
+          "duration": 1.0333333015441895
+        },
+        {
+          "name": "Slide",
+          "duration": 3.2333333492279053
+        },
+        {
+          "name": "SlideLeft",
+          "duration": 3.2333333492279053
+        },
+        {
+          "name": "SlideRight",
+          "duration": 3.2333333492279053
+        },
+        {
+          "name": "SitDown",
+          "duration": 1.0333333015441895
+        },
+        {
+          "name": "StandUp",
+          "duration": 1.2333333492279053
+        },
+        {
+          "name": "FinishWave",
+          "duration": 1.4333332777023315
+        }
+      ],
+      "passed": true,
+      "sha256": "c905eb9a203095bdea219f5e78e2de055afc2d88cae344b6eb9714abe69caaab"
+    }
+  ],
+  "browserChecks": {
+    "classic": {
+      "characters": [
+        "teddy",
+        "pip",
+        "tik",
+        "wob"
+      ],
+      "checks": [
+        "load",
+        "switch",
+        "run",
+        "sit",
+        "slide",
+        "jump",
+        "turn",
+        "finish",
+        "reset"
+      ],
+      "passed": true
+    },
+    "soloCharacterChoices": {
+      "characters": [
+        "pip",
+        "tik",
+        "wob"
+      ],
+      "passed": true
+    },
+    "finishCamera": {
+      "wideLane": true,
+      "visibleRider": true,
+      "screenshot": "demo-tik-finish.png",
+      "passed": true
+    },
+    "selectionPersistence": true,
+    "failedLoadKeepsRider": true,
+    "mobileDialogAndTouchControls": true,
+    "fullRegressionScriptPassed": true,
+    "command": "DEMO_URL='http://127.0.0.1:54661/?mode=yard' node tools/check-toy-town.cjs"
+  }
+}

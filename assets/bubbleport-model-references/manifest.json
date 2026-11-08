@@ -1,0 +1,455 @@
+{
+  "name": "泡泡星港景观模型参考库",
+  "date": "2026-11-08",
+  "generator": "built-in image_gen",
+  "view_layout": {
+    "top_left": "front",
+    "top_right": "right",
+    "bottom_left": "back",
+    "bottom_right": "three-quarter"
+  },
+  "notes": [
+    "AI生成的设计参考，不是尺寸校准的工程正投影。隐藏面为重新设计补全。",
+    "每组为单个景观资产，赛道和赛道支架不在交付范围。",
+    "参考图不是3D模型，尚未提交Hi3D或验证重建结果。"
+  ],
+  "assets": [
+    {
+      "id": "01-saturn-landmark",
+      "name": "土星地标",
+      "description": "A freestanding peach translucent Saturn globe with a slim ivory and mint cylindrical pedestal and a single decorative thin peach ring attached to globe. Extract just the planet sculpture and pedestal. No spiral drum, no race track, lights switched off in the baseline pose, no base scenery.",
+      "generation_prompt": "Create a professional 3D ASSET DESIGN REFERENCE SHEET for subsequent single-object image-to-3D generation. Use input image as style and object identity reference, extracting ONLY the specified object, reinterpreting hidden surfaces conservatively to make a complete buildable freestanding asset. One image in landscape 3:2 format with EXACTLY FOUR equally sized rectangular cells in a precise 2x2 grid. White background throughout, generous clear margin around each object so no silhouettes touch cell boundaries. TOP LEFT: straight FRONT orthographic view. TOP RIGHT: straight RIGHT SIDE orthographic view. BOTTOM LEFT: straight BACK orthographic view. BOTTOM RIGHT: elevated front three-quarter view. All four cells show the SAME SINGLE OBJECT at identical relative scale, same geometry and colors, no alternate designs. Use neutral shadowless studio illumination, readable material colors, no cast shadows, no bloom, no atmospheric effects, no room/table environment, no text, no labels, no watermarks, no dimensions. Tactile high quality miniature model product photography, satin ivory painted resin, mint green trim, pale peach accents, restrained metal and acrylic, clean simplified structural details. Every asset must be isolated with complete silhouette and visible bottom feet, physically plausible closed construction. No race track, no terrain, no diorama base, no unrelated neighboring props. Primary object: A freestanding peach translucent Saturn globe with a slim ivory and mint cylindrical pedestal and a single decorative thin peach ring attached to globe. Extract just the planet sculpture and pedestal. No spiral drum, no race track, no LEDs, no base scenery.",
+      "source_sheet": "/Users/cyberlingke/.codex/generated_images/01a1b93f-d38a-7260-a536-fa7db57c2a6b/exec-42cccb00-e2c4-411b-a6c3-cc022aac0d44.png",
+      "sheet": "01-saturn-landmark/reference-sheet.png",
+      "views": {
+        "front": "01-saturn-landmark/front.png",
+        "right": "01-saturn-landmark/right.png",
+        "back": "01-saturn-landmark/back.png",
+        "three-quarter": "01-saturn-landmark/three-quarter.png"
+      },
+      "sheet_dimensions": [
+        1536,
+        1024
+      ],
+      "view_dimensions": [
+        756,
+        756
+      ],
+      "design_file": "01-saturn-landmark/design.json",
+      "motion_file": "01-saturn-landmark/motion.json",
+      "component_readme": "01-saturn-landmark/README.md",
+      "dynamic_status": "designed_not_implemented",
+      "state_comparison": "01-saturn-landmark/states/v1/state-comparison.png"
+    },
+    {
+      "id": "02-ferris-wheel",
+      "name": "摩天轮",
+      "description": "The small ivory and mint A-frame toy Ferris wheel with coral/amber/aqua open passenger gondolas, star emblem at hub, mechanical wheel spokes and compact integral foot platform. Gondolas are evenly spaced and all views show the same static wheel position. No marbles and no track.",
+      "generation_prompt": "Create a professional 3D ASSET DESIGN REFERENCE SHEET for subsequent single-object image-to-3D generation. Use input image as style and object identity reference, extracting ONLY the specified object, reinterpreting hidden surfaces conservatively to make a complete buildable freestanding asset. One image in landscape 3:2 format with EXACTLY FOUR equally sized rectangular cells in a precise 2x2 grid. White background throughout, generous clear margin around each object so no silhouettes touch cell boundaries. TOP LEFT: straight FRONT orthographic view. TOP RIGHT: straight RIGHT SIDE orthographic view. BOTTOM LEFT: straight BACK orthographic view. BOTTOM RIGHT: elevated front three-quarter view. All four cells show the SAME SINGLE OBJECT at identical relative scale, same geometry and colors, no alternate designs. Use neutral shadowless studio illumination, readable material colors, no cast shadows, no bloom, no atmospheric effects, no room/table environment, no text, no labels, no watermarks, no dimensions. Tactile high quality miniature model product photography, satin ivory painted resin, mint green trim, pale peach accents, restrained metal and acrylic, clean simplified structural details. Every asset must be isolated with complete silhouette and visible bottom feet, physically plausible closed construction. No race track, no terrain, no diorama base, no unrelated neighboring props. Primary object: The small ivory and mint A-frame toy Ferris wheel with coral/amber/aqua open passenger gondolas, star emblem at hub, mechanical wheel spokes and compact integral foot platform. Gondolas are evenly spaced and all views show the same static wheel position. No marbles and no track.",
+      "source_sheet": "/Users/cyberlingke/.codex/generated_images/01a1b93f-d38a-7260-a536-fa7db57c2a6b/exec-dbfbb7d8-beb7-4c59-8450-b9616f66ede2.png",
+      "sheet": "02-ferris-wheel/reference-sheet.png",
+      "views": {
+        "front": "02-ferris-wheel/front.png",
+        "right": "02-ferris-wheel/right.png",
+        "back": "02-ferris-wheel/back.png",
+        "three-quarter": "02-ferris-wheel/three-quarter.png"
+      },
+      "sheet_dimensions": [
+        1536,
+        1024
+      ],
+      "view_dimensions": [
+        756,
+        756
+      ],
+      "design_file": "02-ferris-wheel/design.json",
+      "motion_file": "02-ferris-wheel/motion.json",
+      "component_readme": "02-ferris-wheel/README.md",
+      "dynamic_status": "designed_not_implemented",
+      "state_comparison": "02-ferris-wheel/states/v1/state-comparison.png"
+    },
+    {
+      "id": "03-soda-cafe",
+      "name": "汽水店",
+      "description": "The freestanding rounded cylindrical soda cafe: ivory walls, mint domed roof, peach-and-cream striped curved awning, orange soda-cup pictogram sign on roof, large curved storefront glazing, single entrance, modest visible simplified interior counter. No tables, no chairs, no plants and no ground plaza.",
+      "generation_prompt": "Create a professional 3D ASSET DESIGN REFERENCE SHEET for subsequent single-object image-to-3D generation. Use input image as style and object identity reference, extracting ONLY the specified object, reinterpreting hidden surfaces conservatively to make a complete buildable freestanding asset. One image in landscape 3:2 format with EXACTLY FOUR equally sized rectangular cells in a precise 2x2 grid. White background throughout, generous clear margin around each object so no silhouettes touch cell boundaries. TOP LEFT: straight FRONT orthographic view. TOP RIGHT: straight RIGHT SIDE orthographic view. BOTTOM LEFT: straight BACK orthographic view. BOTTOM RIGHT: elevated front three-quarter view. All four cells show the SAME SINGLE OBJECT at identical relative scale, same geometry and colors, no alternate designs. Use neutral shadowless studio illumination, readable material colors, no cast shadows, no bloom, no atmospheric effects, no room/table environment, no text, no labels, no watermarks, no dimensions. Tactile high quality miniature model product photography, satin ivory painted resin, mint green trim, pale peach accents, restrained metal and acrylic, clean simplified structural details. Every asset must be isolated with complete silhouette and visible bottom feet, physically plausible closed construction. No race track, no terrain, no diorama base, no unrelated neighboring props. Primary object: The freestanding rounded cylindrical soda cafe: ivory walls, mint domed roof, peach-and-cream striped curved awning, orange soda-cup pictogram sign on roof, large curved storefront glazing, single entrance, modest visible simplified interior counter. No tables, no chairs, no plants and no ground plaza.",
+      "source_sheet": "/Users/cyberlingke/.codex/generated_images/01a1b93f-d38a-7260-a536-fa7db57c2a6b/exec-be0bdf07-f562-4137-a8d0-52a1f57c29c1.png",
+      "sheet": "03-soda-cafe/reference-sheet.png",
+      "views": {
+        "front": "03-soda-cafe/front.png",
+        "right": "03-soda-cafe/right.png",
+        "back": "03-soda-cafe/back.png",
+        "three-quarter": "03-soda-cafe/three-quarter.png"
+      },
+      "sheet_dimensions": [
+        1536,
+        1024
+      ],
+      "view_dimensions": [
+        756,
+        756
+      ],
+      "design_file": "03-soda-cafe/design.json",
+      "motion_file": "03-soda-cafe/motion.json",
+      "component_readme": "03-soda-cafe/README.md",
+      "dynamic_status": "designed_not_implemented",
+      "state_comparison": "03-soda-cafe/states/v1/state-comparison.png"
+    },
+    {
+      "id": "04-moon-observatory",
+      "name": "月牙观测塔",
+      "description": "The slender cream and mint retro-futuristic cylindrical moon observatory tower from scene: stepped round upper observation deck with ivory railing, small dome roof and crescent moon finial, arched windows and one entrance on ground floor. Freestanding closed building with simple rear service door. No attached track, no marble tubes, no surrounding plants.",
+      "generation_prompt": "Create a professional 3D ASSET DESIGN REFERENCE SHEET for subsequent single-object image-to-3D generation. Use input image as style and object identity reference, extracting ONLY the specified object, reinterpreting hidden surfaces conservatively to make a complete buildable freestanding asset. One image in landscape 3:2 format with EXACTLY FOUR equally sized rectangular cells in a precise 2x2 grid. White background throughout, generous clear margin around each object so no silhouettes touch cell boundaries. TOP LEFT: straight FRONT orthographic view. TOP RIGHT: straight RIGHT SIDE orthographic view. BOTTOM LEFT: straight BACK orthographic view. BOTTOM RIGHT: elevated front three-quarter view. All four cells show the SAME SINGLE OBJECT at identical relative scale, same geometry and colors, no alternate designs. Use neutral shadowless studio illumination, readable material colors, no cast shadows, no bloom, no atmospheric effects, no room/table environment, no text, no labels, no watermarks, no dimensions. Tactile high quality miniature model product photography, satin ivory painted resin, mint green trim, pale peach accents, restrained metal and acrylic, clean simplified structural details. Every asset must be isolated with complete silhouette and visible bottom feet, physically plausible closed construction. No race track, no terrain, no diorama base, no unrelated neighboring props. Primary object: The slender cream and mint retro-futuristic cylindrical moon observatory tower from scene: stepped round upper observation deck with ivory railing, small dome roof and crescent moon finial, arched windows and one entrance on ground floor. Freestanding closed building with simple rear service door. No attached track, no marble tubes, no surrounding plants.",
+      "source_sheet": "/Users/cyberlingke/.codex/generated_images/01a1b93f-d38a-7260-a536-fa7db57c2a6b/exec-1a687960-8a20-4b39-a7b5-d307bcd5bf9a.png",
+      "sheet": "04-moon-observatory/reference-sheet.png",
+      "views": {
+        "front": "04-moon-observatory/front.png",
+        "right": "04-moon-observatory/right.png",
+        "back": "04-moon-observatory/back.png",
+        "three-quarter": "04-moon-observatory/three-quarter.png"
+      },
+      "sheet_dimensions": [
+        1536,
+        1024
+      ],
+      "view_dimensions": [
+        756,
+        756
+      ],
+      "design_file": "04-moon-observatory/design.json",
+      "motion_file": "04-moon-observatory/motion.json",
+      "component_readme": "04-moon-observatory/README.md",
+      "dynamic_status": "designed_not_implemented",
+      "state_comparison": "04-moon-observatory/states/v1/state-comparison.png"
+    },
+    {
+      "id": "05-glass-dome-pavilion",
+      "name": "玻璃穹顶馆",
+      "description": "The low round ivory and mint observatory pavilion with large transparent hemispherical glass dome held by ivory structural ribs, small rooftop antenna, arched windows and ground entrance. Empty simplified interior with one observation instrument. Freestanding single building, no landscape vegetation, no track.",
+      "generation_prompt": "Create a professional 3D ASSET DESIGN REFERENCE SHEET for subsequent single-object image-to-3D generation. Use input image as style and object identity reference, extracting ONLY the specified object, reinterpreting hidden surfaces conservatively to make a complete buildable freestanding asset. One image in landscape 3:2 format with EXACTLY FOUR equally sized rectangular cells in a precise 2x2 grid. White background throughout, generous clear margin around each object so no silhouettes touch cell boundaries. TOP LEFT: straight FRONT orthographic view. TOP RIGHT: straight RIGHT SIDE orthographic view. BOTTOM LEFT: straight BACK orthographic view. BOTTOM RIGHT: elevated front three-quarter view. All four cells show the SAME SINGLE OBJECT at identical relative scale, same geometry and colors, no alternate designs. Use neutral shadowless studio illumination, readable material colors, no cast shadows, no bloom, no atmospheric effects, no room/table environment, no text, no labels, no watermarks, no dimensions. Tactile high quality miniature model product photography, satin ivory painted resin, mint green trim, pale peach accents, restrained metal and acrylic, clean simplified structural details. Every asset must be isolated with complete silhouette and visible bottom feet, physically plausible closed construction. No race track, no terrain, no diorama base, no unrelated neighboring props. Primary object: The low round ivory and mint observatory pavilion with large transparent hemispherical glass dome held by ivory structural ribs, small rooftop antenna, arched windows and ground entrance. Empty simplified interior with one observation instrument. Freestanding single building, no landscape vegetation, no track.",
+      "source_sheet": "/Users/cyberlingke/.codex/generated_images/01a1b93f-d38a-7260-a536-fa7db57c2a6b/exec-3cdfbbb8-87ae-441b-80ab-04644d326d93.png",
+      "sheet": "05-glass-dome-pavilion/reference-sheet.png",
+      "views": {
+        "front": "05-glass-dome-pavilion/front.png",
+        "right": "05-glass-dome-pavilion/right.png",
+        "back": "05-glass-dome-pavilion/back.png",
+        "three-quarter": "05-glass-dome-pavilion/three-quarter.png"
+      },
+      "sheet_dimensions": [
+        1536,
+        1024
+      ],
+      "view_dimensions": [
+        756,
+        756
+      ],
+      "design_file": "05-glass-dome-pavilion/design.json",
+      "motion_file": "05-glass-dome-pavilion/motion.json",
+      "component_readme": "05-glass-dome-pavilion/README.md",
+      "dynamic_status": "designed_not_implemented",
+      "state_comparison": "05-glass-dome-pavilion/states/v1/state-comparison.png"
+    },
+    {
+      "id": "06-curved-shop",
+      "name": "弧形商铺模块",
+      "description": "A standalone arc-shaped single-story miniature shop building extracted from below the FRONT U turn: curved ivory facade with repeated warm clear arched display windows, mint lower trim, peach corner details, flat solid curved roof and straight inner rear facade. Model only one coherent 90-degree arc building module with closed end walls, not an entire semicircle city. No road, racing deck, track rails or support columns above roof. Unlit simple interior.",
+      "generation_prompt": "Create a professional 3D ASSET DESIGN REFERENCE SHEET for subsequent single-object image-to-3D generation. Use input image as style and object identity reference, extracting ONLY the specified object, reinterpreting hidden surfaces conservatively to make a complete buildable freestanding asset. One image in landscape 3:2 format with EXACTLY FOUR equally sized rectangular cells in a precise 2x2 grid. White background throughout, generous clear margin around each object so no silhouettes touch cell boundaries. TOP LEFT: straight FRONT orthographic view. TOP RIGHT: straight RIGHT SIDE orthographic view. BOTTOM LEFT: straight BACK orthographic view. BOTTOM RIGHT: elevated front three-quarter view. All four cells show the SAME SINGLE OBJECT at identical relative scale, same geometry and colors, no alternate designs. Use neutral shadowless studio illumination, readable material colors, no cast shadows, no bloom, no atmospheric effects, no room/table environment, no text, no labels, no watermarks, no dimensions. Tactile high quality miniature model product photography, satin ivory painted resin, mint green trim, pale peach accents, restrained metal and acrylic, clean simplified structural details. Every asset must be isolated with complete silhouette and visible bottom feet, physically plausible closed construction. No race track, no terrain, no diorama base, no unrelated neighboring props. Primary object: A standalone arc-shaped single-story miniature shop building extracted from below the FRONT U turn: curved ivory facade with repeated warm clear arched display windows, mint lower trim, peach corner details, flat solid curved roof and straight inner rear facade. Model only one coherent 90-degree arc building module with closed end walls, not an entire semicircle city. No road, racing deck, track rails or support columns above roof. Unlit simple interior.",
+      "source_sheet": "/Users/cyberlingke/.codex/generated_images/01a1b93f-d38a-7260-a536-fa7db57c2a6b/exec-ec84aa8f-db51-410c-97ef-ba20273fee3b.png",
+      "sheet": "06-curved-shop/reference-sheet.png",
+      "views": {
+        "front": "06-curved-shop/front.png",
+        "right": "06-curved-shop/right.png",
+        "back": "06-curved-shop/back.png",
+        "three-quarter": "06-curved-shop/three-quarter.png"
+      },
+      "sheet_dimensions": [
+        1536,
+        1024
+      ],
+      "view_dimensions": [
+        756,
+        756
+      ],
+      "design_file": "06-curved-shop/design.json",
+      "motion_file": "06-curved-shop/motion.json",
+      "component_readme": "06-curved-shop/README.md",
+      "dynamic_status": "designed_not_implemented",
+      "state_comparison": "06-curved-shop/states/v1/state-comparison.png"
+    },
+    {
+      "id": "07-terminal-station",
+      "name": "终点站房",
+      "description": "A small standalone rectangular station building extracted from under the foreground FINISH deck. Ivory rounded corners, mint entrance doors, symmetrical clear arched windows, central gold star medallion over door, peach accent panels, flat solid roof. No track, no START/FINISH gantry, no checkerboard floor, no planter attachments.",
+      "generation_prompt": "Create a professional 3D ASSET DESIGN REFERENCE SHEET for subsequent single-object image-to-3D generation. Use input image as style and object identity reference, extracting ONLY the specified object, reinterpreting hidden surfaces conservatively to make a complete buildable freestanding asset. One image in landscape 3:2 format with EXACTLY FOUR equally sized rectangular cells in a precise 2x2 grid. White background throughout, generous clear margin around each object so no silhouettes touch cell boundaries. TOP LEFT: straight FRONT orthographic view. TOP RIGHT: straight RIGHT SIDE orthographic view. BOTTOM LEFT: straight BACK orthographic view. BOTTOM RIGHT: elevated front three-quarter view. All four cells show the SAME SINGLE OBJECT at identical relative scale, same geometry and colors, no alternate designs. Use neutral shadowless studio illumination, readable material colors, no cast shadows, no bloom, no atmospheric effects, no room/table environment, no text, no labels, no watermarks, no dimensions. Tactile high quality miniature model product photography, satin ivory painted resin, mint green trim, pale peach accents, restrained metal and acrylic, clean simplified structural details. Every asset must be isolated with complete silhouette and visible bottom feet, physically plausible closed construction. No race track, no terrain, no diorama base, no unrelated neighboring props. Primary object: A small standalone rectangular station building extracted from under the foreground FINISH deck. Ivory rounded corners, mint entrance doors, symmetrical clear arched windows, central gold star medallion over door, peach accent panels, flat solid roof. No track, no START/FINISH gantry, no checkerboard floor, no planter attachments.",
+      "source_sheet": "/Users/cyberlingke/.codex/generated_images/01a1b93f-d38a-7260-a536-fa7db57c2a6b/exec-0a292e3c-dadf-4892-a465-1f72ce090670.png",
+      "sheet": "07-terminal-station/reference-sheet.png",
+      "views": {
+        "front": "07-terminal-station/front.png",
+        "right": "07-terminal-station/right.png",
+        "back": "07-terminal-station/back.png",
+        "three-quarter": "07-terminal-station/three-quarter.png"
+      },
+      "sheet_dimensions": [
+        1536,
+        1024
+      ],
+      "view_dimensions": [
+        756,
+        756
+      ],
+      "design_file": "07-terminal-station/design.json",
+      "motion_file": "07-terminal-station/motion.json",
+      "component_readme": "07-terminal-station/README.md",
+      "dynamic_status": "designed_not_implemented",
+      "state_comparison": "07-terminal-station/states/v1/state-comparison.png"
+    },
+    {
+      "id": "08-service-robot",
+      "name": "服务机器人",
+      "description": "One small friendly cream-white and mint service robot from the plaza: large rounded helmet head with glossy black visor and two cyan inset oval eyes, compact torso with round mint chest badge, short articulated arms with simple rounded grippers, chunky short legs and mint boot feet. Neutral symmetric relaxed A-pose, both hands empty, same pose in all views, no pedestal.",
+      "generation_prompt": "Create a professional 3D ASSET DESIGN REFERENCE SHEET for subsequent single-object image-to-3D generation. Use input image as style and object identity reference, extracting ONLY the specified object, reinterpreting hidden surfaces conservatively to make a complete buildable freestanding asset. One image in landscape 3:2 format with EXACTLY FOUR equally sized rectangular cells in a precise 2x2 grid. White background throughout, generous clear margin around each object so no silhouettes touch cell boundaries. TOP LEFT: straight FRONT orthographic view. TOP RIGHT: straight RIGHT SIDE orthographic view. BOTTOM LEFT: straight BACK orthographic view. BOTTOM RIGHT: elevated front three-quarter view. All four cells show the SAME SINGLE OBJECT at identical relative scale, same geometry and colors, no alternate designs. Use neutral shadowless studio illumination, readable material colors, no cast shadows, no bloom, no atmospheric effects, no room/table environment, no text, no labels, no watermarks, no dimensions. Tactile high quality miniature model product photography, satin ivory painted resin, mint green trim, pale peach accents, restrained metal and acrylic, clean simplified structural details. Every asset must be isolated with complete silhouette and visible bottom feet, physically plausible closed construction. No race track, no terrain, no diorama base, no unrelated neighboring props. Primary object: One small friendly cream-white and mint service robot from the plaza: large rounded helmet head with glossy black visor and two cyan inset oval eyes, compact torso with round mint chest badge, short articulated arms with simple rounded grippers, chunky short legs and mint boot feet. Neutral symmetric relaxed A-pose, both hands empty, same pose in all views, no pedestal.",
+      "source_sheet": "/Users/cyberlingke/.codex/generated_images/01a1b93f-d38a-7260-a536-fa7db57c2a6b/exec-3e30fe40-40c2-4990-a285-5512d55a817c.png",
+      "sheet": "08-service-robot/reference-sheet.png",
+      "views": {
+        "front": "08-service-robot/front.png",
+        "right": "08-service-robot/right.png",
+        "back": "08-service-robot/back.png",
+        "three-quarter": "08-service-robot/three-quarter.png"
+      },
+      "sheet_dimensions": [
+        1536,
+        1024
+      ],
+      "view_dimensions": [
+        756,
+        756
+      ],
+      "design_file": "08-service-robot/design.json",
+      "motion_file": "08-service-robot/motion.json",
+      "component_readme": "08-service-robot/README.md",
+      "dynamic_status": "designed_not_implemented",
+      "state_comparison": "08-service-robot/states/v1/state-comparison.png"
+    },
+    {
+      "id": "09-bench",
+      "name": "长椅",
+      "description": "One freestanding miniature mint-green park bench from scene, three simple rounded horizontal backrest slats and seat slats, ivory-metal rounded armrests and paired legs. Plain clean object, no ground, no people, no other furniture.",
+      "generation_prompt": "Create a professional 3D ASSET DESIGN REFERENCE SHEET for subsequent single-object image-to-3D generation. Use input image as style and object identity reference, extracting ONLY the specified object, reinterpreting hidden surfaces conservatively to make a complete buildable freestanding asset. One image in landscape 3:2 format with EXACTLY FOUR equally sized rectangular cells in a precise 2x2 grid. White background throughout, generous clear margin around each object so no silhouettes touch cell boundaries. TOP LEFT: straight FRONT orthographic view. TOP RIGHT: straight RIGHT SIDE orthographic view. BOTTOM LEFT: straight BACK orthographic view. BOTTOM RIGHT: elevated front three-quarter view. All four cells show the SAME SINGLE OBJECT at identical relative scale, same geometry and colors, no alternate designs. Use neutral shadowless studio illumination, readable material colors, no cast shadows, no bloom, no atmospheric effects, no room/table environment, no text, no labels, no watermarks, no dimensions. Tactile high quality miniature model product photography, satin ivory painted resin, mint green trim, pale peach accents, restrained metal and acrylic, clean simplified structural details. Every asset must be isolated with complete silhouette and visible bottom feet, physically plausible closed construction. No race track, no terrain, no diorama base, no unrelated neighboring props. Primary object: One freestanding miniature mint-green park bench from scene, three simple rounded horizontal backrest slats and seat slats, ivory-metal rounded armrests and paired legs. Plain clean object, no ground, no people, no other furniture.",
+      "source_sheet": "/Users/cyberlingke/.codex/generated_images/01a1b93f-d38a-7260-a536-fa7db57c2a6b/exec-969041fa-4783-477c-a310-1ef3660e73b3.png",
+      "sheet": "09-bench/reference-sheet.png",
+      "views": {
+        "front": "09-bench/front.png",
+        "right": "09-bench/right.png",
+        "back": "09-bench/back.png",
+        "three-quarter": "09-bench/three-quarter.png"
+      },
+      "sheet_dimensions": [
+        1536,
+        1024
+      ],
+      "view_dimensions": [
+        756,
+        756
+      ],
+      "design_file": "09-bench/design.json",
+      "motion_file": "09-bench/motion.json",
+      "component_readme": "09-bench/README.md",
+      "dynamic_status": "static_skipped"
+    },
+    {
+      "id": "10-lamp",
+      "name": "路灯",
+      "description": "One miniature park lamp: slender satin ivory/champagne metal pole on small bolt-mounted round foot, simple mint collar, small frosted spherical globe in a protective short cylindrical clear housing. No glow or light spill, no wires outside, no ground.",
+      "generation_prompt": "Create a professional 3D ASSET DESIGN REFERENCE SHEET for subsequent single-object image-to-3D generation. Use input image as style and object identity reference, extracting ONLY the specified object, reinterpreting hidden surfaces conservatively to make a complete buildable freestanding asset. One image in landscape 3:2 format with EXACTLY FOUR equally sized rectangular cells in a precise 2x2 grid. White background throughout, generous clear margin around each object so no silhouettes touch cell boundaries. TOP LEFT: straight FRONT orthographic view. TOP RIGHT: straight RIGHT SIDE orthographic view. BOTTOM LEFT: straight BACK orthographic view. BOTTOM RIGHT: elevated front three-quarter view. All four cells show the SAME SINGLE OBJECT at identical relative scale, same geometry and colors, no alternate designs. Use neutral shadowless studio illumination, readable material colors, no cast shadows, no bloom, no atmospheric effects, no room/table environment, no text, no labels, no watermarks, no dimensions. Tactile high quality miniature model product photography, satin ivory painted resin, mint green trim, pale peach accents, restrained metal and acrylic, clean simplified structural details. Every asset must be isolated with complete silhouette and visible bottom feet, physically plausible closed construction. No race track, no terrain, no diorama base, no unrelated neighboring props. Primary object: One miniature park lamp: slender satin ivory/champagne metal pole on small bolt-mounted round foot, simple mint collar, small frosted spherical globe in a protective short cylindrical clear housing. No glow or light spill, no wires outside, no ground.",
+      "source_sheet": "/Users/cyberlingke/.codex/generated_images/01a1b93f-d38a-7260-a536-fa7db57c2a6b/exec-b711844b-873d-48d6-8f72-975774b0f91c.png",
+      "sheet": "10-lamp/reference-sheet.png",
+      "views": {
+        "front": "10-lamp/front.png",
+        "right": "10-lamp/right.png",
+        "back": "10-lamp/back.png",
+        "three-quarter": "10-lamp/three-quarter.png"
+      },
+      "sheet_dimensions": [
+        1536,
+        1024
+      ],
+      "view_dimensions": [
+        756,
+        756
+      ],
+      "design_file": "10-lamp/design.json",
+      "motion_file": "10-lamp/motion.json",
+      "component_readme": "10-lamp/README.md",
+      "dynamic_status": "designed_not_implemented",
+      "state_comparison": "10-lamp/states/v1/state-comparison.png"
+    },
+    {
+      "id": "11-planter",
+      "name": "花箱",
+      "description": "One self-contained rounded rectangular ivory planter box with mint trim and discreet corner screws, holding a compact row of stylized dense green shrub foliage with a few small cream flowers. Simple modeled foliage volumes suitable for 3D reconstruction, no loose floating leaves, no adjacent ground or other props.",
+      "generation_prompt": "Create a professional 3D ASSET DESIGN REFERENCE SHEET for subsequent single-object image-to-3D generation. Use input image as style and object identity reference, extracting ONLY the specified object, reinterpreting hidden surfaces conservatively to make a complete buildable freestanding asset. One image in landscape 3:2 format with EXACTLY FOUR equally sized rectangular cells in a precise 2x2 grid. White background throughout, generous clear margin around each object so no silhouettes touch cell boundaries. TOP LEFT: straight FRONT orthographic view. TOP RIGHT: straight RIGHT SIDE orthographic view. BOTTOM LEFT: straight BACK orthographic view. BOTTOM RIGHT: elevated front three-quarter view. All four cells show the SAME SINGLE OBJECT at identical relative scale, same geometry and colors, no alternate designs. Use neutral shadowless studio illumination, readable material colors, no cast shadows, no bloom, no atmospheric effects, no room/table environment, no text, no labels, no watermarks, no dimensions. Tactile high quality miniature model product photography, satin ivory painted resin, mint green trim, pale peach accents, restrained metal and acrylic, clean simplified structural details. Every asset must be isolated with complete silhouette and visible bottom feet, physically plausible closed construction. No race track, no terrain, no diorama base, no unrelated neighboring props. Primary object: One self-contained rounded rectangular ivory planter box with mint trim and discreet corner screws, holding a compact row of stylized dense green shrub foliage with a few small cream flowers. Simple modeled foliage volumes suitable for 3D reconstruction, no loose floating leaves, no adjacent ground or other props.",
+      "source_sheet": "/Users/cyberlingke/.codex/generated_images/01a1b93f-d38a-7260-a536-fa7db57c2a6b/exec-6b672cf9-468b-49b2-bc70-9960e25d39e1.png",
+      "sheet": "11-planter/reference-sheet.png",
+      "views": {
+        "front": "11-planter/front.png",
+        "right": "11-planter/right.png",
+        "back": "11-planter/back.png",
+        "three-quarter": "11-planter/three-quarter.png"
+      },
+      "sheet_dimensions": [
+        1536,
+        1024
+      ],
+      "view_dimensions": [
+        756,
+        756
+      ],
+      "design_file": "11-planter/design.json",
+      "motion_file": "11-planter/motion.json",
+      "component_readme": "11-planter/README.md",
+      "dynamic_status": "designed_not_implemented",
+      "state_comparison": "11-planter/states/v1/state-comparison.png"
+    },
+    {
+      "id": "12-umbrella-table",
+      "name": "遮阳伞桌",
+      "description": "One integrated miniature cafe assembly consisting of a small round ivory cafe table with a central slender ivory pole and a peach-and-cream alternating-panel eight-segment parasol above it, stable round metal pedestal foot. Table, central pole, umbrella and foot are one mechanically connected asset. No chairs, no drinks, no ground.",
+      "generation_prompt": "Create a professional 3D ASSET DESIGN REFERENCE SHEET for subsequent single-object image-to-3D generation. Use input image as style and object identity reference, extracting ONLY the specified object, reinterpreting hidden surfaces conservatively to make a complete buildable freestanding asset. One image in landscape 3:2 format with EXACTLY FOUR equally sized rectangular cells in a precise 2x2 grid. White background throughout, generous clear margin around each object so no silhouettes touch cell boundaries. TOP LEFT: straight FRONT orthographic view. TOP RIGHT: straight RIGHT SIDE orthographic view. BOTTOM LEFT: straight BACK orthographic view. BOTTOM RIGHT: elevated front three-quarter view. All four cells show the SAME SINGLE OBJECT at identical relative scale, same geometry and colors, no alternate designs. Use neutral shadowless studio illumination, readable material colors, no cast shadows, no bloom, no atmospheric effects, no room/table environment, no text, no labels, no watermarks, no dimensions. Tactile high quality miniature model product photography, satin ivory painted resin, mint green trim, pale peach accents, restrained metal and acrylic, clean simplified structural details. Every asset must be isolated with complete silhouette and visible bottom feet, physically plausible closed construction. No race track, no terrain, no diorama base, no unrelated neighboring props. Primary object: One integrated miniature cafe assembly consisting of a small round ivory cafe table with a central slender ivory pole and a peach-and-cream alternating-panel eight-segment parasol above it, stable round metal pedestal foot. Table, central pole, umbrella and foot are one mechanically connected asset. No chairs, no drinks, no ground.",
+      "source_sheet": "/Users/cyberlingke/.codex/generated_images/01a1b93f-d38a-7260-a536-fa7db57c2a6b/exec-8099198b-7f75-46c7-b0d8-63ed69d5f124.png",
+      "sheet": "12-umbrella-table/reference-sheet.png",
+      "views": {
+        "front": "12-umbrella-table/front.png",
+        "right": "12-umbrella-table/right.png",
+        "back": "12-umbrella-table/back.png",
+        "three-quarter": "12-umbrella-table/three-quarter.png"
+      },
+      "sheet_dimensions": [
+        1536,
+        1024
+      ],
+      "view_dimensions": [
+        756,
+        756
+      ],
+      "design_file": "12-umbrella-table/design.json",
+      "motion_file": "12-umbrella-table/motion.json",
+      "component_readme": "12-umbrella-table/README.md",
+      "dynamic_status": "designed_not_implemented",
+      "state_comparison": "12-umbrella-table/states/v1/state-comparison.png"
+    },
+    {
+      "id": "13-cafe-chair",
+      "name": "咖啡椅",
+      "description": "One freestanding miniature mint and ivory cafe chair: rounded rectangular mint upholstered-looking molded plastic back and seat, slim ivory metal tube frame and four legs. No table, no umbrella, no ground.",
+      "generation_prompt": "Create a professional 3D ASSET DESIGN REFERENCE SHEET for subsequent single-object image-to-3D generation. Use input image as style and object identity reference, extracting ONLY the specified object, reinterpreting hidden surfaces conservatively to make a complete buildable freestanding asset. One image in landscape 3:2 format with EXACTLY FOUR equally sized rectangular cells in a precise 2x2 grid. White background throughout, generous clear margin around each object so no silhouettes touch cell boundaries. TOP LEFT: straight FRONT orthographic view. TOP RIGHT: straight RIGHT SIDE orthographic view. BOTTOM LEFT: straight BACK orthographic view. BOTTOM RIGHT: elevated front three-quarter view. All four cells show the SAME SINGLE OBJECT at identical relative scale, same geometry and colors, no alternate designs. Use neutral shadowless studio illumination, readable material colors, no cast shadows, no bloom, no atmospheric effects, no room/table environment, no text, no labels, no watermarks, no dimensions. Tactile high quality miniature model product photography, satin ivory painted resin, mint green trim, pale peach accents, restrained metal and acrylic, clean simplified structural details. Every asset must be isolated with complete silhouette and visible bottom feet, physically plausible closed construction. No race track, no terrain, no diorama base, no unrelated neighboring props. Primary object: One freestanding miniature mint and ivory cafe chair: rounded rectangular mint upholstered-looking molded plastic back and seat, slim ivory metal tube frame and four legs. No table, no umbrella, no ground.",
+      "source_sheet": "/Users/cyberlingke/.codex/generated_images/01a1b93f-d38a-7260-a536-fa7db57c2a6b/exec-4c6a438b-af8c-41c1-b7f2-1ad9f529f576.png",
+      "sheet": "13-cafe-chair/reference-sheet.png",
+      "views": {
+        "front": "13-cafe-chair/front.png",
+        "right": "13-cafe-chair/right.png",
+        "back": "13-cafe-chair/back.png",
+        "three-quarter": "13-cafe-chair/three-quarter.png"
+      },
+      "sheet_dimensions": [
+        1536,
+        1024
+      ],
+      "view_dimensions": [
+        756,
+        756
+      ],
+      "design_file": "13-cafe-chair/design.json",
+      "motion_file": "13-cafe-chair/motion.json",
+      "component_readme": "13-cafe-chair/README.md",
+      "dynamic_status": "static_skipped"
+    },
+    {
+      "id": "14-rocket-gantry",
+      "name": "火箭装饰门架",
+      "description": "One freestanding START decorative gantry structure extracted from the scene, two ivory rocket-shaped upright towers with peach conical tips and small mint accent rings, joined by a curved ivory overhead sign frame containing a blank dark mint inset sign panel. Exactly two uprights and one crossbeam, stable small integrated foot plates. No written text; sign is blank for later texturing. No course floor, no racing deck, no checkered banner or extra track supports.",
+      "generation_prompt": "Create a professional 3D ASSET DESIGN REFERENCE SHEET for subsequent single-object image-to-3D generation. Use input image as style and object identity reference, extracting ONLY the specified object, reinterpreting hidden surfaces conservatively to make a complete buildable freestanding asset. One image in landscape 3:2 format with EXACTLY FOUR equally sized rectangular cells in a precise 2x2 grid. White background throughout, generous clear margin around each object so no silhouettes touch cell boundaries. TOP LEFT: straight FRONT orthographic view. TOP RIGHT: straight RIGHT SIDE orthographic view. BOTTOM LEFT: straight BACK orthographic view. BOTTOM RIGHT: elevated front three-quarter view. All four cells show the SAME SINGLE OBJECT at identical relative scale, same geometry and colors, no alternate designs. Use neutral shadowless studio illumination, readable material colors, no cast shadows, no bloom, no atmospheric effects, no room/table environment, no text, no labels, no watermarks, no dimensions. Tactile high quality miniature model product photography, satin ivory painted resin, mint green trim, pale peach accents, restrained metal and acrylic, clean simplified structural details. Every asset must be isolated with complete silhouette and visible bottom feet, physically plausible closed construction. No race track, no terrain, no diorama base, no unrelated neighboring props. Primary object: One freestanding START decorative gantry structure extracted from the scene, two ivory rocket-shaped upright towers with peach conical tips and small mint accent rings, joined by a curved ivory overhead sign frame containing a blank dark mint inset sign panel. Exactly two uprights and one crossbeam, stable small integrated foot plates. No written text; sign is blank for later texturing. No course floor, no racing deck, no checkered banner or extra track supports.",
+      "source_sheet": "/Users/cyberlingke/.codex/generated_images/01a1b93f-d38a-7260-a536-fa7db57c2a6b/exec-2620bbb5-3842-42c2-b7aa-df2b36e687c2.png",
+      "sheet": "14-rocket-gantry/reference-sheet.png",
+      "views": {
+        "front": "14-rocket-gantry/front.png",
+        "right": "14-rocket-gantry/right.png",
+        "back": "14-rocket-gantry/back.png",
+        "three-quarter": "14-rocket-gantry/three-quarter.png"
+      },
+      "sheet_dimensions": [
+        1536,
+        1024
+      ],
+      "view_dimensions": [
+        756,
+        756
+      ],
+      "design_file": "14-rocket-gantry/design.json",
+      "motion_file": "14-rocket-gantry/motion.json",
+      "component_readme": "14-rocket-gantry/README.md",
+      "dynamic_status": "designed_not_implemented",
+      "state_comparison": "14-rocket-gantry/states/v1/state-comparison.png"
+    },
+    {
+      "id": "15-ornamental-tree",
+      "name": "观赏小树",
+      "description": "One miniature ornamental tree from plaza: slender branching tan trunk with a handful of compact rounded green foliage crowns, toy-scale modeled leaf clusters, growing in a small integral round ivory pot with mint rim and peach foot. Single complete tree-and-pot asset, broad clean readable silhouette, no individual floating leaves, no plaza or neighboring flowers.",
+      "generation_prompt": "Create a professional 3D ASSET DESIGN REFERENCE SHEET for subsequent single-object image-to-3D generation. Use input image as style and object identity reference, extracting ONLY the specified object, reinterpreting hidden surfaces conservatively to make a complete buildable freestanding asset. One image in landscape 3:2 format with EXACTLY FOUR equally sized rectangular cells in a precise 2x2 grid. White background throughout, generous clear margin around each object so no silhouettes touch cell boundaries. TOP LEFT: straight FRONT orthographic view. TOP RIGHT: straight RIGHT SIDE orthographic view. BOTTOM LEFT: straight BACK orthographic view. BOTTOM RIGHT: elevated front three-quarter view. All four cells show the SAME SINGLE OBJECT at identical relative scale, same geometry and colors, no alternate designs. Use neutral shadowless studio illumination, readable material colors, no cast shadows, no bloom, no atmospheric effects, no room/table environment, no text, no labels, no watermarks, no dimensions. Tactile high quality miniature model product photography, satin ivory painted resin, mint green trim, pale peach accents, restrained metal and acrylic, clean simplified structural details. Every asset must be isolated with complete silhouette and visible bottom feet, physically plausible closed construction. No race track, no terrain, no diorama base, no unrelated neighboring props. Primary object: One miniature ornamental tree from plaza: slender branching tan trunk with a handful of compact rounded green foliage crowns, toy-scale modeled leaf clusters, growing in a small integral round ivory pot with mint rim and peach foot. Single complete tree-and-pot asset, broad clean readable silhouette, no individual floating leaves, no plaza or neighboring flowers.",
+      "source_sheet": "/Users/cyberlingke/.codex/generated_images/01a1b93f-d38a-7260-a536-fa7db57c2a6b/exec-d151f4d5-2cc1-4a5c-894c-f47ab7742fc9.png",
+      "sheet": "15-ornamental-tree/reference-sheet.png",
+      "views": {
+        "front": "15-ornamental-tree/front.png",
+        "right": "15-ornamental-tree/right.png",
+        "back": "15-ornamental-tree/back.png",
+        "three-quarter": "15-ornamental-tree/three-quarter.png"
+      },
+      "sheet_dimensions": [
+        1536,
+        1024
+      ],
+      "view_dimensions": [
+        756,
+        756
+      ],
+      "design_file": "15-ornamental-tree/design.json",
+      "motion_file": "15-ornamental-tree/motion.json",
+      "component_readme": "15-ornamental-tree/README.md",
+      "dynamic_status": "designed_not_implemented",
+      "state_comparison": "15-ornamental-tree/states/v1/state-comparison.png"
+    },
+    {
+      "id": "16-plaza-railing",
+      "name": "广场围栏",
+      "description": "One standalone modular ornamental plaza railing section, not a racing guardrail: exactly two short ivory-metal upright posts with mint collars and round gold finials, connected by two horizontal ivory-metal rails, each post on a small round mounting foot. Clean continuous tube construction, small screws, no sign flags, no terrain or track.",
+      "generation_prompt": "Create a professional 3D ASSET DESIGN REFERENCE SHEET for subsequent single-object image-to-3D generation. Use input image as style and object identity reference, extracting ONLY the specified object, reinterpreting hidden surfaces conservatively to make a complete buildable freestanding asset. One image in landscape 3:2 format with EXACTLY FOUR equally sized rectangular cells in a precise 2x2 grid. White background throughout, generous clear margin around each object so no silhouettes touch cell boundaries. TOP LEFT: straight FRONT orthographic view. TOP RIGHT: straight RIGHT SIDE orthographic view. BOTTOM LEFT: straight BACK orthographic view. BOTTOM RIGHT: elevated front three-quarter view. All four cells show the SAME SINGLE OBJECT at identical relative scale, same geometry and colors, no alternate designs. Use neutral shadowless studio illumination, readable material colors, no cast shadows, no bloom, no atmospheric effects, no room/table environment, no text, no labels, no watermarks, no dimensions. Tactile high quality miniature model product photography, satin ivory painted resin, mint green trim, pale peach accents, restrained metal and acrylic, clean simplified structural details. Every asset must be isolated with complete silhouette and visible bottom feet, physically plausible closed construction. No race track, no terrain, no diorama base, no unrelated neighboring props. Primary object: One standalone modular ornamental plaza railing section, not a racing guardrail: exactly two short ivory-metal upright posts with mint collars and round gold finials, connected by two horizontal ivory-metal rails, each post on a small round mounting foot. Clean continuous tube construction, small screws, no sign flags, no terrain or track.",
+      "source_sheet": "/Users/cyberlingke/.codex/generated_images/01a1b93f-d38a-7260-a536-fa7db57c2a6b/exec-571a8668-c3e5-42dc-a02e-256107265300.png",
+      "sheet": "16-plaza-railing/reference-sheet.png",
+      "views": {
+        "front": "16-plaza-railing/front.png",
+        "right": "16-plaza-railing/right.png",
+        "back": "16-plaza-railing/back.png",
+        "three-quarter": "16-plaza-railing/three-quarter.png"
+      },
+      "sheet_dimensions": [
+        1536,
+        1024
+      ],
+      "view_dimensions": [
+        756,
+        756
+      ],
+      "design_file": "16-plaza-railing/design.json",
+      "motion_file": "16-plaza-railing/motion.json",
+      "component_readme": "16-plaza-railing/README.md",
+      "dynamic_status": "static_skipped"
+    }
+  ],
+  "component_settings_authority": "Each component design.json and motion.json; manifest is an index.",
+  "dynamic_summary": {
+    "dynamic_components": 13,
+    "static_components": 3,
+    "states_per_dynamic_component": 4,
+    "generator": "built-in image_gen",
+    "implementation": "concept_keyframes_and_specifications_only"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "key": "loop",
+  "file": "/Users/cyberlingke/software/commonplay/assets/track-redesign-validation/loop-raw.glb",
+  "bytes": 47768756,
+  "vertices": 1025272,
+  "triangles": 1973000,
+  "meshes": 1,
+  "primitives": 1,
+  "nodes": 2,
+  "nodeNames": [
+    "world",
+    "geometry_0"
+  ],
+  "materials": 1,
+  "textures": 2,
+  "animations": [],
+  "missingNormals": 1,
+  "missingUVs": 0,
+  "localBounds": {
+    "min": [
+      -0.14298425614833832,
+      -0.14673368632793427,
+      -0.5000674724578857
+    ],
+    "max": [
+      0.14227916300296783,
+      0.1465223729610443,
+      0.5000629425048828
+    ]
+  },
+  "basicStructurePassed": true,
+  "gameReady": false,
+  "notes": [
+    "High polygon source: simplify before runtime use.",
+    "Explicit vertex normals absent; generate normals during preparation.",
+    "One mesh: no semantic separation of deck, guardrails and moving obstacles.",
+    "No supplied motion: pivots and obstacle animation still require implementation.",
+    "Basic structure checks do not verify road continuity, exact dimensions, collision or physics."
+  ],
+  "browser": {
+    "ready": true,
+    "initialBounds": [
+      0.28526341915130615,
+      0.2932560592889786,
+      1.0001304149627686
+    ],
+    "normalizedBounds": [
+      2.8522622138426375,
+      2.9321781929799178,
+      10
+    ],
+    "textureDimensions": [
+      {
+        "width": 8192,
+        "height": 8192
+      },
+      {
+        "width": 8192,
+        "height": 8192
+      }
+    ],
+    "animations": 0
+  },
+  "visualReview": {
+    "visual": "回环、平缓备选路和分合流轮廓存在；尚未验证回环曲面和分支碰撞是否能支撑实际运动。",
+    "verdict": "需精确重建路面和碰撞，进行动力学验证。"
+  },
+  "playabilityVerified": false,
+  "sha256": "01f5a7ab67cf867ea05f60726f367f3f4bfd4a5b287db8e0ac3c5dd67face016",
+  "targetLength": 50,
+  "outerWidthAtTargetLength": 14.261311069213187
+}

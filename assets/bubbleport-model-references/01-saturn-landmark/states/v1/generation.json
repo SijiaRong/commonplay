@@ -1,0 +1,30 @@
+{
+  "generator": "built-in image_gen",
+  "source_sheet": "/Users/cyberlingke/.codex/generated_images/01a1b93f-d38a-7260-a536-fa7db57c2a6b/exec-a19eb42b-5d26-4ba6-b073-533f4c10f1d1.png",
+  "input_reference": "../../reference-sheet.png",
+  "prompt": "Create a FOUR-STATE MOTION AND LIGHTING DESIGN COMPARISON SHEET of the single miniature toy asset in the provided reference. This is NOT a multi-camera turnaround: ALL FOUR CELLS MUST USE THE EXACT SAME front three-quarter CAMERA, same magnification, same perspective, same position on ground, identical static geometry and materials. Reference is a 4-view identity sheet; take its bottom-right three-quarter angle and repeat that angle in all four cells. Landscape 1536x1024-like 3:2 image, precisely equal 2x2 grid with generous white margins and fine light-gray divider lines at exact center. Top-left is state 1, top-right state 2, bottom-left state 3, bottom-right state 4. White neutral studio background and constant soft neutral studio illumination; lighting changes ONLY from specified miniature practical lights; never change overall exposure or backdrop to fake a state change. Closed full object silhouettes, no cropping. Ivory, mint, peach premium tabletop model craftsmanship. No track, environment, people, extra props, text, numbers, captions, arrows or watermark. No ghosting, no motion blur, no duplicate moving parts inside a cell. Preserve shape topology, counts and colors across all cells. Show different actual joint positions or light colors as specified, freezing time at each state; no deformation of rigid structures. Newly animated areas must stay physically supported. Each panel shows a single complete instance. Asset ID: 01-saturn-landmark.\nSTATE 1: Upper planet and ring at yaw 0 degrees, no internal illumination.\nSTATE 2: Upper planet-and-ring assembly turns 30 degrees about vertical spindle, peach amber light inside globe and warm ring rim. Pedestal stationary.\nSTATE 3: Upper assembly yaw 60 degrees, pale cyan illumination inside globe and along ring rim.\nSTATE 4: Upper assembly yaw 90 degrees, soft low peach glow. Same connected ring and globe, spindle supported.\nMechanism note: 上部球体与装饰环作为同一转子；底座不转。灯光强度用平滑呼吸曲线。",
+  "layout": "top-left, top-right, bottom-left, bottom-right; same camera",
+  "states": [
+    {
+      "id": "off",
+      "name": "日间关闭",
+      "file": "off.png"
+    },
+    {
+      "id": "welcome",
+      "name": "暖光迎宾",
+      "file": "welcome.png"
+    },
+    {
+      "id": "pulse_cyan",
+      "name": "青色呼吸高点",
+      "file": "pulse_cyan.png"
+    },
+    {
+      "id": "pulse_peach",
+      "name": "蜜桃呼吸低点",
+      "file": "pulse_peach.png"
+    }
+  ],
+  "review_note": "概念关键帧；具体角度、灯光强度和关节约束以motion.json为准，图像并非同一3D网格的精确渲染。"
+}

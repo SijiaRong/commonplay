@@ -1,5 +1,5 @@
 import { route } from './public/course.js';
-import { makeCollider } from '../.local/lost-marbles/public/shared/physics.js';
+import { makeCollider } from '../teddy-playground/dist/solo/shared/physics.js';
 
 export function buildStages(seed) {
   return Array.from({length: 5}, (_, index) => {

@@ -1,0 +1,218 @@
+[
+  {
+    "key": "slalom",
+    "file": "/Users/cyberlingke/software/commonplay/assets/track-redesign-validation/slalom-raw.glb",
+    "bytes": 46765640,
+    "vertices": 1013592,
+    "triangles": 1929264,
+    "meshes": 1,
+    "primitives": 1,
+    "nodes": 2,
+    "nodeNames": [
+      "world",
+      "geometry_0"
+    ],
+    "materials": 1,
+    "textures": 2,
+    "animations": [],
+    "missingNormals": 1,
+    "missingUVs": 0,
+    "localBounds": {
+      "min": [
+        -0.28855663537979126,
+        -0.06059693917632103,
+        -0.5000457763671875
+      ],
+      "max": [
+        0.28812265396118164,
+        0.06078512966632843,
+        0.5000454187393188
+      ]
+    },
+    "basicStructurePassed": true,
+    "gameReady": false,
+    "notes": [
+      "High polygon source: simplify before runtime use.",
+      "Explicit vertex normals absent; generate normals during preparation.",
+      "One mesh: no semantic separation of deck, guardrails and moving obstacles.",
+      "No supplied motion: pivots and obstacle animation still require implementation.",
+      "Basic structure checks do not verify road continuity, exact dimensions, collision or physics."
+    ],
+    "browser": {
+      "ready": true,
+      "initialBounds": [
+        0.5766792893409729,
+        0.12138206884264946,
+        1.0000911951065063
+      ],
+      "normalizedBounds": [
+        5.766267038073048,
+        1.2137100040134108,
+        10
+      ],
+      "textureDimensions": [
+        {
+          "width": 8192,
+          "height": 8192
+        },
+        {
+          "width": 8192,
+          "height": 8192
+        }
+      ],
+      "animations": 0
+    },
+    "visualReview": {
+      "visual": "路面和统一风格可辨认；但要求六块错位障碍，结果只有三块，且基本排在中线，未保留原定绕行节奏。",
+      "verdict": "需重新布置障碍并重做准确路面。"
+    },
+    "playabilityVerified": false,
+    "sha256": "8b3097e274f7e3287d8344116220fb5a342d9daf00ae67c3f8d5911e0181accf",
+    "targetLength": 30,
+    "outerWidthAtTargetLength": 17.298801114219142
+  },
+  {
+    "key": "hammers",
+    "file": "/Users/cyberlingke/software/commonplay/assets/track-redesign-validation/hammers-raw.glb",
+    "bytes": 47281644,
+    "vertices": 1033651,
+    "triangles": 1953630,
+    "meshes": 1,
+    "primitives": 1,
+    "nodes": 2,
+    "nodeNames": [
+      "world",
+      "geometry_0"
+    ],
+    "materials": 1,
+    "textures": 2,
+    "animations": [],
+    "missingNormals": 1,
+    "missingUVs": 0,
+    "localBounds": {
+      "min": [
+        -0.500077486038208,
+        -0.1819411814212799,
+        -0.18804195523262024
+      ],
+      "max": [
+        0.500059187412262,
+        0.18164995312690735,
+        0.18809399008750916
+      ]
+    },
+    "basicStructurePassed": true,
+    "gameReady": false,
+    "notes": [
+      "High polygon source: simplify before runtime use.",
+      "Explicit vertex normals absent; generate normals during preparation.",
+      "One mesh: no semantic separation of deck, guardrails and moving obstacles.",
+      "No supplied motion: pivots and obstacle animation still require implementation.",
+      "Basic structure checks do not verify road continuity, exact dimensions, collision or physics."
+    ],
+    "browser": {
+      "ready": true,
+      "initialBounds": [
+        1.00013667345047,
+        0.36359113454818726,
+        0.3761359453201294
+      ],
+      "normalizedBounds": [
+        3.7608454454775773,
+        3.6354144808408875,
+        10
+      ],
+      "textureDimensions": [
+        {
+          "width": 8192,
+          "height": 8192
+        },
+        {
+          "width": 8192,
+          "height": 8192
+        }
+      ],
+      "animations": 0
+    },
+    "visualReview": {
+      "visual": "两只摆锤和支架外观保留；生成结果没有可单独驱动的锤头、摆臂或转轴节点。",
+      "verdict": "需拆分/重建机关、设置转轴和动画。"
+    },
+    "playabilityVerified": false,
+    "sha256": "725927cf58dd6b8eb4ec9fbcf3aab0787fdaec2d910361976300755302766a7c",
+    "targetLength": 30,
+    "outerWidthAtTargetLength": 11.28253633643273
+  },
+  {
+    "key": "loop",
+    "file": "/Users/cyberlingke/software/commonplay/assets/track-redesign-validation/loop-raw.glb",
+    "bytes": 47768756,
+    "vertices": 1025272,
+    "triangles": 1973000,
+    "meshes": 1,
+    "primitives": 1,
+    "nodes": 2,
+    "nodeNames": [
+      "world",
+      "geometry_0"
+    ],
+    "materials": 1,
+    "textures": 2,
+    "animations": [],
+    "missingNormals": 1,
+    "missingUVs": 0,
+    "localBounds": {
+      "min": [
+        -0.14298425614833832,
+        -0.14673368632793427,
+        -0.5000674724578857
+      ],
+      "max": [
+        0.14227916300296783,
+        0.1465223729610443,
+        0.5000629425048828
+      ]
+    },
+    "basicStructurePassed": true,
+    "gameReady": false,
+    "notes": [
+      "High polygon source: simplify before runtime use.",
+      "Explicit vertex normals absent; generate normals during preparation.",
+      "One mesh: no semantic separation of deck, guardrails and moving obstacles.",
+      "No supplied motion: pivots and obstacle animation still require implementation.",
+      "Basic structure checks do not verify road continuity, exact dimensions, collision or physics."
+    ],
+    "browser": {
+      "ready": true,
+      "initialBounds": [
+        0.28526341915130615,
+        0.2932560592889786,
+        1.0001304149627686
+      ],
+      "normalizedBounds": [
+        2.8522622138426375,
+        2.9321781929799178,
+        10
+      ],
+      "textureDimensions": [
+        {
+          "width": 8192,
+          "height": 8192
+        },
+        {
+          "width": 8192,
+          "height": 8192
+        }
+      ],
+      "animations": 0
+    },
+    "visualReview": {
+      "visual": "回环、平缓备选路和分合流轮廓存在；尚未验证回环曲面和分支碰撞是否能支撑实际运动。",
+      "verdict": "需精确重建路面和碰撞，进行动力学验证。"
+    },
+    "playabilityVerified": false,
+    "sha256": "01f5a7ab67cf867ea05f60726f367f3f4bfd4a5b287db8e0ac3c5dd67face016",
+    "targetLength": 50,
+    "outerWidthAtTargetLength": 14.261311069213187
+  }
+]

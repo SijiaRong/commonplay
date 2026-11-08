@@ -1,0 +1,54 @@
+{
+  "source": "assets/toy-town-models/originals/pip-original.glb",
+  "output": "assets/toy-town-models/pip-game.glb",
+  "sourceTriangles": 2000000,
+  "triangles": 23999,
+  "meshes": 1,
+  "normalizedDimensionsXYZ": [
+    0.9501963555812836,
+    1.0700644552707672,
+    1.0012697492929874
+  ],
+  "yawDegrees": 0,
+  "sourceImages": [
+    {
+      "name": "Image_0",
+      "size": [
+        8192,
+        8192
+      ]
+    },
+    {
+      "name": "Image_1",
+      "size": [
+        8192,
+        8192
+      ]
+    }
+  ],
+  "images": [
+    {
+      "name": "Image_0",
+      "size": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "name": "Image_1",
+      "size": [
+        2048,
+        2048
+      ]
+    }
+  ],
+  "geometryChecksPassed": true,
+  "visualReviewPassed": true,
+  "note": "Automated checks do not replace front/side/back visual review. No animation or character-specific action has been added.",
+  "smoothNormals": true,
+  "uvSeamsWelded": true,
+  "tailRepair": "compressed rear depth to 68%",
+  "visualReviewNotes": "Checked front, back, side and three-quarter after smoothing. Original winding preserved, no visible culled surface patches. Tail depth reduced.",
+  "animationReviewPassed": true,
+  "animationReviewNotes": "Shared nine-clip export passed GLB structural checks; slide and jump inspected; full classic slide, jump, steer, finish and reset exercised in browser."
+}

@@ -1,0 +1,13 @@
+{
+  "taskId": "77d3b74786184bb68dfdfc588d3baeae",
+  "modelPage": "https://www.hi3d.ai/3d-model/77d3b74786184bb68dfdfc588d3baeae",
+  "points": 45,
+  "parameters": {
+    "version": "v3.0",
+    "quality": "high_quality",
+    "pbr": true,
+    "license": "private"
+  },
+  "reference": "../references/hi3d-input.jpg",
+  "prompt": "A single original toy: sewn wide flat manta ray with dark navy reversible sequins and apricot lightning on back, short cord tail. Match the supplied reference; complete full body, no ground or base."
+}

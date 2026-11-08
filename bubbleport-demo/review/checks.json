@@ -1,0 +1,31 @@
+{
+  "physicsTests": 15,
+  "physicsPassed": 15,
+  "desktop": {
+    "slalomKeyboardFinish": true,
+    "hammersKeyboardFinish": true,
+    "loopKeyboardFinish": true,
+    "loopFinishSeconds": 5.69,
+    "loopFalls": 0,
+    "pause": true,
+    "widthToggle16and19_2": true,
+    "consoleErrors": 0,
+    "widthSwitchRestartsCourse": true,
+    "nextStationButtonBrowserTested": false
+  },
+  "mobile": {
+    "viewport": [
+      390,
+      844
+    ],
+    "layoutReviewed": true,
+    "stationAndWidthSwitch": true,
+    "touchButtonsVisible": true,
+    "touchHardwareTested": false
+  },
+  "limitations": [
+    "Three independent test stations, not a full five-stage show.",
+    "Inverted loop uses a disclosed magnetic guide with gravity along tangent, lateral control and jump release.",
+    "No multiplayer or independent mobile hardware performance verification."
+  ]
+}

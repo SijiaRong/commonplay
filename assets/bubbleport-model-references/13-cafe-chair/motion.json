@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "id": "13-cafe-chair",
+  "status": "static_skipped",
+  "reason": "固定咖啡椅，无活动机构；跳过动态设计。"
+}

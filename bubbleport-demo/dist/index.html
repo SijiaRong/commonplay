@@ -1,0 +1,14 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#e9eee6"><meta name="description" content="泡泡星港微缩乐园，三类原创精确赛道的加宽试玩。"><title>泡泡星港 · 宽版赛道试玩</title><link rel="stylesheet" href="style.css"><script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script></head><body>
+<canvas id="world" aria-label="泡泡星港三维试玩场景"></canvas>
+<header><a class="brand" href="./"><span class="planet">◒</span><span>BUBBLEPORT<small>泡泡星港 · 微缩乐园</small></span></a><div class="header-right"><span class="live"><i></i>轨道试验日</span><button id="view">切换俯瞰</button><button id="pause" aria-label="暂停或继续">暂停</button></div></header>
+<aside class="station"><div class="eyebrow">THE ORBITAL PLAYGROUND / 001</div><h1>把快乐，<br>放大一点。</h1><p class="intro">一座掌心里的太空游乐园。<br>更宽的路面，同样有趣的冒险。</p>
+<div class="course-tabs" role="group" aria-label="选择试玩路段"><button data-course="slalom" class="selected"><span>01</span>星尘绕行</button><button data-course="hammers"><span>02</span>月面摆锤</button><button data-course="loop"><span>03</span>轨道回环</button></div>
+<div class="width-box"><div><span>路面通行宽度</span><strong id="width-value">19.2 <small>+20%</small></strong></div><div class="segmented" role="group" aria-label="赛道宽度"><button data-width="16">原宽 16</button><button data-width="19.2" class="selected">加宽 19.2</button></div><p id="course-hint">穿过六块错位胶囊，试试更从容的转向。</p></div>
+<button class="primary" id="start">出发试玩 <span>↗</span></button><div class="keys"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> 移动 <b>·</b> <kbd>空格</kbd>跳跃 <b>·</b> <kbd>R</kbd>重来</div></aside>
+<div class="play-hud" id="play-hud" hidden><div><span id="current-name">星尘绕行</span><strong id="timer">00.0<small>s</small></strong></div><div class="telemetry"><span><b id="speed">0</b> 速度</span><span><b id="hits">0</b> 碰撞</span><span><b id="falls">0</b> 跌落</span></div><button id="reset">回到起点 ↺</button></div>
+<div class="route-note" id="route-note">左右拖动画面看全景 · 滚轮缩放</div>
+<footer><span>精确路面与碰撞 / 三类独立测试站</span><span class="asset-status" id="asset-status">正在点亮星港…</span></footer>
+<div class="toast" id="toast" role="status"></div>
+<div class="touch-controls" aria-label="触屏操控"><div><button data-key="a" aria-label="向左">←</button><button data-key="d" aria-label="向右">→</button></div><div><button data-key="s" aria-label="减速后退">↓</button><button data-key="w" aria-label="前进">↑</button><button data-key=" " aria-label="跳跃">跃</button></div></div>
+<div id="finish" class="modal" hidden><div class="finish-card"><div class="eyebrow">A LITTLE GIANT LEAP</div><div class="finish-planet">✦</div><h2>漂亮的一程。</h2><p id="finish-result"></p><button id="next" class="primary">前往下一站 ↗</button><button id="again">再跑一次</button></div></div>
+<script type="module" src="game.mjs"></script></body></html>

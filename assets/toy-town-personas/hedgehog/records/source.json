@@ -1,0 +1,13 @@
+{
+  "taskId": "2ebf1acab9014dc8b7d5b3ca2f0c8dbc",
+  "modelPage": "https://www.hi3d.ai/3d-model/2ebf1acab9014dc8b7d5b3ca2f0c8dbc",
+  "points": 45,
+  "parameters": {
+    "version": "v3.0",
+    "quality": "high_quality",
+    "pbr": true,
+    "license": "private"
+  },
+  "reference": "../references/hi3d-input.jpg",
+  "prompt": "A single original toy: carved maple hedgehog with three side-by-side rubber stamp wheels across its back bearing dots, dashes, stars. Match the supplied reference; complete full body, no ground or base."
+}

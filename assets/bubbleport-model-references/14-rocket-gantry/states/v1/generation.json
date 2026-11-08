@@ -1,0 +1,30 @@
+{
+  "generator": "built-in image_gen",
+  "source_sheet": "/Users/cyberlingke/.codex/generated_images/01a1b93f-d38a-7260-a536-fa7db57c2a6b/exec-dcba4ef3-600e-4329-9211-bf6cdfff610e.png",
+  "input_reference": "../../reference-sheet.png",
+  "prompt": "Create a FOUR-STATE MOTION AND LIGHTING DESIGN COMPARISON SHEET of the single miniature toy asset in the provided reference. This is NOT a multi-camera turnaround: ALL FOUR CELLS MUST USE THE EXACT SAME front three-quarter CAMERA, same magnification, same perspective, same position on ground, identical static geometry and materials. Reference is a 4-view identity sheet; take its bottom-right three-quarter angle and repeat that angle in all four cells. Landscape 1536x1024-like 3:2 image, precisely equal 2x2 grid with generous white margins and fine light-gray divider lines at exact center. Top-left is state 1, top-right state 2, bottom-left state 3, bottom-right state 4. White neutral studio background and constant soft neutral studio illumination; lighting changes ONLY from specified miniature practical lights; never change overall exposure or backdrop to fake a state change. Closed full object silhouettes, no cropping. Ivory, mint, peach premium tabletop model craftsmanship. No track, environment, people, extra props, text, numbers, captions, arrows or watermark. No ghosting, no motion blur, no duplicate moving parts inside a cell. Preserve shape topology, counts and colors across all cells. Show different actual joint positions or light colors as specified, freezing time at each state; no deformation of rigid structures. Newly animated areas must stay physically supported. Each panel shows a single complete instance. Asset ID: 14-rocket-gantry.\nSTATE 1: All rocket indicator bulbs and blank sign backlight off.\nSTATE 2: Only TOP round bulb on each rocket upright glows soft red, other bulbs unlit. Blank sign softly lit.\nSTATE 3: Only MIDDLE round bulb on each rocket glows amber; other bulbs off. Same blank sign.\nSTATE 4: Only BOTTOM round bulb on each rocket glows mint green; other bulbs off. Blank sign softly mint backlit. No added text.\nMechanism note: 红、黄、绿灯按事件状态切换，默认不自动循环倒计时；图示顺序是状态比较。",
+  "layout": "top-left, top-right, bottom-left, bottom-right; same camera",
+  "states": [
+    {
+      "id": "off",
+      "name": "关闭",
+      "file": "off.png"
+    },
+    {
+      "id": "hold_red",
+      "name": "等待·红灯",
+      "file": "hold_red.png"
+    },
+    {
+      "id": "ready_amber",
+      "name": "准备·黄灯",
+      "file": "ready_amber.png"
+    },
+    {
+      "id": "go_green",
+      "name": "出发·绿灯",
+      "file": "go_green.png"
+    }
+  ],
+  "review_note": "概念关键帧；具体角度、灯光强度和关节约束以motion.json为准，图像并非同一3D网格的精确渲染。"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "pip",
+  "taskId": "c7e67ae289454e80a8221774c469b914",
+  "modelPage": "https://www.hi3d.ai/3d-model/c7e67ae289454e80a8221774c469b914",
+  "points": 45,
+  "parameters": {
+    "version": "v3.0",
+    "quality": "high_quality",
+    "pbr": true,
+    "license": "private"
+  },
+  "reference": "references/pip.png"
+}

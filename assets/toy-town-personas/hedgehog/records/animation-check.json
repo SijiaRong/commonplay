@@ -1,0 +1,47 @@
+{
+  "file": "teddy-playground/dist/characters/hedgehog-animated.glb",
+  "bytes": 5399508,
+  "triangles": 23995,
+  "vertices": 14953,
+  "meshes": 1,
+  "textures": 2,
+  "animations": [
+    {
+      "name": "Idle",
+      "duration": 3.0333333015441895
+    },
+    {
+      "name": "Run",
+      "duration": 0.8333333134651184
+    },
+    {
+      "name": "Jump",
+      "duration": 1.0333333015441895
+    },
+    {
+      "name": "Slide",
+      "duration": 3.2333333492279053
+    },
+    {
+      "name": "SlideLeft",
+      "duration": 3.2333333492279053
+    },
+    {
+      "name": "SlideRight",
+      "duration": 3.2333333492279053
+    },
+    {
+      "name": "SitDown",
+      "duration": 1.0333333015441895
+    },
+    {
+      "name": "StandUp",
+      "duration": 1.2333333492279053
+    },
+    {
+      "name": "FinishWave",
+      "duration": 1.4333332777023315
+    }
+  ],
+  "passed": true
+}

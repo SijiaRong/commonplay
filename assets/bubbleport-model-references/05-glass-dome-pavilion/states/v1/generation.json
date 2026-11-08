@@ -1,0 +1,30 @@
+{
+  "generator": "built-in image_gen",
+  "source_sheet": "/Users/cyberlingke/.codex/generated_images/01a1b93f-d38a-7260-a536-fa7db57c2a6b/exec-8f46c239-40e4-4723-9bef-ecfdbba25729.png",
+  "input_reference": "../../reference-sheet.png",
+  "prompt": "Create a FOUR-STATE MOTION AND LIGHTING DESIGN COMPARISON SHEET of the single miniature toy asset in the provided reference. This is NOT a multi-camera turnaround: ALL FOUR CELLS MUST USE THE EXACT SAME front three-quarter CAMERA, same magnification, same perspective, same position on ground, identical static geometry and materials. Reference is a 4-view identity sheet; take its bottom-right three-quarter angle and repeat that angle in all four cells. Landscape 1536x1024-like 3:2 image, precisely equal 2x2 grid with generous white margins and fine light-gray divider lines at exact center. Top-left is state 1, top-right state 2, bottom-left state 3, bottom-right state 4. White neutral studio background and constant soft neutral studio illumination; lighting changes ONLY from specified miniature practical lights; never change overall exposure or backdrop to fake a state change. Closed full object silhouettes, no cropping. Ivory, mint, peach premium tabletop model craftsmanship. No track, environment, people, extra props, text, numbers, captions, arrows or watermark. No ghosting, no motion blur, no duplicate moving parts inside a cell. Preserve shape topology, counts and colors across all cells. Show different actual joint positions or light colors as specified, freezing time at each state; no deformation of rigid structures. Newly animated areas must stay physically supported. Each panel shows a single complete instance. Asset ID: 05-glass-dome-pavilion.\nSTATE 1: Same glass dome stays completely fixed. Interior telescope yaw 0 degrees, elevation 10 degrees, all lamps off.\nSTATE 2: Interior telescope yaw 30 degrees, elevation 25 degrees on its gimbal, warm dome-base ring light. Glass shell fixed.\nSTATE 3: Telescope yaw 60 degrees, elevation 55 degrees, pale cyan dome-base ring and windows. Fixed dome with same ribs.\nSTATE 4: Telescope yaw minus 25 degrees, elevation 35 degrees, soft lavender ring. Dome never opens or changes shape.\nMechanism note: 外壳不动；内部望远镜使用水平转台和俯仰轴两个关节。",
+  "layout": "top-left, top-right, bottom-left, bottom-right; same camera",
+  "states": [
+    {
+      "id": "parked",
+      "name": "收泊·灯灭",
+      "file": "parked.png"
+    },
+    {
+      "id": "observe_low",
+      "name": "低空观测",
+      "file": "observe_low.png"
+    },
+    {
+      "id": "observe_high",
+      "name": "高空观测",
+      "file": "observe_high.png"
+    },
+    {
+      "id": "return",
+      "name": "回转扫描",
+      "file": "return.png"
+    }
+  ],
+  "review_note": "概念关键帧；具体角度、灯光强度和关节约束以motion.json为准，图像并非同一3D网格的精确渲染。"
+}

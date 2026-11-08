@@ -1,0 +1,49 @@
+{
+  "imagePoints": 18,
+  "modelPoints": 135,
+  "totalPoints": 153,
+  "modelCount": 3,
+  "allGenerated": true,
+  "allGLBsLoaded": true,
+  "directRuntimeApproved": 0,
+  "physicalPlayabilityVerified": false,
+  "decision": "Do not batch-generate all 34 complete tracks. Use original procedural/precise road geometry and separately modeled moving pieces; use Hi3D primarily for appearance exploration and reusable decorative assets.",
+  "samples": [
+    {
+      "key": "slalom",
+      "triangles": 1929264,
+      "meshes": 1,
+      "missingNormals": 1,
+      "outerWidthAtTargetLength": 17.298801114219142,
+      "sha256": "8b3097e274f7e3287d8344116220fb5a342d9daf00ae67c3f8d5911e0181accf",
+      "visualReview": {
+        "visual": "路面和统一风格可辨认；但要求六块错位障碍，结果只有三块，且基本排在中线，未保留原定绕行节奏。",
+        "verdict": "需重新布置障碍并重做准确路面。"
+      }
+    },
+    {
+      "key": "hammers",
+      "triangles": 1953630,
+      "meshes": 1,
+      "missingNormals": 1,
+      "outerWidthAtTargetLength": 11.28253633643273,
+      "sha256": "725927cf58dd6b8eb4ec9fbcf3aab0787fdaec2d910361976300755302766a7c",
+      "visualReview": {
+        "visual": "两只摆锤和支架外观保留；生成结果没有可单独驱动的锤头、摆臂或转轴节点。",
+        "verdict": "需拆分/重建机关、设置转轴和动画。"
+      }
+    },
+    {
+      "key": "loop",
+      "triangles": 1973000,
+      "meshes": 1,
+      "missingNormals": 1,
+      "outerWidthAtTargetLength": 14.261311069213187,
+      "sha256": "01f5a7ab67cf867ea05f60726f367f3f4bfd4a5b287db8e0ac3c5dd67face016",
+      "visualReview": {
+        "visual": "回环、平缓备选路和分合流轮廓存在；尚未验证回环曲面和分支碰撞是否能支撑实际运动。",
+        "verdict": "需精确重建路面和碰撞，进行动力学验证。"
+      }
+    }
+  ]
+}

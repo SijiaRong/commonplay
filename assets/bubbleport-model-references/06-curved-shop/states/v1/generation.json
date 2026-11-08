@@ -1,0 +1,30 @@
+{
+  "generator": "built-in image_gen",
+  "source_sheet": "/Users/cyberlingke/.codex/generated_images/01a1b93f-d38a-7260-a536-fa7db57c2a6b/exec-969e7c3d-1ce2-45ad-8350-0e620cff49ba.png",
+  "input_reference": "../../reference-sheet.png",
+  "prompt": "Create a FOUR-STATE MOTION AND LIGHTING DESIGN COMPARISON SHEET of the single miniature toy asset in the provided reference. This is NOT a multi-camera turnaround: ALL FOUR CELLS MUST USE THE EXACT SAME front three-quarter CAMERA, same magnification, same perspective, same position on ground, identical static geometry and materials. Reference is a 4-view identity sheet; take its bottom-right three-quarter angle and repeat that angle in all four cells. Landscape 1536x1024-like 3:2 image, precisely equal 2x2 grid with generous white margins and fine light-gray divider lines at exact center. Top-left is state 1, top-right state 2, bottom-left state 3, bottom-right state 4. White neutral studio background and constant soft neutral studio illumination; lighting changes ONLY from specified miniature practical lights; never change overall exposure or backdrop to fake a state change. Closed full object silhouettes, no cropping. Ivory, mint, peach premium tabletop model craftsmanship. No track, environment, people, extra props, text, numbers, captions, arrows or watermark. No ghosting, no motion blur, no duplicate moving parts inside a cell. Preserve shape topology, counts and colors across all cells. Show different actual joint positions or light colors as specified, freezing time at each state; no deformation of rigid structures. Newly animated areas must stay physically supported. Each panel shows a single complete instance. Asset ID: 06-curved-shop.\nSTATE 1: All interior display windows and cornice lighting off. Same fixed building.\nSTATE 2: All display windows softly warm amber, subtle warm cornice strip.\nSTATE 3: Alternating existing arched windows: first, third and fifth warm amber bright, second and fourth dim.\nSTATE 4: Opposite existing windows second and fourth pale cyan bright, first third fifth dim warm. Same architecture.\nMechanism note: 不让建筑本体转动；橱窗分A/B组轮亮。灯条为设计新增材质区。",
+  "layout": "top-left, top-right, bottom-left, bottom-right; same camera",
+  "states": [
+    {
+      "id": "closed",
+      "name": "闭店",
+      "file": "closed.png"
+    },
+    {
+      "id": "warm",
+      "name": "营业暖光",
+      "file": "warm.png"
+    },
+    {
+      "id": "sequence_a",
+      "name": "橱窗轮亮A",
+      "file": "sequence_a.png"
+    },
+    {
+      "id": "sequence_b",
+      "name": "橱窗轮亮B",
+      "file": "sequence_b.png"
+    }
+  ],
+  "review_note": "概念关键帧；具体角度、灯光强度和关节约束以motion.json为准，图像并非同一3D网格的精确渲染。"
+}

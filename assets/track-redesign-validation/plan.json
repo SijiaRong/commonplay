@@ -1,0 +1,36 @@
+{
+  "scope": "First three-module Hi3D feasibility validation",
+  "referenceWidth": 16,
+  "targetWidth": 19.2,
+  "widthIncrease": 0.2,
+  "acceptedTrialEstimate": {
+    "min": 270,
+    "max": 405
+  },
+  "tasks": [
+    {
+      "key": "slalom",
+      "label": "宽版错位障碍路段",
+      "prompt": "Create an ORIGINAL game-ready modular toy race track design reference, not based on any existing game or copyrighted screenshot. Single isolated complete modular road section, neutral light gray background, soft studio light, high oblique three-quarter view with every endpoint and complete route visible, no cropping, no text, no watermark, no collage, no characters. Design language: clean continuous ivory molded-polymer deck, solid muted petrol-teal rounded guardrails, pale yellow connectors, coral foam obstacles; no wooden planks, no rainbow-block fences. Precise usable flat road surfaces and clearly separated moving pieces; restrained simple chunky toy shapes. Track travel from back to front. Working design proportions: 19.2 units clear usable width, about 30 units long. Show underside thickness and small low support feet. An original wide slalom obstacle section: a single straight continuous wide road, six staggered low capsule-shaped foam bumpers arranged as three alternating pairs, broad readable gaps between them, low solid continuous sidewalls. Smooth ramp-free connections at both ends. Each coral capsule bumper has a pale-yellow recessed endcap, no spikes or peg forest. Entire object should look manufacturable and easy to reconstruct as simple collision shapes.",
+      "imageTaskId": "76b1b3926d2f476aab9dd8e834f8e582",
+      "imagePoints": 6,
+      "desiredClearWidth": 19.2
+    },
+    {
+      "key": "hammers",
+      "label": "宽版摆锤路段",
+      "prompt": "Create an ORIGINAL game-ready modular toy race track design reference, not based on any existing game or copyrighted screenshot. Single isolated complete modular road section, neutral light gray background, soft studio light, high oblique three-quarter view with every endpoint and complete route visible, no cropping, no text, no watermark, no collage, no characters. Design language: clean continuous ivory molded-polymer deck, solid muted petrol-teal rounded guardrails, pale yellow connectors, coral foam obstacles; no wooden planks, no rainbow-block fences. Precise usable flat road surfaces and clearly separated moving pieces; restrained simple chunky toy shapes. Track travel from back to front. Working design proportions: 19.2 units clear usable width, about 30 units long. Show underside thickness and small low support feet. An original pendulum-mallet road module: straight wide road with TWO distinct overhead rounded portal frames, each with one suspended coral padded oval mallet. Strong visible pivots mounted above the route and separate hanging arms; one mallet slightly swung left, the other slightly right. Maintain open space under frames and a connected unobstructed flat floor. Supports stay outside usable road. No extra obstacle groups. Make pivots and mallet separation obvious for later rigging.",
+      "imageTaskId": "335079185a1f42f69976d49f7bf92959",
+      "imagePoints": 6,
+      "desiredClearWidth": 19.2
+    },
+    {
+      "key": "loop",
+      "label": "宽版回环与平缓备选岔路",
+      "prompt": "Create an ORIGINAL game-ready modular toy race track design reference, not based on any existing game or copyrighted screenshot. Single isolated complete modular road section, neutral light gray background, soft studio light, high oblique three-quarter view with every endpoint and complete route visible, no cropping, no text, no watermark, no collage, no characters. Design language: clean continuous ivory molded-polymer deck, solid muted petrol-teal rounded guardrails, pale yellow connectors, coral foam obstacles; no wooden planks, no rainbow-block fences. Precise usable flat road surfaces and clearly separated moving pieces; restrained simple chunky toy shapes. Track travel from back to front. Working design proportions: 19.2 units clear usable width, about 30 units long. Show underside thickness and small low support feet. An original two-choice fork module. A wide approach road splits visibly into TWO parallel routes then merges back into one equally wide exit. Left branch includes exactly one complete vertical loop-the-loop in the direction of travel, with continuous visible curved running surface and safety lips. Right branch is a calm low flat bypass without obstacles. Overall module is about 50 units long; each branch has about 7.2 units of clear width. Show both branches, entrance split and exit merge in full. Two low independent teal structural cradle supports under loop. No jumps or missing floor. Ensure the circular loop is a functional continuous road strip, not a decorative ring beside the road.",
+      "imageTaskId": "34675b1025c446f19e5c588ad8d37724",
+      "imagePoints": 6,
+      "desiredClearWidth": 19.2
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "id": "02-ferris-wheel",
+  "status": "designed_not_implemented",
+  "coordinate_system": "+Y up; +Z front; +X object right. Angles use local joint axes.",
+  "parts": [
+    "support_static",
+    "wheel_rotor",
+    "gondolas_pivoted",
+    "rim_light_segments",
+    "hub_light"
+  ],
+  "cycle_seconds": 32,
+  "playback": "loop_with_off_state",
+  "notes": "主轮绕水平轮轴旋转；每个吊舱独立反向补偿，始终朝上。示意角度，不表示完整循环只转67.5°。",
+  "states": [
+    {
+      "id": "off_0",
+      "name": "停止·灯灭",
+      "illustration_cell": 0,
+      "parameters": {
+        "wheel_deg": 0,
+        "lights": 0
+      },
+      "visual_description": "Wheel at initial angle 0 degrees, all lamps off.",
+      "image": "states/v1/off_0.png"
+    },
+    {
+      "id": "warm_22",
+      "name": "旋转22.5°·暖灯",
+      "illustration_cell": 1,
+      "parameters": {
+        "wheel_deg": 22.5,
+        "lights": 0.8,
+        "palette": "warm"
+      },
+      "visual_description": "Wheel rotated 22.5 degrees in its own vertical plane, warm amber rim and hub lights.",
+      "image": "states/v1/warm_22.png"
+    },
+    {
+      "id": "cyan_45",
+      "name": "旋转45°·青色追光A",
+      "illustration_cell": 2,
+      "parameters": {
+        "wheel_deg": 45,
+        "lights": 0.8,
+        "palette": "cyan",
+        "chase_phase": 0
+      },
+      "visual_description": "Wheel rotated 45 degrees, alternating short cyan and unlit rim-light segments, warm hub.",
+      "image": "states/v1/cyan_45.png"
+    },
+    {
+      "id": "party_67",
+      "name": "旋转67.5°·彩色追光B",
+      "illustration_cell": 3,
+      "parameters": {
+        "wheel_deg": 67.5,
+        "lights": 0.8,
+        "palette": "peach-cyan",
+        "chase_phase": 1
+      },
+      "visual_description": "Wheel rotated 67.5 degrees, alternating peach and pale cyan rim lights, shifted chase pattern.",
+      "image": "states/v1/party_67.png"
+    }
+  ],
+  "reference_sheet": "states/v1/state-comparison.png",
+  "state_image_dir": "states/v1",
+  "interpolation": "smoothstep; lamps fade over 0.3-0.8 seconds",
+  "generation_policy": "生成3D使用baseline中性造型，动态状态仅用于灯光/关节/形变设定；不对各状态分别生成模型。",
+  "comparison_layout": [
+    "top_left",
+    "top_right",
+    "bottom_left",
+    "bottom_right"
+  ],
+  "reference_accuracy": "AI概念关键帧；角度与关节约束以参数为准，不是同一3D网格的精确渲染。",
+  "clip_preview": "目录页的关键帧轮播，不是骨骼动画或物理动画。",
+  "rotation_loop": {
+    "full_turn_seconds": 32,
+    "angular_velocity_deg_per_sec": 11.25,
+    "interpolation": "linear; wrap 360 to 0",
+    "note": "四张图是角度采样，不是一个完整旋转周期的四等分。"
+  },
+  "constraints": [
+    "支架及底座固定",
+    "轮体绕垂直轮盘的水平轴旋转",
+    "吊舱独立绕轮轴方向反向补偿，保持世界朝上",
+    "灯光相位独立于旋转相位"
+  ],
+  "lighting_clips": {
+    "chase_period_seconds": 3.2,
+    "fade_seconds": 0.35,
+    "palette": [
+      "#FFD29A",
+      "#8EDDDC",
+      "#FFB6A0"
+    ]
+  }
+}

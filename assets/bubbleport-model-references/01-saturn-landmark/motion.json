@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "id": "01-saturn-landmark",
+  "status": "designed_not_implemented",
+  "coordinate_system": "+Y up; +Z front; +X object right. Angles use local joint axes.",
+  "parts": [
+    "pedestal_static",
+    "planet_upper_rotor",
+    "planet_inner_light",
+    "ring_edge_light"
+  ],
+  "cycle_seconds": 16,
+  "playback": "loop_with_off_state",
+  "notes": "上部球体与装饰环作为同一转子；底座不转。灯光强度用平滑呼吸曲线。",
+  "states": [
+    {
+      "id": "off",
+      "name": "日间关闭",
+      "illustration_cell": 0,
+      "parameters": {
+        "upper_yaw_deg": 0,
+        "light_intensity": 0
+      },
+      "visual_description": "Upper planet and ring at yaw 0 degrees, no internal illumination.",
+      "image": "states/v1/off.png"
+    },
+    {
+      "id": "welcome",
+      "name": "暖光迎宾",
+      "illustration_cell": 1,
+      "parameters": {
+        "upper_yaw_deg": 30,
+        "light_intensity": 0.6,
+        "color": "#FFC477"
+      },
+      "visual_description": "Upper planet-and-ring assembly turns 30 degrees about vertical spindle, peach amber light inside globe and warm ring rim. Pedestal stationary.",
+      "image": "states/v1/welcome.png"
+    },
+    {
+      "id": "pulse_cyan",
+      "name": "青色呼吸高点",
+      "illustration_cell": 2,
+      "parameters": {
+        "upper_yaw_deg": 60,
+        "light_intensity": 1,
+        "color": "#7DE4E0"
+      },
+      "visual_description": "Upper assembly yaw 60 degrees, pale cyan illumination inside globe and along ring rim.",
+      "image": "states/v1/pulse_cyan.png"
+    },
+    {
+      "id": "pulse_peach",
+      "name": "蜜桃呼吸低点",
+      "illustration_cell": 3,
+      "parameters": {
+        "upper_yaw_deg": 90,
+        "light_intensity": 0.35,
+        "color": "#FFAF99"
+      },
+      "visual_description": "Upper assembly yaw 90 degrees, soft low peach glow. Same connected ring and globe, spindle supported.",
+      "image": "states/v1/pulse_peach.png"
+    }
+  ],
+  "reference_sheet": "states/v1/state-comparison.png",
+  "state_image_dir": "states/v1",
+  "interpolation": "smoothstep; lamps fade over 0.3-0.8 seconds",
+  "generation_policy": "生成3D使用baseline中性造型，动态状态仅用于灯光/关节/形变设定；不对各状态分别生成模型。",
+  "comparison_layout": [
+    "top_left",
+    "top_right",
+    "bottom_left",
+    "bottom_right"
+  ],
+  "reference_accuracy": "AI概念关键帧；角度与关节约束以参数为准，不是同一3D网格的精确渲染。",
+  "clip_preview": "目录页的关键帧轮播，不是骨骼动画或物理动画。",
+  "rotation_loop": {
+    "full_turn_seconds": 16,
+    "angular_velocity_deg_per_sec": 22.5,
+    "interpolation": "linear; wrap 360 to 0",
+    "note": "四张图是角度采样，不是一个完整旋转周期的四等分。"
+  },
+  "lighting_clips": {
+    "breath_period_seconds": 4,
+    "intensity_min": 0.35,
+    "intensity_max": 1,
+    "curve": "sinusoidal",
+    "off_is_separate_power_state": true
+  }
+}

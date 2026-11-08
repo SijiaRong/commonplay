@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "id": "09-bench",
+  "status": "static_skipped",
+  "reason": "固定长椅，无活动机构；跳过动态设计。"
+}

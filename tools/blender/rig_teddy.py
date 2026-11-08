@@ -49,7 +49,7 @@ mesh.parent=arm
 mod=mesh.modifiers.new('Plush skin','ARMATURE');mod.object=arm
 scene=bpy.context.scene;scene.render.fps=30
 ad=arm.animation_data_create()
-for name,length,step in [('Idle',90,5),('Run',24,2),('Jump',30,2),('Slide',48,4)]:
+for name,length,step in [('Idle',90,5),('Run',24,2),('Jump',30,2),('Slide',96,3),('SlideLeft',96,3),('SlideRight',96,3),('SitDown',30,2),('StandUp',36,2),('FinishWave',42,2)]:
     action=bpy.data.actions.new(name);ad.action=action
     for f in range(0,length+1,step):
         t=f/length; ph=2*pi*t;wave=sin(ph);lift=0
@@ -58,9 +58,22 @@ for name,length,step in [('Idle',90,5),('Run',24,2),('Jump',30,2),('Slide',48,4)
             lift=.006*(1-cos(ph));angles={'Chest':(-2*wave,0,0),'Head':(2*wave,1.6*wave,3*wave)}
         elif name=='Run':
             lift=.017*(1-cos(2*ph));angles={'Chest':(8,3*wave,6*wave),'Head':(-5,-2*wave,-4*wave)}
-        elif name=='Slide':
-            lift=-.154+.003*cos(2*ph)
-            angles={'Chest':(-12+2*cos(ph),2*wave,0),'Head':(9,-3*wave,3*wave)}
+        elif name in ('Slide','SlideLeft','SlideRight','SitDown','StandUp'):
+            entering=name=='SitDown'; exiting=name=='StandUp'
+            seat=smooth(.08,.78,t) if entering else 1-smooth(.12,.90,t) if exiting else 1
+            # Pull the feet in, shift weight over them, then extend or stand.
+            gather=sin(pi*t)**2 if entering or exiting else 0
+            lean={'SlideLeft':1,'SlideRight':-1}.get(name,0)
+            loop=0 if entering or exiting else 1
+            lift=-.151*seat-.052*gather+.004*loop*(cos(2*ph)-1)
+            kick=loop*max(0,sin(ph))**6
+            glance=loop*(sin(ph)**3)
+            angles={'Hips':(0,4*lean,0),'Chest':(-10*seat+25*gather,10*lean+2*loop*wave,-4*lean),
+                    'Head':(9*seat-13*gather+2*kick,-3*lean,9*glance+9*lean)}
+        elif name=='FinishWave':
+            salute=smooth(0,.22,t)*(1-smooth(.72,1,t))
+            lift=.012*salute
+            angles={'Chest':(0,4*salute,0),'Head':(-3*salute,-7*salute,9*salute)}
         else:
             def curve(vals):
                 for (a,v),(b,w) in zip(vals,vals[1:]):
@@ -74,12 +87,22 @@ for name,length,step in [('Idle',90,5),('Run',24,2),('Jump',30,2),('Slide',48,4)
             elif name=='Run':
                 p=wave*s
                 vals=(-38*p-5,37*max(0,-p)+5,14*p,32*p,-14-12*max(p,0),5*p)
-            elif name=='Slide':
-                vals=(-82+3*s*wave,17+s*3*wave,-16,-22+5*s*wave,-16,5*s*wave)
+            elif name in ('Slide','SlideLeft','SlideRight','SitDown','StandUp'):
+                vals=(-82*seat-45*gather+4*s*loop*wave-8*kick*(s==1),
+                      17*seat+75*gather+4*s*loop*wave,-16*seat-24*gather+8*kick,
+                      -22*seat-28*gather+6*s*loop*wave-9*s*lean,
+                      -16*seat-12*gather-11*kick*(s==-1),7*s*loop*wave)
+            elif name=='FinishWave':
+                vals=(0,0,0,-26*salute if s==1 else 0,-24*salute if s==1 else 0,0)
             else:vals=(-35*tuck,58*tuck,-20*tuck,-44*reach,-16*reach,0)
             for n,val in zip(('Thigh','Shin','Foot','UpperArm','Forearm','Paw'),vals):
-                if name=='Slide' and n in ('UpperArm','Thigh'):
-                    angles[n+sf]=(val,-s*(46+4*s*wave if n=='UpperArm' else 9),0)
+                if name in ('Slide','SlideLeft','SlideRight','SitDown','StandUp') and n in ('UpperArm','Thigh'):
+                    spread=(46*seat+4*s*loop*wave+16*s*lean+16*gather) if n=='UpperArm' else 9*seat
+                    angles[n+sf]=(val,-s*spread,0)
+                    continue
+                if name=='FinishWave' and s==1 and n in ('UpperArm','Forearm','Paw'):
+                    spread={'UpperArm':-92,'Forearm':-18-20*sin(3*ph),'Paw':16*sin(3*ph)}[n]
+                    angles[n+sf]=(val,spread*salute,0)
                     continue
                 angles[n+sf]=(val,(-s*18*reach if name=='Jump' and n=='UpperArm' else 0),0)
         for b in arm.pose.bones:

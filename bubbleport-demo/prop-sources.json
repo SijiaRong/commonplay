@@ -1,0 +1,29 @@
+{
+  "newPoints": 102,
+  "previousTrialPoints": 153,
+  "cumulativePoints": 255,
+  "records": [
+    {
+      "key": "bumper",
+      "prompt": "Original standalone game prop for Bubbleport, a dreamy science-fiction miniature amusement park. One single isolated movable obstacle part ONLY, absolutely no road, no floor tile, no arch, no surroundings, no text, no letters. Ivory/mint/peach soft-touch molded toy resin with tiny brass fittings, subtle pastel acrylic accents. Manufacturable simple symmetrical silhouette, centered on plain neutral light gray, studio three-quarter product view, sharp clean edges, complete object visible. A low rounded coral-peach capsule bumper with ivory end caps and a small recessed mint star on the top. Capsule's long axis horizontal, length 4, width 1.4, height 1.3 proportions. Flat underside suitable for placing on our own road. Exactly one obstacle. No mounting platform.",
+      "imageTaskId": "d916365bb98e4aacbe56c637f8dcdbd5",
+      "modelTaskId": "68eefddfbde04239a9fa100ce1dd51a8",
+      "modelPage": "https://www.hi3d.ai/3d-model/68eefddfbde04239a9fa100ce1dd51a8",
+      "imagePoints": 6,
+      "modelPoints": 45,
+      "license": "private",
+      "usage": "Independent visual skin; original road geometry and analytic moving collisions"
+    },
+    {
+      "key": "mallet",
+      "prompt": "Original standalone game prop for Bubbleport, a dreamy science-fiction miniature amusement park. One single isolated movable obstacle part ONLY, absolutely no road, no floor tile, no arch, no surroundings, no text, no letters. Ivory/mint/peach soft-touch molded toy resin with tiny brass fittings, subtle pastel acrylic accents. Manufacturable simple symmetrical silhouette, centered on plain neutral light gray, studio three-quarter product view, sharp clean edges, complete object visible. One pendulum hammer HEAD only, rounded peach foam toy head shaped like a chubby Saturn planet, mint protective end caps, a thin pale gold equatorial ring inset into the body without a large protrusion. A small ivory socket on the top for attaching our own swing arm. No arm, no pivot bracket, no gantry, no road. Body is horizontal and symmetric, roughly 2.8 wide, 1.5 tall, 1.6 deep.",
+      "imageTaskId": "d353b070673945a1a81a46ee186d2935",
+      "modelTaskId": "713ea7daa2ce422aba4d5e5441fb3d7b",
+      "modelPage": "https://www.hi3d.ai/3d-model/713ea7daa2ce422aba4d5e5441fb3d7b",
+      "imagePoints": 6,
+      "modelPoints": 45,
+      "license": "private",
+      "usage": "Independent visual skin; original road geometry and analytic moving collisions"
+    }
+  ]
+}

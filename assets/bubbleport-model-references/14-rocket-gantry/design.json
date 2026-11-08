@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "id": "14-rocket-gantry",
+  "name": "火箭装饰门架",
+  "version": "v1",
+  "description": "One freestanding START decorative gantry structure extracted from the scene, two ivory rocket-shaped upright towers with peach conical tips and small mint accent rings, joined by a curved ivory overhead sign frame containing a blank dark mint inset sign panel. Exactly two uprights and one crossbeam, stable small integrated foot plates. No written text; sign is blank for later texturing. No course floor, no racing deck, no checkered banner or extra track supports.",
+  "style": {
+    "palette": [
+      "ivory",
+      "mint",
+      "peach"
+    ],
+    "materials": [
+      "painted resin",
+      "molded plastic",
+      "acrylic",
+      "restrained metal"
+    ]
+  },
+  "baseline": {
+    "sheet": "reference-sheet.png",
+    "front": "front.png",
+    "right": "right.png",
+    "back": "back.png",
+    "three_quarter": "three-quarter.png"
+  },
+  "baseline_generation_prompt": "Create a professional 3D ASSET DESIGN REFERENCE SHEET for subsequent single-object image-to-3D generation. Use input image as style and object identity reference, extracting ONLY the specified object, reinterpreting hidden surfaces conservatively to make a complete buildable freestanding asset. One image in landscape 3:2 format with EXACTLY FOUR equally sized rectangular cells in a precise 2x2 grid. White background throughout, generous clear margin around each object so no silhouettes touch cell boundaries. TOP LEFT: straight FRONT orthographic view. TOP RIGHT: straight RIGHT SIDE orthographic view. BOTTOM LEFT: straight BACK orthographic view. BOTTOM RIGHT: elevated front three-quarter view. All four cells show the SAME SINGLE OBJECT at identical relative scale, same geometry and colors, no alternate designs. Use neutral shadowless studio illumination, readable material colors, no cast shadows, no bloom, no atmospheric effects, no room/table environment, no text, no labels, no watermarks, no dimensions. Tactile high quality miniature model product photography, satin ivory painted resin, mint green trim, pale peach accents, restrained metal and acrylic, clean simplified structural details. Every asset must be isolated with complete silhouette and visible bottom feet, physically plausible closed construction. No race track, no terrain, no diorama base, no unrelated neighboring props. Primary object: One freestanding START decorative gantry structure extracted from the scene, two ivory rocket-shaped upright towers with peach conical tips and small mint accent rings, joined by a curved ivory overhead sign frame containing a blank dark mint inset sign panel. Exactly two uprights and one crossbeam, stable small integrated foot plates. No written text; sign is blank for later texturing. No course floor, no racing deck, no checkered banner or extra track supports.",
+  "editing_policy": "修改设定优先编辑本文件；保留原始参考图，后续设计另存版本。",
+  "dynamic_design": "motion.json",
+  "dynamic_construction": {
+    "parts_to_keep_separable": [
+      "gantry_static",
+      "rocket_red_lamps",
+      "rocket_amber_lamps",
+      "rocket_green_lamps",
+      "sign_backlight"
+    ],
+    "specification": "motion.json",
+    "neutral_model_generation": "使用基础中性姿态。将灯光表面单独分配材质；可动部件留独立网格和转轴，风动部件留骨骼或顶点权重。状态图仅用于动作设计，不逐态生成模型。",
+    "rendering": "灯光与玻璃效果在引擎设置，不烘焙成固定光斑。"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "generator": "built-in image_gen",
+  "source_sheet": "/Users/cyberlingke/.codex/generated_images/01a1b93f-d38a-7260-a536-fa7db57c2a6b/exec-85a95cc7-5a15-4bc7-972a-32297c101f38.png",
+  "input_reference": "../../reference-sheet.png",
+  "prompt": "Create a FOUR-STATE MOTION AND LIGHTING DESIGN COMPARISON SHEET of the single miniature toy asset in the provided reference. This is NOT a multi-camera turnaround: ALL FOUR CELLS MUST USE THE EXACT SAME front three-quarter CAMERA, same magnification, same perspective, same position on ground, identical static geometry and materials. Reference is a 4-view identity sheet; take its bottom-right three-quarter angle and repeat that angle in all four cells. Landscape 1536x1024-like 3:2 image, precisely equal 2x2 grid with generous white margins and fine light-gray divider lines at exact center. Top-left is state 1, top-right state 2, bottom-left state 3, bottom-right state 4. White neutral studio background and constant soft neutral studio illumination; lighting changes ONLY from specified miniature practical lights; never change overall exposure or backdrop to fake a state change. Closed full object silhouettes, no cropping. Ivory, mint, peach premium tabletop model craftsmanship. No track, environment, people, extra props, text, numbers, captions, arrows or watermark. No ghosting, no motion blur, no duplicate moving parts inside a cell. Preserve shape topology, counts and colors across all cells. Show different actual joint positions or light colors as specified, freezing time at each state; no deformation of rigid structures. Newly animated areas must stay physically supported. Each panel shows a single complete instance. Asset ID: 07-terminal-station.\nSTATE 1: Both front doors closed, star emblem and indoor lights off.\nSTATE 2: Both doors closed, golden star lit and warm interior windows.\nSTATE 3: The same two front door leaves swing outward on their OUTER hinges to approximately 65 degrees each, revealing doorway; soft cyan star and warm windows. Keep frame fixed.\nSTATE 4: Doors partly open 25 degrees outward, warm amber star and windows. All building surfaces unchanged.\nMechanism note: 两扇门以外侧门轴铰接；正负角度以门轴局部坐标为准，双门向外打开。",
+  "layout": "top-left, top-right, bottom-left, bottom-right; same camera",
+  "states": [
+    {
+      "id": "closed",
+      "name": "闭站",
+      "file": "closed.png"
+    },
+    {
+      "id": "ready",
+      "name": "候客",
+      "file": "ready.png"
+    },
+    {
+      "id": "boarding",
+      "name": "开门迎接",
+      "file": "boarding.png"
+    },
+    {
+      "id": "closing",
+      "name": "缓慢关门",
+      "file": "closing.png"
+    }
+  ],
+  "review_note": "概念关键帧；具体角度、灯光强度和关节约束以motion.json为准，图像并非同一3D网格的精确渲染。"
+}

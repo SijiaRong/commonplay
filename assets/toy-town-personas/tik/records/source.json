@@ -1,0 +1,8 @@
+{
+  "id": "tik",
+  "taskId": "2cbf0120e832472c90b46638b1ddaaa4",
+  "modelPage": "https://www.hi3d.ai/3d-model/2cbf0120e832472c90b46638b1ddaaa4",
+  "points": 45,
+  "parameters": {"version":"v3.0","quality":"high_quality","pbr":true,"license":"private"},
+  "reference": "references/tik.png"
+}

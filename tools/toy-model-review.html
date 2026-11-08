@@ -1,0 +1,41 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><title>Toy model review</title>
+<script type="importmap">{"imports":{"three":"/teddy-playground/dist/slide/film/three.module.js"}}</script>
+<style>body{margin:0;background:#eee7da;font:16px system-ui;color:#3b453b}canvas{display:block}#labels{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;pointer-events:none}#labels span{padding:18px 24px}#status{position:absolute;right:20px;bottom:10px;font-size:12px}</style></head><body><div id="labels"><span>FRONT</span><span>BACK</span><span>SIDE</span><span>THREE-QUARTER</span></div><div id="status">Loading</div>
+<script type="module">
+import * as T from 'three';
+import {GLTFLoader} from '/teddy-playground/dist/vendor/GLTFLoader.js';
+const params=new URLSearchParams(location.search), url=params.get('model');
+const renderer=new T.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});
+renderer.setSize(1600,1000);renderer.setPixelRatio(1);renderer.toneMapping=T.AgXToneMapping;renderer.toneMappingExposure=1;
+renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;document.body.prepend(renderer.domElement);
+const scene=new T.Scene();scene.background=new T.Color('#eee7da');scene.add(new T.HemisphereLight(0xfff7e9,0x88918a,2.1));
+const key=new T.DirectionalLight(0xffedd2,3.3);key.position.set(3,5,4);key.castShadow=true;key.shadow.mapSize.set(1024,1024);key.shadow.camera.left=-2;key.shadow.camera.right=2;key.shadow.camera.top=2;key.shadow.camera.bottom=-2;key.shadow.normalBias=.02;scene.add(key);
+const fill=new T.DirectionalLight(0xd9e9ff,1.4);fill.position.set(-3,2,-2);scene.add(fill);
+const floor=new T.Mesh(new T.PlaneGeometry(200,200),new T.MeshStandardMaterial({color:0xeee7da,roughness:1}));floor.rotation.x=-Math.PI/2;floor.receiveShadow=true;scene.add(floor);
+const camera=new T.PerspectiveCamera(32,1.6,.01,100);
+const views=[[0,0,0,2.45],[800,0,0,-2.45],[0,500,2.45,0],[800,500,1.8,1.8]];
+try{
+  if(!url)throw Error('Pass ?model=/assets/...glb');
+  const gltf=await new GLTFLoader().loadAsync(url), model=gltf.scene;
+  model.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;o.frustumCulled=false}});
+  scene.add(model);let mixer=null;
+  const box=new T.Box3().setFromObject(model,true),size=box.getSize(new T.Vector3()),center=box.getCenter(new T.Vector3());
+  const scale=1/Math.max(size.y,size.x/1.65,size.z/1.65);model.scale.multiplyScalar(scale);model.position.addScaledVector(new T.Vector3(center.x,box.min.y,center.z),-scale);
+  function render(){
+    model.updateMatrixWorld(true);renderer.setScissorTest(true);
+    for(const [x,y,cx,cz] of views){
+      renderer.setViewport(x,500-y,800,500);renderer.setScissor(x,500-y,800,500);
+      camera.position.set(cx,.65,cz);camera.lookAt(0,size.y*scale*.49,0);renderer.render(scene,camera);
+    }
+    renderer.setScissorTest(false);
+  }
+  window.review={ready:true,animations:gltf.animations.map(a=>a.name),bounds:size.toArray(),
+    twoSided(){model.traverse(o=>{if(o.isMesh)for(const m of [o.material].flat()){m.side=T.DoubleSide;m.needsUpdate=true}});render()},
+    pose(name,time=0){
+      mixer?.stopAllAction();
+      if(name){mixer??=new T.AnimationMixer(model);const clip=gltf.animations.find(a=>a.name===name);if(!clip)throw Error('Missing '+name);mixer.clipAction(clip).play();mixer.setTime(time)}
+      render();
+    },render};
+  document.querySelector('#status').textContent=url+' · '+gltf.animations.length+' actions';render();
+}catch(e){window.review={error:String(e)};document.querySelector('#status').textContent=String(e);throw e}
+</script></body></html>

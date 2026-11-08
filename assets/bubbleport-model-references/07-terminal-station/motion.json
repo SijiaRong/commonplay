@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "id": "07-terminal-station",
+  "status": "designed_not_implemented",
+  "coordinate_system": "+Y up; +Z front; +X object right. Angles use local joint axes.",
+  "parts": [
+    "building_static",
+    "door_left",
+    "door_right",
+    "star_emblem_light",
+    "interior_light"
+  ],
+  "cycle_seconds": 12,
+  "playback": "event_driven_with_idle_loop",
+  "notes": "两扇门以外侧门轴铰接；正负角度以门轴局部坐标为准，双门向外打开。",
+  "states": [
+    {
+      "id": "closed",
+      "name": "闭站",
+      "illustration_cell": 0,
+      "parameters": {
+        "left_door_deg": 0,
+        "right_door_deg": 0,
+        "star": 0,
+        "inside": 0
+      },
+      "visual_description": "Both front doors closed, star emblem and indoor lights off.",
+      "image": "states/v1/closed.png"
+    },
+    {
+      "id": "ready",
+      "name": "候客",
+      "illustration_cell": 1,
+      "parameters": {
+        "left_door_deg": 0,
+        "right_door_deg": 0,
+        "star": 0.7,
+        "inside": 0.6
+      },
+      "visual_description": "Both doors closed, golden star lit and warm interior windows.",
+      "image": "states/v1/ready.png"
+    },
+    {
+      "id": "boarding",
+      "name": "开门迎接",
+      "illustration_cell": 2,
+      "parameters": {
+        "left_door_deg": 65,
+        "right_door_deg": -65,
+        "star": 1,
+        "inside": 0.8
+      },
+      "visual_description": "The same two front door leaves swing outward on their OUTER hinges to approximately 65 degrees each, revealing doorway; soft cyan star and warm windows. Keep frame fixed.",
+      "image": "states/v1/boarding.png"
+    },
+    {
+      "id": "closing",
+      "name": "缓慢关门",
+      "illustration_cell": 3,
+      "parameters": {
+        "left_door_deg": 25,
+        "right_door_deg": -25,
+        "star": 0.6,
+        "inside": 0.6
+      },
+      "visual_description": "Doors partly open 25 degrees outward, warm amber star and windows. All building surfaces unchanged.",
+      "image": "states/v1/closing.png"
+    }
+  ],
+  "reference_sheet": "states/v1/state-comparison.png",
+  "state_image_dir": "states/v1",
+  "interpolation": "smoothstep; lamps fade over 0.3-0.8 seconds",
+  "generation_policy": "生成3D使用baseline中性造型，动态状态仅用于灯光/关节/形变设定；不对各状态分别生成模型。",
+  "comparison_layout": [
+    "top_left",
+    "top_right",
+    "bottom_left",
+    "bottom_right"
+  ],
+  "reference_accuracy": "AI概念关键帧；角度与关节约束以参数为准，不是同一3D网格的精确渲染。",
+  "clip_preview": "目录页的关键帧轮播，不是骨骼动画或物理动画。",
+  "door_clip": {
+    "open_seconds": 1.2,
+    "hold_open_seconds": 3,
+    "close_seconds": 1.6,
+    "pivot": "each leaf outer vertical hinge",
+    "max_outward_angle_deg": 65,
+    "trigger": "visitor_arrival_or_finish_event"
+  }
+}

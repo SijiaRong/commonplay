@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "id": "05-glass-dome-pavilion",
+  "status": "designed_not_implemented",
+  "coordinate_system": "+Y up; +Z front; +X object right. Angles use local joint axes.",
+  "parts": [
+    "building_and_dome_static",
+    "telescope_yaw_mount",
+    "telescope_pitch_tube",
+    "dome_ring_light",
+    "window_lights"
+  ],
+  "cycle_seconds": 20,
+  "playback": "loop_with_off_state",
+  "notes": "外壳不动；内部望远镜使用水平转台和俯仰轴两个关节。",
+  "states": [
+    {
+      "id": "parked",
+      "name": "收泊·灯灭",
+      "illustration_cell": 0,
+      "parameters": {
+        "yaw_deg": 0,
+        "pitch_deg": 10,
+        "lights": 0
+      },
+      "visual_description": "Same glass dome stays completely fixed. Interior telescope yaw 0 degrees, elevation 10 degrees, all lamps off.",
+      "image": "states/v1/parked.png"
+    },
+    {
+      "id": "observe_low",
+      "name": "低空观测",
+      "illustration_cell": 1,
+      "parameters": {
+        "yaw_deg": 30,
+        "pitch_deg": 25,
+        "lights": 0.5,
+        "color": "#FFD198"
+      },
+      "visual_description": "Interior telescope yaw 30 degrees, elevation 25 degrees on its gimbal, warm dome-base ring light. Glass shell fixed.",
+      "image": "states/v1/observe_low.png"
+    },
+    {
+      "id": "observe_high",
+      "name": "高空观测",
+      "illustration_cell": 2,
+      "parameters": {
+        "yaw_deg": 60,
+        "pitch_deg": 55,
+        "lights": 0.7,
+        "color": "#8ADDDC"
+      },
+      "visual_description": "Telescope yaw 60 degrees, elevation 55 degrees, pale cyan dome-base ring and windows. Fixed dome with same ribs.",
+      "image": "states/v1/observe_high.png"
+    },
+    {
+      "id": "return",
+      "name": "回转扫描",
+      "illustration_cell": 3,
+      "parameters": {
+        "yaw_deg": -25,
+        "pitch_deg": 35,
+        "lights": 0.5,
+        "color": "#D7C0ED"
+      },
+      "visual_description": "Telescope yaw minus 25 degrees, elevation 35 degrees, soft lavender ring. Dome never opens or changes shape.",
+      "image": "states/v1/return.png"
+    }
+  ],
+  "reference_sheet": "states/v1/state-comparison.png",
+  "state_image_dir": "states/v1",
+  "interpolation": "smoothstep; lamps fade over 0.3-0.8 seconds",
+  "generation_policy": "生成3D使用baseline中性造型，动态状态仅用于灯光/关节/形变设定；不对各状态分别生成模型。",
+  "comparison_layout": [
+    "top_left",
+    "top_right",
+    "bottom_left",
+    "bottom_right"
+  ],
+  "reference_accuracy": "AI概念关键帧；角度与关节约束以参数为准，不是同一3D网格的精确渲染。",
+  "clip_preview": "目录页的关键帧轮播，不是骨骼动画或物理动画。"
+}

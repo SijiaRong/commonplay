@@ -1,0 +1,13 @@
+{
+  "taskId": "cdfbbecfb7a14d5e8a5e7cc4cf717c6b",
+  "modelPage": "https://www.hi3d.ai/3d-model/cdfbbecfb7a14d5e8a5e7cc4cf717c6b",
+  "points": 45,
+  "parameters": {
+    "version": "v3.0",
+    "quality": "high_quality",
+    "pbr": true,
+    "license": "private"
+  },
+  "reference": "../references/hi3d-input.jpg",
+  "prompt": "A single original toy: dark teal rubber gecko, four wide padded feet, lime green spirit level vial across its back, ivory nose and tail ticks. Match the supplied reference; complete full body, no ground or base."
+}

@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "id": "15-ornamental-tree",
+  "status": "designed_not_implemented",
+  "coordinate_system": "+Y up; +Z front; +X object right. Angles use local joint axes.",
+  "parts": [
+    "pot_and_roots_static",
+    "trunk_lower_static",
+    "branch_joints",
+    "leaf_cluster_deform"
+  ],
+  "cycle_seconds": 7,
+  "playback": "loop_with_off_state",
+  "notes": "盆、根和树干底部固定；枝梢与叶团使用分层风动。树叶不凭空增减。",
+  "states": [
+    {
+      "id": "calm",
+      "name": "无风",
+      "illustration_cell": 0,
+      "parameters": {
+        "branch_bend_deg": 0,
+        "leaf_bend_deg": 0
+      },
+      "visual_description": "Neutral upright tree, exact reference branches and foliage crowns.",
+      "image": "states/v1/calm.png"
+    },
+    {
+      "id": "gust_left",
+      "name": "左风阵",
+      "illustration_cell": 1,
+      "parameters": {
+        "branch_bend_deg": -4,
+        "leaf_bend_deg": -10
+      },
+      "visual_description": "Trunk base and pot remain still; upper branches bend gently to IMAGE LEFT and same leaf crowns lag slightly farther left.",
+      "image": "states/v1/gust_left.png"
+    },
+    {
+      "id": "gust_right",
+      "name": "右风阵",
+      "illustration_cell": 2,
+      "parameters": {
+        "branch_bend_deg": 4,
+        "leaf_bend_deg": 10
+      },
+      "visual_description": "Upper branches and leaf crowns lean gently to IMAGE RIGHT, same tree topology and leaves. Pot stationary.",
+      "image": "states/v1/gust_right.png"
+    },
+    {
+      "id": "settle",
+      "name": "余振",
+      "illustration_cell": 3,
+      "parameters": {
+        "branch_bend_deg": -1.5,
+        "leaf_bend_deg": 4
+      },
+      "visual_description": "Upper trunk nearly upright, branch tips show small returning bend with leaf crowns lagging opposite; same rooted silhouette.",
+      "image": "states/v1/settle.png"
+    }
+  ],
+  "reference_sheet": "states/v1/state-comparison.png",
+  "state_image_dir": "states/v1",
+  "interpolation": "smoothstep; lamps fade over 0.3-0.8 seconds",
+  "generation_policy": "生成3D使用baseline中性造型，动态状态仅用于灯光/关节/形变设定；不对各状态分别生成模型。",
+  "comparison_layout": [
+    "top_left",
+    "top_right",
+    "bottom_left",
+    "bottom_right"
+  ],
+  "reference_accuracy": "AI概念关键帧；角度与关节约束以参数为准，不是同一3D网格的精确渲染。",
+  "clip_preview": "目录页的关键帧轮播，不是骨骼动画或物理动画。",
+  "wind_clip": {
+    "period_seconds": 7,
+    "base_curve": "sin(2*pi*t/period)",
+    "secondary_curve": "0.2*sin(2*pi*t/(period*0.47)+phase)",
+    "root_weight": 0,
+    "tip_weight": 1,
+    "randomize_instance_phase": true,
+    "note": "花箱/花盆/根固定；主摆动与叶尖余振分层。"
+  }
+}

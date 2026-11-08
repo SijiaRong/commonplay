@@ -1,0 +1,30 @@
+{
+  "generator": "built-in image_gen",
+  "source_sheet": "/Users/cyberlingke/.codex/generated_images/01a1b93f-d38a-7260-a536-fa7db57c2a6b/exec-f2e798a8-df8c-469b-838d-400aac429b0f.png",
+  "input_reference": "../../reference-sheet.png",
+  "prompt": "Create a FOUR-STATE MOTION AND LIGHTING DESIGN COMPARISON SHEET of the single miniature toy asset in the provided reference. This is NOT a multi-camera turnaround: ALL FOUR CELLS MUST USE THE EXACT SAME front three-quarter CAMERA, same magnification, same perspective, same position on ground, identical static geometry and materials. Reference is a 4-view identity sheet; take its bottom-right three-quarter angle and repeat that angle in all four cells. Landscape 1536x1024-like 3:2 image, precisely equal 2x2 grid with generous white margins and fine light-gray divider lines at exact center. Top-left is state 1, top-right state 2, bottom-left state 3, bottom-right state 4. White neutral studio background and constant soft neutral studio illumination; lighting changes ONLY from specified miniature practical lights; never change overall exposure or backdrop to fake a state change. Closed full object silhouettes, no cropping. Ivory, mint, peach premium tabletop model craftsmanship. No track, environment, people, extra props, text, numbers, captions, arrows or watermark. No ghosting, no motion blur, no duplicate moving parts inside a cell. Preserve shape topology, counts and colors across all cells. Show different actual joint positions or light colors as specified, freezing time at each state; no deformation of rigid structures. Newly animated areas must stay physically supported. Each panel shows a single complete instance. Asset ID: 12-umbrella-table.\nSTATE 1: Canopy orientation 0 degrees about vertical umbrella pole.\nSTATE 2: ONLY striped umbrella canopy with its ribs rotates 22.5 degrees around the stationary vertical pole. Table and foot unchanged.\nSTATE 3: Same canopy rotates 45 degrees from initial orientation, alternating peach and cream panels shift visibly. Table stays fixed.\nSTATE 4: Same canopy rotates 67.5 degrees about pole, keep identical canopy shape and stripe count, no folding or tilting.\nMechanism note: 伞顶加入轴承式旋转的设计设定；不是暗示普通固定遮阳伞会持续自转。桌面、伞杆、底盘不转。",
+  "layout": "top-left, top-right, bottom-left, bottom-right; same camera",
+  "states": [
+    {
+      "id": "angle_0",
+      "name": "伞面0°",
+      "file": "angle_0.png"
+    },
+    {
+      "id": "angle_22",
+      "name": "伞面22.5°",
+      "file": "angle_22.png"
+    },
+    {
+      "id": "angle_45",
+      "name": "伞面45°",
+      "file": "angle_45.png"
+    },
+    {
+      "id": "angle_67",
+      "name": "伞面67.5°",
+      "file": "angle_67.png"
+    }
+  ],
+  "review_note": "概念关键帧；具体角度、灯光强度和关节约束以motion.json为准，图像并非同一3D网格的精确渲染。"
+}

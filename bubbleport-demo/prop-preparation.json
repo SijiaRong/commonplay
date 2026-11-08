@@ -1,0 +1,20 @@
+[
+  {
+    "key": "bumper",
+    "file": "obstacle-capsule.glb",
+    "sourceTriangles": 1968618,
+    "triangles": 12000,
+    "bytes": 471240,
+    "textureMax": 1024,
+    "purpose": "visual skin only; collision and pivots are original program geometry"
+  },
+  {
+    "key": "mallet",
+    "file": "mallet-head.glb",
+    "sourceTriangles": 1991236,
+    "triangles": 11999,
+    "bytes": 501808,
+    "textureMax": 1024,
+    "purpose": "visual skin only; collision and pivots are original program geometry"
+  }
+]

@@ -1,6 +1,6 @@
 import {enableRunnerHandling} from './runner-handling.js';
 // Keep the live controller, collisions and network snapshots while practicing on one fixed course.
-import {ShowSession} from '../.local/lost-marbles/public/shared/session.js';
+import {ShowSession} from '../teddy-playground/dist/solo/shared/session.js';
 import {randomInt} from 'node:crypto';
 
 export class PracticeSession extends ShowSession {

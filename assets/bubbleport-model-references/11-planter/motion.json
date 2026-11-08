@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "id": "11-planter",
+  "status": "designed_not_implemented",
+  "coordinate_system": "+Y up; +Z front; +X object right. Angles use local joint axes.",
+  "parts": [
+    "planter_static",
+    "shrub_roots_static",
+    "shrub_upper_wind_deform",
+    "flower_stems"
+  ],
+  "cycle_seconds": 5,
+  "playback": "loop_with_off_state",
+  "notes": "使用顶点权重或少量骨骼形变；根部权重为0，叶尖为1。不可将整株当刚体连花箱一起摇。",
+  "states": [
+    {
+      "id": "calm",
+      "name": "无风",
+      "illustration_cell": 0,
+      "parameters": {
+        "foliage_bend_deg": 0,
+        "flower_bend_deg": 0
+      },
+      "visual_description": "Leaves and flowers upright at neutral pose.",
+      "image": "states/v1/calm.png"
+    },
+    {
+      "id": "wind_left",
+      "name": "向左摆",
+      "illustration_cell": 1,
+      "parameters": {
+        "foliage_bend_deg": -8,
+        "flower_bend_deg": -12
+      },
+      "visual_description": "Only upper foliage and flower stems sway gently to IMAGE LEFT; roots stay anchored in same planter. No pot motion.",
+      "image": "states/v1/wind_left.png"
+    },
+    {
+      "id": "wind_right",
+      "name": "向右摆",
+      "illustration_cell": 2,
+      "parameters": {
+        "foliage_bend_deg": 8,
+        "flower_bend_deg": 12
+      },
+      "visual_description": "Same exact leaf clusters and flowers sway to IMAGE RIGHT with opposite gentle bend, no new leaves or flowers.",
+      "image": "states/v1/wind_right.png"
+    },
+    {
+      "id": "settle",
+      "name": "回弹",
+      "illustration_cell": 3,
+      "parameters": {
+        "foliage_bend_deg": -3,
+        "flower_bend_deg": 4
+      },
+      "visual_description": "Foliage returning near center with slight opposite lag in flexible flower stems. Pot and roots perfectly stationary.",
+      "image": "states/v1/settle.png"
+    }
+  ],
+  "reference_sheet": "states/v1/state-comparison.png",
+  "state_image_dir": "states/v1",
+  "interpolation": "smoothstep; lamps fade over 0.3-0.8 seconds",
+  "generation_policy": "生成3D使用baseline中性造型，动态状态仅用于灯光/关节/形变设定；不对各状态分别生成模型。",
+  "comparison_layout": [
+    "top_left",
+    "top_right",
+    "bottom_left",
+    "bottom_right"
+  ],
+  "reference_accuracy": "AI概念关键帧；角度与关节约束以参数为准，不是同一3D网格的精确渲染。",
+  "clip_preview": "目录页的关键帧轮播，不是骨骼动画或物理动画。",
+  "wind_clip": {
+    "period_seconds": 5,
+    "base_curve": "sin(2*pi*t/period)",
+    "secondary_curve": "0.2*sin(2*pi*t/(period*0.47)+phase)",
+    "root_weight": 0,
+    "tip_weight": 1,
+    "randomize_instance_phase": true,
+    "note": "花箱/花盆/根固定；主摆动与叶尖余振分层。"
+  }
+}
