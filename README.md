@@ -18,6 +18,7 @@ An open-source 3D two-player game project started at AI Hacker House. Research e
 - [按 3D 资源选型](docs/asset-driven-directions.zh-CN.md)：结合黑客松 3D 主题，比较现成场景、角色、动画与道具的可用性。
 - [Hi3D 半天原型方案](docs/half-day-hi3d-plan.zh-CN.md)：最新约束下的首选与备选、资源清单、时间安排和验收标准。
 - [Poki 双人试玩清单](docs/browser-playlist.zh-CN.md)：仅保留 Poki，合作与对战分别列出，注明 3D / 2D 与设备要求。
+- [Punchers 技术栈分析](docs/punchers-tech-analysis.zh-CN.md)：从实际加载配置确认引擎与 Web 构建，并区分物理实现推断与未知项。
 - 当前优先考虑易导入、少动画、简单碰撞的玩法；Hi3D 负责视觉资产，首版优先验证固定规则下的双人可玩闭环。
 - 优先验证一个能在 3–5 分钟内完整体验的双人核心循环。
 - 合作候选：非对称信息解谜、互补能力闯关、双人协调操作。
