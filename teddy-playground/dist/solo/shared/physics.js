@@ -159,8 +159,15 @@ function computeAABB(col) {
 }
 
 // Smooth 0..1..0 trapdoor curve: closed, opening, open, closing within one period.
+function dropPhase(m,t) {
+  return (((t+m.phase)%m.period)+m.period)%m.period/m.period;
+}
+export function dropWarning(m,t) {
+  const remaining=(m.closedFrac-dropPhase(m,t))*m.period;
+  return remaining>0?Math.max(0,1-remaining/2):0;
+}
 function dropAmount(m, t) {
-  const p = (((t + m.phase) % m.period) + m.period) % m.period / m.period;
+  const p = dropPhase(m,t);
   const o0 = m.closedFrac, o1 = m.closedFrac + 0.08, o2 = 1 - 0.08;
   if (p < o0) return 0;
   if (p < o1) return smooth((p - o0) / (o1 - o0));

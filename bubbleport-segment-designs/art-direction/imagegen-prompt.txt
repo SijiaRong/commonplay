@@ -1,0 +1,19 @@
+Use case: stylized-concept / sketch-to-render.
+Create ONE polished landscape art-direction concept image for Bubbleport, showing our THREE existing modular obstacle-course segments as three separate miniature dioramas side by side on a warm wooden studio tabletop. This is a material/detail and environmental polish pass over reviewed blockout geometry, not a new course layout.
+
+INPUT ROLES:
+Image 1: PRIMARY STYLE REFERENCE. Match its beautifully crafted physical miniature theme park, sophisticated cream/ivory painted resin, mint green, muted peach, warm amber shop windows, rounded toy engineering, brass fasteners, translucent acrylic, miniature greenery, warm realistic photographic lighting and tactile material detail.
+Image 2: GEOMETRY AND LAYOUT REFERENCE ONLY. Its left, middle, right are the exact THREE blockout modules to preserve. Ignore every UI frame, label, button and graphic. Do not match its flat gray lighting or low-detail cylinders.
+Image 3: EXISTING SODA CAFE IDENTITY REFERENCE. Use this same dome-shaped mint/ivory/peach soda kiosk as the left module's exterior decoration.
+
+COMPOSITION:
+One spacious cohesive product-photography image, three-quarter elevated camera, all three modules fully visible with their long axes receding into the image. LEFT straight flat module, CENTER descending slide, RIGHT 180-degree U-turn module. Each has its own neat miniature base and realistic piers; clearly separate modules, not connected into an invented giant track. Strong readable silhouettes and generous spacing. Fill the image with the models, realistic depth but no heavy blur on the courses. No triptych UI borders, no text or annotations.
+
+PRESERVE COURSE STRUCTURE:
+LEFT: an absolutely LEVEL straight ivory deck with mint rails; two low offset peach soda-can bumpers in the first half, then exactly TWO mint portal frames with two independently rising shutter lanes each in the second half, peach and mint shutters alternating heights, generous empty entry and exit; both outer bypass lanes remain clear. Upgrade portal housings into rounded toy ticket-control mechanisms with small colored signal lamps, brass trim and visible vertical guides. The domed soda cafe is outside the rails, never on the driving surface.
+CENTER: one broad straight-axis S-PROFILE DOWNHILL SLIDE, high flat entrance at the front, visibly smoothly descending into a low flat exit at the back; ivory continuous riding floor, mint trough sidewalls and peach rolled rims, high piers at the entrance and shorter piers at exit. Exactly TWO low offset rounded buoys on the slope, one peach and one mint. Two mint braking strips on the final flat landing. No jump, loop, staircase or missing deck. Small exterior soda reservoirs.
+RIGHT: a broad flat 180-degree U-shaped return bend, two straight connection tails next to each other at the front and the circular turnaround toward the back. Exactly TWO low peach rotating paddles on the INNER lane only. Outer mint-marked lane completely unobstructed. A peach translucent Saturn globe and brass orbit ring on a cream/mint cylindrical beacon in the inner courtyard, never obstructing the road.
+All decks are broad relative to their props, guardrails continuous, no forced gaps or inaccessible tracks.
+
+POLISH:
+Use the original reference's believable tiny mechanical assembly: soft molded edge radii, panel seams, restrained gold screws, translucent indicator lenses, hand-painted toy finish, warm shop lights, high-quality ambient occlusion and soft shadows. Miniature planters and lamps sparingly along the OUTSIDE of tracks. Road arrows are simple paint graphics without words. Do not add new obstacles, ferris wheels, new architecture on the road, characters, crowd, text, logos, title, watermark. Preserve level vs slope vs turn distinctions. This image is visual inspiration, not dimension verification.

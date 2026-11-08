@@ -1,0 +1,192 @@
+{
+  "schemaVersion": 1,
+  "source": "material-atlas/dist/original/bubbleport/materials.mjs",
+  "mode": "Runtime-equivalent scalar parameters plus shared procedural maps",
+  "materials": [
+    {
+      "id": "road",
+      "name": "象牙路面",
+      "en": "IVORY DECK",
+      "color": "#f4e8d1",
+      "desc": "抛光象牙树脂与平滑清漆，长条灯箱反射可辨。微纹理减弱，保持亮面而非提高曝光。",
+      "use": "主路面、滑梯底面、平台",
+      "params": {
+        "roughness": 0.16,
+        "metalness": 0,
+        "clearcoat": 1,
+        "clearcoatRoughness": 0.065
+      },
+      "materialClass": "MeshPhysicalMaterial",
+      "bump": {
+        "file": "textures/shared/road-grain-height.png",
+        "repeat": [
+          4,
+          4
+        ],
+        "bumpScale": 0.0012,
+        "colorSpace": "linear-data"
+      },
+      "roughnessMap": null
+    },
+    {
+      "id": "mint",
+      "name": "薄荷树脂",
+      "en": "MOLDED RESIN",
+      "color": "#8dc7ad",
+      "desc": "有厚度的模塑树脂，表面柔和反光，边缘保留一层清漆高光。",
+      "use": "护栏、导轨外壳、桥墩",
+      "params": {
+        "roughness": 0.29,
+        "metalness": 0,
+        "clearcoat": 0.48,
+        "clearcoatRoughness": 0.22
+      },
+      "materialClass": "MeshPhysicalMaterial",
+      "bump": null,
+      "roughnessMap": null
+    },
+    {
+      "id": "peach",
+      "name": "蜜桃软胶",
+      "en": "SOFT VINYL",
+      "color": "#eca18a",
+      "desc": "乳浊蜜桃软胶：柔和表面高光与受控背光散射。软垫演示受压与回弹；可分别关闭散射与形变。",
+      "use": "柱套、胶囊软垫、锤头包覆",
+      "params": {
+        "roughness": 0.39,
+        "metalness": 0,
+        "clearcoat": 0.025,
+        "clearcoatRoughness": 0.38,
+        "specularIntensity": 0.4,
+        "ior": 1.43
+      },
+      "materialClass": "MeshPhysicalMaterial",
+      "bump": null,
+      "roughnessMap": null
+    },
+    {
+      "id": "brass",
+      "name": "香槟黄铜",
+      "en": "CHAMPAGNE BRASS",
+      "color": "#d1ac68",
+      "desc": "暖色导体反射，明暗会随环境与视角变化。细微拉丝沿表面展开。",
+      "use": "转轴、螺帽、灯座、接头",
+      "params": {
+        "roughness": 0.26,
+        "metalness": 1,
+        "clearcoat": 0.08,
+        "clearcoatRoughness": 0.25
+      },
+      "materialClass": "MeshPhysicalMaterial",
+      "bump": {
+        "file": "textures/shared/metal-brush-microstructure.png",
+        "repeat": [
+          1,
+          2
+        ],
+        "bumpScale": 0.003,
+        "colorSpace": "linear-data"
+      },
+      "roughnessMap": {
+        "file": "textures/shared/metal-brush-microstructure.png",
+        "repeat": [
+          1,
+          2
+        ],
+        "colorSpace": "linear-data",
+        "multiplyBy": 0.26
+      }
+    },
+    {
+      "id": "silver",
+      "name": "拉丝铝",
+      "en": "BRUSHED ALUMINUM",
+      "color": "#c3cfce",
+      "desc": "中性的金属反射和较宽亮带，用于与黄铜及树脂直接比较。拉丝通过粗糙度和微弱凹凸表现。",
+      "use": "滑轨、活动杆、内侧衬板",
+      "params": {
+        "roughness": 0.34,
+        "metalness": 1,
+        "clearcoat": 0,
+        "clearcoatRoughness": 0.3
+      },
+      "materialClass": "MeshPhysicalMaterial",
+      "bump": {
+        "file": "textures/shared/metal-brush-microstructure.png",
+        "repeat": [
+          1,
+          2
+        ],
+        "bumpScale": 0.003,
+        "colorSpace": "linear-data"
+      },
+      "roughnessMap": {
+        "file": "textures/shared/metal-brush-microstructure.png",
+        "repeat": [
+          1,
+          2
+        ],
+        "colorSpace": "linear-data",
+        "multiplyBy": 0.34
+      }
+    },
+    {
+      "id": "acrylic",
+      "name": "薄荷亚克力",
+      "en": "TINTED ACRYLIC",
+      "color": "#d0efdf",
+      "desc": "有厚度的透色材料，利用透射、折射和吸收产生边缘色。底部与背后底纹用于检查透光。",
+      "use": "透明槽壁、灯罩、观测窗",
+      "params": {
+        "roughness": 0.09,
+        "metalness": 0,
+        "clearcoat": 1,
+        "clearcoatRoughness": 0.1,
+        "transmission": 0.94,
+        "thickness": 0.7,
+        "ior": 1.46,
+        "attenuationColor": "#4d9f89",
+        "attenuationDistance": 7
+      },
+      "materialClass": "MeshPhysicalMaterial",
+      "bump": null,
+      "roughnessMap": null
+    },
+    {
+      "id": "amber",
+      "name": "暖琥珀灯",
+      "en": "AMBER EMITTER",
+      "color": "#ffe3a1",
+      "desc": "暖色灯芯负责自发光；点光源负责照亮邻近表面；Bloom 负责镜头里的光晕。三层可单独检查。",
+      "use": "路灯、门架灯、栏边灯带",
+      "params": {
+        "roughness": 0.22,
+        "metalness": 0,
+        "clearcoat": 0.2,
+        "emissive": "#ffbb52",
+        "emissiveIntensity": 4
+      },
+      "materialClass": "MeshPhysicalMaterial",
+      "bump": null,
+      "roughnessMap": null
+    },
+    {
+      "id": "signal",
+      "name": "青绿指示灯",
+      "en": "MINT SIGNAL",
+      "color": "#bcf9e0",
+      "desc": "偏青的透亮指示色，与暖琥珀灯区分状态。发光强度保持局部，避免把薄荷壳体照成白色。",
+      "use": "门洞状态灯、路线引导灯",
+      "params": {
+        "roughness": 0.18,
+        "metalness": 0,
+        "clearcoat": 0.3,
+        "emissive": "#65efc6",
+        "emissiveIntensity": 3.2
+      },
+      "materialClass": "MeshPhysicalMaterial",
+      "bump": null,
+      "roughnessMap": null
+    }
+  ]
+}
