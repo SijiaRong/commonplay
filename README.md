@@ -6,6 +6,10 @@ An open-source 3D party racing and obstacle-course game project started at AI Ha
 
 Commonplay 是项目名称，主线游戏定名为《泡泡星港》。
 
+## 正式部署版本
+
+**泡泡星城**是原「小熊滑滑梯」的正式名称。阿里云测试服使用本仓库 `teddy-playground/` 下的游戏和派对服务器，发布入口为 [泡泡星城](https://actionl.ink/bubbleport/)。`bubbleport-demo/` 是独立的「泡泡星港」赛道原型。更新测试服时，请从 `teddy-playground/server/` 运行服务，并将入口及其 WebSocket 请求转发到同一服务。[服务器运行说明](teddy-playground/server/README.md)
+
 ## 当前状态
 
 截至 2026-11-08，已确认派对竞速闯关这一类型，已提供小熊滑梯、风港快递、泡泡星港和赛道实验室四个可运行原型。

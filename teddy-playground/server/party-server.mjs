@@ -1,4 +1,4 @@
-// 小熊滑滑梯 · 局域网派对服务器
+// 泡泡星城 · 局域网派对服务器
 // Serves teddy-playground/dist and runs points races for rooms of up to MAX_PLAYERS people (bots optional).
 //   npm install && npm start            → http://<this computer's LAN address>:4180
 //   PORT=4180 MAX_PLAYERS=4 npm start   (MAX_PLAYERS may go up to 16)
@@ -243,7 +243,7 @@ setInterval(()=>{for(const ws of wss.clients){if(!ws.isAlive){ws.terminate();con
 server.listen(PORT,process.env.HOST||'0.0.0.0',()=>{
   const port=server.address().port;
   const addresses=lanAddresses();
-  console.log(`${city ? "泡泡星港" : "小熊滑滑梯"}派对服务器已启动（每个房间最多 ${MAX_PLAYERS} 人，含机器人最多 ${MAX_FIELD} 名选手）`);
+  console.log(`${city ? "泡泡星港" : "泡泡星城"}派对服务器已启动（每个房间最多 ${MAX_PLAYERS} 人，含机器人最多 ${MAX_FIELD} 名选手）`);
   console.log(`  本机打开:   http://localhost:${port}`);
   for(const a of addresses)console.log(`  同一 Wi-Fi: http://${a}:${port}`);
 });

@@ -6,11 +6,11 @@ import {createRider} from './rider.js';
 import {restoreCourseMaterials} from './course-materials.js';
 
 const $=s=>document.querySelector(s);
-const go=$('#go'), launch=$('#launch'), meter=$('progress');
+const go=$('#go'), launch=$('#launch'), meter=$('#progress progress');
 const clamp=T.MathUtils.clamp, mix=T.MathUtils.lerp;
 const smooth=(rate,dt)=>1-Math.exp(-rate*dt);
 
-async function play(){
+export async function play(progress){
   const canvas=document.createElement('canvas');
   $('#world').append(canvas);
   const lite=matchMedia('(pointer: coarse)').matches;
@@ -32,6 +32,7 @@ async function play(){
   course.scene.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true}});
   await restoreCourseMaterials(course,renderer,{quality,lite});
   }
+  progress.value = 2;
   const definitions=catalog.characters;
   const defaultCharacter=definitions.find(c=>c.id==='teddy'&&c.ready);
   if(!defaultCharacter)throw Error('默认人物缺失');
@@ -49,6 +50,7 @@ async function play(){
     if(selected===defaultCharacter)throw error;
     selected=defaultCharacter;rider=createRider(await loader.loadAsync(selected.model),selected);
   }
+  progress.value = 3;
   let bear=rider.model, seatedOffset=rider.seatedOffset, seatedHeight=rider.seatedHeight;
   player.add(bear);
   let contact=createContactShadow(rider.shadowRadius);scene.add(contact);
@@ -271,4 +273,3 @@ async function play(){
     film.render(dt);
   });
 }
-play().catch(e=>{console.error(e);$('#result').textContent='赛道加载失败，请刷新重试。';go.textContent='重新加载';go.disabled=false;go.onclick=()=>location.reload()});
