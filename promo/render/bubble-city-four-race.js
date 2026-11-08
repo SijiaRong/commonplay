@@ -188,18 +188,28 @@ async function setup() {
     }
     if(shot.teaser) {
       const ease=t*t*(3-2*t);
-      if(shot.landmark && [2,3,5].includes(shot.stage)) {
-        // Saturn switchback, cannon fork and the final jump each have a different camera path.
-        const rigs={
-          2:[503, .25, .97, 82, 56, 1.30],
-          3:[226, -1.65, -2.1, 29, 20, .58],
-          5:[285, 2.85, 3.5, 46, 31, .83]
-        };
-        const [s,from,to,wide,tight,lift]=rigs[shot.stage],i=nearest(s);
-        const yaw=Math.atan2(path.tx[i],path.tz[i])+from+(to-from)*ease;
-        focus.set(path.x[i],path.y[i]+1.4,path.z[i]);
-        const radius=T.MathUtils.lerp(wide,tight,ease);
-        camera.position.copy(focus).add(new T.Vector3(Math.sin(yaw)*radius,lift*radius,Math.cos(yaw)*radius));
+      if(shot.landmark) {
+        // Begin above the whole route, then descend onto its signature obstacle.
+        const details=[
+          {s:117,yaw:.28,radius:27,lift:1.25}, // swinging hammers
+          {s:503,yaw:.97,radius:43,lift:1.3},  // Saturn switchback
+          {s:226,yaw:-1.90,radius:15,lift:.46}, // cannon barrel
+          {s:202,yaw:1.05,radius:31,lift:.92}, // stacked helix
+          {s:285,yaw:3.5,radius:25,lift:.83}   // final jump
+        ];
+        const detail=details[shot.stage-1],i=nearest(detail.s);
+        const close=new T.Vector3(path.x[i],path.y[i]+1.4,path.z[i]);
+        if(shot.stage===3) {
+          const cannon=show.stage.forks.find(fork=>fork.cannon).cannon;
+          close.set(...cannon.breech).addScaledVector(new T.Vector3(...cannon.d),3);
+        }
+        const push=T.MathUtils.smoothstep(t,.10,.92);
+        focus=shot.middle.clone().lerp(close,push);
+        const yaw=Math.atan2(path.tx[i],path.tz[i])+detail.yaw+.45*(1-push);
+        const wide=shot.courseSize*1.05;
+        const radius=wide*Math.pow(detail.radius/wide,push);
+        const height=T.MathUtils.lerp(1.30,detail.lift,push)*radius;
+        camera.position.copy(focus).add(new T.Vector3(Math.sin(yaw)*radius,height,Math.cos(yaw)*radius));
       }
       const zoom=shot.landmark ? .94+.24*ease : shot.cannon ? 1+.10*ease : .96+.13*ease;
       camera.zoom=zoom;camera.updateProjectionMatrix();

@@ -66,13 +66,19 @@ try {
     ending.style.cssText='position:fixed;inset:0;z-index:9999;display:grid;place-items:center;pointer-events:none';
     line.textContent='长大了，也要一起玩哦';
     line.style.cssText='color:#fff8e8;font:600 66px/1.4 "PingFang SC",sans-serif;letter-spacing:3px;text-shadow:0 2px 14px rgba(26,19,14,.45)';
-    ending.append(line);
+    const signature=document.createElement('div'),gameName=document.createElement('div');
+    signature.style.cssText='text-align:center;text-shadow:0 3px 16px rgba(26,19,14,.55)';
+    gameName.textContent='泡泡星港';
+    gameName.style.cssText='color:#fff8e8;font:750 79px/1.2 "PingFang SC",sans-serif;letter-spacing:6px;margin-bottom:17px';
+    line.style.fontSize='47px';
+    signature.append(gameName,line);ending.append(signature);
     window.drawEnding=frame=>{
       if(!ending.isConnected)document.querySelector('#world').append(ending);
       const ease=n=>{const t=Math.max(0,Math.min(1,n));return t*t*(3-2*t);};
       const blur=ease((frame-12)/34);
       ending.style.backdropFilter='blur('+14*blur+'px)';
       ending.style.backgroundColor='rgba(27,21,18,'+.35*blur+')';
+      gameName.style.opacity=String(ease((frame-23)/20));
       line.style.opacity=String(ease((frame-32)/18));
     };
     window.showCourseTitle=stage=>{
