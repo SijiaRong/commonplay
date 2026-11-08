@@ -2,7 +2,9 @@
 
 目标版本：2026-11-08 获取的公开交付脚本。这里分析常规随机比赛；Course Builder 的指定配方是另一条生成分支。
 
-本文仅供学习研究，不作商业用途。相关权利归各自权利人所有，如涉及版权问题，可通过 [GitHub Issues](https://github.com/SijiaRong/commonplay/issues) 联系删除。原始脚本及本地生成数据不随报告上传。
+本文仅供学习研究，不作商业用途。相关权利归各自权利人所有，如涉及版权问题，可通过 [GitHub Issues](https://github.com/SijiaRong/commonplay/issues) 联系删除。原始脚本及分析用结构数据保留在本地；研究渲染图已纳入报告。
+
+完整场景与机关外观可对照 [REA 逆向分析中的五关高清图](lost-marbles-rea-analysis.zh-CN.md#full-course-gallery)：包含五关同场全景，以及每关的完整路线俯视、斜向全景和三个机关特写。图片对应固定种子 `20261108`，用于结构分析。
 
 ## 1. 整体流程
 

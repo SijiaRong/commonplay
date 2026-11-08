@@ -2,6 +2,8 @@
 
 检查日期：2026-11-08。对象：[Lost Marbles 在线页面](https://meticulai.com/games/lost-marbles/)。基于页面 HTML 和公开加载的 JavaScript 源码；未取得服务端项目，也未进行完整多人实测。线上文件未固定到发布版本，未来可能变化。
 
+完整场景与机关外观可对照 [REA 逆向分析中的五关高清图](lost-marbles-rea-analysis.zh-CN.md#full-course-gallery)：包含五关同场全景，以及每关的完整路线俯视、斜向全景和三个机关特写。图片对应固定种子 `20261108`，用于结构分析。
+
 ## 核实结论
 
 | 层次 | 公开文件支持的结论 | 主要证据 |

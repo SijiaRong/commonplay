@@ -2,7 +2,7 @@
 
 分析日期：2026-11-08，Asia/Shanghai。目标：[Lost Marbles](https://meticulai.com/games/lost-marbles/)。
 
-> 本文仅供学习、研究和技术交流使用，不作商业用途。相关游戏、商标、源码及素材的权利归各自权利人所有。本文不授予第三方内容的使用许可，也不代表与原作者存在关联或获得其授权。如认为本文涉及版权或其他权利问题，请随时通过 [GitHub Issues](https://github.com/SijiaRong/commonplay/issues) 联系我们，我们将及时核实并删除相关内容。公开仓库仅包含分析文字，不包含下载的第三方游戏源码、素材和大型证据包；文中 `.local/` 链接仅在采集者本机可用。
+> 本文仅供学习、研究和技术交流使用，不作商业用途。相关游戏、商标、源码及素材的权利归各自权利人所有。本文不授予第三方内容的使用许可，也不代表与原作者存在关联或获得其授权。如认为本文涉及版权或其他权利问题，请随时通过 [GitHub Issues](https://github.com/SijiaRong/commonplay/issues) 联系我们，我们将及时核实并删除相关内容。本报告公开交付分析文字、研究渲染图和自编渲染脚本；本次采集的第三方游戏源码与大型证据包仍保留在忽略目录中。研究渲染图的来源与权利说明见[图库说明](../assets/lost-marbles/README.md)；文中 `.local/` 链接仅在采集者本机可用。
 
 结论：核心是原生 JavaScript ES Modules + Three.js r186 + 自研弹珠物理和比赛模拟。赛道及弹珠几何体主要由代码生成，画面结合摄影全景、扫描木纹、自定义玻璃着色器和移轴后处理。单机与联机复用共享模拟层。已经通过 REA 进行静态分析、物理/材质模块追踪和真实 Chrome 场景采集；这是一份实现分析与本地证据集，不是已经复刻完成的游戏。
 
@@ -16,6 +16,7 @@
 4. 对 `shared/physics.js` 和 `js/render/marbles.js` 分别运行 `trace-application-feature`，各保留 22 条追踪路径。
 5. REA 启动独立临时 Chrome，执行菜单就绪 → 点击 Solo → 首次帮助 → 关闭帮助 → 等待 30 秒，采集截图、可访问性、最终 DOM、网络和错误事件。浏览器由 REA 清理，结果为 `terminated-owned-process`。
 6. 在 Node.js 中运行已获取的共享逻辑，验证赛道种子、50 球模拟和协议编解码。该部分为额外行为探针，不是 REA 静态图推断。
+7. 使用同一采集版本的生成器与赛道渲染模块，为种子 `20261108` 导出五关同场全景，以及每关三张高清图。完整图片、机关图注和渲染边界见[第 3.3 节](#full-course-gallery)。
 
 **证据层级：** 下文标注的源码结论来自交付脚本；运行结果来自浏览器采集或本地探针；架构图和实现建议是基于这些证据的整理。
 
@@ -89,6 +90,110 @@ flowchart TD
 因此这些核心场景并没有一套可直接下载的 GLB/FBX 模型包。可以运行构建代码后导出几何，但普通模型格式不能完整带走自定义着色器、比赛逻辑和后处理。
 
 参考：[赛道生成](../.local/lost-marbles/public/shared/course.js)、[网格生成](../.local/lost-marbles/public/js/render/geometry.js)、[赛道显示](../.local/lost-marbles/public/js/render/courseView.js)。
+
+<a id="full-course-gallery"></a>
+
+### 3.3 五关完整路线与机关场景渲染
+
+以下图片由已采集的 `buildShow(20261108)`、`CourseView` 和原版材质模块在本地渲染，展示这一固定种子的五关赛道。每关三张 **3200 × 4000** 大图：完整路线俯视、斜向全景，以及带位置编号的机关特写。点击图片可查看原尺寸；也可打开[独立图库](../assets/lost-marbles/README.md)或下载仓库后打开[浏览索引](../assets/lost-marbles/index.html)。
+
+这些是为分析构图导出的静帧，机关统一停在关卡时间 `t = 2s`；没有运行完整五关比赛。俯视图中的 **S** 为起点、**F** 为检查点或终点；细节图左侧的 **1–3** 对应右侧三个机关特写。为便于辨认路线，分关图采用中性地面、关闭景深和游戏 HUD，未复用原版完整后处理链；它们与第 8 节的原站实玩截图属于不同证据。
+
+渲染时从关卡局部视觉描述重新计算房间位置，避免与碰撞体共享数组的加速带被平移两次；模块选择、岔路和机关布局仍来自原生成器。复现入口为[渲染脚本](../tools/render-lost-marbles.cjs)和[渲染页面](../tools/lost-marbles-gallery.html)，图片尺寸与视图类型见[清单](../assets/lost-marbles/manifest.json)。
+
+**五关同场 · 斜向全景**
+
+![种子 20261108 的五关赛道同场斜向全景](../assets/lost-marbles/full-overview.png)
+
+**五关同场 · 完整俯视**
+
+![五关赛道的空间分布与完整俯视](../assets/lost-marbles/full-top.png)
+
+**五关同场 · 房间环境**
+
+![五关赛道置于摄影房间全景中的研究渲染](../assets/lost-marbles/full-room.png)
+
+房间环境图同时展示摄影全景投影与程序化赛道的组合。高位全景构图会放大房间照片的投影变形；背景并非可自由探索的室内网格，相关实现见第 4.1 节。
+
+#### 第 1 关 · The Bookshelf Drop
+
+右侧起跑后进入鼓壁螺旋，经过第一组岔路再折返进入中间直道的半管滑槽，最终由左侧直道抵达检查点。细节编号：**1 鼓壁螺旋（The Drum）**、**2 三路岔道（碰撞柱／陷阱／平路）**、**3 半管滑槽（Half-pipe）**。
+
+**完整路线俯视图**
+
+![第 1 关 The Bookshelf Drop：完整路线俯视图](../assets/lost-marbles/stage-1-1-top.jpg)
+
+**斜向全景图**
+
+![第 1 关 The Bookshelf Drop：斜向全景图](../assets/lost-marbles/stage-1-2-overview.jpg)
+
+**完整路线与三个机关特写**
+
+![第 1 关 The Bookshelf Drop：完整路线与三个机关特写](../assets/lost-marbles/stage-1-3-details.jpg)
+
+#### 第 2 关 · Crayon Canyon
+
+起跑段以陡降连接钉阵与岔路；后续直道包含跳格平台、滚筒、活动琴键和回环分支，末段进入检查点漏斗。细节编号：**1 陡降（The Plunge）**、**2 活动琴键（Piano Keys）**、**3 检查点漏斗（The Bowl）**。
+
+**完整路线俯视图**
+
+![第 2 关 Crayon Canyon：完整路线俯视图](../assets/lost-marbles/stage-2-1-top.jpg)
+
+**斜向全景图**
+
+![第 2 关 Crayon Canyon：斜向全景图](../assets/lost-marbles/stage-2-2-overview.jpg)
+
+**完整路线与三个机关特写**
+
+![第 2 关 Crayon Canyon：完整路线与三个机关特写](../assets/lost-marbles/stage-2-3-details.jpg)
+
+#### 第 3 关 · Pillow Pass
+
+路线包含陷阱地板、跳格平台、回环／钉阵岔路、半管滑槽、弹射炮分支及侧置漩涡漏斗。细节编号：**1 回环／钉阵岔路**、**2 弹射炮／碰撞柱岔路**、**3 漩涡漏斗（Whirlpool）**。
+
+**完整路线俯视图**
+
+![第 3 关 Pillow Pass：完整路线俯视图](../assets/lost-marbles/stage-3-1-top.jpg)
+
+**斜向全景图**
+
+![第 3 关 Pillow Pass：斜向全景图](../assets/lost-marbles/stage-3-2-overview.jpg)
+
+**完整路线与三个机关特写**
+
+![第 3 关 Pillow Pass：完整路线与三个机关特写](../assets/lost-marbles/stage-3-3-details.jpg)
+
+#### 第 4 关 · Rug Rumble
+
+起跑段布置摆锤与回环分支，中段包含陡降、高低路和跷跷板，随后通过下降螺旋与侧置漩涡。细节编号：**1 摆锤（Hammers）**、**2 下降螺旋（Helix）**、**3 漩涡漏斗（Whirlpool）**。
+
+**完整路线俯视图**
+
+![第 4 关 Rug Rumble：完整路线俯视图](../assets/lost-marbles/stage-4-1-top.jpg)
+
+**斜向全景图**
+
+![第 4 关 Rug Rumble：斜向全景图](../assets/lost-marbles/stage-4-2-overview.jpg)
+
+**完整路线与三个机关特写**
+
+![第 4 关 Rug Rumble：完整路线与三个机关特写](../assets/lost-marbles/stage-4-3-details.jpg)
+
+#### 第 5 关 · Toy Box Finale
+
+最终关组合陡降、回环、活动琴键和滚筒；下降螺旋后进入大跳跃与多落点，末段通过高低路抵达终点漏斗。细节编号：**1 陡降（The Plunge）**、**2 大跳跃与落点（Mega Jump）**、**3 终点漏斗（Final Bowl）**。
+
+**完整路线俯视图**
+
+![第 5 关 Toy Box Finale：完整路线俯视图](../assets/lost-marbles/stage-5-1-top.jpg)
+
+**斜向全景图**
+
+![第 5 关 Toy Box Finale：斜向全景图](../assets/lost-marbles/stage-5-2-overview.jpg)
+
+**完整路线与三个机关特写**
+
+![第 5 关 Toy Box Finale：完整路线与三个机关特写](../assets/lost-marbles/stage-5-3-details.jpg)
 
 ## 4. 画面为什么有真实玩具感
 
@@ -216,6 +321,8 @@ flowchart TD
 | `runtime-resource-inventory.json` | 本次浏览器请求的逐项 URL、类型和响应状态 |
 | `probe.mjs` / `probe-results.json` | 本地行为探针及结果 |
 | `findings-summary.json` | 两类证据 ID、图统计、浏览器结果及追踪统计 |
+
+公开图片交付位于 [`assets/lost-marbles/`](../assets/lost-marbles/README.md)，共 3 张五关同场全景与 15 张分关大图；图片已纳入 Git，可直接在 GitHub 阅读本报告时查看。渲染脚本见 [`tools/render-lost-marbles.cjs`](../tools/render-lost-marbles.cjs)，依赖和复现步骤见[图库说明](../assets/lost-marbles/README.md)。
 
 静态父证据 ID：`ev_b18a28c0916130cee4bf2c188261d90efcba0d58d8e2144373f8118001ec8e4f`。
 
