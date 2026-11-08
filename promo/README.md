@@ -1,6 +1,29 @@
 # 宣传片：脚本、分镜与渲染
 
-## 泡泡星城实机版
+## 泡泡星城四人竞速版
+
+[播放 95 秒四人版](bubble-city/bubble-city-four-player.mp4) · [镜头表与渲染入口](render/bubble-city-four.mjs)
+
+前 15 秒以五个空镜展示五关赛道。接下来的 80 秒由缝线小熊、兜兜飞鼠 PIP、滴克 TIK 和雨衣小鸭阿扣同场出镜，最后在终点合影。比赛取景使用游戏多人模式的 `CityPartyShow`、当前布景、原版角色模型及骨骼动画。每个赛段开拍时安排四个起始位置，四路脚本输入分别控制跑动与跳跃。收尾调用游戏的终点挥手动作。全片为 1600 × 900、30 fps，配乐使用游戏内的《Orbital Sprint》。
+
+从仓库根目录启动服务，以便浏览器同时读取泡泡星城和共用的多人规则。另开终端执行取帧与编码命令。
+
+```sh
+python3 -m http.server 8771 --bind 127.0.0.1
+```
+
+```sh
+cd promo/render
+npm ci
+node bubble-city-four.mjs http://127.0.0.1:8771/bubblecity-teddy-slide/dist/ out/four-player
+ffmpeg -framerate 30 -i out/four-player/%04d.jpg \
+  -stream_loop -1 -i ../../bubblecity-teddy-slide/dist/music/orbital-sprint.m4a \
+  -map 0:v -map 1:a -t 95 -c:v libx264 -pix_fmt yuv420p -crf 19 \
+  -af "volume=0.78,afade=t=in:d=0.16,afade=t=out:st=93.4:d=1.6" \
+  -c:a aac -b:a 192k -movflags +faststart ../bubble-city/bubble-city-four-player.mp4
+```
+
+## 泡泡星城单人实机版
 
 [播放 95 秒动态宣传片](bubble-city/bubble-city-promo.mp4) · [动态取景脚本](render/bubble-city-motion.mjs)
 
