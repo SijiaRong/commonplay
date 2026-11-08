@@ -40,6 +40,39 @@ async function setup() {
     for(let i=1;i<p.n;i++)if(Math.abs(p.s[i]-s)<Math.abs(p.s[best]-s))best=i;
     return best;
   }
+  // Fit the two edges of the playable road in the actual widescreen frustum.
+  // Decorative meshes never enter the fit. Trim isolated tips at each screen edge.
+  function openingView(path, endYaw) {
+    const samples=[];
+    for(let i=0;i<path.n;i++)for(const side of [-1,1]){
+      const lane=side*path.hw[i];
+      samples.push(new T.Vector3(path.x[i]+path.tz[i]*lane,path.y[i],path.z[i]-path.tx[i]*lane));
+    }
+    const tanY=Math.tan(T.MathUtils.degToRad(camera.fov/2))/.94;
+    const tanX=tanY*camera.aspect;
+    const trimmed=(values,fraction)=>values.sort((a,b)=>a-b)[Math.floor((values.length-1)*fraction)];
+    let best;
+    for(let k=-5;k<=5;k++){
+      const yaw=endYaw+k*.29,pitch=1.02;
+      const back=new T.Vector3(Math.sin(yaw)*Math.cos(pitch),Math.sin(pitch),Math.cos(yaw)*Math.cos(pitch));
+      const right=new T.Vector3(Math.cos(yaw),0,-Math.sin(yaw));
+      const vertical=back.clone().cross(right);
+      const left=[],top=[],bottom=[],edge=[];
+      for(const q of samples){
+        const x=q.dot(right),y=q.dot(vertical),z=q.dot(back);
+        left.push(x-tanX*z);edge.push(x+tanX*z);
+        bottom.push(y-tanY*z);top.push(y+tanY*z);
+      }
+      const l=trimmed(left,.025),r=trimmed(edge,.975),b=trimmed(bottom,.025),u=trimmed(top,.975);
+      const target=shot.middle.clone();
+      target.addScaledVector(right,(l+r)/2-target.dot(right));
+      target.addScaledVector(vertical,(b+u)/2-target.dot(vertical));
+      const distance=Math.max((r-l)/(2*tanX),(u-b)/(2*tanY))-target.dot(back);
+      const score=distance*(1+.022*Math.abs(k));
+      if(!best||score<best.score)best={target,yaw,pitch,distance:distance*1.09,score};
+    }
+    return best;
+  }
   function begin(config) {
     shot=config;
     show.startStage(shot.stage-1);
@@ -203,12 +236,15 @@ async function setup() {
           const cannon=show.stage.forks.find(fork=>fork.cannon).cannon;
           close.set(...cannon.breech).addScaledVector(new T.Vector3(...cannon.d),3);
         }
-        const push=T.MathUtils.smoothstep(t,.10,.92);
-        focus=shot.middle.clone().lerp(close,push);
-        const yaw=Math.atan2(path.tx[i],path.tz[i])+detail.yaw+.45*(1-push);
-        const wide=shot.courseSize*1.05;
-        const radius=wide*Math.pow(detail.radius/wide,push);
-        const height=T.MathUtils.lerp(1.30,detail.lift,push)*radius;
+        const endYaw=Math.atan2(path.tx[i],path.tz[i])+detail.yaw;
+        shot.opening??=openingView(path,endYaw);
+        const start=shot.opening,push=T.MathUtils.smoothstep(t,.16,.90);
+        focus=start.target.clone().lerp(close,push);
+        const yaw=T.MathUtils.lerp(start.yaw,endYaw,push);
+        const wide=start.distance*Math.cos(start.pitch);
+        const endRadius=Math.max(detail.radius,wide*.38);
+        const radius=T.MathUtils.lerp(wide,endRadius,push);
+        const height=T.MathUtils.lerp(start.distance*Math.sin(start.pitch),detail.lift*endRadius,push);
         camera.position.copy(focus).add(new T.Vector3(Math.sin(yaw)*radius,height,Math.cos(yaw)*radius));
       }
       const zoom=shot.landmark ? .94+.24*ease : shot.cannon ? 1+.10*ease : .96+.13*ease;
