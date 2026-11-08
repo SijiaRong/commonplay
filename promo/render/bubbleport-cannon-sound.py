@@ -1,4 +1,4 @@
-"""Write a timed toy cannon thump for the 40-second edit."""
+"""Write a timed toy cannon thump for a promo edit."""
 import array
 import json
 import math
@@ -10,7 +10,8 @@ from pathlib import Path
 event = json.loads(Path(sys.argv[1]).read_text())
 rate = 48000
 start = round(event["frame"] * rate / event["fps"])
-samples = array.array("h", [0]) * (40 * rate)
+seconds = int(sys.argv[3]) if len(sys.argv) > 3 else 40
+samples = array.array("h", [0]) * (seconds * rate)
 noise = random.Random(47)
 phase = 0.0
 low = 0.0
