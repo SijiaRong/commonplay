@@ -44,10 +44,13 @@ for(const [humans,bots] of [[2,2],[1,MAX_FIELD-1]]){
   assert.equal(show.qualifiedCount,3);
   session.step();
   assert.equal(show.endAt,Infinity,'bots alone do not start the countdown');
+  show.phaseEnd=show.tick+2; // first finisher just before the original race deadline
   show.qualify(show.players[0]);
   session.step();
   assert.ok(Number.isFinite(show.endAt)&&show.endAt-show.tick>25*60,'a person finishing starts a 30 s countdown');
   assert.ok(session.snapshot(1).graceLeft>25);
+  session.step();
+  assert.equal(show.phase,'race','the original deadline does not cut the grace period short');
   show.qualify(show.players[1]);
   session.step();
   assert.ok(show.endAt-show.tick<=4*60,'once every person is in the stage wraps up');

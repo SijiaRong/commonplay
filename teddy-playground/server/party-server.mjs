@@ -15,7 +15,9 @@ import {PartySession,MAX_FIELD} from '../dist/solo/party.js';
 
 const root=fileURLToPath(new URL('../dist/',import.meta.url));
 const PORT=Number(process.env.PORT||4180);
-const MAX_PLAYERS=Math.max(1,Math.min(MAX_FIELD,Number(process.env.MAX_PLAYERS||4)));
+const configuredPlayers=Number(process.env.MAX_PLAYERS||4);
+if(!Number.isInteger(configuredPlayers))throw new Error('MAX_PLAYERS must be an integer');
+const MAX_PLAYERS=Math.max(1,Math.min(MAX_FIELD,configuredPlayers));
 const PUBLISH_EVERY=2; // ticks between state messages: 30 per second
 const RECONNECT_GRACE=90e3; // ms a dropped racer keeps their seat
 const catalog=JSON.parse(readFileSync(resolve(root,'slide/characters.json'),'utf8')).characters;
@@ -50,8 +52,11 @@ function newCode(){
     if(!rooms.has(code))return code;
   }
 }
-const send=(ws,message)=>{if(ws?.readyState===WebSocket.OPEN)ws.send(typeof message==='string'?message:JSON.stringify(message))};
-const cleanName=value=>String(value??'').replace(/[\u0000-\u001f<>]/g,'').trim().slice(0,12);
+const encodeCourse=(_key,value)=>ArrayBuffer.isView(value)?Array.from(value):value;
+function send(ws,message){
+  if(ws?.readyState===WebSocket.OPEN)ws.send(JSON.stringify(message,message.type==='course'?encodeCourse:undefined));
+}
+const cleanName=value=>(typeof value==='string'?value:'').replace(/[\u0000-\u001f<>]/g,'').trim().slice(0,12);
 
 class Room{
   constructor(){
@@ -156,7 +161,7 @@ class Room{
       for(const m of this.members)this.sendRace(m);
       clearInterval(this.timer);this.timer=null;
       this.lastResults={type:'results',board:session.snapshot(-1).board,roster:session.roster()};
-      for(const m of this.members){
+      for(const m of [...this.members]){
         send(m.ws,this.lastResults);
         // Dropped racers who never came back leave once the race is over.
         if(!m.ws)this.remove(m);
@@ -179,32 +184,28 @@ class Room{
 // ------------------------------------------------------------------ sockets
 
 const wss=new WebSocketServer({server,path:'/party',maxPayload:4096,
-  verifyClient:({origin,req})=>!origin||new URL(origin).host===req.headers.host});
-const encodeCourse=(_key,value)=>ArrayBuffer.isView(value)?Array.from(value):value;
-wss.on('connection',(ws,req)=>{if(process.env.DEBUG)console.log('ws connect',req.headers.origin,req.socket.remoteAddress);
-  const rawSend=ws.send.bind(ws);
-  ws.send=(data,...rest)=>rawSend(typeof data==='string'?data:JSON.stringify(data,encodeCourse),...rest);
+  verifyClient:({origin,req})=>origin===undefined||origin==='http://'+req.headers.host||origin==='https://'+req.headers.host});
+wss.on('connection',(ws)=>{
   let room=null,member=null;
   ws.isAlive=true;
   ws.on('pong',()=>{ws.isAlive=true});
   ws.on('error',()=>ws.terminate());
   ws.on('message',bytes=>{
-    if(process.env.DEBUG)console.log('ws msg',String(bytes).slice(0,80));
     let m;try{m=JSON.parse(bytes)}catch{ws.close(1003,'无效消息');return}
     if(!m||typeof m!=='object')return;
     if(m.type==='join'){
       if(member)return;
-      const code=String(m.room||'').toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,4);
+      const code=(typeof m.room==='string'?m.room:'').toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,4);
       let target=code?rooms.get(code):new Room();
       if(!target){send(ws,{type:'error',message:'找不到房间 '+code+'，请检查房间码'});return}
-      const result=target.add(ws,{name:cleanName(m.name),character:String(m.character||''),token:typeof m.token==='string'?m.token:null});
+      const result=target.add(ws,{name:cleanName(m.name),character:m.character,token:typeof m.token==='string'?m.token:null});
       if(result.error){send(ws,{type:'error',message:result.error});if(!target.members.length)target.close();return}
       room=target;member=result.member;return;
     }
     if(!member||member.ws!==ws)return;
     switch(m.type){
       case 'input':
-        if(room.inGame&&member.seat>=0)room.session.controls(member.seat,+m.x,+m.z,m.btn|0);
+        if(room.inGame&&member.seat>=0)room.session.controls(member.seat,m.x,m.z,Number.isInteger(m.btn)?m.btn:0);
         break;
       case 'profile':
         if(room.inGame)break;
@@ -213,7 +214,7 @@ wss.on('connection',(ws,req)=>{if(process.env.DEBUG)console.log('ws connect',req
         room.broadcastLobby();
         break;
       case 'bots':
-        if(member!==room.host||room.inGame)break;
+        if(member!==room.host||room.inGame||!Number.isInteger(m.count))break;
         room.bots=Math.max(0,Math.min(MAX_FIELD-room.members.length,m.count|0));
         room.broadcastLobby();
         break;
@@ -233,8 +234,9 @@ wss.on('connection',(ws,req)=>{if(process.env.DEBUG)console.log('ws connect',req
 setInterval(()=>{for(const ws of wss.clients){if(!ws.isAlive){ws.terminate();continue}ws.isAlive=false;ws.ping()}},10e3);
 
 server.listen(PORT,'0.0.0.0',()=>{
+  const port=server.address().port;
   const addresses=Object.values(networkInterfaces()).flat().filter(a=>a&&a.family==='IPv4'&&!a.internal).map(a=>a.address);
   console.log(`小熊滑滑梯派对服务器已启动（每个房间最多 ${MAX_PLAYERS} 人，含机器人最多 ${MAX_FIELD} 名选手）`);
-  console.log(`  本机打开:   http://localhost:${PORT}`);
-  for(const a of addresses)console.log(`  同一 Wi-Fi: http://${a}:${PORT}`);
+  console.log(`  本机打开:   http://localhost:${port}`);
+  for(const a of addresses)console.log(`  同一 Wi-Fi: http://${a}:${port}`);
 });

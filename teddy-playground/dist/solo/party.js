@@ -99,7 +99,7 @@ class PartyShow extends Show {
     if (peopleIn && this.endAt === Infinity && !this.untimed) this.endAt = this.tick + STAGE_GRACE / TICK_DT;
     if (people.length && peopleIn === people.length) this.endAt = Math.min(this.endAt, this.tick + SETTLE / TICK_DT);
     const allIn = this.players.every(p => p.finishOrder >= 0);
-    if (allIn || this.tick >= this.endAt || this.tick >= this.phaseEnd) this.scoreStage();
+    if (allIn || this.tick >= (Number.isFinite(this.endAt) ? this.endAt : this.phaseEnd)) this.scoreStage();
   }
 
   scoreStage() {
@@ -324,12 +324,11 @@ export class PartySession {
     };
     const me = s.players[you];
     if (me) {
-      const spawn = slotsFor(s, stage, you);
       state.you = you;
       state.ability = me.st.active?.id || '';
       state.awarded = s.phase === 'draft' && me.draft ? [me.draft.options[me.draft.picked]] :
         stage.index === 0 && s.phase === 'intro' ? this.starters[you] || null : null;
-      if (!started) [state.spawnX, state.spawnY, state.spawnZ] = spawn;
+      if (!started) [state.spawnX, state.spawnY, state.spawnZ] = slotsFor(s, stage, you);
     }
     return state;
   }

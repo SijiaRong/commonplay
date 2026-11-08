@@ -241,7 +241,7 @@ export async function startSolo(host){
     if(!partyEndpoint||joining)return;
     // Keep the current scene as a backdrop until the room's first race arrives.
     joining=true;link?.terminate();mode='party';room=null;results=null;held.clear();
-    clearRemotes();roster=[];you=0;
+    rosterToken++;clearRemotes();roster=[];you=0;
     setNotice(code?'正在加入房间 '+code+'…':'正在创建房间…');
     const token=code&&sessionStore.get('commonplay-room-code')===code?sessionStore.get('commonplay-room-token'):null;
     link=openParty(partyEndpoint,{type:'join',room:code,name:nameInput.value,character:host.character(),token});
@@ -251,8 +251,10 @@ export async function startSolo(host){
       if(mode!=='party')return;
       setNotice(error.message||'与房间的连接已断开');
       // A dropped phone (screen lock, Wi-Fi hop) rejoins its seat automatically.
-      const again=sessionStore.get('commonplay-room-code');
-      if(again&&!error.final)setTimeout(()=>{if(mode==='party'&&link?.closed)joinRoom(again)},1500);
+      const again=room?.code||code;
+      if(!again||error.final){leaveRoom(false);return}
+      const dropped=link;
+      setTimeout(()=>{if(link===dropped&&dropped.closed)joinRoom(again)},1500);
     };
   }
   function leaveRoom(tell=true){
