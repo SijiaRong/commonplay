@@ -1,0 +1,72 @@
+/* The HUD uses a clear lens. Text carries its own contrast over the live scene. */
+:root {
+  --rim: inset 0 1px 1px #ffffffe0, inset 0 -2px 3px #caffdf66,
+         inset 2px 0 3px #ffffff38, 0 4px 12px #10241838;
+  --letter-shadow: 0 1px 2px #17251b, 0 0 4px #17251b, 0 1px 8px #17251b99;
+  --accent: #c3ffdf;
+}
+body { font-family: "DM Sans", "Helvetica Neue", "PingFang SC", system-ui, sans-serif; }
+body :is(.glass, #appearance, #character-picker, #gate-countdown, #starter-reveal, #result:where(:not(:empty)), .character-summary>span, .pad button) {
+  background: transparent;
+  color: #fffdf5;
+  border: 1px solid #ffffff80;
+  box-shadow: var(--rim);
+  text-shadow: var(--letter-shadow);
+  -webkit-backdrop-filter: blur(0);
+  backdrop-filter: var(--lens, blur(0px));
+}
+body :is(.logo,.brand.glass) {
+  transform: none; border-radius: 18px; padding: 8px 13px 8px 8px;
+}
+body :is(.logo i,.planet,.patch) {
+  color: #184b36; background: var(--accent); text-shadow: none;
+  border: 0; outline: 0; transform: none; border-radius: 12px;
+}
+body :is(nav button, nav a, .character-card, #appearance button, .play-hud button, .segmented button, .course-tabs button) {
+  color: inherit; text-shadow: inherit; font-weight: 650;
+}
+body :is(nav a,nav button) { text-decoration: none; border: 0; border-radius: 22px; background: transparent; padding: 8px 10px; }
+body nav.glass { padding: 4px; border-radius: 28px; }
+body kbd,body .character-state { background: #203e2d5c; color: white; border-color: #fff8; }
+body progress::-webkit-progress-bar { background: #19362e88; }
+body progress::-webkit-progress-value { background: var(--accent); }
+body progress::-moz-progress-bar { background: var(--accent); }
+body :is(#appearance,#character-picker) { background-color: #19392c57; }
+body :is(#appearance,#character-picker)::backdrop { background: #142b2055; backdrop-filter: blur(2px); }
+body #appearance button, body .character-card, body #close-character-picker { background: #1b39284d; border: 1px solid #fffa; color: white; text-shadow: var(--letter-shadow); }
+body .character-card:disabled:not([aria-pressed=true]) { background: #23382f44; color: #ddd; }
+body .character-card[aria-pressed=true], body #appearance button[aria-pressed=true] { background: #347e5c99; box-shadow: inset 0 0 0 2px var(--accent); }
+body #appearance input { accent-color: #86e7b2; }
+body #starter-reveal li { background: #183c2e4d; }
+body .character-summary>span,body #choose-character { padding: 7px 12px; }
+body .readout { padding: 7px 13px; border-radius: 20px; }
+body :is(#go,#leap,.mint-action,.pad button) {
+  --shine: 24%;
+  background:
+    radial-gradient(ellipse at var(--shine) 0%,#fff9,transparent 32%) top / 100% 9px no-repeat,
+    radial-gradient(ellipse at 62% 106%,#98ffd4c4,transparent 65%) bottom / 100% 10px no-repeat,
+    linear-gradient(174deg,#b2ffd471,#7af1b12e 32%,#14473150 66%,#30bf8895);
+  color: #fffdf7; text-shadow: var(--letter-shadow); font-weight: 750;
+  border: 1px solid #ceffe3ce; border-radius: 30px;
+  box-shadow: inset 1px 2px 2px #f2fff0ce,inset -2px -3px 3px #79f6c4ce,
+              inset 0 -5px 5px #06715088,0 3px 4px #12382866,0 7px 13px #123b2d44;
+}
+body :is(button,a):focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+@media (prefers-reduced-motion: no-preference) {
+  body :is(button,nav a) { transition: transform .19s cubic-bezier(.2,.85,.22,1.18),box-shadow .19s; }
+  @media (hover:hover) { body button:enabled:hover,body nav a:hover { transform: translateY(-1px); } }
+  body :is(#go,#leap,.mint-action,.pad button):enabled:active { transform: translateY(1px) scale(1.035,.93); }
+}
+body .station { background-color: #152e232e; max-height: calc(100dvh - 130px); overflow-y: auto; }
+.station h1 { font: 800 clamp(32px,3.2vw,51px)/1.12 "DM Sans","PingFang SC",sans-serif; letter-spacing: -.055em; }
+.station h1 span,.station .eyebrow { color: var(--accent); }
+.station .eyebrow,.station button span { opacity: 1; }
+body .station :is(.keys,.width-box p,.width-box strong,.width-box>div:first-child,.width-box strong small),body .finish-card p { color: inherit; }
+body :is(.course-tabs button,.segmented,.play-hud button) { background: #19382e45; border: 1px solid #ffffff65; }
+body :is(.course-tabs button.selected,.segmented button.selected) { background: #a9f6c843; color: white; box-shadow: inset 0 0 0 1px #bdffdc; }
+body :is(.header-right,.live,footer) { color: white; text-shadow: var(--letter-shadow); }
+@media(max-width:760px) { body .playing .station { max-height: calc(100dvh - 260px); } }
+@media(max-height:520px) { body .station { max-height: calc(100dvh - 115px); } }
+@media (max-width:760px) and (pointer:coarse) {
+  .playing .route-note { display: none; }
+}

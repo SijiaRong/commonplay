@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>关卡材质编辑器 · 泡泡星城</title><link rel="icon" href="../bubble-city-icon.png"><link rel="stylesheet" href="./style.css">
+<script type="importmap">{"imports":{"three":"../slide/film/three.module.js","three/addons/":"../slide/film/addons/"}}</script></head>
+<body><main><canvas aria-label="关卡预览，拖动旋转，滚轮缩放，点击选择组件"></canvas>
+<header><img src="../bubble-city-logo.png" width="40" height="40" alt=""><div><small>BUBBLE CITY</small><h1>泡泡星城</h1></div></header>
+<div id="views"><button id="overview">关卡全景</button><button id="section-view">赛段近景</button></div>
+<output id="loading" role="status">正在装配关卡…</output></main>
+<aside><div class="title"><h2>关卡材质编辑器</h2><a id="play" href="../">返回试玩 ↗</a></div>
+<form id="controls"><fieldset><legend>场景选择</legend>
+<label>关卡<select id="stage"></select></label>
+<label>赛段<select id="zone"></select></label>
+<label>组件<select id="part"></select></label>
+<label id="slots" hidden>材质槽<select id="slot"></select></label>
+<button id="focus-part" type="button">聚焦组件</button></fieldset>
+<fieldset><legend>表面材质</legend>
+<label>预设<select id="preset" aria-describedby="layer-note"></select></label>
+<p id="layer-note" hidden></p>
+<label class="row">基色<input type="color" id="tint"></label>
+<label>粗糙度 <output id="rough-value"></output><input id="rough" type="range" min="0" max="1" step=".01"></label>
+<label>金属度 <output id="metal-value"></output><input id="metal" type="range" min="0" max="1" step=".01"></label>
+<div class="row"><button type="button" id="revert">还原此材质</button><output id="saved" role="status"></output></div></fieldset><fieldset><legend>场景环境</legend>
+<div id="environment"></div><button type="button" id="reset-environment">恢复试玩默认环境</button>
+</fieldset></form>
+</aside><script type="module" src="./scene.js"></script></body></html>

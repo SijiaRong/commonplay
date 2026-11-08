@@ -1,0 +1,1080 @@
+[
+  {
+    "file": "commonplay/bubbleport/obstacles/original/bumper-raw.glb",
+    "bytes": 47100816,
+    "sha256": "bc2065ac774eb3bc4d3b96d83ea89a6d06e4d78f1374781499b689160086e878",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/bubbleport-props/bumper-raw.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/obstacles/original/mallet-raw.glb",
+    "bytes": 47872056,
+    "sha256": "7747fc0ab90c7e23ea77d0c5ca02e8966e9de308e91fcfeabc27fc29ad2b771e",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/bubbleport-props/mallet-raw.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/obstacles/runtime/mallet-head.glb",
+    "bytes": 501808,
+    "sha256": "9265a563edd884b17d5b542f57a69d24341bc40dee8fe266000bc636514e3428",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/bubbleport-site/dist/assets/mallet-head.glb",
+      ".local/teddy-track-lab-site/dist/assets/mallet-head.glb",
+      "bubbleport-demo/dist/assets/mallet-head.glb",
+      "teddy-track-lab/dist/assets/mallet-head.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/obstacles/runtime/obstacle-capsule.glb",
+    "bytes": 471240,
+    "sha256": "e073fdb1e36438cce362e6202971a24b568dfbdf8f7dd0a55870d0412321c67f",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/bubbleport-site/dist/assets/obstacle-capsule.glb",
+      ".local/teddy-track-lab-site/dist/assets/obstacle-capsule.glb",
+      "bubbleport-demo/dist/assets/obstacle-capsule.glb",
+      "teddy-track-lab/dist/assets/obstacle-capsule.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/obstacles/runtime/starport-sliding-gate.glb",
+    "bytes": 1198848,
+    "sha256": "25593c16912af69fcc6cb9a566003061f34b60f12502216ed1c2937cf005ea53",
+    "meshes": 18,
+    "materials": 6,
+    "sources": [
+      "bubbleport-segment-designs/models/sliding-gate-source.mjs"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/scenery/original/01-saturn-landmark.glb",
+    "bytes": 47822400,
+    "sha256": "751f5a13951853ed4bcd31315ac0a565438550456bac4576225789beea49ed52",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/bubbleport-scenery/01-saturn-landmark.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/scenery/original/02-ferris-wheel.glb",
+    "bytes": 47925064,
+    "sha256": "b6077a5d50ad98fb0d05c6cb80d5ac3d8e1caafc5ebb116e0e45c5310a0104f6",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/bubbleport-scenery/02-ferris-wheel.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/scenery/original/03-soda-cafe.glb",
+    "bytes": 48088528,
+    "sha256": "407bb8afa3dcc452279476382bf14875a6242542b4f7fa506d6e6d3f630ff3f5",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/bubbleport-scenery/03-soda-cafe.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/scenery/original/04-moon-observatory.glb",
+    "bytes": 49552384,
+    "sha256": "9f35b9e53bc4e18136681bf896d1f747db926f61642a14f47b80b4d135762fb3",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/bubbleport-scenery/04-moon-observatory.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/scenery/original/05-glass-dome-pavilion.glb",
+    "bytes": 48251456,
+    "sha256": "385cd7f2552d787f227b58b9da2eb801f04c4b894f999d990dc2b33d872f4acd",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/bubbleport-scenery/05-glass-dome-pavilion.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/scenery/original/06-curved-shop.glb",
+    "bytes": 48318892,
+    "sha256": "cbe4301a05d3d0d61dd290a2ca9fd169a01ccbfacdc67a09ada778c4b499f57c",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/bubbleport-scenery/06-curved-shop.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/scenery/original/07-terminal-station.glb",
+    "bytes": 47829892,
+    "sha256": "037a6a22ddd9c0880f355738e31adf6cac1354ac02bcf2972f959b09f3b16cfb",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/bubbleport-scenery/07-terminal-station.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/scenery/original/08-service-robot.glb",
+    "bytes": 47913244,
+    "sha256": "08e6e9ab1184747189e94901a26915c549df120307817a6a882310b6cac50e92",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/bubbleport-scenery/08-service-robot.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/scenery/original/09-bench.glb",
+    "bytes": 47244380,
+    "sha256": "6ea8299ebb391c266cc1d2a6924ccb8aa18939888b12da8f390f42939af2d1af",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/bubbleport-scenery/09-bench.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/scenery/original/10-lamp.glb",
+    "bytes": 43419548,
+    "sha256": "0e0cfb97be054f331de13d5594a27ea3d4d5105c706f3d8fd7756e8f34975580",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/bubbleport-scenery/10-lamp.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/scenery/original/11-planter.glb",
+    "bytes": 48238912,
+    "sha256": "3a7f721484eb862d1bfc33842706c1e0086e1519ceecc96d05deb017993809dd",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/bubbleport-scenery/11-planter.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/scenery/original/12-umbrella-table.glb",
+    "bytes": 47583684,
+    "sha256": "22d3afd86ca8d9de31bccd4dc425dbb3b234f9cef9727cbcd1a9b52c803728cc",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/bubbleport-scenery/12-umbrella-table.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/scenery/original/13-cafe-chair.glb",
+    "bytes": 48294804,
+    "sha256": "ac2fcc056671143c14a316dccb43d32aa0c26c239e7b63690ac7f9e1c9b94aa0",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/bubbleport-scenery/13-cafe-chair.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/scenery/original/14-rocket-gantry.glb",
+    "bytes": 48045716,
+    "sha256": "b631761873380564d3b3973dd727b5e8582de2dfa472a6f5f5ffb6a9bb181d13",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/bubbleport-scenery/14-rocket-gantry.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/scenery/original/15-ornamental-tree.glb",
+    "bytes": 49031372,
+    "sha256": "5b043662835f623247e32fbdd95a8c08af73fe4aecc6f8b0a5dda91c3caafc80",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/bubbleport-scenery/15-ornamental-tree.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/scenery/original/16-plaza-railing.glb",
+    "bytes": 47049372,
+    "sha256": "e19af38bf2bfc164d9ce2b5940447657586a87f3864ac0dda18505d2350fff7b",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/bubbleport-scenery/16-plaza-railing.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/scenery/runtime/01-saturn-landmark.glb",
+    "bytes": 547324,
+    "sha256": "de9d9c7d336ee225e610baa993c64d191a84257bbc4134fd6b263b87d0108f73",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "bubbleport-circuit/models/01-saturn-landmark.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/scenery/runtime/02-ferris-wheel.glb",
+    "bytes": 561904,
+    "sha256": "40c75075326e4a1d4d2e9b1d282751fb8103530fcbb70b21afd325a3caacd52a",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "bubbleport-circuit/models/02-ferris-wheel.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/scenery/runtime/03-soda-cafe.glb",
+    "bytes": 613356,
+    "sha256": "fc67e7657da6c1abe3baac36c790fc2fa6de1e9d2ff497b2e15d7d09d0af2537",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "bubbleport-circuit/models/03-soda-cafe.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/scenery/runtime/04-moon-observatory.glb",
+    "bytes": 4990052,
+    "sha256": "c24f4c34dc182239911abe849347975cbfbbf5988c7c13fd1f229a4bbf54007a",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "bubbleport-circuit/models/04-moon-observatory.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/scenery/runtime/05-glass-dome-pavilion.glb",
+    "bytes": 622596,
+    "sha256": "ea46b5dea7455cfc8fda78bc0755c957976cfd17df86d09e1d1f9364808a8f3c",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "bubbleport-circuit/models/05-glass-dome-pavilion.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/scenery/runtime/06-curved-shop.glb",
+    "bytes": 596480,
+    "sha256": "5963367325f6fb3ba55f9f8f07a65dc08e2241f0e75788b1ca30149a473017e2",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "bubbleport-circuit/models/06-curved-shop.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/scenery/runtime/07-terminal-station.glb",
+    "bytes": 603808,
+    "sha256": "7c96746edaa949ccb4da14e5a3a63830de2d258612306a94ec48284c4fa6f67d",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "bubbleport-circuit/models/07-terminal-station.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/scenery/runtime/08-service-robot.glb",
+    "bytes": 521596,
+    "sha256": "823c96d8a4c614a3388123a0d0ac49ec3175a4479736edbd615ecf7164884a33",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "bubbleport-circuit/models/08-service-robot.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/scenery/runtime/09-bench.glb",
+    "bytes": 540016,
+    "sha256": "cbc98f23fbd7d19664970b8fb11fe5287754b4dca228b9122e10b7d6a64f132b",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "bubbleport-circuit/models/09-bench.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/scenery/runtime/10-lamp.glb",
+    "bytes": 447376,
+    "sha256": "6c523832cdf9295f01dcd92d543a42fb65b8777de91c07f415bb9af59b86a502",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "bubbleport-circuit/models/10-lamp.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/scenery/runtime/11-planter.glb",
+    "bytes": 570036,
+    "sha256": "3de3963218644aaf2dc5dc37816cb94d784cbb53529a640071b28b4f9ccf6333",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "bubbleport-circuit/models/11-planter.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/scenery/runtime/12-umbrella-table.glb",
+    "bytes": 509596,
+    "sha256": "aa2032dce2631654c25635511cde0b1c26d481204a96a9da2e7511fcadf065e4",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "bubbleport-circuit/models/12-umbrella-table.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/scenery/runtime/13-cafe-chair.glb",
+    "bytes": 606400,
+    "sha256": "9362af59e957c58477e5546766ca75ad59d6f23c3043b6dd3e2068a5b209fc71",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "bubbleport-circuit/models/13-cafe-chair.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/scenery/runtime/14-rocket-gantry.glb",
+    "bytes": 560684,
+    "sha256": "b8b266f1fb3002cd584c0465fe7064378ac138147a71bd2972d516d3a13101c6",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "bubbleport-circuit/models/14-rocket-gantry.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/scenery/runtime/15-ornamental-tree.glb",
+    "bytes": 674456,
+    "sha256": "02e9602aae7359cede9a3e7c8d51e1f9e94193191874fc9dec8611bd691aa448",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "bubbleport-circuit/models/15-ornamental-tree.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/scenery/runtime/16-plaza-railing.glb",
+    "bytes": 481184,
+    "sha256": "af2c97462641ef4e00ec86be73cb2bb7edc6bd01490ad906f04377484110b58b",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "bubbleport-circuit/models/16-plaza-railing.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/track-studies/hammers-raw.glb",
+    "bytes": 47281644,
+    "sha256": "725927cf58dd6b8eb4ec9fbcf3aab0787fdaec2d910361976300755302766a7c",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "assets/track-redesign-validation/hammers-raw.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/track-studies/loop-raw.glb",
+    "bytes": 47768756,
+    "sha256": "01f5a7ab67cf867ea05f60726f367f3f4bfd4a5b287db8e0ac3c5dd67face016",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "assets/track-redesign-validation/loop-raw.glb"
+    ]
+  },
+  {
+    "file": "commonplay/bubbleport/track-studies/slalom-raw.glb",
+    "bytes": 46765640,
+    "sha256": "8b3097e274f7e3287d8344116220fb5a342d9daf00ae67c3f8d5911e0181accf",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "assets/track-redesign-validation/slalom-raw.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/apex-pacer/desktop.glb",
+    "bytes": 69773592,
+    "sha256": "850ab958feaeb3b0df4f5ac6c7dfa67cad5bdad7a69c3656051926391751417c",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "assets/toy-town-personas/apex-pacer/models/desktop.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/apex-pacer/original.glb",
+    "bytes": 49340148,
+    "sha256": "b1e53e9297eefa93a61f8be91752781ed7576bc31cbb0b233479802b107f4d8f",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "assets/toy-town-personas/apex-pacer/models/original.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/arc-keeper/desktop.glb",
+    "bytes": 46093184,
+    "sha256": "c0c77a1181dbdf0b195cfdf33e7ede4e6dab508bc4047885bb73168e6be93d6d",
+    "meshes": 1,
+    "materials": 3,
+    "sources": [
+      "assets/toy-town-personas/arc-keeper/models/desktop.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/arc-keeper/original.glb",
+    "bytes": 51377268,
+    "sha256": "cc9c31897ed511c11a42aeb612d8d001058a41064925052aaa779ce432b0c166",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "assets/toy-town-personas/arc-keeper/models/original.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/crab/animated.glb",
+    "bytes": 6981964,
+    "sha256": "579a9a1c635a144ae5b9fe5b7f92005da3fb1f23ebac39f463758b35f4f430d5",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/teddy-track-lab-site/dist/characters/crab-animated.glb",
+      "assets/toy-town-personas/crab/models/animated.glb",
+      "bubblecity-teddy-slide/dist/characters/crab-animated.glb",
+      "teddy-playground/dist/characters/crab-animated.glb",
+      "teddy-track-lab/dist/characters/crab-animated.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/crab/game.glb",
+    "bytes": 6650264,
+    "sha256": "dd791e4ac09706918d0753bf8e7107ded8a8035d033dc51df6b07d3b6bfe0c5a",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "assets/toy-town-personas/crab/models/game.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/crab/original.glb",
+    "bytes": 48544520,
+    "sha256": "21ebde4bc518e1987644b1ab2cc53706091d26a90b9f8f887842122f5965db50",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "assets/toy-town-personas/crab/models/original.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/duck/animated.glb",
+    "bytes": 6605924,
+    "sha256": "ed715fb0ae101ccaf0713e7b16dde6d0bdf2a28c01cfdd9a5f4e20ec1b5180a1",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/teddy-track-lab-site/dist/characters/duck-animated.glb",
+      "assets/toy-town-personas/duck/models/animated.glb",
+      "bubblecity-teddy-slide/dist/characters/duck-animated.glb",
+      "teddy-playground/dist/characters/duck-animated.glb",
+      "teddy-track-lab/dist/characters/duck-animated.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/duck/game.glb",
+    "bytes": 6299104,
+    "sha256": "cda8e1736134c6d62abbc73aeeb6a54e2c0ef3e8208c99295c40e2efbbf74eea",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "assets/toy-town-personas/duck/models/game.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/duck/original.glb",
+    "bytes": 48764840,
+    "sha256": "e991ef7f14154f05fe3ce13b15621dc531027ce52096dc7edee3d27a0931928d",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "assets/toy-town-personas/duck/models/original.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/echo-diver/desktop.glb",
+    "bytes": 70377676,
+    "sha256": "dd9095dada954f0b52a2ab46b0d503edd8f8ffe7037f8877b7d5a6e039a3ee42",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "assets/toy-town-personas/echo-diver/models/desktop.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/echo-diver/original.glb",
+    "bytes": 49921440,
+    "sha256": "8865c02cc073917ecb033439cdad4af875e520defda0b85cd037ebe60f814b4a",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "assets/toy-town-personas/echo-diver/models/original.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/elephant/animated.glb",
+    "bytes": 7252960,
+    "sha256": "b5aed39ad8ed31632b1dc6fb396801c1f47e1934a88e213dec284fc1500cea84",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/teddy-track-lab-site/dist/characters/elephant-animated.glb",
+      "assets/toy-town-personas/elephant/models/animated.glb",
+      "bubblecity-teddy-slide/dist/characters/elephant-animated.glb",
+      "teddy-playground/dist/characters/elephant-animated.glb",
+      "teddy-track-lab/dist/characters/elephant-animated.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/elephant/game.glb",
+    "bytes": 6918636,
+    "sha256": "305cc50de83048f07c66acf85402355bd7133d242291a05be4f610b5b8e634dd",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "assets/toy-town-personas/elephant/models/game.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/elephant/original.glb",
+    "bytes": 49435004,
+    "sha256": "1dabf03e3b0ac786e6e4d6a58cbc8440f612750a04755c7bd31a57fdb3d36cd8",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "assets/toy-town-personas/elephant/models/original.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/gecko/animated.glb",
+    "bytes": 5956244,
+    "sha256": "018d1db2761038e5280ea453c4ec618ebc27b7be73f78c6a0af388491317d98e",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/teddy-track-lab-site/dist/characters/gecko-animated.glb",
+      "assets/toy-town-personas/gecko/models/animated.glb",
+      "bubblecity-teddy-slide/dist/characters/gecko-animated.glb",
+      "teddy-playground/dist/characters/gecko-animated.glb",
+      "teddy-track-lab/dist/characters/gecko-animated.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/gecko/game.glb",
+    "bytes": 5628680,
+    "sha256": "086247369f8818c5571ee51045b2c0b2c6961b954084d57edda5a1778ebe7f34",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "assets/toy-town-personas/gecko/models/game.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/gecko/original.glb",
+    "bytes": 48291988,
+    "sha256": "0acb389c039730ce5a5ccdc793ace7bdc407743d0ce67c543ad34b4fadf91f53",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "assets/toy-town-personas/gecko/models/original.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/hedgehog/animated.glb",
+    "bytes": 5399508,
+    "sha256": "205b13b2f2f0866eb4308538e26044f60453b1963abe355f86333fcf87fe8e1b",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/teddy-track-lab-site/dist/characters/hedgehog-animated.glb",
+      "assets/toy-town-personas/hedgehog/models/animated.glb",
+      "bubblecity-teddy-slide/dist/characters/hedgehog-animated.glb",
+      "teddy-playground/dist/characters/hedgehog-animated.glb",
+      "teddy-track-lab/dist/characters/hedgehog-animated.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/hedgehog/game.glb",
+    "bytes": 5064912,
+    "sha256": "55d50189992d39d51dd398f21f31427d35f7fb7ffd035f2c5ce8b8273ca7a324",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "assets/toy-town-personas/hedgehog/models/game.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/hedgehog/original.glb",
+    "bytes": 47937244,
+    "sha256": "290a84d0047bbcee9d5a6588b704a7cb92ff468be284f4a8b852c596aa51f2d8",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "assets/toy-town-personas/hedgehog/models/original.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/pip/animated.glb",
+    "bytes": 5674080,
+    "sha256": "829fc2a58f5140c56c0d6dba460d34aaa24db46b8058f0b3c32551ace02c8aa6",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/teddy-track-lab-site/dist/characters/pip-animated.glb",
+      "assets/toy-town-personas/pip/models/animated.glb",
+      "bubblecity-teddy-slide/dist/characters/pip-animated.glb",
+      "teddy-playground/dist/characters/pip-animated.glb",
+      "teddy-track-lab/dist/characters/pip-animated.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/pip/game.glb",
+    "bytes": 5189308,
+    "sha256": "15e804d02a04e68bf27c2268f7c2e90b11a3f42a5a06e880035bfd5548d4adbd",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "assets/toy-town-models/pip-game.glb",
+      "assets/toy-town-personas/pip/models/game.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/pip/original.glb",
+    "bytes": 48205524,
+    "sha256": "99b1225d0eeea05eab9d333f10258ce598289a3bde1ce995860e786431910810",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "assets/toy-town-models/originals/pip-original.glb",
+      "assets/toy-town-personas/pip/models/original.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/ratchet-goalie/desktop.glb",
+    "bytes": 39021760,
+    "sha256": "36fd431b59781f1d2bac2019d2c0ddb6651fd2226168f746697225bedd12bb30",
+    "meshes": 2,
+    "materials": 2,
+    "sources": [
+      "assets/toy-town-personas/ratchet-goalie/models/desktop.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/ratchet-goalie/original.glb",
+    "bytes": 50284304,
+    "sha256": "27c5b83689ebb13a1e586a75d29bc398d66ad0a109dd4d4d3546320a2bb03140",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "assets/toy-town-personas/ratchet-goalie/models/original.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/ray/animated.glb",
+    "bytes": 8227052,
+    "sha256": "ddb70912de232f6bce0887af2b6accd61132b38ddcb22f86ac49c68057c65321",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/teddy-track-lab-site/dist/characters/ray-animated.glb",
+      "assets/toy-town-personas/ray/models/animated.glb",
+      "bubblecity-teddy-slide/dist/characters/ray-animated.glb",
+      "teddy-playground/dist/characters/ray-animated.glb",
+      "teddy-track-lab/dist/characters/ray-animated.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/ray/game.glb",
+    "bytes": 7897632,
+    "sha256": "d6b49e05c0aeddb90246c61158daf018425ab2304ce1800b8f99beb755e6a65d",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "assets/toy-town-personas/ray/models/game.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/ray/original.glb",
+    "bytes": 49381472,
+    "sha256": "556ba4b195484bc30d5fe4d7685a177691f4d0fb592a02fecc9df9b8d6e104e9",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "assets/toy-town-personas/ray/models/original.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/reel-climber/desktop.glb",
+    "bytes": 69779848,
+    "sha256": "1bc185de95f2c3ebeb7a22a9808589059c95022b36bd18242b47f61b930a3136",
+    "meshes": 3,
+    "materials": 3,
+    "sources": [
+      "assets/toy-town-personas/reel-climber/models/desktop.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/reel-climber/original.glb",
+    "bytes": 49306000,
+    "sha256": "2f1dcaeb589eca8eb8999ecfea6415dcfe167e810a222cc2609605460d3416d2",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "assets/toy-town-personas/reel-climber/models/original.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/rivet-press/desktop.glb",
+    "bytes": 53445312,
+    "sha256": "f3da7d0793f0541d93b0f31872e3586d6419b2dc9b07198a8c2e741e04e95e7a",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "assets/toy-town-personas/rivet-press/models/desktop.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/rivet-press/original.glb",
+    "bytes": 50723924,
+    "sha256": "199999f392baf9b832ae100c5e599b7d94412870447e38ce673a9da60fdfe2f5",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "assets/toy-town-personas/rivet-press/models/original.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/signal-beetle/desktop.glb",
+    "bytes": 69863872,
+    "sha256": "ef3ed317da4f0dbd53661148a22d23ae6353768020490a7da4044d6aa32056bc",
+    "meshes": 9,
+    "materials": 9,
+    "sources": [
+      "assets/toy-town-personas/signal-beetle/models/desktop.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/signal-beetle/original.glb",
+    "bytes": 48980476,
+    "sha256": "d8bd86263603cb2471c0ad410d4a923d10a5478c7c502505e4e3e2cc48e13cf8",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "assets/toy-town-personas/signal-beetle/models/original.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/teddy/animated.glb",
+    "bytes": 7545876,
+    "sha256": "d18de38f9a0c8e367e4ad3b6693c7b919427e22a9feb7f770db7a29dd5a5132c",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/teddy-track-lab-site/dist/teddy-bear-animated.glb",
+      "assets/teddy-bear/teddy-bear-animated.glb",
+      "assets/toy-town-personas/teddy/models/animated.glb",
+      "bubblecity-teddy-slide/dist/teddy-bear-animated.glb",
+      "teddy-playground/dist/teddy-bear-animated.glb",
+      "teddy-track-lab/dist/teddy-bear-animated.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/teddy/game.glb",
+    "bytes": 6161176,
+    "sha256": "49d3cac3cadc14799089066ddc7a3f177302fa67a74e79aa8c4f7dff658c1327",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "assets/teddy-bear/teddy-bear-game.glb",
+      "assets/toy-town-personas/teddy/models/game.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/teddy/original.glb",
+    "bytes": 47939952,
+    "sha256": "69db3142ac75e92cb7fb3e46ccf7c1ad998db0c0fec63e958d1501c40d95136b",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "assets/teddy-bear/teddy-bear-original.glb",
+      "assets/toy-town-personas/teddy/models/original.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/tik/animated.glb",
+    "bytes": 6954720,
+    "sha256": "ca7679b4b838dd9ea8e15006907e161dfcc989d0629d1c72be7e96306b36cf49",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/teddy-track-lab-site/dist/characters/tik-animated.glb",
+      "assets/toy-town-personas/tik/models/animated.glb",
+      "bubblecity-teddy-slide/dist/characters/tik-animated.glb",
+      "teddy-playground/dist/characters/tik-animated.glb",
+      "teddy-track-lab/dist/characters/tik-animated.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/tik/game.glb",
+    "bytes": 6396716,
+    "sha256": "69fbc5b57ab46ef4d5f69a427a0696d6f7a4873d3bc52f2ef2c7d2b649ede2f0",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "assets/toy-town-models/tik-game.glb",
+      "assets/toy-town-personas/tik/models/game.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/tik/original.glb",
+    "bytes": 48347392,
+    "sha256": "36693a7a559496310cda50090cf4f440b05be3e14bb7e40c7853e2b175f925c1",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "assets/toy-town-models/originals/tik-original.glb",
+      "assets/toy-town-personas/tik/models/original.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/wob/animated.glb",
+    "bytes": 3909356,
+    "sha256": "7312aae37bfd790503381fd7c493925490f2a0d0672848cae3bc17cdb710c947",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/teddy-track-lab-site/dist/characters/wob-animated.glb",
+      "assets/toy-town-personas/wob/models/animated.glb",
+      "bubblecity-teddy-slide/dist/characters/wob-animated.glb",
+      "teddy-playground/dist/characters/wob-animated.glb",
+      "teddy-track-lab/dist/characters/wob-animated.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/wob/game.glb",
+    "bytes": 3371080,
+    "sha256": "dbc5acbab1c79f97c4965e4c5cf08f733eff5efa069cd545bf9608a847df51bd",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "assets/toy-town-models/wob-game.glb",
+      "assets/toy-town-personas/wob/models/game.glb"
+    ]
+  },
+  {
+    "file": "commonplay/characters/wob/original.glb",
+    "bytes": 47001056,
+    "sha256": "c8c486a347a981b61b050bf21e44ffac53f63d08a8dbee8cd60c4a328b5dda28",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      "assets/toy-town-models/originals/wob-original.glb",
+      "assets/toy-town-personas/wob/models/original.glb"
+    ]
+  },
+  {
+    "file": "commonplay/track-parts/quilted-runway.glb",
+    "bytes": 1905976,
+    "sha256": "71c9374c2509f2939d271741a7034282e24fe77fe9b4b2f7dfb33ed0c7f7afb5",
+    "meshes": 2,
+    "materials": 2,
+    "sources": [
+      "bubblecity-teddy-slide/dist/solo/models/quilted-runway.glb",
+      "teddy-playground/dist/solo/models/quilted-runway.glb"
+    ]
+  },
+  {
+    "file": "commonplay/windport/courier.glb",
+    "bytes": 4408,
+    "sha256": "c9de7641b38f1b4366987e3fc8c429e593aefd4efc2c9b0e0197e2b772e219c3",
+    "meshes": 3,
+    "materials": 3,
+    "sources": [
+      "assets/windport/courier.glb"
+    ]
+  },
+  {
+    "file": "commonplay/windport/harbor.glb",
+    "bytes": 152840,
+    "sha256": "b1a014b0e8d733139ad30d64a2344dd8b453fa71b4d7cb8b49e582eb7f2dc7ff",
+    "meshes": 14,
+    "materials": 12,
+    "sources": [
+      "assets/windport/harbor.glb"
+    ]
+  },
+  {
+    "file": "commonplay/work-in-progress/persona-models/crab-reduced.glb",
+    "bytes": 4870388,
+    "sha256": "231daa5b5c852f7d467faf25d5f0d73701af57aa432215ead447a8be7311be56",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/persona-models/crab-reduced.glb"
+    ]
+  },
+  {
+    "file": "commonplay/work-in-progress/persona-models/duck-reduced.glb",
+    "bytes": 4865768,
+    "sha256": "c9d361d7b13ef01da5758ba66ed794e2eef5ceac14cdf76693807532cd956809",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/persona-models/duck-reduced.glb"
+    ]
+  },
+  {
+    "file": "commonplay/work-in-progress/persona-models/elephant-reduced.glb",
+    "bytes": 5436156,
+    "sha256": "bd10d1051fd0627efa8d88746f0c6c0af6f3a1066f4bafad738ba3dd42b59a02",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/persona-models/elephant-reduced.glb"
+    ]
+  },
+  {
+    "file": "commonplay/work-in-progress/persona-models/gecko-reduced.glb",
+    "bytes": 4408020,
+    "sha256": "9ab8a6689161e4cf322be4826fef09909d015a861afbf3aa1b8df6813009d7d7",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/persona-models/gecko-reduced.glb"
+    ]
+  },
+  {
+    "file": "commonplay/work-in-progress/persona-models/hedgehog-reduced.glb",
+    "bytes": 4068372,
+    "sha256": "5ad1f3773bc0ae170094ef986d17d2c22d6f8560694b21860cbc458a5b8fa5e1",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/persona-models/hedgehog-reduced.glb"
+    ]
+  },
+  {
+    "file": "commonplay/work-in-progress/persona-models/ray-reduced.glb",
+    "bytes": 5521616,
+    "sha256": "3aee48f1e87a991cd065320ef19c972608785dc3ef004181281e7b712adf471d",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/persona-models/ray-reduced.glb"
+    ]
+  },
+  {
+    "file": "commonplay/work-in-progress/persona-models/validation-only.glb",
+    "bytes": 5525732,
+    "sha256": "5b7112b1617ae14219c7f3d21ae2a3ed5c112d50cb7317dd7d01da387ecf2f0d",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/persona-models/validation-only.glb"
+    ]
+  },
+  {
+    "file": "commonplay/work-in-progress/persona-models/validation-prepared.glb",
+    "bytes": 5138288,
+    "sha256": "5f34ac0b219f339fb5b98835ec17bc68d3baedf9e691847f9d6976018cb34d65",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/persona-models/validation-prepared.glb"
+    ]
+  },
+  {
+    "file": "commonplay/work-in-progress/persona-models/validation-reduced.glb",
+    "bytes": 4334260,
+    "sha256": "4c4a7364a72d5168170d738754c467ddf67e7a7f0b64f34bbcc93688df4e2e8d",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/persona-models/validation-reduced.glb"
+    ]
+  },
+  {
+    "file": "commonplay/work-in-progress/teddy-animation-review/teddy-before.glb",
+    "bytes": 7431932,
+    "sha256": "ea236a0a5ca9cb4c7f3e3252f44151452d6f4dc59609758c2c3111f8dfdf5f51",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/teddy-animation-review/teddy-before.glb"
+    ]
+  },
+  {
+    "file": "commonplay/work-in-progress/toy-town-check/pip-prepolish.glb",
+    "bytes": 5189308,
+    "sha256": "d2d472452a458618c324101d2e3153687e1174db498b9113d90b9b8581e3088b",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/toy-town-check/pip-prepolish.glb"
+    ]
+  },
+  {
+    "file": "commonplay/work-in-progress/toy-town-check/tik-fast.glb",
+    "bytes": 6396720,
+    "sha256": "1a002cc6c30e1b127106f8c9e2c3e87a6cdcfb6a706353cfb57d72fb3afba292",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/toy-town-check/tik-fast.glb"
+    ]
+  },
+  {
+    "file": "commonplay/work-in-progress/toy-town-check/wob-prepolish.glb",
+    "bytes": 3429660,
+    "sha256": "c25c1e62caa56bdc774038c7a7f81271b5495a893c8dbf7937dd60b7eca7227d",
+    "meshes": 1,
+    "materials": 1,
+    "sources": [
+      ".local/toy-town-check/wob-prepolish.glb"
+    ]
+  },
+  {
+    "file": "lost-marbles/classic-slide/bubblecity-teddy-slide/wooden-chute.glb",
+    "bytes": 3286544,
+    "sha256": "0e9784acb0b3c067b6bdf1a9bfd3b7ff0c8d9422e4d7215845908a2d9978d6be",
+    "meshes": 20,
+    "materials": 7,
+    "sources": [
+      "bubblecity-teddy-slide/dist/slide/wooden-chute.glb"
+    ]
+  },
+  {
+    "file": "lost-marbles/classic-slide/teddy-playground/wooden-chute.glb",
+    "bytes": 3590412,
+    "sha256": "4c134fc963fd469d02e6a6b6d2b70954ff99dbc564b00b6e5594715c4ed1542a",
+    "meshes": 20,
+    "materials": 7,
+    "sources": [
+      ".local/teddy-track-lab-site/dist/slide/wooden-chute.glb",
+      "teddy-playground/dist/slide/wooden-chute.glb",
+      "teddy-track-lab/dist/slide/wooden-chute.glb"
+    ]
+  }
+]

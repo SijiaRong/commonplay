@@ -1,0 +1,104 @@
+{
+  "characters": [
+    {
+      "id": "teddy",
+      "name": "缝线小熊",
+      "tagline": "熟悉的小伙伴，一起滑滑梯",
+      "ready": true,
+      "model": "./teddy-bear-animated.glb",
+      "scale": 3.1,
+      "material": "teddy-plush",
+      "preview": "./characters/teddy.jpg"
+    },
+    {
+      "id": "pip",
+      "name": "兜兜飞鼠 PIP",
+      "tagline": "软乎乎的滑翔冒险家",
+      "ready": true,
+      "preview": "./characters/pip.jpg",
+      "model": "./characters/pip-animated.glb",
+      "scale": 3.1
+    },
+    {
+      "id": "tik",
+      "name": "滴克 TIK",
+      "tagline": "认真又笨拙的发条维修员",
+      "ready": true,
+      "preview": "./characters/tik.jpg",
+      "model": "./characters/tik-animated.glb",
+      "scale": 3.1
+    },
+    {
+      "id": "duck",
+      "name": "阿扣 · 旧雨衣小鸭",
+      "tagline": "戴着蓝扣雨帽，摇摇摆摆出发",
+      "ready": true,
+      "model": "./characters/duck-animated.glb?v=stride2",
+      "scale": 3.1,
+      "preview": "./characters/duck.jpg"
+    },
+    {
+      "id": "rivet-press",
+      "name": "铆墩",
+      "tagline": "桥架铆接机",
+      "ready": true,
+      "model": "./characters/rivet-press-desktop.glb",
+      "scale": 3.1,
+      "preview": "./characters/rivet-press.jpg"
+    },
+    {
+      "id": "apex-pacer",
+      "name": "切线",
+      "tagline": "半管领跑机",
+      "ready": true,
+      "model": "./characters/apex-pacer-desktop.glb",
+      "scale": 3.1,
+      "preview": "./characters/apex-pacer.jpg"
+    },
+    {
+      "id": "echo-diver",
+      "name": "回声",
+      "tagline": "水槽声呐潜查员",
+      "ready": true,
+      "model": "./characters/echo-diver-desktop.glb",
+      "scale": 3.1,
+      "preview": "./characters/echo-diver.jpg"
+    },
+    {
+      "id": "signal-beetle",
+      "name": "挑杆",
+      "tagline": "起跑闸甲虫机甲",
+      "ready": true,
+      "model": "./characters/signal-beetle-desktop.glb",
+      "scale": 3.1,
+      "preview": "./characters/signal-beetle.jpg"
+    },
+    {
+      "id": "reel-climber",
+      "name": "卷尺",
+      "tagline": "高架检修攀登机",
+      "ready": true,
+      "model": "./characters/reel-climber-desktop.glb",
+      "scale": 3.1,
+      "preview": "./characters/reel-climber.jpg"
+    },
+    {
+      "id": "arc-keeper",
+      "name": "续航",
+      "tagline": "夜场换电机",
+      "ready": true,
+      "model": "./characters/arc-keeper-desktop.glb",
+      "scale": 3.1,
+      "preview": "./characters/arc-keeper.jpg"
+    },
+    {
+      "id": "ratchet-goalie",
+      "name": "反弹",
+      "tagline": "弹珠门将机",
+      "ready": true,
+      "model": "./characters/ratchet-goalie-desktop.glb",
+      "scale": 3.1,
+      "preview": "./characters/ratchet-goalie.jpg"
+    }
+  ]
+}

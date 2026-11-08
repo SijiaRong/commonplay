@@ -1,0 +1,30 @@
+#progress{width:auto;min-width:156px}
+#course-id{font:10px/1.5 ui-monospace,monospace;opacity:.8;margin-top:4px}
+#solo-actions{display:flex;gap:3px;align-items:center}#solo-actions button{padding:9px}
+@media(pointer:coarse){.pad button{padding:10px 9px}.pad{gap:4px}.pad div{gap:3px}}
+@media(max-width:620px){.keys{gap:5px;font-size:11px}}
+@media(max-width:560px){body>header{flex-direction:column;gap:6px}body>header nav{align-self:flex-end}#progress{max-width:74vw}}
+
+#starter-reveal{position:absolute;left:50%;transform:translateX(-50%);pointer-events:none;background:var(--paper);color:var(--ink);box-shadow:0 5px 22px #33221532}
+body #gate-countdown {
+  position:absolute; z-index:2; left:50%; top:40%; transform:translate(-50%,-50%);
+  pointer-events:none; font:900 clamp(96px,26vmin,240px)/1 system-ui,sans-serif;
+  font-variant-numeric:tabular-nums; color:#fffbe9; -webkit-text-stroke:clamp(3px,.8vmin,8px) #173b30;
+  paint-order:stroke fill; text-shadow:0 .04em 0 #173b30,0 .06em .09em #17271c80;
+  border:0; box-shadow:none; background:none; backdrop-filter:none; -webkit-backdrop-filter:none;
+}
+#starter-reveal{bottom:clamp(84px,15vh,150px);width:min(560px,94vw);border-radius:16px;padding:12px 14px}
+#starter-reveal h2{font-size:14px;margin:0 0 8px}
+#starter-reveal ul{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;list-style:none;margin:0;padding:0}
+#starter-reveal li{background:#e3efde;border-radius:10px;padding:9px;animation:deal-skill .42s backwards}
+#starter-reveal li:nth-child(2){animation-delay:.25s}
+#starter-reveal li:nth-child(3){animation-delay:.5s}
+#starter-reveal li strong,#starter-reveal li small{display:block}
+#starter-reveal li small{font-size:11px;line-height:1.45;margin-top:4px}
+#gate-countdown[hidden],#starter-reveal[hidden]{display:none}
+@keyframes deal-skill{from{opacity:0;transform:translateY(10px) rotateX(24deg)}}
+@media(prefers-reduced-motion:reduce){#starter-reveal li{animation:none}}
+@media(max-width:560px){#starter-reveal{bottom:145px}}
+
+#starter-reveal:has(li:only-child){width:min(300px,88vw)}
+#starter-reveal li:only-child{grid-column:1/-1}
