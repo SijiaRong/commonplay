@@ -1,0 +1,39 @@
+{
+  "physicsTests": {
+    "passed": 15,
+    "failed": 0
+  },
+  "browser": {
+    "slalom": {
+      "finished": true,
+      "hits": 0,
+      "falls": 0
+    },
+    "hammers": {
+      "finished": true,
+      "hits": 1,
+      "falls": 0
+    },
+    "loop": {
+      "finished": true,
+      "loopSeen": true,
+      "hits": 0,
+      "falls": 0
+    },
+    "characterSwitch": [
+      "teddy",
+      "pip",
+      "teddy"
+    ],
+    "classicCourseLoaded": true,
+    "widthSelector": [
+      16,
+      19.2
+    ]
+  },
+  "limitations": [
+    "Three independent test routes, not a complete five-round mode",
+    "Inverted loop uses magnetic guide; jump detaches",
+    "Physical mobile hardware not tested"
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "Idle": {
+    "identical": true,
+    "channels": 45,
+    "changed": []
+  },
+  "Run": {
+    "identical": true,
+    "channels": 45,
+    "changed": []
+  },
+  "Jump": {
+    "identical": true,
+    "channels": 45,
+    "changed": []
+  },
+  "Slide": {
+    "identical": false,
+    "channels": 45,
+    "changed": [
+      "Chest.rotation",
+      "Chest.scale",
+      "Chest.translation",
+      "Foot.L.rotation",
+      "Foot.L.scale",
+      "Foot.L.translation",
+      "Foot.R.rotation",
+      "Foot.R.scale",
+      "Foot.R.translation",
+      "Forearm.L.rotation",
+      "Forearm.L.scale",
+      "Forearm.L.translation",
+      "Forearm.R.rotation",
+      "Forearm.R.scale",
+      "Forearm.R.translation",
+      "Head.rotation",
+      "Head.scale",
+      "Head.translation",
+      "Hips.rotation",
+      "Hips.scale",
+      "Hips.translation",
+      "Paw.L.rotation",
+      "Paw.L.scale",
+      "Paw.L.translation",
+      "Paw.R.rotation",
+      "Paw.R.scale",
+      "Paw.R.translation",
+      "Shin.L.rotation",
+      "Shin.L.scale",
+      "Shin.L.translation",
+      "Shin.R.rotation",
+      "Shin.R.scale",
+      "Shin.R.translation",
+      "Thigh.L.rotation",
+      "Thigh.L.scale",
+      "Thigh.L.translation",
+      "Thigh.R.rotation",
+      "Thigh.R.scale",
+      "Thigh.R.translation",
+      "UpperArm.L.rotation",
+      "UpperArm.L.scale",
+      "UpperArm.L.translation",
+      "UpperArm.R.rotation",
+      "UpperArm.R.scale",
+      "UpperArm.R.translation"
+    ]
+  }
+}
