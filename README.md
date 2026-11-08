@@ -14,16 +14,28 @@ An open-source 3D party racing and obstacle-course game project started at AI Ha
 
 ## 队友本地试玩
 
-- **小熊滑滑梯**：在仓库根目录运行 `python3 -m http.server 8080 --directory teddy-playground/dist`，打开 [localhost:8080](http://localhost:8080)。默认单人闯关使用 WASD 移动、空格跳跃、R 复位。第一关「玩具门廊」从软垫起跑，穿过移门和积木桩，沿直滑梯下到钟摆锤廊和波浪地板，再绕 180° 回旋滑梯下到矮栏和终点门廊。[关卡拆解与里程](docs/fall-beans-course.zh-CN.md)记录了参考来源。顶部「经典滑梯」可进入原版滑行。在起点点「换个人物」可从[十只玩偶](assets/toy-town-personas/README.md)中选择。
+- **泡泡星港 UI 实验室**：在仓库根目录运行 `python3 -m http.server 8926 --bind 127.0.0.1`，打开[实验室](http://127.0.0.1:8926/bubbleport-ui-lab/)。可切换准备、竞速、结算，调节玻璃模糊与悬浮动效。
+
+- **泡泡星城**：小熊滑滑梯的独立分支，使用暖木工作室六面天空盒、象牙涂层路面和薄荷树脂构件。在单人闯关中打开「材质编辑」可按关卡、赛段和组件调整材质。[运行说明](bubblecity-teddy-slide/README.md)。
+- **小熊滑滑梯**：在仓库根目录运行 `python3 -m http.server 8080 --directory teddy-playground/dist`，打开 [localhost:8080](http://localhost:8080)。默认单人闯关使用 WASD 移动、空格跳跃、R 复位。用鼠标点击开始或比赛画面即可隐藏光标并转动视角，按 Option / Alt 或 Esc 释放，再点画面继续。标准手柄左摇杆移动、右摇杆转视角，底部键（A / ×）跳跃、左侧键（X / □）用技能、顶部键（Y / △）复位。第一关「玩具门廊」从软垫起跑，穿过移门和积木桩，沿直滑梯下到钟摆锤廊和波浪地板，再绕 180° 回旋滑梯下到矮栏和终点门廊。[关卡拆解与里程](docs/fall-beans-course.zh-CN.md)记录了参考来源。顶部「经典滑梯」可进入原版滑行。在起点点「换个人物」可从[十只玩偶](assets/toy-town-personas/README.md)中选择。
 - **风港快递**：按[局域网启动说明](rooftop/README.md)准备运行时、安装依赖并加入房间。
 - **泡泡星港**：在仓库根目录运行 `python3 -m http.server 8891 --directory bubbleport-demo/dist`，打开 [localhost:8891](http://localhost:8891)。独立测试错位障碍、摆锤、回环与旁路，支持 16 / 19.2 净宽对比，详见[试玩与物理检查](bubbleport-demo/README.md)。
 - **赛道实验室**：在仓库根目录运行 `python3 -m http.server 8892 --directory teddy-track-lab/dist`，打开 [localhost:8892](http://localhost:8892)。复用小熊角色与渲染，试玩三类程序路段，详见[操控与来源](teddy-track-lab/README.md)。
+- **[泡泡星港 · 环港线](bubbleport-circuit/README.md)**：16 件星港设施、三段连续赛道与小熊滑滑梯工作室天空盒，可从起点沿线漫游到终点。
+- **泡泡星港路段设计台**：三个子代理分别设计「苏打验票廊」平地关卡、「苏打云瀑」滑梯和「土星领航湾」180° 回头弯；可旋转查看与导出图片，尚未接入试玩物理。见[设计说明与预览入口](bubbleport-segment-designs/README.md)。
+- **泡泡星港材质实验台**：用简单几何体比较路面、树脂、软胶、黄铜、铝、亚克力与发光灯；支持日夜切换、材质调参和独立检查发光/受光/光晕，见[预览与说明](bubbleport-material-lab/README.md)。
+- 材质资源沿用统一标本室分类：Lost Marbles 研究材质位于 `material-atlas/dist/lm/`；本轮泡泡星港原创材质的唯一主源位于[原创资源目录](material-atlas/dist/original/bubbleport/index.html)，实验台与赛段归档引用同一份源码和纹理。V2提供亮面路面、软胶散射与回弹、同光照旧参数对照。
 - [泰迪熊模型与同机位对比图](assets/teddy-bear/)、[Blender 轻量化与绑骨脚本](tools/blender/)和[人偶竞速设计文档](docs/humanoid-racing-mvp.zh-CN.md)可供后续迭代。
 
 ## 资源与文档导航
 
+[全仓库 3D 模型库](assets/model-library/README.md)按 Lost Marbles 与 Commonplay 原创分组，可直接取用模型或查询全部来源路径。
+
+[仓库材质与纹理合集](assets/material-library/README.md) 按 Lost Marbles 来源与 Commonplay 项目整理，含独立贴图、模型材质槽和程序材质。可在[在线来源索引](https://commonplay-surface-atlas.rongsijia.chatgpt.site/library/)检索。
+
 | 内容 | 入口 |
 |---|---|
+| 泡泡星港六段采用版设计图、三段结构图、八种材质与 28 张纹理 | [资源总览](assets/bubbleport-course-resources/index.html) · [目录说明](assets/bubbleport-course-resources/README.md) · [ZIP](assets/bubbleport-course-resources-v1.zip) |
 | 二十只玩偶设定、概念图、三视图与动作参考；其中十只已接入试玩 | [角色档案](assets/toy-town-personas/README.md) |
 | 初代三角色模型、原始生成记录与模型检查图 | [模型目录](assets/toy-town-models/README.md) |
 | 三种角色概念设计板 | [概念图目录](assets/toy-town-concepts/) |
@@ -72,3 +84,5 @@ cd commonplay
 欢迎通过 Issue 提出玩法、原型反馈和技术建议。项目采用 [MIT License](LICENSE)；后续引入的第三方代码、美术和音频需分别核验许可。调研中的游戏名称及其素材归各权利人所有；小熊滑梯试玩包含源自 Lost Marbles 的赛道和渲染资源。
 
 第三方游戏调研与逆向分析内容仅供学习、研究和技术交流使用，不作商业用途。相关游戏、商标、源码及素材的权利归各自权利人所有，本项目不主张对其拥有权利，也不通过本项目的 MIT 许可授予第三方内容的使用权。如认为相关内容涉及版权或其他权利问题，请随时通过 [GitHub Issues](https://github.com/SijiaRong/commonplay/issues) 联系我们，我们将及时核实并删除相关内容。
+
+[模型材质编辑器](model-editor/index.html)读取统一模型库与纹理库。仓库根目录启动静态服务后，访问 `/model-editor/` 可按编号查找模型、编辑材质槽并导出 GLB。

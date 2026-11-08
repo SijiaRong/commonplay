@@ -3,7 +3,9 @@ import {GRAVITY,TICK_DT,stepWorld} from './shared/physics.js';
 import {BTN_JUMP,controlStep} from './shared/control.js';
 import {CARD_BY_ID} from './shared/cards.js';
 import {makeRng} from './shared/rng.js';
-import {enableRunnerHandling,plantFeet} from './runner-handling.js';
+import {plantFeet} from './runner-handling.js';
+
+import {SlideMode} from '../slide/ground-motion.mjs';
 
 // One human, no matchmaking or filler bots. The original Show still owns the
 // draft, collision world, checkpoints, stage transitions and five-stage podium.
@@ -20,6 +22,8 @@ class SoloShow extends Show {
 
   startStage(index) {
     super.startStage(index);
+    this.slideMode=new SlideMode();
+    this.slidePieces=this.stage.pieces.filter(piece=>['shortSlide','curvedSlide'].includes(piece.name));
     this.finishingRun=false;
     this.players[0].trapZone=null;
     const body=this.players[0].body;
@@ -93,6 +97,14 @@ class SoloShow extends Show {
     if(body.grounded){body.y=this.finishHeight;body.vy=0}
   }
 
+  perkMods(player,aliveN){
+    super.perkMods(player,aliveN);
+    if(this.slideMode.sliding&&player.body.grounded){
+      player.mods.speed*=1.75;
+      player.mods.accel*=2.4;
+    }
+  }
+
   simulate(frozen) {
     const player=this.players[0];
     if(frozen && (this.phase==='intro'||this.phase==='countdown')){
@@ -109,7 +121,24 @@ class SoloShow extends Show {
       if(z!==b.z){b.z=z;b.vz=0}
       return;
     }
-    if(player.finishOrder<0)return super.simulate(frozen);
+    if(player.finishOrder<0){
+      if(this.phase==='race'&&player.body.active){
+        const b=player.body,path=this.stage.path,i=player.sampleIdx;
+        const onSlide=this.slidePieces.some(piece=>player.s>=piece.s0&&player.s<piece.s1);
+        const sliding=this.slideMode.update(TICK_DT,{grounded:b.grounded,normalY:b.gny,
+          speed:Math.hypot(b.vx,b.vz),lockSlide:onSlide||b.gny<0,jump:b.groundT>.16});
+        if(sliding&&b.grounded){
+          const fx=path.tx[i],fz=path.tz[i],input=player.input;
+          const side=input.mx*fz-input.mz*fx;
+          const brake=Math.max(0,-input.mx*fx-input.mz*fz);
+          // Steer across the chute; pulling back eases the automatic forward drive.
+          player.input={mx:fx*(1-.55*brake)+fz*side*.75,mz:fz*(1-.55*brake)-fx*side*.75,btn:input.btn};
+          try{return super.simulate(frozen)}finally{player.input=input}
+        }
+        if(!sliding)plantFeet(player);
+      }else this.slideMode.reset();
+      return super.simulate(frozen);
+    }
     // A jumping finish still lands under gravity; the runner stays at the celebration spot.
     const {body}=player;
     if(body.grounded)return;
@@ -125,7 +154,7 @@ class SoloShow extends Show {
 export class SoloSession {
   constructor(seed) {
     this.show=new SoloShow({seed,fieldSize:1,entrants:[{name:'玩家',loadout:{deck:['polish','rubber','spring','gyro','feather','grip','turbo','headstart','aero','tailwind','recovery','double','pogo','momentum','rocket','slingshot']}}]});
-    enableRunnerHandling(this.show);
+
     this.running=false;
     this.input={x:0,z:0,btn:0};
     this.edges=0;
@@ -180,7 +209,7 @@ export class SoloSession {
         s.phase==='countdown'?Math.ceil((s.phaseEnd-s.tick)/60):null,
       remaining:Math.max(0,Math.ceil((s.phaseEnd-s.tick)/60)),
       x:started?b.x:spawn[0],y:started?b.y:spawn[1],z:started?b.z:spawn[2],
-      vx:b.vx,vy:b.vy,vz:b.vz,r:b.r,tp:b.tp,grounded:b.groundT<.10,
+      sliding:!!s.slideMode?.sliding&&p.finishOrder<0&&b.active,vx:b.vx,vy:b.vy,vz:b.vz,r:b.r,tp:b.tp,grounded:b.groundT<.10,
       nx:b.gnx,ny:b.gny,nz:b.gnz,active:!started||b.active,
       s:p.s,sample:p.sampleIdx??0,placed:p.finishOrder>=0,ability:p.st.active?.id||''};
   }
