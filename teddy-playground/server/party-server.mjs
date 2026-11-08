@@ -1,4 +1,4 @@
-// 小熊滑滑梯 · 局域网派对服务器
+// 泡泡星城 · 局域网派对服务器
 // Serves teddy-playground/dist and runs points races for rooms of up to MAX_PLAYERS people (bots optional).
 //   npm install && npm start            → http://<this computer's LAN address>:4180
 //   PORT=4180 MAX_PLAYERS=4 npm start   (MAX_PLAYERS may go up to 16)
@@ -37,7 +37,7 @@ const server=createServer(async(req,res)=>{
     if(req.method==='HEAD'){res.end();return}
     if(path===resolve(root,'index.html')){
       const html=await readFile(path,'utf8');
-      res.end(html.replace('<head>',`<head><meta name="party-endpoint" content="/party"><meta name="party-max" content="${MAX_PLAYERS}">`));
+      res.end(html.replace('<head>',`<head><meta name="party-endpoint" content="./party"><meta name="party-max" content="${MAX_PLAYERS}">`));
     }else createReadStream(path).on('error',()=>res.destroy()).pipe(res);
   }catch{res.writeHead(404).end()}
 });
@@ -233,10 +233,10 @@ wss.on('connection',(ws)=>{
 });
 setInterval(()=>{for(const ws of wss.clients){if(!ws.isAlive){ws.terminate();continue}ws.isAlive=false;ws.ping()}},10e3);
 
-server.listen(PORT,'0.0.0.0',()=>{
+server.listen(PORT,process.env.HOST||'0.0.0.0',()=>{
   const port=server.address().port;
   const addresses=Object.values(networkInterfaces()).flat().filter(a=>a&&a.family==='IPv4'&&!a.internal).map(a=>a.address);
-  console.log(`小熊滑滑梯派对服务器已启动（每个房间最多 ${MAX_PLAYERS} 人，含机器人最多 ${MAX_FIELD} 名选手）`);
+  console.log(`泡泡星城派对服务器已启动（每个房间最多 ${MAX_PLAYERS} 人，含机器人最多 ${MAX_FIELD} 名选手）`);
   console.log(`  本机打开:   http://localhost:${port}`);
   for(const a of addresses)console.log(`  同一 Wi-Fi: http://${a}:${port}`);
 });
