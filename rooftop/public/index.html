@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#203c47"><title>风港快递 · Commonplay</title><link rel="stylesheet" href="/style.css"><script type="importmap">{"imports":{"three":"/lib/three.module.js"}}</script></head>
+<body><canvas id="world"></canvas><header><div class="brand"><i>➤</i> COMMONPLAY</div><span id="signal">连接中</span></header>
+<main id="panel"><div class="eyebrow">WINDPORT COURIERS</div><h1>风港快递<span>积木竞速</span></h1><p id="summary">穿过随机拼装的坡道与岔路，在五轮淘汰赛中抢先送达。</p>
+<form id="join"><label for="name">信使代号</label><input id="name" maxlength="14" autocomplete="off" placeholder="输入昵称"><button>进入局域网房间 ↗</button></form>
+<div id="room" hidden><p id="roster"></p><button id="start">发车 · 开始比赛 →</button></div><div id="choices"></div></main>
+<div id="hud" hidden><b id="stage"></b><span id="standing"></span><span id="timer"></span></div>
+<div id="notice" aria-live="polite"></div>
+<footer><span>WASD / 方向键　移动</span><span>空格　跳跃</span><span id="abilityHint" hidden></span><span>R　复位</span></footer>
+<div id="pad" hidden><div><button data-key="KeyW">↑</button><section><button data-key="KeyA">←</button><button data-key="KeyS">↓</button><button data-key="KeyD">→</button></section></div><div><button data-key="KeyR">复位</button><button data-key="KeyE" hidden>技能</button><button data-key="Space">跳</button></div></div>
+<script type="module" src="/game.js"></script></body></html>

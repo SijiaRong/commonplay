@@ -1,0 +1,7 @@
+{
+  "name": "commonplay-rooftop",
+  "private": true,
+  "type": "module",
+  "scripts": { "start": "node server.js" },
+  "dependencies": { "three": "^0.185.0", "ws": "^8.18.0" }
+}
