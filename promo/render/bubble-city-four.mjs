@@ -23,7 +23,7 @@ if(short) {
     shots=[
       ...[1,2,3,4,5].map(id=>cut(id,60)),
       cut(6,60),cut(10,60),cut(15,60),cannon,
-      cut(19,60),cut(22,60),cut(23,60),cut(25,60)
+      cut(19,60),cut(22,60),cut(23,30),cut(25,90)
     ].map(shot=>({...shot,teaser:true}));
   } else shots=[
     ...[1,2,3,4,5].map(id=>cut(id,60)),
@@ -62,6 +62,19 @@ try {
     number.style.cssText='font-weight:600;font-size:18px;letter-spacing:3px;color:#bcece0';
     name.style.cssText='font-weight:700;font-size:41px;letter-spacing:2px;line-height:1.35';
     title.append(number,name);document.querySelector('#world').append(title);
+    const ending=document.createElement('div'),line=document.createElement('div');
+    ending.style.cssText='position:fixed;inset:0;z-index:9999;display:grid;place-items:center;pointer-events:none';
+    line.textContent='长大了，也要一起玩哦';
+    line.style.cssText='color:#fff8e8;font:600 66px/1.4 "PingFang SC",sans-serif;letter-spacing:3px;text-shadow:0 2px 14px rgba(26,19,14,.45)';
+    ending.append(line);
+    window.drawEnding=frame=>{
+      if(!ending.isConnected)document.querySelector('#world').append(ending);
+      const ease=n=>{const t=Math.max(0,Math.min(1,n));return t*t*(3-2*t);};
+      const blur=ease((frame-12)/34);
+      ending.style.backdropFilter='blur('+14*blur+'px)';
+      ending.style.backgroundColor='rgba(27,21,18,'+.35*blur+')';
+      line.style.opacity=String(ease((frame-32)/18));
+    };
     window.showCourseTitle=stage=>{
       title.hidden=!stage;
       if(stage){number.textContent='第 '+stage+' 关';name.textContent=stageNames[stage-1];}
@@ -81,7 +94,11 @@ try {
       let allFour=0;
       for(let f=0;f<shot.frames;f++){
         const capture=!preview||[0,Math.floor(shot.frames/2),shot.frames-1].includes(f);
-        const {active,muzzleExit}=await page.evaluate(([n,draw])=>window.raceCapture.draw(n,draw),[f,capture]);
+        const {active,muzzleExit}=await page.evaluate(([n,draw,ending])=>{
+          const result=window.raceCapture.draw(n,draw);
+          if(ending)window.drawEnding(n);
+          return result;
+        },[f,capture,teaser && shot.s==='finish']);
         if(muzzleExit) {
           const event={frame:base+f,fps:30};
           await writeFile(path.join(out,'muzzle-exit.json'),JSON.stringify(event)+'\n');
