@@ -14,14 +14,16 @@ const race=[
   [5,33,.24,.86,true,true],[5,442,-.48,.75,true,true],[5,'finish',3.15,.32]
 ];
 shots.push(...race.map(([stage,s,bearing,lift,jump,slow])=>({stage,s,bearing,lift,jump,slow,zoom:1,frames:120})));
-const teaser=process.argv.includes('--teaser');
+const future=process.argv.includes('--future');
+const teaser=future || process.argv.includes('--teaser');
 const short=teaser || process.argv.includes('--short');
 if(short) {
   const cut=(id,frames)=>({...shots[id-1],frames});
   const cannon={stage:3,s:203,cannon:true,slow:true,frames:180,bearing:0,lift:.5,zoom:1};
   if(teaser) {
     shots=[
-      ...[1,2,3,4,5].map(id=>cut(id,60)),
+      ...(future?[{...cut(1,150),prologue:true}]:[]),
+      ...[1,2,3,4,5].map(id=>cut(id,future?90:60)),
       cut(6,60),cut(10,60),cut(15,60),cannon,
       cut(19,60),cut(22,60),cut(23,30),cut(25,90)
     ].map(shot=>({...shot,teaser:true}));
@@ -86,6 +88,23 @@ try {
       if(stage){number.textContent='第 '+stage+' 关';name.textContent=stageNames[stage-1];}
     };
   });
+  if(future)await page.evaluate(()=>{
+    const overlay=document.createElement('div'),caption=document.createElement('div');
+    overlay.style.cssText='position:fixed;inset:0;z-index:9999;display:grid;place-items:center;pointer-events:none';
+    caption.style.cssText='color:#fff8eb;font:600 63px/1.5 "PingFang SC",sans-serif;letter-spacing:3px;text-shadow:0 2px 16px #241a18';
+    overlay.append(caption);
+    window.drawPrologue=frame=>{
+      if(!overlay.isConnected)document.querySelector('#world').append(overlay);
+      const ease=n=>{const t=Math.max(0,Math.min(1,n));return t*t*(3-2*t);};
+      const second=frame>=72,local=second?frame-72:frame;
+      caption.textContent=second?'那么现在，让我们回到未来。':'现在的你，是童年的未来。';
+      caption.style.opacity=String(ease((local+2)/8)*ease(((second?78:72)-local)/8));
+      const memory=1-ease((frame-125)/24);
+      overlay.style.backdropFilter='blur('+(9*memory)+'px)';
+      overlay.style.backgroundColor='rgba(27,21,18,'+(.48*memory)+')';
+    };
+    window.closePrologue=()=>overlay.remove();
+  });
   await page.waitForFunction(()=>window.raceCapture||window.captureError,{},{timeout:90000});
   const error=await page.evaluate(()=>window.captureError);if(error)throw Error(error);
   const lighting=await page.evaluate(()=>window.raceCapture.lighting);
@@ -96,15 +115,16 @@ try {
   let base=0;
   for(const [i,shot] of shots.entries()){
     if(i+1>=first && i+1<=last && (!selected || selected.includes(i+1))){
-      await page.evaluate(s=>{window.showCourseTitle?.(s.landmark?s.stage:null);window.raceCapture.begin(s);},shot);
+      await page.evaluate(s=>{if(!s.prologue)window.closePrologue?.();window.showCourseTitle?.(s.landmark&&!s.prologue?s.stage:null);window.raceCapture.begin(s);},shot);
       let allFour=0;
       for(let f=0;f<shot.frames;f++){
         const capture=!preview||[0,Math.floor(shot.frames/2),shot.frames-1].includes(f);
-        const {active,muzzleExit}=await page.evaluate(([n,draw,ending])=>{
+        const {active,muzzleExit}=await page.evaluate(([n,draw,ending,prologue])=>{
           const result=window.raceCapture.draw(n,draw);
+          if(prologue)window.drawPrologue(n);
           if(ending)window.drawEnding(n);
           return result;
-        },[f,capture,teaser && shot.s==='finish']);
+        },[f,capture,teaser && shot.s==='finish',shot.prologue]);
         if(muzzleExit) {
           const event={frame:base+f,fps:30};
           await writeFile(path.join(out,'muzzle-exit.json'),JSON.stringify(event)+'\n');

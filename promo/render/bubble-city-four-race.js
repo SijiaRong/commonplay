@@ -149,7 +149,7 @@ async function setup() {
     if(shot.cannon && show.players[0].body.vy>25)shot.launched=true;
   }
   function draw(frame,render=true) {
-    const t=frame/(shot.frames-1),path=show.stage.path;
+    const t=shot.prologue?0:frame/(shot.frames-1),path=show.stage.path;
     let focus;
     if(shot.landmark) {
       const {anchor,middle,size}=shot;
