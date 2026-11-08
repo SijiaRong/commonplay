@@ -18,7 +18,7 @@ for (const variant of ['teddy','bubblecity']) test(variant+' rooms reject bad or
   assert.ok(address,'server started');
   if(variant==='bubblecity'){
     const page=await fetch('http://'+address).then(r=>r.text());
-    assert.match(page,/<title>泡泡星城/);
+    assert.match(page,/<title>泡泡星港 · Commonplay<\/title>/);
     assert.match(page,/name="party-endpoint"/);
     assert.equal((await fetch('http://'+address+'/editor/')).status,200);
   }
