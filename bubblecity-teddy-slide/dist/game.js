@@ -3,7 +3,7 @@ import {installSettings,settingsOpen} from './slide/settings.js';
 import * as THREE from 'three';
 import {GLTFLoader} from './vendor/GLTFLoader.js';
 
-import {loadRoster, installCharacterPicker} from './slide/character-picker.js?v=dock';
+import {loadRoster, installCharacterPicker} from './slide/character-picker.js?v=station';
 import {loadWorkshop} from './slide/workshop.js';
 
 const stage = document.querySelector('#stage');
@@ -41,7 +41,7 @@ async function start(){
   }
   const keys=new Set(),stick=new THREE.Vector2(),cameraTarget=new THREE.Vector3();
   const cameraOffset=new THREE.Vector3(0,1.08,2.75);
-  const pickerBlocked=installCharacterPicker(roster,{renderer,camera,scene,
+  const pickerBlocked=installCharacterPicker(roster,{player,renderer,camera,scene,
     onOpen(){keys.clear();stick.set(0,0);knob.style.transform=''},
     replace(next){
       next.model.rotation.y=bear.rotation.y;

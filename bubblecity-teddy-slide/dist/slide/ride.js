@@ -7,7 +7,7 @@ import {loadDaylight, createContactShadow} from './daylight.js';
 import {SlideMode} from './ground-motion.mjs';
 import {installSettings, settingsOpen} from './settings.js';
 import {createRider} from './rider.js?v=dock';
-import {loadRoster, installCharacterPicker} from './character-picker.js?v=dock';
+import {loadRoster, installCharacterPicker} from './character-picker.js?v=station';
 import {getMaterials} from '../solo/js/render/materials.js';
 import {restoreCourseMaterials} from './course-materials.js';
 
@@ -16,7 +16,7 @@ const go=$('#go'), launch=$('#launch'), meter=$('progress');
 const clamp=T.MathUtils.clamp, mix=T.MathUtils.lerp;
 const smooth=(rate,dt)=>1-Math.exp(-rate*dt);
 
-async function play(){
+export async function play(progress){
   const canvas=document.createElement('canvas');
   $('#world').append(canvas);
   const {film,quality,lite}=createSlideFilm(canvas);
@@ -40,12 +40,14 @@ async function play(){
     classic?fetch('./slide/path.json').then(r=>{if(!r.ok)throw Error('赛道路径读取失败');return r.json()}):null,
     loadDaylight(film), getMaterials(quality,renderer,{lite}).ready
   ]);
+  progress.value = 2;
   await installSettings(film, getMaterials(quality,renderer,{lite}), classic ? 'stardust-slalom' : 'orbital-sprint');
   if(classic){
   scene.add(course.scene);
   course.scene.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true}});
   await restoreCourseMaterials(course,renderer,{quality,lite});
   }
+  progress.value = 3;
   const player=new T.Group();scene.add(player);
   let rider=roster.rider;
   let bear=rider.model, seatedOffset=rider.seatedOffset, seatedHeight=rider.seatedHeight;
@@ -56,7 +58,7 @@ async function play(){
   let mode='ready', game;
   let pickerBlocked=()=>false;
   function enablePicker(){
-    pickerBlocked=installCharacterPicker(roster,{renderer,camera,scene,onOpen:()=>held.clear(),replace(next,character){
+    pickerBlocked=installCharacterPicker(roster,{player,renderer,camera,scene,onOpen:()=>held.clear(),replace(next,character){
       player.remove(bear);
       rider.dispose();
       rider=next;bear=rider.model;player.add(bear);
@@ -244,4 +246,3 @@ async function play(){
     film.render(dt);
   });
 }
-play().catch(e=>{console.error(e);$('#result').textContent='赛道加载失败，请刷新重试。';go.textContent='重新加载';go.disabled=false;go.onclick=()=>location.reload()});

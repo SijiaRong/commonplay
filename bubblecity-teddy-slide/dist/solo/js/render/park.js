@@ -20,7 +20,7 @@ export async function loadParkModels(stage) {
   return new Map(await Promise.all([...names].map(async name=>{
     const url = new URL('../../models/park/'+name+'.glb',import.meta.url);
     try { return [name,(await new GLTFLoader().loadAsync(url.href)).scene]; }
-    catch (error) { console.warn('星城景观未加载', name, error); return [name,null]; }
+    catch (error) { console.warn('星港景观未加载', name, error); return [name,null]; }
   })));
 }
 

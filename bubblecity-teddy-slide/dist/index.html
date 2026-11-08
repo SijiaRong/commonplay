@@ -1,4 +1,10 @@
-<!doctype html><html lang="zh-CN"><!-- Course geometry baked from the locally analyzed Lost Marbles StageBuilder and CourseView by Meticulai. --><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#fcf2db"><link rel="icon" href="./bubble-city-icon.png"><title>泡泡星城 · Commonplay</title><link rel="stylesheet" href="./slide/slide.css"><script type="importmap">{"imports":{"three":"./slide/film/three.module.js","three/addons/":"./slide/film/addons/"}}</script><link rel="stylesheet" href="./slide/settings.css"><link rel="stylesheet" href="./game-glass.css"><link rel="stylesheet" href="./slide/character-picker.css?v=dock"></head><body>
+<!doctype html><html lang="zh-CN"><!-- Course geometry baked from the locally analyzed Lost Marbles StageBuilder and CourseView by Meticulai. --><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#fcf2db"><link rel="icon" href="./bubble-city-icon.png"><title>泡泡星城 · Commonplay</title><link rel="stylesheet" href="./slide/slide.css"><script type="importmap">{"imports":{"three":"./slide/film/three.module.js","three/addons/":"./slide/film/addons/"}}</script><link rel="stylesheet" href="./slide/settings.css"><link rel="stylesheet" href="./game-glass.css"><link rel="stylesheet" href="./slide/character-picker.css?v=dock"><link rel="stylesheet" href="./slide/party-lobby.css"><script>
+  const lobbyParams = new URLSearchParams(location.search);
+  if (document.querySelector('meta[name="party-endpoint"]') && lobbyParams.get('mode') !== 'yard' &&
+      (lobbyParams.get('mode') === 'party' || lobbyParams.has('room'))) {
+    document.documentElement.classList.add('party-lobby');
+  }
+</script><link rel="preload" as="image" href="./loading-scene.webp"><link rel="stylesheet" href="./loading.css"></head><body>
 <main id="world" aria-label="泡泡星城滑梯赛道"></main>
 <header><div class="logo glass"><img src="./bubble-city-logo.png" width="40" height="40" alt=""><div><small>BUBBLE CITY</small><h1>泡泡星城</h1></div></div><nav class="glass"><a href="./practice.html">自由练习</a><button id="reset" aria-label="重新开始">↺<span> 重来</span></button></nav></header>
 <aside id="progress" class="glass"><div><strong id="section">起点</strong><output id="percent">0%</output></div><progress max="100" value="0" aria-label="赛道进度"></progress></aside>
@@ -8,4 +14,21 @@ npm ci
 npm run bubblecity</pre><p>同一 Wi-Fi 下的玩家打开终端显示的局域网地址，即可创建或加入房间。</p><form method="dialog"><button>关闭</button></form></dialog>
 <dialog id="character-picker" aria-labelledby="character-title"><div class="picker-heading"><div><h2 id="character-title">角色选择</h2></div><button id="close-character-picker" type="button" aria-label="完成角色选择">完成</button></div><div id="character-options" class="character-options"></div><p id="character-status" role="status" aria-live="polite"></p></dialog>
 <footer><div class="keys glass"><span><kbd>A</kbd><kbd>D</kbd> 转向</span><span><kbd>W</kbd> 加速</span><span><kbd>S</kbd> 减速</span><span><kbd>空格</kbd> 跳跃</span></div><div class="pad"><div><button data-key="KeyA" aria-label="向左">◀</button><button data-key="KeyD" aria-label="向右">▶</button></div><div><button data-key="KeyS">减速</button><button data-key="KeyW">加速</button><button data-key="Space">跳跃</button></div></div></footer>
-<script type="module" src="./slide/ride.js?v=start5"></script><svg width="0" height="0" aria-hidden="true" style="position:absolute;pointer-events:none"><defs id="lenses"></defs></svg><script src="./glass.js"></script></body></html>
+<section id="game-loading" aria-live="polite"><div><p>正在载入泡泡星城…</p><progress id="loading-progress" max="4" aria-label="游戏载入进度"></progress><button hidden onclick="location.reload()">重新加载</button></div></section>
+<script type="module">
+  const loading = document.querySelector('#game-loading');
+  const progress = document.querySelector('#loading-progress');
+  try {
+    const {play} = await import('./slide/ride.js?v=station');
+    progress.value = 1;
+    await play(progress);
+    progress.value = progress.max;
+    await new Promise(requestAnimationFrame);
+    loading.remove();
+  } catch (error) {
+    console.error(error);
+    loading.querySelector('p').textContent = '游戏加载失败，请检查网络后重试。';
+    progress.hidden = true;
+    loading.querySelector('button').hidden = false;
+  }
+</script><svg width="0" height="0" aria-hidden="true" style="position:absolute;pointer-events:none"><defs id="lenses"></defs></svg><script src="./glass.js"></script></body></html>
