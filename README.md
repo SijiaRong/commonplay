@@ -13,6 +13,8 @@ An open-source 3D two-player game project started at AI Hacker House. Research e
 ## 调研与原型方向
 
 - [市场案例与机制分析](docs/market-research.zh-CN.md)：成功案例、来源、双人适配与黑客松范围建议。
+- [按 3D 资源选型](docs/asset-driven-directions.zh-CN.md)：结合黑客松 3D 主题，比较现成场景、角色、动画与道具的可用性。
+- 选型优先考虑现成 3D 资源充足、风格统一、可快速搭建关卡的类型；当前优先比较双人合作遗迹闯关与 1v1 小型射击竞技场。
 - 优先验证一个能在 3–5 分钟内完整体验的双人核心循环。
 - 合作候选：非对称信息解谜、互补能力闯关、双人协调操作。
 - 对战候选：1v1 空间博弈、弹道攻防或短回合竞技。
