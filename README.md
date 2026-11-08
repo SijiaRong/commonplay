@@ -32,6 +32,7 @@ An open-source 3D party racing and obstacle-course game project started at AI Ha
 | 三种角色概念设计板 | [概念图目录](assets/toy-town-concepts/) |
 | 泡泡星港设施建模参考、零件图片与打包文件 | [参考目录](assets/bubbleport-model-references/README.md) · [参考图 ZIP](assets/bubbleport-model-references.zip) · [零件 ZIP](assets/bubbleport-components-v2.zip) |
 | 宽版赛道原始模型、预览与验证结论 | [资源目录](assets/track-redesign-validation/) · [验证文档](docs/track-redesign-validation.zh-CN.md) |
+| 宣传片脚本、分镜、参考截图与整片渲染脚本 | [宣传片](promo/README.md) · [分镜](promo/storyboard.zh-CN.md) |
 | 玩具市场与材质方向调研 | [市场调研](docs/toy-market-research.zh-CN.md) · [毛绒](docs/toy-design-plush.zh-CN.md) · [机器人](docs/toy-design-robot.zh-CN.md) · [软胶](docs/toy-design-vinyl.zh-CN.md) · [泡泡星港](docs/bubbleport-toy-research.zh-CN.md) |
 
 模型、图片和试玩运行资源随仓库保存。旧小熊和初代模型目录中的相对软链接指向本仓库的角色档案；运行时所需文件仍保留在各 demo 的 `dist/` 内。下载时请保留目录结构；原始高精度模型和参考图片会增加克隆体积。
