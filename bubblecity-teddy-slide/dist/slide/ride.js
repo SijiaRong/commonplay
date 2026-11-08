@@ -73,7 +73,6 @@ async function play(){
       const {pieceNames}=await import('../solo/course-labels.js');
       roomOptions={partyOnly:true,definitions:roster.characters,character:()=>roster.selected.id,loader,createRider,
         createContactShadow,pieceNames,parkModels:await loadParkModels(),partyStyles:'./solo/room.css',
-        previewWorker:()=>new Worker(new URL('../solo/room-worker.js',import.meta.url),{type:'module'}),
         lightCourse(course,position){course.illuminate(position);updateAcrylicBackdrop(course.mats.acrylic,film)}
       };
     }

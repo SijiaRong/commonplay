@@ -35,7 +35,7 @@ const element=(tag,{dataset,...props}={},...children)=>{const e=Object.assign(do
 const F_GROUNDED=1,F_ACTIVE=2,F_PLACED=4,F_ONLINE=8;
 
 export async function startSolo(host){
-  const {film,player,lite,quality,held}=host,{scene,camera,renderer}=film;
+  const {film,player,lite,quality,held,partyOnly=false}=host,{scene,camera,renderer}=film;
   const style=document.createElement('link');style.rel='stylesheet';style.href=host.partyStyles||'./solo/solo.css';document.head.append(style);
   const params=new URLSearchParams(location.search);
   const seedParam=params.get('seed');
@@ -45,7 +45,7 @@ export async function startSolo(host){
   const pool=host.definitions.filter(d=>d.ready).map(d=>d.id);
 
   // ------------------------------------------------------------ page furniture
-  if(host.previewWorker)$('nav').prepend(element('a',{href:'./',textContent:'单人闯关'}));
+  if(partyOnly)$('nav').prepend(element('a',{href:'./',textContent:'单人闯关'}));
   const original=element('a',{href:'?mode=yard',textContent:'经典滑梯'});
   $('nav').prepend(original);
   const courseID=element('div',{id:'course-id'});
@@ -106,14 +106,15 @@ export async function startSolo(host){
   let soloBots=Number(store.get('commonplay-bots','3'));if(!botChoices.includes(soloBots))soloBots=3;
   const botRow=element('div',{className:'choice-row',role:'radiogroup'},element('span',{textContent:'机器人陪跑'}),
     ...botChoices.map(n=>element('button',{type:'button',textContent:n?n+' 个':'不加',dataset:{bots:n},onclick:()=>{if(soloBots===n)return;soloBots=n;store.set('commonplay-bots',String(n));renderMenu();if(mode==='solo'&&(!state||['ready','over','podium'].includes(state.phase)))connectSolo()}})));
+  if(partyOnly)soloBots=0;
   const codeInput=element('input',{id:'room-code',maxLength:4,placeholder:'房间码',autocomplete:'off',inputMode:'text'});
   codeInput.oninput=()=>{codeInput.value=codeInput.value.toUpperCase().replace(/[^A-Z0-9]/g,'')};
-  const partyRow=element('div',{className:'party-entry',hidden:!partyEndpoint},
+  const partyRow=element('div',{className:'party-entry',hidden:true},
     element('button',{type:'button',id:'create-room',textContent:'创建房间',onclick:()=>joinRoom('')}),
     codeInput,
     element('button',{type:'button',id:'join-room',textContent:'加入',onclick:()=>{if(codeInput.value.length===4)joinRoom(codeInput.value);else{codeInput.focus();setNotice('请输入 4 位房间码')}}}));
   const notice=element('p',{id:'menu-notice',role:'status'});
-  const menu=element('div',{id:'launch-menu'},element('label',{className:'name-field'},element('span',{textContent:'昵称'}),nameInput),botRow);
+  const menu=element('div',{id:'launch-menu'},element('label',{className:'name-field'},element('span',{textContent:'昵称'}),nameInput),...(partyOnly?[]:[botRow]));
   $('#launch').insertBefore(menu,$('#result'));
   $('#launch').append(partyRow,notice);
   const roomPanel=element('section',{id:'room-panel',hidden:true});
@@ -227,10 +228,21 @@ export async function startSolo(host){
   function connectSolo(startOnReady=false){
     link?.terminate();mode='solo';room=null;results=null;resetView();
     roomPanel.hidden=true;menu.hidden=false;partyRow.hidden=!partyEndpoint;
-    $('#launch').hidden=false;$('#result').textContent='';$('#go').disabled=true;$('#go').hidden=false;
-    change.hidden=false;$('#reset').lastChild.textContent=' 重来';
+    $('#launch').hidden=false;$('#result').textContent='';$('#go').disabled=true;$('#go').hidden=partyOnly;
+    change.hidden=partyOnly;$('#reset').lastChild.textContent=' 重来';
     courseID.textContent='单人 · 种子 '+seed;
-    link=host.previewWorker ? host.previewWorker() : openAuthority();
+    if(partyOnly){
+      link=null;
+      rosterToken++;clearRemotes();roster=[];
+      document.body.classList.remove('in-race');
+      courseID.textContent='多人房间';
+      player.visible=true;player.position.set(0,0,0);player.rotation.y=.4;
+      host.contact().visible=false;
+      camera.position.set(3,2.8,6);camera.lookAt(0,1.2,0);
+      film.render(0);
+      return;
+    }
+    link=openAuthority();
     link.onerror=e=>{console.error(e);$('#launch').hidden=false;$('#result').textContent='模拟加载失败，请重新开始';$('#go').textContent='重新加载';$('#go').disabled=false;state=null};
     link.onmessage=({data:m})=>{
       handle(m);
@@ -260,7 +272,7 @@ export async function startSolo(host){
   }
   function leaveRoom(tell=true){
     if(tell)link?.postMessage({type:'leave'});
-    sessionStore.set('commonplay-room-code','');history.replaceState(null,'',host.previewWorker?'?mode=party':location.pathname);
+    sessionStore.set('commonplay-room-code','');history.replaceState(null,'',partyOnly?'?mode=party':location.pathname);
     if(course){scene.remove(course.group);course.dispose();course=null}
     connectSolo();
   }
@@ -275,7 +287,11 @@ export async function startSolo(host){
     roomPanel.hidden=racing;$('#launch').hidden=racing;
     if(racing)return;
     courseID.textContent='房间 '+room.code+' · '+room.members.length+'/'+room.max+' 人';
-    const invite=location.origin+location.pathname+'?room='+room.code;
+    const inviteURL=new URL(location.pathname,location.origin);
+    const lanHost=document.querySelector('meta[name="party-lan-host"]')?.content;
+    if(lanHost && ['localhost','127.0.0.1','[::1]'].includes(inviteURL.hostname))inviteURL.hostname=lanHost;
+    inviteURL.searchParams.set('room',room.code);
+    const invite=inviteURL.href;
     const list=element('ul',{className:'room-members'});
     room.members.forEach((m,i)=>{
       const def=host.definitions.find(d=>d.id===m.character);
@@ -294,7 +310,10 @@ export async function startSolo(host){
     const [minus,,plus]=[...bots.children].slice(1);
     minus.onclick=()=>sendBots(room.bots-1);plus.onclick=()=>sendBots(room.bots+1);
     const copy=element('button',{type:'button',className:'copy-link',textContent:'复制邀请链接',onclick:async()=>{
-      try{await navigator.clipboard.writeText(invite);copy.textContent='已复制'}catch{copy.textContent=invite}
+      try{await navigator.clipboard.writeText(invite);copy.textContent='已复制'}catch{
+        const field=element('input',{value:invite,readOnly:true,ariaLabel:'邀请链接'});
+        copy.replaceWith(field);field.focus();field.select();
+      }
     }});
     const startButton=element('button',{type:'button',id:'room-start',
       textContent:room.inGame?'比赛进行中…':room.isHost?'开始比赛  →':'等待房主开始',disabled:!room.isHost||room.inGame,
@@ -376,7 +395,7 @@ export async function startSolo(host){
     if(mode==='party')renderRoom();
   }
   function start(){
-    if(mode!=='solo')return;
+    if(mode!=='solo'||partyOnly)return;
     if(state?.phase==='ready'){
       link.postMessage({type:'start'});$('#go').disabled=true;$('#go').blur();
     }else if(!state||state.phase==='over'||state.phase==='podium')connectSolo(true);
@@ -417,7 +436,7 @@ export async function startSolo(host){
       const rb=rowsB[i],ra=rowsA[i]||rb,teleported=ra[7]!==rb[7]||a.state.stage!==b.state.stage;
       const f=teleported?(k<.5?0:1):k,src=f<.5?ra:rb;
       sampled.set(rb[0],{x:lerp(ra[1],rb[1],f),y:lerp(ra[2],rb[2],f),z:lerp(ra[3],rb[3],f),vx:rb[4],vy:rb[5],vz:rb[6],tp:src[7],
-        grounded:!!(src[8]&F_GROUNDED),active:!!(src[8]&F_ACTIVE),placed:!!(src[8]&F_PLACED),online:!!(src[8]&F_ONLINE),
+        sliding:!!(src[8]&16),grounded:!!(src[8]&F_GROUNDED),active:!!(src[8]&F_ACTIVE),placed:!!(src[8]&F_PLACED),online:!!(src[8]&F_ONLINE),
         sample:src[9],s:src[10],nx:src[11],ny:src[12],nz:src[13],r:src[14]});
     }
     return {clock:lerp(a.state.clock,b.state.clock,k)};
@@ -439,7 +458,7 @@ export async function startSolo(host){
       else if(r.action==='FinishWave'&&r.actionTime>=r.rider.duration('FinishWave'))set('Idle');
     }else if(!a.active)set('Idle');
     else if(!a.grounded&&(a.vy>1.5||r.action==='Jump'))set('Jump');
-    else if(racing&&onSlide&&a.s>1&&speed>(state.stage===0?.65:3)){
+    else if(racing&&(partyOnly&&r.entry.human ? a.sliding : onSlide&&a.s>1&&speed>(state.stage===0?.65:3))){
       if(r.action==='SitDown'){if(r.actionTime>=r.rider.duration('SitDown'))set('Slide')}
       else if(r.action!=='Slide')set(r.action==='Jump'?'Slide':'SitDown');
     }else if(r.action==='Slide'||r.action==='SitDown')set('StandUp');
@@ -483,7 +502,9 @@ export async function startSolo(host){
     worldPos.set(a.x,a.y,a.z);
     const path=course.stage.path,idx=clamp(a.sample,0,path.n-1),trackYaw=Math.atan2(path.tx[idx],path.tz[idx]);
     yaw+=angle(yaw,trackYaw)*(snap?1:damping(6,dt));
-    if(canMove(ph))controls();
+    if(canMove(ph)){
+      if(host.blocked()){if(held.size||stick.id!==null)release()}else controls();
+    }
     // Your own runner.
     const speed=Math.hypot(a.vx,a.vz),motionHeading=Math.atan2(a.vx,a.vz);
     const finished=a.placed||ph==='over';
@@ -493,7 +514,7 @@ export async function startSolo(host){
       facing+=angle(facing,desired)*(snap?1:damping(12,dt));
       const onSlide=state.stage===0?Boolean(slideNames[section?.name]):!deckNames[section?.name];
       const slideSpeed=state.stage===0 ? .65 : sit>.4 ? 3 : 6;
-      const sliding=racing&&onSlide&&a.s>1&&speed>slideSpeed;
+      const sliding=racing&&(partyOnly ? a.sliding : onSlide&&a.s>1&&speed>slideSpeed);
       actionTime+=dt;
       if(finished&&speed<.65){
         if(!a.grounded)setAction('Jump');

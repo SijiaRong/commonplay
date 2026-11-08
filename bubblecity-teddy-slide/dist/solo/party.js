@@ -1,1 +1,0 @@
-../../../teddy-playground/dist/solo/party.js

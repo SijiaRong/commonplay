@@ -11,11 +11,11 @@ import {extname,resolve,sep} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {randomBytes,randomInt} from 'node:crypto';
 import {WebSocketServer,WebSocket} from 'ws';
-import {PartySession,MAX_FIELD,withPartyRules} from '../dist/solo/party.js';
+import {PartySession,MAX_FIELD} from '../dist/solo/party.js';
 
 const city = process.argv.includes('--bubblecity');
 const root = fileURLToPath(new URL(city ? '../../bubblecity-teddy-slide/dist/' : '../dist/', import.meta.url));
-const ShowClass = city ? withPartyRules((await import('../../bubblecity-teddy-slide/dist/solo/shared/sim.js')).Show) : undefined;
+const ShowClass = city ? (await import('../../bubblecity-teddy-slide/dist/solo/city-party.js')).CityPartyShow : undefined;
 const PORT=Number(process.env.PORT||(city ? 4181 : 4180));
 const configuredPlayers=Number(process.env.MAX_PLAYERS||4);
 if(!Number.isInteger(configuredPlayers))throw new Error('MAX_PLAYERS must be an integer');
@@ -27,7 +27,10 @@ const characterIds=new Set(catalog.filter(c=>c.ready).map(c=>c.id));
 const pool=[...characterIds];
 
 const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript','.mjs':'text/javascript','.json':'application/json',
-  '.css':'text/css','.glb':'model/gltf-binary','.jpg':'image/jpeg','.png':'image/png','.hdr':'application/octet-stream','.svg':'image/svg+xml'};
+  '.css':'text/css','.glb':'model/gltf-binary','.jpg':'image/jpeg','.png':'image/png','.hdr':'application/octet-stream','.svg':'image/svg+xml','.m4a':'audio/mp4','.mp3':'audio/mpeg','.webp':'image/webp'};
+function lanAddresses(){
+  return Object.values(networkInterfaces()).flat().filter(a=>a&&a.family==='IPv4'&&!a.internal).map(a=>a.address);
+}
 const server=createServer(async(req,res)=>{
   try{
     const url=new URL(req.url,'http://localhost');
@@ -40,7 +43,8 @@ const server=createServer(async(req,res)=>{
     if(req.method==='HEAD'){res.end();return}
     if(path===resolve(root,'index.html')){
       const html=await readFile(path,'utf8');
-      res.end(html.replace('<head>',`<head><meta name="party-endpoint" content="/party"><meta name="party-max" content="${MAX_PLAYERS}">`));
+      const lanHost=lanAddresses().find(ip=>/^(192\.168\.|10\.|172\.(1[6-9]|2\d|3[01])\.)/.test(ip))||'';
+      res.end(html.replace('<head>',`<head><meta name="party-lan-host" content="${lanHost}"><meta name="party-endpoint" content="/party"><meta name="party-max" content="${MAX_PLAYERS}">`));
     }else createReadStream(path).on('error',()=>res.destroy()).pipe(res);
   }catch{res.writeHead(404).end()}
 });
@@ -238,7 +242,7 @@ setInterval(()=>{for(const ws of wss.clients){if(!ws.isAlive){ws.terminate();con
 
 server.listen(PORT,'0.0.0.0',()=>{
   const port=server.address().port;
-  const addresses=Object.values(networkInterfaces()).flat().filter(a=>a&&a.family==='IPv4'&&!a.internal).map(a=>a.address);
+  const addresses=lanAddresses();
   console.log(`${city ? "泡泡星城" : "小熊滑滑梯"}派对服务器已启动（每个房间最多 ${MAX_PLAYERS} 人，含机器人最多 ${MAX_FIELD} 名选手）`);
   console.log(`  本机打开:   http://localhost:${port}`);
   for(const a of addresses)console.log(`  同一 Wi-Fi: http://${a}:${port}`);

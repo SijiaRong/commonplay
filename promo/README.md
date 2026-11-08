@@ -2,6 +2,10 @@
 
 ## 泡泡星城实机版
 
+[播放 95 秒动态宣传片](bubble-city/bubble-city-promo.mp4) · [动态取景脚本](render/bubble-city-motion.mjs)
+
+成片沿用 32 镜的顺序。单人赛每输出一帧推进两次 60 Hz 实机物理，使用游戏的碰撞、角色动画、机关和渲染管线。拍摄时将角色放在各赛段的入镜位置，推进方向由该段赛道切线决定。第 05、13、20、24、27 镜分别从摩天轮、土星地标、玻璃穹顶馆、弧面商店和星港总站看向赛道。配乐取自本版游戏的《Orbital Sprint》。
+
 [逐镜浏览](bubble-city/index.html) · [32 镜总览图](bubble-city/contact-sheet.jpg) · [95 秒分镜视频](bubble-city/storyboard.mp4) · [取景脚本](render/bubble-city.mjs)
 
 镜头 01–04 从选角进入单人赛起跑；05–12 展示玩具门廊；13–19 沿蜡笔峡谷进入第二关的土星回旋滑梯；20–30 巡览后三关；31–32 以经典滑梯与自由练习收尾。视频按前三十一镜各 3 秒、末镜 2 秒剪成静帧预演，供核对画面与节奏。
@@ -18,6 +22,17 @@ npm ci
 node bubble-city.mjs http://127.0.0.1:8771/
 # 由新图重新剪出分镜预演（需要 ffmpeg）
 ffmpeg -y -framerate 1/3 -i ../bubble-city/shots/%02d.jpg -t 95 -vf fps=24 -c:v libx264 -pix_fmt yuv420p -movflags +faststart ../bubble-city/storyboard.mp4
+```
+
+动态版从同一个游戏地址读取模型。启动上面的服务并在 `promo/render` 安装依赖后，运行以下命令生成 2,850 帧和带游戏配乐的 MP4。
+
+```sh
+node bubble-city-motion.mjs http://127.0.0.1:8771/ out/bubble-city-frames
+ffmpeg -framerate 30 -start_number 0 -i out/bubble-city-frames/%04d.jpg \
+  -stream_loop -1 -i ../../bubblecity-teddy-slide/dist/music/orbital-sprint.m4a \
+  -map 0:v -map 1:a -t 95 -c:v libx264 -pix_fmt yuv420p -crf 19 \
+  -af "volume=0.78,afade=t=in:d=0.16,afade=t=out:st=93.4:d=1.6" \
+  -c:a aac -b:a 192k -movflags +faststart ../bubble-city/bubble-city-promo.mp4
 ```
 
 ## 小熊滑滑梯原版

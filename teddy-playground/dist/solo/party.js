@@ -3,7 +3,7 @@ import {TICK_DT,stepWorld} from './shared/physics.js';
 import {BTN_JUMP,controlStep} from './shared/control.js';
 import {CARD_BY_ID} from './shared/cards.js';
 import {makeRng} from './shared/rng.js';
-import {enableRunnerHandling,plantFeet} from './runner-handling.js';
+import {plantFeet} from './runner-handling.js';
 
 // A points race for 1–16 runners on the teddy course. Everyone runs all five stages: nobody is cut.
 // Each stage scores by finishing order, the final counts double, and the podium ranks the totals.
@@ -191,7 +191,16 @@ export const withPartyRules = BaseShow => class PartyShow extends BaseShow {
     }
   }
 
+  prepareRunner(player) {
+    plantFeet(player);
+  }
+
   simulate(frozen) {
+    if (!frozen && this.phase === PHASE.RACE) {
+      for (const p of this.players) {
+        if (p.human && p.connected && p.alive && p.body.active && p.finishOrder < 0) this.prepareRunner(p);
+      }
+    }
     if (!(frozen && (this.phase === PHASE.INTRO || this.phase === PHASE.COUNTDOWN))) return super.simulate(frozen);
     // Behind the gate runners may walk and hop about the start platform.
     const st = this.stage, gate = st.colliders[st.gate], path = st.path;
@@ -225,7 +234,6 @@ export class PartySession {
       seed, fieldSize, untimed: fieldSize === 1,
       entrants: humans.map(e => ({name: e.name, loadout: {deck: HUMAN_DECK}})),
     });
-    enableRunnerHandling(this.show);
     // Bots get a friendly name and wear one of the playable characters so the field looks like a party.
     const rng = makeRng(seed ^ 0x51ed270b), names = rng.shuffle(BOT_NAMES.slice()), taken = new Set(humans.map(h => h.name));
     this.show.players.forEach((p, i) => {
@@ -312,7 +320,7 @@ export class PartySession {
     const runners = !started ? [] : s.players.map(p => {
       const b = p.body;
       return [p.id, r2(b.x), r2(b.y), r2(b.z), r2(b.vx), r2(b.vy), r2(b.vz), b.tp,
-        (b.groundT < .1 ? 1 : 0) | (b.active ? 2 : 0) | (p.finishOrder >= 0 ? 4 : 0) | (p.connected ? 8 : 0),
+        (b.groundT < .1 ? 1 : 0) | (b.active ? 2 : 0) | (p.finishOrder >= 0 ? 4 : 0) | (p.connected ? 8 : 0) | (p.slideMode?.sliding ? 16 : 0),
         p.sampleIdx ?? 0, Math.round(p.s * 10) / 10, r2(b.gnx), r2(b.gny), r2(b.gnz), r2(b.r)];
     });
     const state = {
