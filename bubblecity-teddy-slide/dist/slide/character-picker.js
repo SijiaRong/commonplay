@@ -1,3 +1,4 @@
+import {TextureLoader, SRGBColorSpace} from 'three';
 import {createRider} from './rider.js?v=dock';
 
 const storageKey = 'bubblecity-rider';
@@ -27,7 +28,7 @@ export async function loadRoster(loader, scale) {
   return {characters, selected, rider, load};
 }
 
-export function installCharacterPicker(roster, {renderer, camera, scene, replace, onOpen}) {
+export function installCharacterPicker(roster, {player, renderer, camera, scene, replace, onOpen}) {
   const dialog = document.querySelector('#character-picker');
   const trigger = document.querySelector('#choose-character');
   const choices = dialog.querySelector('#character-options');
@@ -35,6 +36,18 @@ export function installCharacterPicker(roster, {renderer, camera, scene, replace
   const close = dialog.querySelector('#close-character-picker');
   let selected = roster.selected;
   let busy = false;
+
+  let stationTexture, previousBackground;
+  const hiddenScenery = [];
+  function frameStation() {
+    if (!dialog.open || !stationTexture?.image) return;
+    const image = stationTexture.image;
+    const aspect = (innerWidth / innerHeight) / (image.width / image.height);
+    stationTexture.repeat.set(Math.min(1, aspect), Math.min(1, 1 / aspect));
+    stationTexture.offset.set((1 - stationTexture.repeat.x) / 2, (1 - stationTexture.repeat.y) / 2);
+    scene.background = stationTexture;
+  }
+  window.addEventListener('resize', frameStation);
 
   function refresh() {
     trigger.querySelector('img').src = selected.preview;
@@ -89,11 +102,27 @@ export function installCharacterPicker(roster, {renderer, camera, scene, replace
   trigger.onclick = () => {
     onOpen();
     status.textContent = '';
+    previousBackground = scene.background;
     dialog.showModal();
+    for (const object of scene.children) {
+      if (object.visible && object !== player && !object.isLight) {
+        hiddenScenery.push(object);
+        object.visible = false;
+      }
+    }
+    if (!stationTexture) {
+      stationTexture = new TextureLoader().load('./slide/party-station.jpg', frameStation);
+      stationTexture.colorSpace = SRGBColorSpace;
+    }
+    frameStation();
     choices.querySelector('[aria-pressed="true"]').focus();
   };
   close.onclick = () => dialog.close();
   dialog.addEventListener('cancel', event => { if (busy) event.preventDefault(); });
-  dialog.addEventListener('close', () => trigger.focus());
+  dialog.addEventListener('close', () => {
+    scene.background = previousBackground;
+    for (const object of hiddenScenery.splice(0)) object.visible = true;
+    trigger.focus();
+  });
   return () => dialog.open || busy;
 }
