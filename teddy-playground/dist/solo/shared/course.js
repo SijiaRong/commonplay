@@ -62,10 +62,10 @@ export const HELIX_DROP = 9;
 const FLOOR_T = 1.0;
 const SAMPLE_STEP = 1.5;
 
-// Kids' block palette (painted wood, grain shows through).
+// Enamel tints for the Bubbleport toy course.
 export const PALETTE = {
-  red: '#c42a1c', orange: '#e2701a', yellow: '#efb21c', green: '#2f8f47', teal: '#0f8f87', blue: '#1f5bc4',
-  navy: '#1a3577', purple: '#6438a6', pink: '#de5d86', wood: '#ffffff', birch: '#f6efe6', walnut: '#c9a27d',
+  red: '#d88365', orange: '#efaa81', yellow: '#d5ae78', green: '#9ac9b3', teal: '#65aea3', blue: '#7eafb1',
+  navy: '#356d6b', purple: '#ae958d', pink: '#eeae98', wood: '#ffffff', birch: '#f6efe6', walnut: '#c9a27d',
   cream: '#efe6d6',
 };
 const BRIGHT = ['red', 'orange', 'yellow', 'green', 'teal', 'blue', 'purple', 'pink'];
@@ -1783,12 +1783,35 @@ class StageBuilder {
     }
     band(rPrev, ro + 0.6, bankCol);
     this.vis({ ...V, outline: [[ro - 0.5, base - 1], [ro + 0.5, base - 1], [ro + 0.5, base + wallTop], [ro - 0.5, base + wallTop]], lift: [0, 0, bank(ro), bank(ro)], col: this.nextColor(), segments: extra ? 16 : 14 });
+    if (!extra && drop > 0) {
+      const rim = base + wallTop;
+      this.vis({ ...V, segments: 14, m: 'brass', col: PALETTE.cream,
+        outline: [[ro - 0.56, rim - 0.12], [ro + 0.56, rim - 0.12], [ro + 0.56, rim + 0.06], [ro - 0.56, rim + 0.06]],
+        lift: Array(4).fill(bank(ro)) });
+      // Mount the guide lights on the inside face, following its faceted curve and bank.
+      const bays = 14;
+      const radius = (ro - 0.5) * Math.cos((a1 - a0) / (2 * bays));
+      const smooth = t => { t = Math.max(0, Math.min(1, t)); return t*t*(3-2*t); };
+      for (let i = 0; i < bays; i++) {
+        const t = (i + 0.5) / bays, ph = a0 + t * (a1 - a0);
+        const cs = Math.cos(ph), sn = Math.sin(ph);
+        const bankWeight = smooth((ph - a0) / blend) * smooth((a1 - ph) / blend);
+        const lampY = y + rim + rise*t + bank(ro)*bankWeight - 0.5;
+        const R = [-sn,-cs,0, 0,0,-1, cs,-sn,0];
+        for (const [inset, r, m, col] of [[0.05,0.27,'brass',PALETTE.cream],[0.14,0.19,'lamp',PALETTE.cream]]) {
+          this.vis({ k:'cyl', c:[C[0]+cs*(radius-inset),lampY,C[2]+sn*(radius-inset)], R, r, h:0.12, m, col });
+        }
+      }
+    }
     // The post (a tall striped tower for the helter-skelter).
     const top = 4.8 + (extra ? 2.5 : 0);
     const postH = top + H;
     this.collider('cyl', { c: [C[0], y + top / 2 - H / 2 - 1.6, C[2]], radius: rin, hh: postH / 2 + 1.6, mat: MAT.wall });
     this.vis({ k: 'cyl', c: [C[0], y + top - postH / 2, C[2]], R: matIdentity(), r: rin, h: postH, col: this.nextColor(), m: 'paint', stripes: true });
     this.vis({ k: 'cyl', c: [C[0], y + top + 0.3, C[2]], R: matIdentity(), r: rin + 0.4, h: 0.6, col: PALETTE.cream, m: 'paint' });
+    if (!extra && drop > 0) {
+      this.vis({ k: 'saturnLamp', c: [C[0], y + top + 0.6, C[2]] });
+    }
     if (extra) {
       // A pointed roof cap like a fairground helter-skelter: stacked discs.
       for (let i = 0; i < 4; i++) {

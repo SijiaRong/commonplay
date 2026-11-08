@@ -1,0 +1,297 @@
+{
+  "schemaVersion": 1,
+  "mode": "Baked color/roughness/metallic maps. Use white color, roughness=1, metalness=1 with these maps to avoid multiplying the defaults twice.",
+  "materials": [
+    {
+      "id": "road",
+      "name": "象牙路面",
+      "basecolor": {
+        "file": "textures/road/basecolor.png",
+        "colorSpace": "sRGB",
+        "materialColor": "#ffffff"
+      },
+      "roughness": {
+        "file": "textures/road/roughness.png",
+        "colorSpace": "linear-data",
+        "materialRoughness": 1,
+        "repeat": [
+          1,
+          1
+        ]
+      },
+      "metallic": {
+        "file": "textures/road/metallic.png",
+        "colorSpace": "linear-data",
+        "materialMetalness": 1
+      },
+      "emissive": null,
+      "bump": {
+        "file": "textures/shared/road-grain-height.png",
+        "repeat": [
+          4,
+          4
+        ],
+        "bumpScale": 0.0012,
+        "colorSpace": "linear-data"
+      },
+      "physicalProperties": {
+        "roughness": 0.16,
+        "metalness": 0,
+        "clearcoat": 1,
+        "clearcoatRoughness": 0.065
+      }
+    },
+    {
+      "id": "mint",
+      "name": "薄荷树脂",
+      "basecolor": {
+        "file": "textures/mint/basecolor.png",
+        "colorSpace": "sRGB",
+        "materialColor": "#ffffff"
+      },
+      "roughness": {
+        "file": "textures/mint/roughness.png",
+        "colorSpace": "linear-data",
+        "materialRoughness": 1,
+        "repeat": [
+          1,
+          1
+        ]
+      },
+      "metallic": {
+        "file": "textures/mint/metallic.png",
+        "colorSpace": "linear-data",
+        "materialMetalness": 1
+      },
+      "emissive": null,
+      "bump": null,
+      "physicalProperties": {
+        "roughness": 0.29,
+        "metalness": 0,
+        "clearcoat": 0.48,
+        "clearcoatRoughness": 0.22
+      }
+    },
+    {
+      "id": "peach",
+      "name": "蜜桃软胶",
+      "basecolor": {
+        "file": "textures/peach/basecolor.png",
+        "colorSpace": "sRGB",
+        "materialColor": "#ffffff"
+      },
+      "roughness": {
+        "file": "textures/peach/roughness.png",
+        "colorSpace": "linear-data",
+        "materialRoughness": 1,
+        "repeat": [
+          1,
+          1
+        ]
+      },
+      "metallic": {
+        "file": "textures/peach/metallic.png",
+        "colorSpace": "linear-data",
+        "materialMetalness": 1
+      },
+      "emissive": null,
+      "bump": null,
+      "physicalProperties": {
+        "roughness": 0.39,
+        "metalness": 0,
+        "clearcoat": 0.025,
+        "clearcoatRoughness": 0.38,
+        "specularIntensity": 0.4,
+        "ior": 1.43
+      }
+    },
+    {
+      "id": "brass",
+      "name": "香槟黄铜",
+      "basecolor": {
+        "file": "textures/brass/basecolor.png",
+        "colorSpace": "sRGB",
+        "materialColor": "#ffffff"
+      },
+      "roughness": {
+        "file": "textures/brass/roughness.png",
+        "colorSpace": "linear-data",
+        "materialRoughness": 1,
+        "repeat": [
+          1,
+          2
+        ]
+      },
+      "metallic": {
+        "file": "textures/brass/metallic.png",
+        "colorSpace": "linear-data",
+        "materialMetalness": 1
+      },
+      "emissive": null,
+      "bump": {
+        "file": "textures/shared/metal-brush-microstructure.png",
+        "repeat": [
+          1,
+          2
+        ],
+        "bumpScale": 0.003,
+        "colorSpace": "linear-data"
+      },
+      "physicalProperties": {
+        "roughness": 0.26,
+        "metalness": 1,
+        "clearcoat": 0.08,
+        "clearcoatRoughness": 0.25
+      }
+    },
+    {
+      "id": "silver",
+      "name": "拉丝铝",
+      "basecolor": {
+        "file": "textures/silver/basecolor.png",
+        "colorSpace": "sRGB",
+        "materialColor": "#ffffff"
+      },
+      "roughness": {
+        "file": "textures/silver/roughness.png",
+        "colorSpace": "linear-data",
+        "materialRoughness": 1,
+        "repeat": [
+          1,
+          2
+        ]
+      },
+      "metallic": {
+        "file": "textures/silver/metallic.png",
+        "colorSpace": "linear-data",
+        "materialMetalness": 1
+      },
+      "emissive": null,
+      "bump": {
+        "file": "textures/shared/metal-brush-microstructure.png",
+        "repeat": [
+          1,
+          2
+        ],
+        "bumpScale": 0.003,
+        "colorSpace": "linear-data"
+      },
+      "physicalProperties": {
+        "roughness": 0.34,
+        "metalness": 1,
+        "clearcoat": 0,
+        "clearcoatRoughness": 0.3
+      }
+    },
+    {
+      "id": "acrylic",
+      "name": "薄荷亚克力",
+      "basecolor": {
+        "file": "textures/acrylic/basecolor.png",
+        "colorSpace": "sRGB",
+        "materialColor": "#ffffff"
+      },
+      "roughness": {
+        "file": "textures/acrylic/roughness.png",
+        "colorSpace": "linear-data",
+        "materialRoughness": 1,
+        "repeat": [
+          1,
+          1
+        ]
+      },
+      "metallic": {
+        "file": "textures/acrylic/metallic.png",
+        "colorSpace": "linear-data",
+        "materialMetalness": 1
+      },
+      "emissive": null,
+      "bump": null,
+      "physicalProperties": {
+        "roughness": 0.09,
+        "metalness": 0,
+        "clearcoat": 1,
+        "clearcoatRoughness": 0.1,
+        "transmission": 0.94,
+        "thickness": 0.7,
+        "ior": 1.46,
+        "attenuationColor": "#4d9f89",
+        "attenuationDistance": 7
+      }
+    },
+    {
+      "id": "amber",
+      "name": "暖琥珀灯",
+      "basecolor": {
+        "file": "textures/amber/basecolor.png",
+        "colorSpace": "sRGB",
+        "materialColor": "#ffffff"
+      },
+      "roughness": {
+        "file": "textures/amber/roughness.png",
+        "colorSpace": "linear-data",
+        "materialRoughness": 1,
+        "repeat": [
+          1,
+          1
+        ]
+      },
+      "metallic": {
+        "file": "textures/amber/metallic.png",
+        "colorSpace": "linear-data",
+        "materialMetalness": 1
+      },
+      "emissive": {
+        "file": "textures/amber/emissive.png",
+        "colorSpace": "sRGB",
+        "materialEmissive": "#ffffff",
+        "intensity": 4
+      },
+      "bump": null,
+      "physicalProperties": {
+        "roughness": 0.22,
+        "metalness": 0,
+        "clearcoat": 0.2,
+        "emissive": "#ffbb52",
+        "emissiveIntensity": 4
+      }
+    },
+    {
+      "id": "signal",
+      "name": "青绿指示灯",
+      "basecolor": {
+        "file": "textures/signal/basecolor.png",
+        "colorSpace": "sRGB",
+        "materialColor": "#ffffff"
+      },
+      "roughness": {
+        "file": "textures/signal/roughness.png",
+        "colorSpace": "linear-data",
+        "materialRoughness": 1,
+        "repeat": [
+          1,
+          1
+        ]
+      },
+      "metallic": {
+        "file": "textures/signal/metallic.png",
+        "colorSpace": "linear-data",
+        "materialMetalness": 1
+      },
+      "emissive": {
+        "file": "textures/signal/emissive.png",
+        "colorSpace": "sRGB",
+        "materialEmissive": "#ffffff",
+        "intensity": 3.2
+      },
+      "bump": null,
+      "physicalProperties": {
+        "roughness": 0.18,
+        "metalness": 0,
+        "clearcoat": 0.3,
+        "emissive": "#65efc6",
+        "emissiveIntensity": 3.2
+      }
+    }
+  ]
+}

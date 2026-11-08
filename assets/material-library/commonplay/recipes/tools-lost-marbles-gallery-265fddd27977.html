@@ -1,0 +1,106 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0;background:#eee;}canvas{display:block;width:100vw;height:100vh}</style><script type="importmap">{"imports":{"three":"/vendor/three/three.module.js","three/addons/":"/vendor/three/addons/"}}</script></head><body><canvas></canvas><script type="module">
+import * as THREE from 'three';
+import { buildShow, buildStage, STAGE_NAMES } from '/shared/course.js';
+import { CourseView } from '/js/render/courseView.js';
+import { getMaterials } from '/js/render/materials.js';
+import { Environment } from '/js/render/env.js';
+const renderer=new THREE.WebGLRenderer({canvas:document.querySelector('canvas'),antialias:true,preserveDrawingBuffer:true});
+renderer.setSize(3200,3800); renderer.setPixelRatio(1); renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.AgXToneMapping;renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+const scene=new THREE.Scene();scene.background=new THREE.Color('#e4dfd6');
+const sun=new THREE.DirectionalLight('#fff1dc',2.6);sun.castShadow=true;sun.shadow.mapSize.set(4096,4096);sun.shadow.bias=-0.00015;sun.shadow.normalBias=.15;scene.add(sun,sun.target);
+const s3={scene,renderer,sun,sunDir:new THREE.Vector3(.62,.62,.48).normalize(),exposure:1};
+const env=new Environment(s3,'high');await env.load();scene.add(new THREE.HemisphereLight('#e4efff','#cbb694',.45));
+const stages=buildShow(20261108);
+// Derive visual positions from the original stage-local descriptors to avoid shared collider arrays being translated twice.
+stages.forEach((st,i)=>{const raw=buildStage(20261108,i,50-i*10);st.visuals.forEach((v,j)=>{if(raw.visuals[j].c)v.c=raw.visuals[j].c.map((n,k)=>n+st.offset[k]);});});
+const views=stages.map(st=>{const v=new CourseView(st,'high');v.update(2,0,false);scene.add(v.group);return v;});await getMaterials().ready;
+const floor=new THREE.Mesh(new THREE.PlaneGeometry(2200,2200),new THREE.MeshStandardMaterial({color:'#ded8cb',roughness:.94}));floor.rotation.x=-Math.PI/2;floor.position.y=-.08;floor.receiveShadow=true;floor.visible=false;scene.add(floor);
+window.views=views;window.stages=stages;window.THREE=THREE; let camera;
+window.shot=async function(index=-1,style='room',azimuth=.85){
+ views.forEach((v,i)=>v.group.visible=index<0||i===index);
+ env.group.visible=style==='room';floor.visible=style!=='room';
+ const box=new THREE.Box3();views.forEach(v=>{if(v.group.visible)box.union(new THREE.Box3().setFromObject(v.group));});
+ const center=box.getCenter(new THREE.Vector3());
+ const direction=new THREE.Vector3(Math.sin(azimuth),style==='top'?3.5:1.15,Math.cos(azimuth)).normalize();
+ camera=new THREE.PerspectiveCamera(style==='room'?68:42,innerWidth/innerHeight,.5,4000);
+ const corners=[];for(let x of [box.min.x,box.max.x])for(let y of [box.min.y,box.max.y])for(let z of [box.min.z,box.max.z])corners.push(new THREE.Vector3(x,y,z));
+ let distance=200;
+ for(;distance<1800;distance+=4){camera.position.copy(center).addScaledVector(direction,distance);camera.lookAt(center);camera.updateMatrixWorld();if(corners.every(c=>{const p=c.clone().project(camera);return Math.abs(p.x)<.93&&Math.abs(p.y)<.91&&p.z<1;}))break;}
+ const span=index<0?350:200;sun.shadow.camera.left=-span;sun.shadow.camera.right=span;sun.shadow.camera.top=span;sun.shadow.camera.bottom=-span;sun.shadow.camera.near=1;sun.shadow.camera.far=1500;sun.shadow.camera.updateProjectionMatrix();sun.target.position.copy(center);sun.position.copy(center).addScaledVector(s3.sunDir,500);sun.shadow.needsUpdate=true;
+ renderer.render(scene,camera);await new Promise(r=>requestAnimationFrame(r));renderer.render(scene,camera);
+ return {index,name:index<0?'All five stages':STAGE_NAMES[index],distance,bounds:[box.min.toArray(),box.max.toArray()],camera:camera.position.toArray()};
+};
+// The visible canvas composes native WebGL renders with readable captions.
+const board=document.createElement('canvas');board.id='output';board.width=3200;board.height=4000;document.body.append(board);renderer.domElement.style.display='none';
+const ctx=board.getContext('2d');
+const plans=[
+ [{name:'drum',title:'01 / THE DRUM — banked spiral'}, {name:'fork',title:'02 / FIRST FORK — bumpers / trap / clear'}, {name:'halfpipe',title:'03 / HALF-PIPE — curved walls'}],
+ [{name:'plunge',title:'01 / THE PLUNGE — steep descent'}, {name:'keys',title:'02 / PIANO KEYS — moving floor'}, {name:'bowl',title:'03 / CHECKPOINT BOWL — funnel & drain'}],
+ [{name:'fork',title:'01 / FIRST FORK — loop / pegs'}, {name:'fork',nth:1,title:'02 / SECOND FORK — cannon / bumpers'}, {name:'whirlpool',title:'03 / WHIRLPOOL — side funnel'}],
+ [{name:'hammers',title:'01 / HAMMERS — swinging obstacles'}, {name:'helix',title:'02 / HELIX — descending spiral'}, {name:'whirlpool',title:'03 / WHIRLPOOL — entry & exit'}],
+ [{name:'plunge',title:'01 / THE PLUNGE — crest & run-out'}, {name:'megaJump',title:'02 / MEGA JUMP — launch & landings'}, {name:'bowl',title:'03 / FINAL BOWL — finish drain'}]
+];
+function wholeBox(index){return new THREE.Box3().setFromObject(views[index].group);}
+function detailBox(st,item){
+ if(item.name==='bowl'){
+ const c=st.bowl.c,r=st.bowl.rim||24;
+ return new THREE.Box3(new THREE.Vector3(c[0]-r-5,c[1]-14,c[2]-r-5),new THREE.Vector3(c[0]+r+5,c[1]+10,c[2]+r+5));
+ }
+ const piece=st.pieces.filter(p=>p.name===item.name)[item.nth||0];
+ const box=new THREE.Box3(),p=st.path;
+ for(let k=0;k<p.n;k++)if(p.s[k]>=piece.s0&&p.s[k]<=piece.s1)box.expandByPoint(new THREE.Vector3(p.x[k],p.y[k],p.z[k]));
+ box.expandByVector(new THREE.Vector3(st.width*.62,8,5));return box;
+}
+function drawScene(box,w,h,mode='oblique',azimuth=.65){
+ renderer.setSize(w,h,false);
+ const center=box.getCenter(new THREE.Vector3()),size=box.getSize(new THREE.Vector3());
+ let cam;
+ if(mode==='top'){
+ const height=Math.max(size.z*1.12,size.x*1.12/(w/h));
+ cam=new THREE.OrthographicCamera(-height*w/h/2,height*w/h/2,height/2,-height/2,1,2000);
+ cam.position.copy(center).add(new THREE.Vector3(0,700,0));cam.up.set(0,0,-1);cam.lookAt(center);
+ }else{
+ cam=new THREE.PerspectiveCamera(34,w/h,.2,3000);
+ const direction=new THREE.Vector3(Math.sin(azimuth),1.25,Math.cos(azimuth)).normalize();
+ const corners=[];for(const x of [box.min.x,box.max.x])for(const y of [box.min.y,box.max.y])for(const z of [box.min.z,box.max.z])corners.push(new THREE.Vector3(x,y,z));
+ for(let d=20;d<1800;d+=2){cam.position.copy(center).addScaledVector(direction,d);cam.lookAt(center);cam.updateMatrixWorld();if(corners.every(c=>{const v=c.clone().project(cam);return Math.abs(v.x)<.92&&Math.abs(v.y)<.92&&v.z<1;}))break;}
+ }
+ cam.updateProjectionMatrix();cam.updateMatrixWorld();renderer.render(scene,cam);return cam;
+}
+function caption(text,x,y,size=30,color='#534c41'){ctx.fillStyle=color;ctx.font=`500 ${size}px -apple-system, BlinkMacSystemFont, sans-serif`;ctx.fillText(text,x,y);}
+function drawPanel(box,x,y,w,h,mode,azimuth){
+ const cam=drawScene(box,w,h,mode,azimuth);ctx.drawImage(renderer.domElement,x,y,w,h);return cam;
+}
+function pin(point,label,cam,x,y,w,h){
+ const q=new THREE.Vector3(...point).project(cam),px=x+(q.x+1)*w/2,py=y+(1-q.y)*h/2;
+ ctx.beginPath();ctx.arc(px,py,30,0,Math.PI*2);ctx.fillStyle='#163e4b';ctx.fill();ctx.lineWidth=4;ctx.strokeStyle='#fff9ed';ctx.stroke();ctx.textAlign='center';caption(label,px,py+11,30,'#ffffff');ctx.textAlign='left';
+}
+window.galleryShot=async function(index,kind){
+ views.forEach((v,i)=>v.group.visible=i===index);env.group.visible=false;floor.visible=true;
+ const st=stages[index],box=wholeBox(index),center=box.getCenter(new THREE.Vector3());
+ const shadow=sun.shadow.camera;Object.assign(shadow,{left:-180,right:180,top:180,bottom:-180,near:1,far:1200});shadow.updateProjectionMatrix();sun.target.position.copy(center);sun.position.copy(center).addScaledVector(s3.sunDir,500);sun.shadow.needsUpdate=true;
+ board.width=3200;board.height=4000;ctx.fillStyle='#f6f1e7';ctx.fillRect(0,0,3200,4000);
+ caption('LOST MARBLES / STAGE '+(index+1),110,95,35,'#697568');caption(STAGE_NAMES[index],110,179,70,'#263b3c');
+ const labels={top:'01 / COMPLETE ROUTE — overhead',overview:'02 / COMPLETE COURSE — elevated perspective',details:'03 / FULL ROUTE + THREE MECHANISM CLOSE-UPS'};
+ caption(labels[kind],110,246,30);
+ if(kind!=='details'){
+ const cam=drawPanel(box,70,310,3060,3510,kind==='top'?'top':'oblique',.48);
+ if(kind==='top'){
+ pin(st.grid[0],'S',cam,70,310,3060,3510);const end=st.bowl?st.bowl.c:st.penCenter;pin(end,'F',cam,70,310,3060,3510);
+ caption('S = START    F = CHECKPOINT / FINISH',110,3890,29);
+ }
+ }else{
+ const mapCam=drawPanel(box,70,365,1390,3330,'top',0);
+ caption('COMPLETE ROUTE / DETAIL LOCATIONS',100,335,27);
+ for(let k=0;k<3;k++){
+ const item=plans[index][k],b=detailBox(st,item),c=b.getCenter(new THREE.Vector3());
+ pin(c.toArray(),String(k+1),mapCam,70,365,1390,3330);
+ const y=365+k*1130;caption(item.title,1540,y-26,27);
+ drawPanel(b,1520,y,1610,1040,'oblique',k===1?-1.0:.65);
+ ctx.strokeStyle='#ded5c5';ctx.lineWidth=2;ctx.strokeRect(1520,y,1610,1040);
+ }
+ }
+ caption('SEED 20261108  /  ORIGINAL PROCEDURAL COURSE  /  STATIC OBSTACLE POSE: t = 2s',110,3960,25,'#777468');
+ return {stage:index+1,name:st.name,kind,width:board.width,height:board.height,details:kind==='details'?plans[index]:undefined};
+};window.ready=true;
+</script></body></html>

@@ -24,12 +24,28 @@
 
 左右按观察者面对胸窗时的方向标记。两节电芯分别控制自发光。
 
+## 首图复核
+
+首图为拇指加三指，天线在角色右侧。胸门按正面画面左侧唯一铰链、上下可释放搭扣解释，右侧圆钮解锁；原图未区分这些铜件的安装方式。
+
 ## 待验证
 
 胸窗高光不能盖住两节电芯的间隙。
+
+## 桌面高模
+
+[桌面模型与动作预览](../robots-desktop.html?id=arc-keeper) · [带动作的桌面 GLB](models/desktop.glb) · [原始 GLB](models/original.glb) · [Hi3D 模型页](https://www.hi3d.ai/3d-model/c2b43a81fe2f41de9a744fe148de0f12)
+
+原始网格 1,981,300 个三角面。桌面成品 1,190,208 个三角面、44.0 MiB，保留两张 8192 × 8192 原始贴图。基础动作沿用小熊的九个片段名与时长，另有 双芯交接（PowerTransfer）。
+
+已剔除邻视图几何。两节电芯用独立材质和 KHR_animation_pointer 发光通道；桌面预览页支持这一扩展。
+
+[站姿实模](records/desktop-rest.jpg) · [专属动作实模](records/desktop-action.jpg) · [规格](records/desktop.json) · [生成记录](records/hi3d.json)
 
 ## 变更记录
 
 2026-11-08 · v1 · 收录首版概念图与步态设定。
 
 2026-11-08 · v1.1 · 收录全身三视图与三阶段动态设定。
+
+2026-11-08 · v1.2 · 复核头手及双芯灯态，补充胸门装配说明。

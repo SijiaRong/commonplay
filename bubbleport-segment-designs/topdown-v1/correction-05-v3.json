@@ -1,0 +1,6 @@
+{
+  "file": "05-return-slide-v3.png",
+  "source": "05-return-slide-v2.png",
+  "tool": "built-in image_gen.imagegen",
+  "prompt": "Make exactly ONE localized correction to this image. In the upper-right quadrant of the U-shaped track curve (approximately the2 o'clock position on the curved road), there is a pair of peach painted chevrons currently pointing UP-LEFT, against the correct traffic flow. Rotate ONLY those two peach chevrons180 degrees in place so they point DOWN-RIGHT, following the clockwise teal dashed route from top of the arc down the right tail. Keep their color, size and location exactly the same. Leave every other arrow, the three white DOWNWARD exit chevrons, text, rails, paths, materials, title and all other pixels unchanged. No redesign. Traffic is UP left tail, across TOP left-to-right, DOWN right tail."
+}

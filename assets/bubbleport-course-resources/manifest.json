@@ -1,0 +1,799 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-08",
+  "adoptedTrackCount": 6,
+  "materialCount": 8,
+  "textureCount": 28,
+  "files": [
+    {
+      "file": "README.md",
+      "source": "tools/archive-bubbleport-course-resources.cjs (generated catalog or metadata)",
+      "role": "reference or catalog",
+      "bytes": 2519,
+      "sha256": "8edcf7ff2986650180a8448a09dbbfa6a9476fa5da5299430db32f64fd16294b"
+    },
+    {
+      "file": "catalog.json",
+      "source": "tools/archive-bubbleport-course-resources.cjs (generated catalog or metadata)",
+      "role": "reference or catalog",
+      "bytes": 3656,
+      "sha256": "e31f08fa08251776b74fdfb2c05e5ecc90b1b8ba37a48ccd3c332d3e84dc63cd"
+    },
+    {
+      "file": "concepts/effect-prompt.txt",
+      "source": "bubbleport-segment-designs/art-direction/imagegen-prompt.txt",
+      "role": "reference or catalog",
+      "bytes": 3855,
+      "sha256": "c39e1e394a684a954be7449ea3eb0efc7225bb84d2f1ad84cf9239068f47a607"
+    },
+    {
+      "file": "concepts/generation.json",
+      "source": "tools/archive-bubbleport-course-resources.cjs (generated catalog or metadata)",
+      "role": "reference or catalog",
+      "bytes": 267,
+      "sha256": "fcfb8f93dfdc024b6e5e017057d1092970c82ae4116eeb696405b5881882a7f5"
+    },
+    {
+      "file": "concepts/soda-cafe-reference.png",
+      "source": "assets/bubbleport-model-references/03-soda-cafe/three-quarter.png",
+      "role": "reference or catalog",
+      "bytes": 391062,
+      "sha256": "f6f3df265eae89e7b31a850b26e4af0d026c06b962e3af22f173004aa7f43425",
+      "width": 756,
+      "height": 756
+    },
+    {
+      "file": "concepts/style-reference.png",
+      "source": "bubbleport-segment-designs/art-direction/bubbleport-style-reference.png",
+      "role": "reference or catalog",
+      "bytes": 2795853,
+      "sha256": "9bc52244f49d55fa310139486949cc1684956bd016a0a452e592c0e09e07bbdf",
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "file": "concepts/three-segments-effect.png",
+      "source": "bubbleport-segment-designs/art-direction/three-segments-effect-v1.png",
+      "role": "reference or catalog",
+      "bytes": 2787879,
+      "sha256": "6b7027b9163a8c2a5528c472a5f54deb48ff4c4381b2a9ac48c0e3a32088d79b",
+      "width": 1752,
+      "height": 897
+    },
+    {
+      "file": "index.html",
+      "source": "tools/archive-bubbleport-course-resources.cjs (generated catalog or metadata)",
+      "role": "reference or catalog",
+      "bytes": 7607,
+      "sha256": "1b69a01c3dcd94326c736d80dadef450eefaa89eeeb0509e9781427ed1a2c102"
+    },
+    {
+      "file": "materials/README.md",
+      "source": "tools/archive-bubbleport-course-resources.cjs (generated catalog or metadata)",
+      "role": "material preset or source",
+      "bytes": 3147,
+      "sha256": "49a5d87c5d6a349f493948ddceca332fa3d64cb91246e13ce4e1675c7492b8be"
+    },
+    {
+      "file": "materials/catalog.json",
+      "source": "tools/archive-bubbleport-course-resources.cjs (generated catalog or metadata)",
+      "role": "material preset or source",
+      "bytes": 596,
+      "sha256": "4c11c2a6a65769cf96c21b1f6278587821623cb6f2048ee3b0d01d441c5d4bcf"
+    },
+    {
+      "file": "materials/history/materials-v1.mjs",
+      "source": "tools/archive-bubbleport-course-resources.cjs (generated catalog or metadata)",
+      "role": "material preset or source",
+      "bytes": 3588,
+      "sha256": "9ea2cea4b5bb021c0ebbac956e58b3e4d96391b379621ff553cf55de0a0854db"
+    },
+    {
+      "file": "materials/index.html",
+      "source": "tools/archive-bubbleport-course-resources.cjs (generated catalog or metadata)",
+      "role": "material preset or source",
+      "bytes": 1953,
+      "sha256": "7df57334dfba92c888d9bfa9effaef11c57af8d6aba351d46dd25079b6984f29"
+    },
+    {
+      "file": "materials/lighting-presets.json",
+      "source": "tools/archive-bubbleport-course-resources.cjs (generated catalog or metadata)",
+      "role": "material preset or source",
+      "bytes": 1508,
+      "sha256": "5a970cd97c357e9b57fbbc96dcc3569b5515c3f2b865178e61c57122c46005b0"
+    },
+    {
+      "file": "materials/materials.mjs",
+      "source": "tools/archive-bubbleport-course-resources.cjs (generated catalog or metadata)",
+      "role": "material preset or source",
+      "bytes": 5030,
+      "sha256": "8a91c7780175d328ba9e5be55019941d1d4558e917a2bcf938e2db6510b4e62b"
+    },
+    {
+      "file": "materials/presets.json",
+      "source": "tools/archive-bubbleport-course-resources.cjs (generated catalog or metadata)",
+      "role": "material preset or source",
+      "bytes": 5651,
+      "sha256": "a9172518b8ced33648f972ff676f19e3457574ab9c6b63b9537fde533cb08a38"
+    },
+    {
+      "file": "materials/previews/peach-v2-static.png",
+      "source": "bubbleport-material-lab/review/peach-v2-static.png",
+      "role": "material preset or source",
+      "bytes": 293953,
+      "sha256": "6ef48b56d753b40e7edceed31b5b586ef9ef4d6090cd7004b5e2d1c5af063108",
+      "width": 1600,
+      "height": 1080
+    },
+    {
+      "file": "materials/previews/road-v1-comparison.png",
+      "source": "bubbleport-material-lab/review/road-v1-comparison.png",
+      "role": "material preset or source",
+      "bytes": 233674,
+      "sha256": "73f93ebfc4ce6dd570503036698a84dc1ad6422676eea1f284a223d6fabc69cd",
+      "width": 1600,
+      "height": 1080
+    },
+    {
+      "file": "materials/previews/road-v2.png",
+      "source": "bubbleport-material-lab/review/road-v2.png",
+      "role": "material preset or source",
+      "bytes": 262654,
+      "sha256": "9820a28486d8d9d2a5dfab287cf6761d33bcc28b42984b27cdd66518043da3da",
+      "width": 1600,
+      "height": 1080
+    },
+    {
+      "file": "materials/previews/studio.png",
+      "source": "bubbleport-material-lab/review/studio.png",
+      "role": "material preset or source",
+      "bytes": 392120,
+      "sha256": "e80f061b996d2ba93ed33d430208e593eb89cb2fda482b73785923bb3c67f373",
+      "width": 1600,
+      "height": 1080
+    },
+    {
+      "file": "materials/references/README.md",
+      "source": "bubbleport-material-lab/references/README.md",
+      "role": "material preset or source",
+      "bytes": 5236,
+      "sha256": "7684e3b596fd0d9edea6f9e33f00f3cb682e35be1efe8e8216eb0ac18c7a0873"
+    },
+    {
+      "file": "materials/source/LICENSE-three",
+      "source": "bubbleport-material-lab/vendor/LICENSE-three",
+      "role": "material preset or source",
+      "bytes": 1081,
+      "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc"
+    },
+    {
+      "file": "materials/source/RoomEnvironment.js",
+      "source": "bubbleport-material-lab/vendor/environments/RoomEnvironment.js",
+      "role": "material preset or source",
+      "bytes": 4960,
+      "sha256": "55f466192cc84298755a424c5e040345006b2ee1455589b3b54126c2ea4123f4"
+    },
+    {
+      "file": "materials/source/lab.mjs",
+      "source": "bubbleport-material-lab/lab.mjs",
+      "role": "material preset or source",
+      "bytes": 15917,
+      "sha256": "745322c30ed4e5a798359f43bff1c4c784c995d9531d980de31c01ec203d1d67"
+    },
+    {
+      "file": "materials/source/materials.mjs",
+      "source": "material-atlas/dist/original/bubbleport/materials.mjs",
+      "role": "material preset or source",
+      "bytes": 5030,
+      "sha256": "8a91c7780175d328ba9e5be55019941d1d4558e917a2bcf938e2db6510b4e62b"
+    },
+    {
+      "file": "materials/texture-workflow.json",
+      "source": "tools/archive-bubbleport-course-resources.cjs (generated catalog or metadata)",
+      "role": "material preset or source",
+      "bytes": 7296,
+      "sha256": "d091831f2eac952c5c9324fae8ed7a713a938beeff9be4ce4abe8ca4db15041b"
+    },
+    {
+      "file": "materials/textures/acrylic/basecolor.png",
+      "source": "material-atlas/dist/original/bubbleport/materials.mjs (browser Canvas export)",
+      "role": "material texture",
+      "bytes": 283,
+      "sha256": "a47fa12a13ece2874757d966bcc5838558221cd313f5d0a5d2363f59b8e44d74",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "file": "materials/textures/acrylic/metallic.png",
+      "source": "material-atlas/dist/original/bubbleport/materials.mjs (browser Canvas export)",
+      "role": "material texture",
+      "bytes": 287,
+      "sha256": "ebee394e41386893e365bab36916668522c516e325de348f1a7a593998e75687",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "file": "materials/textures/acrylic/roughness.png",
+      "source": "material-atlas/dist/original/bubbleport/materials.mjs (browser Canvas export)",
+      "role": "material texture",
+      "bytes": 279,
+      "sha256": "e3f6c6b71a2d61ec793101729723a534d8843625b425ffb17e6321c0ed1854aa",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "file": "materials/textures/amber/basecolor.png",
+      "source": "material-atlas/dist/original/bubbleport/materials.mjs (browser Canvas export)",
+      "role": "material texture",
+      "bytes": 281,
+      "sha256": "0eb2baf9951c4bd349b6517e36799be929853294927ef74afc421c8357d722c1",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "file": "materials/textures/amber/emissive.png",
+      "source": "material-atlas/dist/original/bubbleport/materials.mjs (browser Canvas export)",
+      "role": "material texture",
+      "bytes": 279,
+      "sha256": "7380286f5e494417387a16015978c88b3e5d816bbd73aecb1e499df6e778223e",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "file": "materials/textures/amber/metallic.png",
+      "source": "material-atlas/dist/original/bubbleport/materials.mjs (browser Canvas export)",
+      "role": "material texture",
+      "bytes": 287,
+      "sha256": "ebee394e41386893e365bab36916668522c516e325de348f1a7a593998e75687",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "file": "materials/textures/amber/roughness.png",
+      "source": "material-atlas/dist/original/bubbleport/materials.mjs (browser Canvas export)",
+      "role": "material texture",
+      "bytes": 279,
+      "sha256": "fd61c61f394eaff040d3c5a64f36876173cb09a4b629e01e135e54811fb74ef2",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "file": "materials/textures/brass/basecolor.png",
+      "source": "material-atlas/dist/original/bubbleport/materials.mjs (browser Canvas export)",
+      "role": "material texture",
+      "bytes": 282,
+      "sha256": "87728020ac4b1b755797091abf7d91e75b5b5f5bfc5e4080cddb5594e7c4108f",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "file": "materials/textures/brass/metallic.png",
+      "source": "material-atlas/dist/original/bubbleport/materials.mjs (browser Canvas export)",
+      "role": "material texture",
+      "bytes": 273,
+      "sha256": "85f7fc7310a1235c2caf57807b20f6d7c60a31d3b95633ca99fc5a002790e929",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "file": "materials/textures/brass/roughness.png",
+      "source": "material-atlas/dist/original/bubbleport/materials.mjs (browser Canvas export)",
+      "role": "material texture",
+      "bytes": 53072,
+      "sha256": "bf7c6699367d7fc3c1abeb19b9157c391c5ac3bb3d96ed31b45eb1acfda5013e",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "file": "materials/textures/mint/basecolor.png",
+      "source": "material-atlas/dist/original/bubbleport/materials.mjs (browser Canvas export)",
+      "role": "material texture",
+      "bytes": 282,
+      "sha256": "edf0cde46327dd03954bec165fa6cd1e3a59ba359f214b57f741cc7fc4ba3332",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "file": "materials/textures/mint/metallic.png",
+      "source": "material-atlas/dist/original/bubbleport/materials.mjs (browser Canvas export)",
+      "role": "material texture",
+      "bytes": 287,
+      "sha256": "ebee394e41386893e365bab36916668522c516e325de348f1a7a593998e75687",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "file": "materials/textures/mint/roughness.png",
+      "source": "material-atlas/dist/original/bubbleport/materials.mjs (browser Canvas export)",
+      "role": "material texture",
+      "bytes": 279,
+      "sha256": "59e0135bd2787667b4950cba5a247341f3441b1cf1ba3cc1b27c47ad9a75a895",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "file": "materials/textures/peach/basecolor.png",
+      "source": "material-atlas/dist/original/bubbleport/materials.mjs (browser Canvas export)",
+      "role": "material texture",
+      "bytes": 282,
+      "sha256": "cce45efe2562e2a7d941d18cd07c99256412bd40d26f076481c6c4530f6b8a27",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "file": "materials/textures/peach/metallic.png",
+      "source": "material-atlas/dist/original/bubbleport/materials.mjs (browser Canvas export)",
+      "role": "material texture",
+      "bytes": 287,
+      "sha256": "ebee394e41386893e365bab36916668522c516e325de348f1a7a593998e75687",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "file": "materials/textures/peach/roughness.png",
+      "source": "material-atlas/dist/original/bubbleport/materials.mjs (browser Canvas export)",
+      "role": "material texture",
+      "bytes": 279,
+      "sha256": "fce46cacca0ee37338654a5a16cfed30e6664d1201148cac8c3ea15621eb7a2a",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "file": "materials/textures/road/basecolor.png",
+      "source": "material-atlas/dist/original/bubbleport/materials.mjs (browser Canvas export)",
+      "role": "material texture",
+      "bytes": 282,
+      "sha256": "198aeaf632068d34f9a6941976c4888fd6bab05a24a07b255b2a88f7a37e2a76",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "file": "materials/textures/road/metallic.png",
+      "source": "material-atlas/dist/original/bubbleport/materials.mjs (browser Canvas export)",
+      "role": "material texture",
+      "bytes": 287,
+      "sha256": "ebee394e41386893e365bab36916668522c516e325de348f1a7a593998e75687",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "file": "materials/textures/road/roughness.png",
+      "source": "material-atlas/dist/original/bubbleport/materials.mjs (browser Canvas export)",
+      "role": "material texture",
+      "bytes": 279,
+      "sha256": "7595cbf6978fe51b547d0ef6a35d3c53ce281424e1687de6816ee3f662f4d07c",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "file": "materials/textures/shared/metal-brush-microstructure.png",
+      "source": "material-atlas/dist/original/bubbleport/materials.mjs (browser Canvas export)",
+      "role": "material texture",
+      "bytes": 76822,
+      "sha256": "d37eb5ae0c75202812f6ba54c020684d58b369f27cc4498b22bdb53f3d4f745d",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "file": "materials/textures/shared/road-grain-height.png",
+      "source": "material-atlas/dist/original/bubbleport/materials.mjs (browser Canvas export)",
+      "role": "material texture",
+      "bytes": 85624,
+      "sha256": "81afc89e3cdd3edef391eacb1580e7bb46579a0375dc2b606e6584c6fac1d268",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "file": "materials/textures/signal/basecolor.png",
+      "source": "material-atlas/dist/original/bubbleport/materials.mjs (browser Canvas export)",
+      "role": "material texture",
+      "bytes": 282,
+      "sha256": "f107b8ed82b6c238f2caac893bad2906e672dcd07575f955ff136eb8e10e0f6a",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "file": "materials/textures/signal/emissive.png",
+      "source": "material-atlas/dist/original/bubbleport/materials.mjs (browser Canvas export)",
+      "role": "material texture",
+      "bytes": 282,
+      "sha256": "23677c7cfa3fb1e145301502ec8ff93d4ad68e34c8ad1be0f02f7ff291ca7e20",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "file": "materials/textures/signal/metallic.png",
+      "source": "material-atlas/dist/original/bubbleport/materials.mjs (browser Canvas export)",
+      "role": "material texture",
+      "bytes": 287,
+      "sha256": "ebee394e41386893e365bab36916668522c516e325de348f1a7a593998e75687",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "file": "materials/textures/signal/roughness.png",
+      "source": "material-atlas/dist/original/bubbleport/materials.mjs (browser Canvas export)",
+      "role": "material texture",
+      "bytes": 279,
+      "sha256": "9f21b8601e36728062712670263bbda78789ee909152f51621193900d6ffbf80",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "file": "materials/textures/silver/basecolor.png",
+      "source": "material-atlas/dist/original/bubbleport/materials.mjs (browser Canvas export)",
+      "role": "material texture",
+      "bytes": 281,
+      "sha256": "1301791aa404f81280d2a64096dec2e1b728abbe025f884efcbd056dd4e553b1",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "file": "materials/textures/silver/metallic.png",
+      "source": "material-atlas/dist/original/bubbleport/materials.mjs (browser Canvas export)",
+      "role": "material texture",
+      "bytes": 273,
+      "sha256": "85f7fc7310a1235c2caf57807b20f6d7c60a31d3b95633ca99fc5a002790e929",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "file": "materials/textures/silver/roughness.png",
+      "source": "material-atlas/dist/original/bubbleport/materials.mjs (browser Canvas export)",
+      "role": "material texture",
+      "bytes": 56491,
+      "sha256": "bf374dc49c271540a936db84ed1838b720be943e2d12e7e9bb4d61c3c29bd1b9",
+      "width": 256,
+      "height": 256
+    },
+    {
+      "file": "previews/materials-acrylic-detail.png",
+      "source": "bubbleport-material-lab/review/acrylic-detail.png",
+      "role": "preview",
+      "bytes": 578229,
+      "sha256": "d9b70e35a348f67f11313136c866503b04147ad7a27f81807901106486c9b4cd",
+      "width": 1600,
+      "height": 1080
+    },
+    {
+      "file": "previews/materials-amber-detail.png",
+      "source": "bubbleport-material-lab/review/amber-detail.png",
+      "role": "preview",
+      "bytes": 555809,
+      "sha256": "a722e63d870f68f2b012947d011ef129c70fffaba0df5e238f100727546f01dc",
+      "width": 1600,
+      "height": 1080
+    },
+    {
+      "file": "previews/materials-brass-detail.png",
+      "source": "bubbleport-material-lab/review/brass-detail.png",
+      "role": "preview",
+      "bytes": 459440,
+      "sha256": "935f2fe91121dc1a103a5a821d704dda5de63e93a8b3e4f374ee7f9a518cfde9",
+      "width": 1600,
+      "height": 1080
+    },
+    {
+      "file": "previews/materials-night.png",
+      "source": "bubbleport-material-lab/review/night.png",
+      "role": "preview",
+      "bytes": 543614,
+      "sha256": "82c3f98b552ca807b6e26ceee462b691062d42b268120c6121d7f63b1fd923b8",
+      "width": 1600,
+      "height": 1080
+    },
+    {
+      "file": "previews/materials-studio.png",
+      "source": "bubbleport-material-lab/review/studio.png",
+      "role": "preview",
+      "bytes": 392120,
+      "sha256": "e80f061b996d2ba93ed33d430208e593eb89cb2fda482b73785923bb3c67f373",
+      "width": 1600,
+      "height": 1080
+    },
+    {
+      "file": "previews/structures-overview.jpg",
+      "source": "bubbleport-segment-designs/review/contact-sheet.jpg",
+      "role": "preview",
+      "bytes": 104438,
+      "sha256": "c58e0bee1b5de4e65b82add41c5716471038495b45465e6d78866c802deb00f8"
+    },
+    {
+      "file": "previews/tracks-overview.jpg",
+      "source": "bubbleport-segment-designs/topdown-v1/overview.jpg",
+      "role": "preview",
+      "bytes": 573388,
+      "sha256": "f8a660869f69b3babbb894ce8895c17f788310319002b720a1f1d72f20221f1d"
+    },
+    {
+      "file": "structures/flat/design.md",
+      "source": "bubbleport-segment-designs/designs/flat.md",
+      "role": "structural study",
+      "bytes": 3547,
+      "sha256": "e009882d086175e86e23f98b07c62bc11dcb2304d180706f70fcc99f11365ab7"
+    },
+    {
+      "file": "structures/flat/perspective.png",
+      "source": "bubbleport-segment-designs/review/flat-perspective.png",
+      "role": "structural study",
+      "bytes": 123692,
+      "sha256": "9a56b154fc1ea750c3f5dcd819bff0464ee02d31ad62c03ea225ee46869f2aec",
+      "width": 1256,
+      "height": 788
+    },
+    {
+      "file": "structures/flat/side.png",
+      "source": "bubbleport-segment-designs/review/flat-side.png",
+      "role": "structural study",
+      "bytes": 41557,
+      "sha256": "06a4ca0908307c2eba6df147d58f3687228310036745d999120f4cbe2fe6e990",
+      "width": 1256,
+      "height": 788
+    },
+    {
+      "file": "structures/flat/top.png",
+      "source": "bubbleport-segment-designs/review/flat-top.png",
+      "role": "structural study",
+      "bytes": 86942,
+      "sha256": "ead41f7068d45b0f29e42814d315b13f094761abbd26f2b9cc49aabeb9794916",
+      "width": 1256,
+      "height": 788
+    },
+    {
+      "file": "structures/slide/design.md",
+      "source": "bubbleport-segment-designs/designs/slide.md",
+      "role": "structural study",
+      "bytes": 3403,
+      "sha256": "ff707d7c37eab85b95d461e127cc2360c4d1830ff3ec1ed6b5b3b17232a9bd64"
+    },
+    {
+      "file": "structures/slide/perspective.png",
+      "source": "bubbleport-segment-designs/review/slide-perspective.png",
+      "role": "structural study",
+      "bytes": 106945,
+      "sha256": "c2dd9ccc4194019abfdfc988508d101ff88b9a050fe1b1e9a7515556a90507b6",
+      "width": 1256,
+      "height": 788
+    },
+    {
+      "file": "structures/slide/side.png",
+      "source": "bubbleport-segment-designs/review/slide-side.png",
+      "role": "structural study",
+      "bytes": 44039,
+      "sha256": "2e407a8f06e7e3cf47dbd7214283fb6c4f55f03971561c0e8e0fb35c3d09da5b",
+      "width": 1256,
+      "height": 788
+    },
+    {
+      "file": "structures/slide/top.png",
+      "source": "bubbleport-segment-designs/review/slide-top.png",
+      "role": "structural study",
+      "bytes": 59649,
+      "sha256": "1ca63b28bb4906924307ac72b8782c728d1ac7a0fffa39180e6d367d6cf09b8a",
+      "width": 1256,
+      "height": 788
+    },
+    {
+      "file": "structures/source/kit.mjs",
+      "source": "bubbleport-segment-designs/kit.mjs",
+      "role": "structural study",
+      "bytes": 3421,
+      "sha256": "fca88b2a0492ece926f41c75b528a23939f0e1ebd9d6ec8a950b50cf2a4e5c23"
+    },
+    {
+      "file": "structures/source/segments/flat.mjs",
+      "source": "bubbleport-segment-designs/segments/flat.mjs",
+      "role": "structural study",
+      "bytes": 5375,
+      "sha256": "b5812263fe73de64658fcb60b08b27c666bcc279f2edbf997cf30de5b35857d3"
+    },
+    {
+      "file": "structures/source/segments/slide.mjs",
+      "source": "bubbleport-segment-designs/segments/slide.mjs",
+      "role": "structural study",
+      "bytes": 4317,
+      "sha256": "074730c88633085c4afb28bf8c059a4044383f69453952f29505b0549b28c1b3"
+    },
+    {
+      "file": "structures/source/segments/turn.mjs",
+      "source": "bubbleport-segment-designs/segments/turn.mjs",
+      "role": "structural study",
+      "bytes": 4148,
+      "sha256": "9515c94cd31c72ce49ca6ee4cf6499042ef9e61b6a99738b417a44c2585449f8"
+    },
+    {
+      "file": "structures/structure-audit.json",
+      "source": "bubbleport-segment-designs/review/structure-audit.json",
+      "role": "structural study",
+      "bytes": 1366,
+      "sha256": "fa1b5e92ba79dfb5b73b33c70db2c105ce16e8baf40be326b50c46cad83666a4"
+    },
+    {
+      "file": "structures/turn/design.md",
+      "source": "bubbleport-segment-designs/designs/turn.md",
+      "role": "structural study",
+      "bytes": 3828,
+      "sha256": "3cf6f755361867dfeabf9062b2d11a4dbc79680b7fdaa84f18b8702b3fabbbf4"
+    },
+    {
+      "file": "structures/turn/perspective.png",
+      "source": "bubbleport-segment-designs/review/turn-perspective.png",
+      "role": "structural study",
+      "bytes": 142577,
+      "sha256": "e976a53f5fe7521e4e0204b9086b52d4766d0d34b47ce4ebe490db14d368b8bd",
+      "width": 1256,
+      "height": 788
+    },
+    {
+      "file": "structures/turn/side.png",
+      "source": "bubbleport-segment-designs/review/turn-side.png",
+      "role": "structural study",
+      "bytes": 46131,
+      "sha256": "4835e38fbb7e75734d95c40849d13c2e114f1451a53af508a26767aba7d880e2",
+      "width": 1256,
+      "height": 788
+    },
+    {
+      "file": "structures/turn/top.png",
+      "source": "bubbleport-segment-designs/review/turn-top.png",
+      "role": "structural study",
+      "bytes": 135781,
+      "sha256": "e970085ca427b8842d8cae9a8734ac68894a6e84ff2b368ce88c68eaf089bb9c",
+      "width": 1256,
+      "height": 788
+    },
+    {
+      "file": "tracks/01-pendulums/design.md",
+      "source": "tools/archive-bubbleport-course-resources.cjs (generated catalog or metadata)",
+      "role": "track design",
+      "bytes": 689,
+      "sha256": "3fc15297fc59c59fb4d4e9fc25d785bbacbd1274d15f0944beb988f7eaba93dc"
+    },
+    {
+      "file": "tracks/01-pendulums/generation.json",
+      "source": "tools/archive-bubbleport-course-resources.cjs (generated catalog or metadata)",
+      "role": "track design",
+      "bytes": 4868,
+      "sha256": "c8dd367afcba8b994a78ae9b119d082a4a3f91e8a600bbad72803b92918aee79"
+    },
+    {
+      "file": "tracks/01-pendulums/topdown.png",
+      "source": "bubbleport-segment-designs/topdown-v1/01-pendulums-v2.png",
+      "role": "track design",
+      "bytes": 1713101,
+      "sha256": "16ad28a00f080a9f6b10dbab738b737534bc4bb86824a367830245c27c299075",
+      "width": 1024,
+      "height": 1536
+    },
+    {
+      "file": "tracks/02-sliding-doors/design.md",
+      "source": "tools/archive-bubbleport-course-resources.cjs (generated catalog or metadata)",
+      "role": "track design",
+      "bytes": 564,
+      "sha256": "bbedd98c0e2207aa0b6444b1ed67c68e01d5f15ea5d3d9533bd6cd3cea5e5d3e"
+    },
+    {
+      "file": "tracks/02-sliding-doors/generation.json",
+      "source": "tools/archive-bubbleport-course-resources.cjs (generated catalog or metadata)",
+      "role": "track design",
+      "bytes": 4758,
+      "sha256": "4a32cc8e1f2aaa6127b4110fd59e25c9c05d9a683ba776fc032fbefad4492ff4"
+    },
+    {
+      "file": "tracks/02-sliding-doors/topdown.png",
+      "source": "bubbleport-segment-designs/topdown-v1/02-sliding-doors-v2.png",
+      "role": "track design",
+      "bytes": 1680656,
+      "sha256": "7514421f46f5f07798446275d75e390f2c8012a1ef33d427612febb5505491e1",
+      "width": 887,
+      "height": 1774
+    },
+    {
+      "file": "tracks/03-peg-field/design.md",
+      "source": "tools/archive-bubbleport-course-resources.cjs (generated catalog or metadata)",
+      "role": "track design",
+      "bytes": 475,
+      "sha256": "93d750ddfdb3053049d5a45e3dd4cd6928854908cac92cb0e3202554c9f44281"
+    },
+    {
+      "file": "tracks/03-peg-field/generation.json",
+      "source": "tools/archive-bubbleport-course-resources.cjs (generated catalog or metadata)",
+      "role": "track design",
+      "bytes": 4650,
+      "sha256": "3fee7fee2de5a16e36757d58fae919f80962d4f5e79f5421a8906ce8a22dfbef"
+    },
+    {
+      "file": "tracks/03-peg-field/topdown.png",
+      "source": "bubbleport-segment-designs/topdown-v1/03-peg-field-v2.png",
+      "role": "track design",
+      "bytes": 1636735,
+      "sha256": "54c8a0c2a6189ad96775f8138d029484431e1614247592b76688566b8c15d814",
+      "width": 887,
+      "height": 1774
+    },
+    {
+      "file": "tracks/04-straight-slide/design.md",
+      "source": "tools/archive-bubbleport-course-resources.cjs (generated catalog or metadata)",
+      "role": "track design",
+      "bytes": 540,
+      "sha256": "25dadb695cb3e18fca40f57f8af69f3779e62955a89bdccc8ac5e2728762e438"
+    },
+    {
+      "file": "tracks/04-straight-slide/generation.json",
+      "source": "tools/archive-bubbleport-course-resources.cjs (generated catalog or metadata)",
+      "role": "track design",
+      "bytes": 5099,
+      "sha256": "1d6e8f38c63ccd21df97c41d568c5b8f726c290d7ef244f29cf3cf1638bb9ebe"
+    },
+    {
+      "file": "tracks/04-straight-slide/topdown.png",
+      "source": "bubbleport-segment-designs/topdown-v1/04-straight-slide-v2.png",
+      "role": "track design",
+      "bytes": 1624952,
+      "sha256": "6d348c667efe99acfc3fcf9ffd164e0869aa3c31a583c4adb28efcc8e5fb0fdf",
+      "width": 1024,
+      "height": 1536
+    },
+    {
+      "file": "tracks/05-return-slide/design.md",
+      "source": "tools/archive-bubbleport-course-resources.cjs (generated catalog or metadata)",
+      "role": "track design",
+      "bytes": 574,
+      "sha256": "e677a5d4dbd9cbad51b82119e7ef0267152382e6604d0e7590542afe47b8d240"
+    },
+    {
+      "file": "tracks/05-return-slide/generation.json",
+      "source": "tools/archive-bubbleport-course-resources.cjs (generated catalog or metadata)",
+      "role": "track design",
+      "bytes": 6208,
+      "sha256": "73a6add945ccec44ad307ba6a9ec6794cbb7e4aa75aa8ea89d4659184f8c15e7"
+    },
+    {
+      "file": "tracks/05-return-slide/topdown.png",
+      "source": "bubbleport-segment-designs/topdown-v1/05-return-slide-v3.png",
+      "role": "track design",
+      "bytes": 1778014,
+      "sha256": "1e1bb080409928bd3040479722c596f2076b636ab23f509baba84ef3257393cb",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "file": "tracks/06-wave-floor/design.md",
+      "source": "tools/archive-bubbleport-course-resources.cjs (generated catalog or metadata)",
+      "role": "track design",
+      "bytes": 801,
+      "sha256": "521ad5b9f37764de082c46563ff7c09afc1979d0ce51a74a8883cb59638bca81"
+    },
+    {
+      "file": "tracks/06-wave-floor/generation.json",
+      "source": "tools/archive-bubbleport-course-resources.cjs (generated catalog or metadata)",
+      "role": "track design",
+      "bytes": 4994,
+      "sha256": "2b2daec140af464795c5ee3b9160007542f83e0142d5cdf635d125027ecc167b"
+    },
+    {
+      "file": "tracks/06-wave-floor/topdown.png",
+      "source": "bubbleport-segment-designs/topdown-v1/06-wave-floor-v2.png",
+      "role": "track design",
+      "bytes": 1720318,
+      "sha256": "36a00aac996b6cbcaca737aac3dc80f3e7226f0fee51af6f14f2db4ec4c518a2",
+      "width": 1024,
+      "height": 1536
+    },
+    {
+      "file": "tracks/design-specifications.md",
+      "source": "bubbleport-segment-designs/topdown-v1/README.md",
+      "role": "track design",
+      "bytes": 6881,
+      "sha256": "740f6b2f3463788ce57f7a7dd79246e561fa017d43131be9ef534d097a019c2a",
+      "transformation": "Relative links rebased for the portable archive"
+    },
+    {
+      "file": "tracks/image-review.md",
+      "source": "bubbleport-segment-designs/topdown-v1/image-review.md",
+      "role": "track design",
+      "bytes": 1865,
+      "sha256": "c31c9c23b4c3c1532baa1b351fe97bc3c680d77e5c7faf5affcb689b650b9ca1"
+    }
+  ]
+}

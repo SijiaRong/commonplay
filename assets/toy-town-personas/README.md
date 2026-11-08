@@ -4,19 +4,21 @@
 
 ## 泡泡星港 · 机器人班组
 
-七款双足机器人各自负责一项乐园工作。
+七款双足机器人已生成桌面高模。可在[桌面预览](robots-desktop.html)逐个旋转角色、查看九段基础动作和专属机构动作。[七款实模动作总览](bubbleport-desktop-review.jpg)
+
+本地浏览时从项目根目录运行 `python3 -m http.server 58731`，再打开 `/assets/toy-town-personas/robots-desktop.html`。各角色文件夹内的 `models/original.glb` 为 Hi3D 原始输出，`models/desktop.glb` 为绑定成品。[高模绑定脚本](../../tools/build-bubbleport-robots.py)
 
 ![七款机器人概念总览](bubbleport-robots.jpg)
 
 | 角色 | 园中岗位 | 造型与动态 |
 |---|---|---|
-| [铆墩](rivet-press/README.md) | 桥架铆接机 | [三视图](rivet-press/references/turnaround-v1.png) · [锁紧压钳](rivet-press/references/motion-v1.png) |
-| [切线](apex-pacer/README.md) | 半管领跑机 | [三视图](apex-pacer/references/turnaround-v1.png) · [弹簧鞋跟](apex-pacer/references/motion-v1.png) |
-| [回声](echo-diver/README.md) | 水槽声呐潜查员 | [三视图](echo-diver/references/turnaround-v1.png) · [听音盘开合](echo-diver/references/motion-v1.png) |
-| [挑杆](signal-beetle/README.md) | 起跑闸甲虫机甲 | [三视图](signal-beetle/references/turnaround-v1.png) · [背甲发令](signal-beetle/references/motion-v1.png) |
-| [卷尺](reel-climber/README.md) | 高架检修攀登机 | [三视图](reel-climber/references/turnaround-v1.png) · [量带伸缩](reel-climber/references/motion-v1.png) |
+| [铆墩](rivet-press/README.md) | 桥架铆接机 | [三视图](rivet-press/references/turnaround-v1.png) · [锁紧压钳](rivet-press/references/motion-v2.png) |
+| [切线](apex-pacer/README.md) | 半管领跑机 | [跑姿多视图](apex-pacer/references/turnaround-v2.png) · [弹簧鞋跟](apex-pacer/references/motion-v2.png) |
+| [回声](echo-diver/README.md) | 水槽声呐潜查员 | [三视图](echo-diver/references/turnaround-v2.png) · [听音盘开合](echo-diver/references/motion-v1.png) |
+| [挑杆](signal-beetle/README.md) | 起跑闸甲虫机甲 | [三视图](signal-beetle/references/turnaround-v1.png) · [背甲发令](signal-beetle/references/motion-v2.png) |
+| [卷尺](reel-climber/README.md) | 高架检修攀登机 | [三视图](reel-climber/references/turnaround-v3.png) · [量带伸缩](reel-climber/references/motion-v1.png) |
 | [续航](arc-keeper/README.md) | 夜场换电机 | [三视图](arc-keeper/references/turnaround-v1.png) · [双芯灯态](arc-keeper/references/motion-v1.png) |
-| [反弹](ratchet-goalie/README.md) | 弹珠门将机 | [三视图](ratchet-goalie/references/turnaround-v1.png) · [挡球与接球](ratchet-goalie/references/motion-v1.png) |
+| [反弹](ratchet-goalie/README.md) | 弹珠门将机 | [四视图](ratchet-goalie/references/turnaround-v3.png) · [挡球与接球](ratchet-goalie/references/motion-v1.png) |
 
 ## 泡泡星港 · 三位乐园居民
 

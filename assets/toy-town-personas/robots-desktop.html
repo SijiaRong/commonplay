@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>泡泡星港 · 机器人高模</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f2ede2;color:#203d3d;font:16px system-ui,sans-serif}header{display:flex;flex-wrap:wrap;align-items:center;gap:18px;padding:14px 4vw;background:#fbf8f1}h1{font-size:20px;margin:0 auto 0 0}select,button{font:inherit;color:inherit;border:1px solid #aab5a9;border-radius:5px;background:white;padding:5px 8px}canvas{display:block;width:100%;height:calc(100vh - 98px);touch-action:none;cursor:grab}footer{padding:5px 4vw;font-size:13px}
+</style>
+<header><h1>泡泡星港 · 机器人高模</h1><label>角色 <select id="character"></select></label><label>动作 <select id="animation"></select></label><button id="play" disabled>暂停</button></header>
+<canvas></canvas><footer role="status">正在加载模型…</footer>
+<script type="importmap">{"imports":{"three":"/teddy-playground/dist/slide/film/three.module.js"}}</script>
+<script type="module">
+import * as T from 'three';
+import { GLTFLoader } from '/teddy-playground/dist/vendor/GLTFLoader.js';
+const cast = [
+ ['rivet-press','铆墩','压铆'],['apex-pacer','切线','鞋跟回弹'],['echo-diver','回声','展开听音盘'],['signal-beetle','挑杆','开合背甲'],['reel-climber','卷尺','伸出量带'],['arc-keeper','续航','电芯交接'],['ratchet-goalie','反弹','封挡接球']
+];
+const labels={Idle:'待机',Run:'跑步',Jump:'起跳',Slide:'滑行',SlideLeft:'左转',SlideRight:'右转',SitDown:'坐下',StandUp:'起身',FinishWave:'挥手'};
+const byId=id=>document.getElementById(id);
+const select=byId('character'), clips=byId('animation'),play=byId('play'), footer=document.querySelector('footer');
+const q=new URLSearchParams(location.search);
+const entry=cast.find(r=>r[0]===q.get('id'))||cast[0];
+for(const [id,name] of cast)select.add(new Option(name,id,false,id===entry[0]));
+select.onchange=()=>location.search=new URLSearchParams({id:select.value});
+const canvas=document.querySelector('canvas');
+try {
+ const renderer=new T.WebGLRenderer({canvas,antialias:true,preserveDrawingBuffer:true});
+ renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));
+ const scene=new T.Scene();scene.background=new T.Color(0xf2ede2);
+ scene.add(new T.HemisphereLight(0xfff6e8,0xacb5b9,2.2));
+ const key=new T.DirectionalLight(0xfff2dc,2.3);key.position.set(2,3,3);scene.add(key);
+ const rim=new T.DirectionalLight(0xd7eeee,1.4);rim.position.set(-2,1,-2);scene.add(rim);
+ const camera=new T.PerspectiveCamera(33,1,.02,12);
+ const model=await new GLTFLoader().loadAsync('./'+entry[0]+'/models/desktop.glb');
+ scene.add(model.scene);
+ const mixer=new T.AnimationMixer(model.scene);
+ // The bundled GLTFLoader skips material-pointer channels. Bind the embedded
+ // sampler to the matching rendered material so emissive changes use GLB timing.
+ for(const [i,definition] of model.parser.json.animations.entries()){
+  for(const ch of definition.channels){
+   const path=ch.target.extensions?.KHR_animation_pointer?.pointer;
+   const match=path?.match(/^\/materials\/(\d+)\/emissiveFactor$/);if(!match)continue;
+   const sampler=definition.samplers[ch.sampler];
+   const [times,values]=await Promise.all([sampler.input,sampler.output].map(a=>model.parser.getDependency('accessor',a)));
+   model.scene.traverse(mesh=>{
+    if(mesh.isMesh && model.parser.associations.get(mesh.material)?.materials===Number(match[1]))
+     model.animations[i].tracks.push(new T.ColorKeyframeTrack(mesh.uuid+'.material.emissive',times.array,values.array));
+   });
+  }
+ }
+ for(const clip of model.animations)clips.add(new Option(labels[clip.name]||entry[2],clip.name));
+ let active,paused=false,yaw=entry[0]==='signal-beetle'?Math.PI+.18:entry[0]==='apex-pacer'?.8:.13,pitch=.06,distance=entry[0]==='apex-pacer'?2.4:2.05;
+ function setClip(name){active?.stop();active=mixer.clipAction(model.animations.find(c=>c.name===name));active.reset().play();clips.value=name}
+ setClip(model.animations.at(-1).name);clips.onchange=()=>{setClip(clips.value);mixer.update(0);draw()};
+ play.disabled=false;play.onclick=()=>{paused=!paused;play.textContent=paused?'播放':'暂停'};
+ canvas.onpointerdown=e=>canvas.setPointerCapture(e.pointerId);
+ canvas.onpointermove=e=>{if(canvas.hasPointerCapture(e.pointerId)){yaw-=e.movementX*.008;pitch=Math.max(-.85,Math.min(.85,pitch+e.movementY*.008));if(paused)draw()}};
+ canvas.onwheel=e=>{e.preventDefault();distance=Math.max(.75,Math.min(4,distance+e.deltaY*.001));if(paused)draw()};
+ function draw(){const w=canvas.clientWidth,h=canvas.clientHeight;if(canvas.width!==Math.round(w*renderer.getPixelRatio())||canvas.height!==Math.round(h*renderer.getPixelRatio()))renderer.setSize(w,h,false);
+ camera.aspect=w/h;camera.updateProjectionMatrix();camera.position.set(Math.sin(yaw)*Math.cos(pitch)*distance,.51+Math.sin(pitch)*distance,Math.cos(yaw)*Math.cos(pitch)*distance);camera.lookAt(0,.51,0);renderer.render(scene,camera)}
+ let previous=performance.now();function loop(now){if(!paused){mixer.update(Math.min(.25,(now-previous)/1000));draw()}previous=now;requestAnimationFrame(loop)}
+ window.addEventListener("resize",draw);draw();requestAnimationFrame(loop);footer.textContent='拖动旋转视角，滚轮缩放';
+ window.robotReview={ready:true,names:model.animations.map(c=>c.name),sample(name,time){paused=true;setClip(name);mixer.setTime(time);draw();return renderer.info.render.triangles}};
+}catch(error){footer.textContent='模型加载失败 · '+error.message;window.robotReview={error:String(error)}}
+</script></html>

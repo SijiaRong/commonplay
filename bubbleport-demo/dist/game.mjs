@@ -18,7 +18,7 @@ function toggleView(){overview=!overview;$('#view').textContent=overview?'回到
 function pause(){paused=!paused;$('#pause').textContent=paused?'继续':'暂停';if(paused)toast('已暂停');}
 $('#start').onclick=start;$('#reset').onclick=()=>restart();$('#view').onclick=toggleView;$('#pause').onclick=pause;$('#again').onclick=()=>restart(false);$('#next').onclick=()=>{chooseCourse(kinds[(index()+1)%3]);playing=true;overview=false;};
 document.querySelectorAll('[data-course]').forEach(b=>b.onclick=()=>chooseCourse(b.dataset.course));document.querySelectorAll('[data-width]').forEach(b=>b.onclick=()=>setWidth(b.dataset.width));
-addEventListener('keydown',e=>{const k=e.key.toLowerCase();if([' ','arrowup','arrowdown','arrowleft','arrowright'].includes(k))e.preventDefault();held.add(k);if(k==='r')restart();if(k==='v')toggleView();if(k==='escape')pause();if(k==='enter'&&!playing)start();});addEventListener('keyup',e=>held.delete(e.key.toLowerCase()));addEventListener('blur',()=>{held.clear();if(playing&&!paused)pause();});
+addEventListener('keydown',e=>{if($('#game').inert)return;const k=e.key.toLowerCase();if([' ','arrowup','arrowdown','arrowleft','arrowright'].includes(k))e.preventDefault();held.add(k);if(k==='r')restart();if(k==='v')toggleView();if(k==='escape')pause();if(k==='enter'&&!playing)start();});addEventListener('keyup',e=>held.delete(e.key.toLowerCase()));addEventListener('blur',()=>{held.clear();if(playing&&!paused)pause();});
 for(const b of document.querySelectorAll('[data-key]')){b.addEventListener('pointerdown',e=>{e.preventDefault();b.setPointerCapture(e.pointerId);held.add(b.dataset.key);b.classList.add('pressed');});const end=e=>{held.delete(b.dataset.key);b.classList.remove('pressed');};b.addEventListener('pointerup',end);b.addEventListener('pointercancel',end);}
 canvas.addEventListener('pointerdown',e=>{if(overview){drag={x:e.clientX,y:e.clientY};canvas.setPointerCapture(e.pointerId);}});canvas.addEventListener('pointermove',e=>{if(drag){yaw-=(e.clientX-drag.x)*.005;elevation=T.MathUtils.clamp(elevation+(e.clientY-drag.y)*.003,.3,1.25);drag={x:e.clientX,y:e.clientY};}});canvas.addEventListener('pointerup',()=>drag=null);canvas.addEventListener('wheel',e=>{if(overview){zoom=T.MathUtils.clamp(zoom+e.deltaY*.08,90,235);e.preventDefault();}},{passive:false});
 function input(){return {forward:(held.has('w')||held.has('arrowup')?1:0)-(held.has('s')||held.has('arrowdown')?1:0),steer:(held.has('d')||held.has('arrowright')?1:0)-(held.has('a')||held.has('arrowleft')?1:0),jump:held.has(' ')};}
@@ -33,5 +33,29 @@ let previousBall=new T.Vector3();function tick(){const now=performance.now();if(
  if(state.finished&&!finishedShown){finishedShown=true;$('#finish-result').textContent=names[kind]+' · '+state.time.toFixed(2)+' 秒\n碰撞 '+state.hits+' 次 · 跌落 '+state.falls+' 次';$('#finish').hidden=false;}
  if(inspection)inspection.textContent=JSON.stringify({p:state.p,v:state.v,normal:state.normal,f:state.forward,grounded:state.grounded,guide:state.loopGuide,input:input()},null,1);renderer.render(scene,camera);requestAnimationFrame(tick);}
 requestAnimationFrame(tick);$('#asset-status').textContent='星港已就绪 · 暖灯夜航';
-try{const manifest=await fetch('./assets/props.json').then(r=>r.json());propSource=manifest.models||[];const loader=new GLTFLoader();for(const def of propSource){try{const g=await loader.loadAsync('./assets/'+def.file);templates[def.key]=g.scene;skinTracks();}catch(e){console.warn('机关外观暂未载入，保留精确基础形体',def.key,e);}}}catch(e){console.warn('保留基础机关外观',e);}
+const progress = $('#loading-progress');
+try {
+  const manifest = await fetch('./assets/props.json').then(response => response.json());
+  propSource = manifest.models || [];
+  // Count the initialized scene, each model, and the final handoff to the game.
+  progress.max = propSource.length + 2;
+  progress.value = 1;
+  const loader = new GLTFLoader();
+  for (const [index, def] of propSource.entries()) {
+    try {
+      const model = await loader.loadAsync('./assets/' + def.file, event => {
+        if (event.lengthComputable && event.total > 0) {
+          progress.value = 1 + index + event.loaded / event.total;
+        }
+      });
+      templates[def.key] = model.scene;
+      skinTracks();
+    } catch (error) {
+      console.warn('机关外观暂未载入，保留精确基础形体', def.key, error);
+    }
+    progress.value = index + 2;
+  }
+} catch (error) {
+  console.warn('保留基础机关外观', error);
+}
 window.__bubbleport={ready:true,getSnapshot:()=>({kind,width,playing,paused,overview,state:JSON.parse(JSON.stringify(state)),props:Object.keys(templates),triangles:courses[index()].triangles.length,renderer:{calls:renderer.info.render.calls,triangles:renderer.info.render.triangles}}),start,setCourse:chooseCourse,setWidth,restart,stepTicks(n,controls={forward:1}){for(let i=0;i<n;i++)step(state,courses[index()],controls,1/240);return this.getSnapshot();},setState(p,v=[0,0,0]){state.p=[...p];state.v=[...v];state.grounded=false;},setOverview(v){overview=v;}};

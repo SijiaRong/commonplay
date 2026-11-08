@@ -1,0 +1,31 @@
+{
+  "triangles": 1446224,
+  "vertices": 741150,
+  "bytes": 53445312,
+  "clips": [
+    "Idle",
+    "Run",
+    "Jump",
+    "Slide",
+    "SlideLeft",
+    "SlideRight",
+    "SitDown",
+    "StandUp",
+    "FinishWave",
+    "Rivet"
+  ],
+  "controls": {
+    "Punch": 5532
+  },
+  "sourceTriangles": 1987436,
+  "textureSizes": [
+    [
+      8192,
+      8192
+    ],
+    [
+      8192,
+      8192
+    ]
+  ]
+}

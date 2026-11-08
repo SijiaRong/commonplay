@@ -6,25 +6,7 @@ import path from 'node:path';
 const out = fileURLToPath(new URL('../bubble-city/', import.meta.url));
 const base = process.argv[2] || 'http://127.0.0.1:8771/';
 const seed = 20261108;
-// Stage, course piece, position within the piece, camera offset (right, up, forward).
-const plan = [
-  ['欢迎来到泡泡星城','ready'], ['挑选参赛伙伴','picker'], ['起跑倒数','start'],
-  ['冲出起跑门','race'], ['玩具门廊全景',1],
-  ['第一道移门',1,'firstDoors',.46,7,5,-13], ['积木绕桩',1,'slalomDeck',.46,13,9,12],
-  ['树脂滑梯',1,'shortSlide',.52,15,12,-16], ['钟摆锤廊',1,'hammerDeck',.48,6,6,-12],
-  ['波浪地板',1,'tileDeck',.5,12,9,-14], ['回旋滑梯',1,'curvedSlide',.5,23,21,8],
-  ['终点门廊',1,'finishDoors',.68,5,5,-13],
-  ['蜡笔峡谷全景',2], ['腾空跳台',2,'bigAir',.68,14,9,12],
-  ['岔路交会',2,'fork',.55,4,19,-18], ['陡降滑槽',2,'plunge'],
-  ['土星弯入口',2,'saturnSlide',.12,11,9,-20], ['土星回旋俯瞰',2,'saturnSlide',.54,9,43,9],
-  ['出弯检查线',2,'saturnSlide',.98,2,14,-18],
-  ['枕头山口全景',3], ['摆锤阵',3,'hammers',.5,12,6,-11],
-  ['旋转杆',3,'spinners',.5,5,14,-13], ['旋涡入口',3,'whirlpool',.5,7,21,9],
-  ['地毯回旋全景',4], ['滚筒阵',4,'rollers',.5,11,8,10], ['断崖边缘',4,'cliff',.5,15,9,-12],
-  ['玩具箱决赛全景',5], ['跳房子',5,'hopscotch',.48,7,13,-12],
-  ['大跳台',5,'megaJump'], ['琴键路段',5,'keys',.5,11,7,-11],
-  ['经典滑梯','classic'], ['回到角色练习场','practice']
-];
+import { plan } from './bubble-city-shots.mjs';
 
 const browser = await chromium.launch({channel: process.env.CHROME_CHANNEL || 'chrome',
   args:['--use-angle=metal','--disable-dev-shm-usage']});

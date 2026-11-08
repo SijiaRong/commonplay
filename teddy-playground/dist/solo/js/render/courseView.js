@@ -1,19 +1,21 @@
 // Turns a built stage (shared/course.js) into meshes: static blocks are merged per material into a few big
 // geometries; moving obstacles are instanced in batches and posed every frame from the same physics colliders.
 import * as THREE from 'three';
-import { poseAt } from '../../shared/physics.js';
+import { poseAt, dropWarning } from '../../shared/physics.js';
 import { GeoBuilder, chamferBox, cylinder, lathe, helixLathe, rgb, IDENT, revolveRows } from './geometry.js';
 import { bowlHeightAt, dishHeightAt } from '../../shared/course.js';
 import { getMaterials, materialKey } from './materials.js';
 import { textTexture } from './textures.js';
 import { makeRng } from '../../shared/rng.js';
 
-const BRIGHT = ['#c42a1c', '#e2701a', '#efb21c', '#2f8f47', '#0f8f87', '#1f5bc4', '#6438a6', '#de5d86'];
+const BRIGHT = ['#d88365', '#efaa81', '#d5ae78', '#9ac9b3', '#65aea3', '#7eafb1', '#ae958d', '#eeae98'];
+const warningColor=new THREE.Color('#ff990f'),tileColor=new THREE.Color();
 const NATURAL = ['#ffffff', '#f6efe6', '#efe3d2', '#e6d3bd'];
 
 export class CourseView {
   constructor(stage, quality, runway = null) {
     this.stage = stage;
+    this.reduceMotion=matchMedia('(prefers-reduced-motion: reduce)');
     this.group = new THREE.Group();
     this.group.name = 'stage' + stage.index;
     this.kin = [];
@@ -74,6 +76,24 @@ export class CourseView {
       } else if (v.k === 'helix') {
         const key = materialKey(v.m);
         helixLathe(builderFor(key, v.c), v.R || IDENT, v.c, v.outline, v.a0, v.a1, v.rise || 0, !!v.ease, rgb(v.col, 0.03, rnd), { segments: v.segments, lift: v.lift, blend: v.blend });
+      } else if (v.k === 'saturnLamp') {
+        const base = builderFor('brass', v.c);
+        cylinder(base, IDENT, [v.c[0], v.c[1] + 0.18, v.c[2]], 1.35, 0.36, [1,1,1]);
+        cylinder(base, IDENT, [v.c[0], v.c[1] + 0.56, v.c[2]], 0.52, 0.7, [1,1,1]);
+        const center = [v.c[0], v.c[1] + 2.0, v.c[2]];
+        // Revolve a peach enamel globe and tilt its brass orbit around the same center.
+        const globe = [], orbit = [];
+        for (let i = 0; i <= 24; i++) {
+          const angle = i * Math.PI / 24;
+          globe.push([1.36 * Math.sin(angle), 1.36 * Math.cos(angle)]);
+        }
+        for (let i = 0; i < 12; i++) {
+          const angle = i * Math.PI / 6;
+          orbit.push([2.02 + 0.23 * Math.cos(angle), 0.11 * Math.sin(angle)]);
+        }
+        helixLathe(builderFor('paint', center), IDENT, center, globe.reverse(), 0, 2*Math.PI, 0, false, rgb('#efaa81'), {segments:32});
+        const tilt = 0.38, cs = Math.cos(tilt), sn = Math.sin(tilt);
+        helixLathe(base, [cs,-sn,0,sn,cs,0,0,0,1], center, orbit, 0, 2*Math.PI, 0, false, [1,1,1], {segments:40});
       } else if (v.k === 'kin') {
         this.addKinematic(v);
       } else if (v.k === 'banner') {
@@ -341,7 +361,14 @@ export class CourseView {
         const col = k.items[i].col;
         if (!col.motion) continue;
         poseAt(col, t);
-        setInstance(k.mesh, i, col.R, col.c);
+        if(col.motion.type==='drop'){
+          const warning=dropWarning(col.motion,t);
+          tileColor.fromArray(k.items[i].color).lerp(warningColor,Math.sqrt(warning));
+          k.mesh.setColorAt(i,tileColor);
+          k.mesh.instanceColor.needsUpdate=true;
+          const shake=this.reduceMotion.matches?0:Math.sin(warning*38)*.15*warning;
+          setInstance(k.mesh,i,col.R,[col.c[0]+shake*col.R[0],col.c[1],col.c[2]+shake*col.R[6]]);
+        }else setInstance(k.mesh, i, col.R, col.c);
       }
       k.mesh.instanceMatrix.needsUpdate = true;
     }

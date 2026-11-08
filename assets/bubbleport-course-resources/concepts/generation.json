@@ -1,0 +1,8 @@
+{
+  "tool": "built-in image_gen.imagegen",
+  "output": "three-segments-effect.png",
+  "prompt": "effect-prompt.txt",
+  "reference": "style-reference.png",
+  "structureGuide": "../previews/structures-overview.jpg",
+  "additionalReference": "soda-cafe-reference.png"
+}

@@ -1,0 +1,24 @@
+{
+  "tests": {
+    "passed": 22,
+    "failed": 0
+  },
+  "rules": {
+    "enterDegrees": 12,
+    "exitDegrees": 3,
+    "enterSeconds": 0.12,
+    "flatSeconds": 0.7,
+    "minSlideSeconds": 1.2,
+    "airGraceSeconds": 0.16
+  },
+  "browser": {
+    "flatGroundReducedSpeed": "Run, slope 0, seated 0",
+    "loop": {
+      "finished": true,
+      "loopSeen": true,
+      "falls": 0
+    },
+    "consoleErrors": []
+  },
+  "publicationCommit": "377694f9cec19d71e625987ebe4fb51790b60e91"
+}

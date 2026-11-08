@@ -36,7 +36,7 @@ const F_GROUNDED=1,F_ACTIVE=2,F_PLACED=4,F_ONLINE=8;
 
 export async function startSolo(host){
   const {film,player,lite,quality,held}=host,{scene,camera,renderer}=film;
-  const style=document.createElement('link');style.rel='stylesheet';style.href='./solo/solo.css';document.head.append(style);
+  const style=document.createElement('link');style.rel='stylesheet';style.href=host.partyStyles||'./solo/solo.css';document.head.append(style);
   const params=new URLSearchParams(location.search);
   const seedParam=params.get('seed');
   const seed=/^\d{1,10}$/.test(seedParam||'')&&Number(seedParam)<=0xffffffff?Number(seedParam):20261108;
@@ -45,6 +45,7 @@ export async function startSolo(host){
   const pool=host.definitions.filter(d=>d.ready).map(d=>d.id);
 
   // ------------------------------------------------------------ page furniture
+  if(host.previewWorker)$('nav').prepend(element('a',{href:'./',textContent:'单人闯关'}));
   const original=element('a',{href:'?mode=yard',textContent:'经典滑梯'});
   $('nav').prepend(original);
   const courseID=element('div',{id:'course-id'});
@@ -198,7 +199,7 @@ export async function startSolo(host){
     }
     if(m.type==='course'){
       if(course){scene.remove(course.group);course.dispose()}
-      course=new CourseView(m.stage,quality,runway);scene.add(course.group);
+      course=new CourseView(m.stage,quality,runway,undefined,host.parkModels);scene.add(course.group);
       snap=true;buffer.length=0;clockOffset=null;for(const r of remotes.values())r.snap=true;
       return;
     }
@@ -229,7 +230,7 @@ export async function startSolo(host){
     $('#launch').hidden=false;$('#result').textContent='';$('#go').disabled=true;$('#go').hidden=false;
     change.hidden=false;$('#reset').lastChild.textContent=' 重来';
     courseID.textContent='单人 · 种子 '+seed;
-    link=openAuthority();
+    link=host.previewWorker ? host.previewWorker() : openAuthority();
     link.onerror=e=>{console.error(e);$('#launch').hidden=false;$('#result').textContent='模拟加载失败，请重新开始';$('#go').textContent='重新加载';$('#go').disabled=false;state=null};
     link.onmessage=({data:m})=>{
       handle(m);
@@ -259,7 +260,7 @@ export async function startSolo(host){
   }
   function leaveRoom(tell=true){
     if(tell)link?.postMessage({type:'leave'});
-    sessionStore.set('commonplay-room-code','');history.replaceState(null,'',location.pathname);
+    sessionStore.set('commonplay-room-code','');history.replaceState(null,'',host.previewWorker?'?mode=party':location.pathname);
     if(course){scene.remove(course.group);course.dispose();course=null}
     connectSolo();
   }
@@ -352,7 +353,7 @@ export async function startSolo(host){
     const followed=mine||state.runners[state.live[0]];
     const s=followed?.[10]??0;
     section=course?.stage.pieces.find(piece=>s>=piece.s0&&s<piece.s1);
-    const trackLabel=slideNames[section?.name]||deckNames[section?.name];
+    const trackLabel=host.pieceNames?.[section?.name]||slideNames[section?.name]||deckNames[section?.name];
     const active=followed?followed[8]&F_ACTIVE:true,placed=followed?followed[8]&F_PLACED:false;
     const label=ph==='countdown'?'起跑 '+state.remaining:ph==='cut'?'本关完成':!active&&ph==='race'?'检查点复位':(ph==='race'&&trackLabel)||stageNames[state.stage];
     $('#section').textContent=(state.stage+1)+'/5 · '+label;
@@ -524,6 +525,7 @@ export async function startSolo(host){
       if(!row||ready){r.group.visible=r.contact.visible=false;r.tag.hidden=true;continue}
       poseRunner(r,row,ph,dt);placeTag(r,row);
     }
+    host.lightCourse?.(course,worldPos);
     const displayTime=timing.clock;
     course.update(displayTime,dt,['race','cut','draft','podium','over'].includes(ph));
     const waiting=ph==='intro'||ph==='countdown';

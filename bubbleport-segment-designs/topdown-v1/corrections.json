@@ -1,0 +1,38 @@
+[
+  {
+    "id": "01-pendulums",
+    "file": "01-pendulums-v2.png",
+    "source": "01-pendulums.png",
+    "prompt": "Precise correction to this existing top-down Bubbleport track design. Preserve EXACT camera, portrait composition, title, materials, palette, floor graphics and all obstacle geometry and positions except the following narrowly specified changes. Both the bottom IN and the top OUT must be FULL-WIDTH OPEN CONNECTION ENDS. Remove the thin transverse raised end rim/bar across the bottom and any bar across the top. Let the ivory riding floor end at a clean flat straight seam, flush with floor. Keep mint side rails and peach side corner caps. No part should turn inward across either open end. This is an edit, not a redesign. No extra objects, no new arrows, no camera tilt. Keep all other pixels as close as possible to the input."
+  },
+  {
+    "id": "02-sliding-doors",
+    "file": "02-sliding-doors-v2.png",
+    "source": "02-sliding-doors.png",
+    "prompt": "Precise correction to this existing top-down Bubbleport track design. Preserve EXACT camera, portrait composition, title, materials, palette, floor graphics and all obstacle geometry and positions except the following narrowly specified changes. Both entry at bottom IN and exit at top OUT must have the SAME FULL OPEN WIDTH as the straight deck. Remove ALL inward-turning mint horizontal rail segments across the top and bottom ends. Keep only the parallel side rails, which terminate neatly. Expand the tiny center entry/exit opening into a wide completely open deck end. Do not change any of the three gate rows. This is an edit, not a redesign. No extra objects, no new arrows, no camera tilt. Keep all other pixels as close as possible to the input."
+  },
+  {
+    "id": "03-peg-field",
+    "file": "03-peg-field-v2.png",
+    "source": "03-peg-field.png",
+    "prompt": "Precise correction to this existing top-down Bubbleport track design. Preserve EXACT camera, portrait composition, title, materials, palette, floor graphics and all obstacle geometry and positions except the following narrowly specified changes. These NINE columns are STATIONARY. Remove every little coral double-headed arrow between columns; these misleadingly suggest motion. Keep nine columns and the dashed teal player path. Also remove the transverse raised rim across the bottom IN and top OUT ends; both ends must be FULL-WIDTH OPEN. Floor should end at a flat flush seam with no cross-track rim. Keep the side rails and peach side end caps. This is an edit, not a redesign. No extra objects, no new arrows, no camera tilt. Keep all other pixels as close as possible to the input."
+  },
+  {
+    "id": "04-straight-slide",
+    "file": "04-straight-slide-v2.png",
+    "source": "04-straight-slide.png",
+    "prompt": "Narrowly targeted edit of this existing Bubbleport track concept. Keep composition and all unmentioned elements unchanged. The two peach capsule bumpers are FIXED, not moving. Remove all coral dashed arcs and coral double-headed arrows near the bumpers. Correct the teal dashed player route so it NEVER passes through either capsule: from the bottom entry it must pass to the LEFT of the lower/right-mounted capsule, cross the clear middle space, then pass to the RIGHT of the upper/left-mounted capsule, and return to center at top exit. Leave a visually clear gap between route and capsule silhouette. Also remove the raised transverse rim/bar across both the bottom and top ends, so the full-width deck is OPEN at both connections; move IN/OUT labels flush onto the floor if needed. Preserve the two capsule locations, entire slide floor, camera, title, palette, chevrons and brake strips. No new obstacles, no extra decorations, no redesign."
+  },
+  {
+    "id": "05-return-slide",
+    "file": "05-return-slide-v2.png",
+    "source": "05-return-slide.png",
+    "prompt": "Precise correction of this existing top-down Bubbleport U-turn slide concept. Preserve the exact U shape, camera, title, material, colors, width and all rails and lights. Travel direction is UP the LEFT tail, CLOCKWISE around the top semicircle, DOWN the RIGHT tail. Make these ONLY changes: 1) Rotate the THREE large white chevron arrowheads inside the green brake strip on the RIGHT EXIT TAIL by180 degrees so they point DOWN toward OUT, matching the teal dashed down arrow above them. 2) The peach inner dashed arc is a shorter player route, NOT moving machinery. Remove its double-headed arrow marks and its backwards-pointing small arrowheads; it should simply be a clean thin peach dashed arc without arrows. Keep the teal outer route arrows, which already correctly run clockwise. 3) Remove the thin raised transverse rim across the bottom of BOTH left IN and right OUT tails. Both full-width floor ends must be OPEN for module connection, flat flush edge with no end wall. Keep the parallel side rails and side corner caps intact. No redesign, no new obstacles, no extra labels."
+  },
+  {
+    "id": "06-wave-floor",
+    "file": "06-wave-floor-v2.png",
+    "source": "06-wave-floor.png",
+    "prompt": "Narrowly targeted edit of this existing Bubbleport track concept. Keep composition and all unmentioned elements unchanged. These floor tiles move UP AND DOWN IN HEIGHT, not laterally. REMOVE all coral dashed horizontal arcs and coral left-right double arrows above the rows. Keep the 12 tile-top small up/down symbols, all tile positions and colors, teal player route, pause symbols and the TWO fixed outer bypass strips. Also REMOVE the whole raised transverse end bar across bottom IN and top OUT so both deck ends are FULL-WIDTH OPEN, with the side rails simply terminating; keep IN and OUT as flat printed floor labels if necessary, no physical end wall. Preserve exact top-down camera, title, materials, floor and all other geometry. No new obstacles, no extra decorations, no redesign."
+  }
+]

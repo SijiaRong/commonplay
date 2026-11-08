@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>泡泡星港 · 模型工作室</title>
+<style>*{margin:0}canvas{display:block;width:100vw;height:100dvh;cursor:grab;touch-action:none}canvas:active{cursor:grabbing}</style>
+<canvas aria-label="模型工作室空场，拖动环视"></canvas>
+<script type="importmap">{"imports":{"three":"../../vendor/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+const canvas = document.querySelector('canvas');
+const renderer = new THREE.WebGLRenderer({canvas, antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(44, 1, 0.1, 1000);
+const loader = new THREE.TextureLoader();
+const [walls, oak] = await Promise.all([
+  loader.loadAsync('maker-walls.jpg'),
+  loader.loadAsync('../oak.jpg')
+]);
+for (const texture of [walls, oak]) {
+  texture.colorSpace = THREE.SRGBColorSpace;
+  texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+}
+const width = 3.9, height = 2.6;
+camera.position.y = 1.43;
+const wallMaterial = new THREE.MeshBasicMaterial({map: walls});
+const wallFaces = [
+  {column: 0, row: 0, rotation: 0},             // Workbench
+  {column: 1, row: 0, rotation: -Math.PI / 2},  // Door
+  {column: 0, row: 1, rotation: Math.PI},        // Cabinet
+  {column: 1, row: 1, rotation: Math.PI / 2}     // Window
+];
+for (const {column, row, rotation} of wallFaces) {
+  const geometry = new THREE.PlaneGeometry(width, height);
+  const uv = geometry.attributes.uv;
+  // Inset the atlas samples so the adjoining photograph cannot bleed into a corner.
+  const insetU = 2 / walls.image.width, insetV = 2 / walls.image.height;
+  for (let i = 0; i < uv.count; i++) {
+    uv.setXY(i, column / 2 + insetU + uv.getX(i) * (0.5 - 2 * insetU),
+      (1 - row) / 2 + insetV + uv.getY(i) * (0.5 - 2 * insetV));
+  }
+  const wall = new THREE.Mesh(geometry, wallMaterial);
+  wall.rotation.y = rotation;
+  wall.position.set(-Math.sin(rotation) * width / 2, height / 2, -Math.cos(rotation) * width / 2);
+  scene.add(wall);
+}
+oak.wrapS = oak.wrapT = THREE.RepeatWrapping;
+oak.repeat.set(3, 2);
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(width, width),
+  new THREE.MeshLambertMaterial({map: oak}));
+floor.rotation.x = -Math.PI / 2;
+scene.add(floor);
+const ceiling = new THREE.Mesh(new THREE.PlaneGeometry(width, width),
+  new THREE.MeshLambertMaterial({color: 0xf2dec1}));
+ceiling.rotation.x = Math.PI / 2;
+ceiling.position.y = height;
+scene.add(ceiling);
+scene.add(new THREE.AmbientLight(0xfff5e6, 1.15));
+const windowLight = new THREE.PointLight(0xffe7bd, 9);
+windowLight.position.set(-width / 2 + 0.1, 1.65, 0);
+scene.add(windowLight);
+let yaw = -Math.PI / 2 - 0.10, pitch = -0.08;
+function draw() {
+  camera.lookAt(Math.cos(yaw)*Math.cos(pitch), camera.position.y + Math.sin(pitch), Math.sin(yaw)*Math.cos(pitch));
+  renderer.render(scene, camera);
+}
+function resize() {
+  renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+  camera.aspect = canvas.clientWidth / canvas.clientHeight;
+  // Limit horizontal coverage on wide screens to avoid stretching the edges.
+  const maxHalfWidth = Math.tan(THREE.MathUtils.degToRad(68 / 2));
+  camera.fov = Math.min(44, 2 * THREE.MathUtils.radToDeg(Math.atan(maxHalfWidth / camera.aspect)));
+  camera.updateProjectionMatrix();
+  draw();
+}
+canvas.onpointerdown = e => canvas.setPointerCapture(e.pointerId);
+canvas.onpointermove = e => {
+  if (!canvas.hasPointerCapture(e.pointerId)) return;
+  yaw -= e.movementX * 0.003;
+  pitch = THREE.MathUtils.clamp(pitch + e.movementY * 0.003, -1.52, 1.52);
+  draw();
+};
+addEventListener('resize', resize);
+resize();
+document.documentElement.dataset.ready='true';
+</script></html>

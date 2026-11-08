@@ -23,7 +23,7 @@ export function stagePoints(order, racers, final) {
   return final ? base * 2 : base;
 }
 
-class PartyShow extends Show {
+export const withPartyRules = BaseShow => class PartyShow extends BaseShow {
   constructor(options) {
     super(options);
     this.untimed = options.untimed;
@@ -153,7 +153,8 @@ class PartyShow extends Show {
 
   atFinish(player) {
     const {bowl, finish, penHeading, path} = this.stage;
-    if (bowl) return super.atFinish(player);
+    if (bowl && bowl.finishInDrain !== false) return super.atFinish(player);
+    if (bowl && !player.passedDrain) return false;
     const b = player.body, dx = b.x - finish.c[0], dz = b.z - finish.c[2];
     const fx = Math.sin(penHeading), fz = Math.cos(penHeading);
     const forward = dx * fx + dz * fz, side = dx * fz - dz * fx;
@@ -164,7 +165,8 @@ class PartyShow extends Show {
 
   qualify(player) {
     const {finish, penHeading, bowl, penCenter, path} = this.stage, b = player.body;
-    if (!bowl && player.human) {
+    const finishInDrain = bowl && bowl.finishInDrain !== false;
+    if (!finishInDrain && player.human) {
       const fx = Math.sin(penHeading), fz = Math.cos(penHeading);
       const beyond = (b.x - finish.c[0]) * fx + (b.z - finish.c[2]) * fz;
       // Carry a humanoid runner clear of the 1.6-unit stripe before it stops to celebrate.
@@ -178,7 +180,7 @@ class PartyShow extends Show {
     player.finishingRun = false;
     super.qualify(player);
     b.vx = b.vz = 0;
-    if (bowl) {
+    if (finishInDrain) {
       // The finish trigger is inside the drain. Celebrate on its exit platform, spread out by finishing order.
       const k = player.finishOrder, j = k % 5, side = ((j + 1) >> 1) * (j % 2 ? 1 : -1) * 1.4, back = Math.floor(k / 5) * 1.4;
       const fx = Math.sin(penHeading), fz = Math.cos(penHeading);
@@ -209,15 +211,17 @@ class PartyShow extends Show {
   }
 }
 
+const PartyShow = withPartyRules(Show);
+
 // entrants: [{name, character}] humans in seat order. bots: extra AI runners. untimed: a lone human with no
 // bots may stop anywhere to look around (the original solo validation mode).
 export class PartySession {
   // pool: character ids bots may wear.
-  constructor({seed, entrants, bots = 0, pool = []}) {
+  constructor({seed, entrants, bots = 0, pool = [], ShowClass = PartyShow}) {
     const humans = entrants.slice(0, MAX_FIELD);
     const fieldSize = Math.min(MAX_FIELD, humans.length + Math.max(0, bots | 0));
     this.characters = [];
-    this.show = new PartyShow({
+    this.show = new ShowClass({
       seed, fieldSize, untimed: fieldSize === 1,
       entrants: humans.map(e => ({name: e.name, loadout: {deck: HUMAN_DECK}})),
     });

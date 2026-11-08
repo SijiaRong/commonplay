@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "classification": "original",
+  "materialVersion": 2,
+  "name": "泡泡星港原创材质",
+  "source": "materials.mjs",
+  "presets": "presets.json",
+  "maps": "textures/",
+  "mapsCount": 28,
+  "references": "references/README.md",
+  "legacyConsumers": [
+    "bubbleport-material-lab/materials.mjs (re-export)",
+    "assets/bubbleport-course-resources/materials (directory symlink)"
+  ],
+  "lostMarblesResearch": "../../lm/",
+  "note": "此目录只维护本轮八种原创材质。Lost Marbles与其他样本沿用总库现有分类，不将其纳入原创资产。"
+}

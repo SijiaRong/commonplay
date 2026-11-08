@@ -1,0 +1,1 @@
+../../../teddy-playground/dist/solo/play.js

@@ -1,0 +1,11 @@
+{
+  "task_id": "d72724ca9035480e91d0e9e5a262913a",
+  "model_page_url": "https://www.hi3d.ai/3d-model/d72724ca9035480e91d0e9e5a262913a",
+  "actual_points": 45,
+  "status": "succeeded",
+  "input": "references/hi3d-input.jpg",
+  "version": "v3.0",
+  "quality": "high_quality",
+  "pbr": true,
+  "license": "private"
+}

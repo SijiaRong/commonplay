@@ -25,9 +25,9 @@ export function chevronTexture() {
   const S = 256;
   const c = canvas(S, S);
   const ctx = c.getContext('2d');
-  ctx.fillStyle = '#ff8c00';
+  ctx.fillStyle = '#cf835f';
   ctx.fillRect(0, 0, S, S);
-  ctx.fillStyle = '#fff1a8';
+  ctx.fillStyle = '#fff0d7';
   for (let i = 0; i < 2; i++) {
     const x = i * (S / 2);
     ctx.beginPath();
@@ -49,7 +49,7 @@ export function checkerTexture() {
   const ctx = c.getContext('2d');
   for (let y = 0; y < 4; y++) {
     for (let x = 0; x < 4; x++) {
-      ctx.fillStyle = (x + y) % 2 ? '#1c1c22' : '#f6f2ea';
+      ctx.fillStyle = (x + y) % 2 ? '#386461' : '#f6f2ea';
       ctx.fillRect(x * 32, y * 32, 32, 32);
     }
   }

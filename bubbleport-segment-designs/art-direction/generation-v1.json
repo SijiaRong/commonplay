@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-08",
+  "tool": "built-in image_gen.imagegen",
+  "mode": "reference-guided generation",
+  "promptFile": "imagegen-prompt.txt",
+  "output": "three-segments-effect-v1.png",
+  "inputs": [
+    {
+      "file": "bubbleport-style-reference.png",
+      "role": "Primary Bubbleport material and miniature art direction",
+      "original": "/Users/cyberlingke/.codex/generated_images/01a1b93f-d38a-7260-a536-fa7db57c2a6b/exec-b63acf5e-12b7-4e4a-8670-35328e9f417e.png"
+    },
+    {
+      "file": "../review/contact-sheet.jpg",
+      "role": "Three authored module layouts; ignore gallery UI"
+    },
+    {
+      "file": "../../assets/bubbleport-model-references/03-soda-cafe/three-quarter.png",
+      "role": "Existing soda cafe identity"
+    }
+  ],
+  "review": "Materials and broad module identities accepted as concept direction. Perspective image does not certify dimensions, geometry, collision or playability.",
+  "newHi3dModelTasks": 0
+}
