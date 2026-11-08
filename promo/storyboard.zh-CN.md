@@ -2,6 +2,8 @@
 
 2026-11-08 · 在线版本：[Claude 文档](https://claude.ai/artifact/4rapS96cuvYjwYkisH3HeV)
 
+泡泡星城实机重制版：[32 镜分镜册](bubble-city/index.html) · [95 秒静帧预演](bubble-city/storyboard.mp4)。
+
 ## 概述
 
 一支 95 秒的横屏宣传片，主线是「一群玩偶在玩具房里的微缩滑梯乐园比赛」。全片用移轴、浅景深表现微缩感：先看五关全景和机关，再看玩家集结、比赛高光，最后是结算。结尾预告泡泡星港。

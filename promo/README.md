@@ -1,5 +1,27 @@
 # 宣传片：脚本、分镜与渲染
 
+## 泡泡星城实机版
+
+[逐镜浏览](bubble-city/index.html) · [32 镜总览图](bubble-city/contact-sheet.jpg) · [95 秒分镜视频](bubble-city/storyboard.mp4) · [取景脚本](render/bubble-city.mjs)
+
+镜头 01–04 从选角进入单人赛起跑；05–12 展示玩具门廊；13–19 沿蜡笔峡谷进入第二关的土星回旋滑梯；20–30 巡览后三关；31–32 以经典滑梯与自由练习收尾。视频按前三十一镜各 3 秒、末镜 2 秒剪成静帧预演，供核对画面与节奏。
+
+取景使用当前工作区的 `bubblecity-teddy-slide/dist`、默认材质和种子 20261108。游戏镜头通过真实试玩界面抓取，赛道镜头调用同一游戏的关卡编辑器渲染。复拍时先在仓库根目录启动静态服务，再在另一终端执行取景脚本（需要 Node.js 20+、Google Chrome 和上述游戏目录）。
+
+```sh
+python3 -m http.server 8771 --bind 127.0.0.1 --directory bubblecity-teddy-slide/dist
+```
+
+```sh
+cd promo/render
+npm ci
+node bubble-city.mjs http://127.0.0.1:8771/
+# 由新图重新剪出分镜预演（需要 ffmpeg）
+ffmpeg -y -framerate 1/3 -i ../bubble-city/shots/%02d.jpg -t 95 -vf fps=24 -c:v libx264 -pix_fmt yuv420p -movflags +faststart ../bubble-city/storyboard.mp4
+```
+
+## 小熊滑滑梯原版
+
 | 内容 | 入口 |
 |---|---|
 | 脚本、角色、分镜、待补素材 | [storyboard.zh-CN.md](storyboard.zh-CN.md) |
