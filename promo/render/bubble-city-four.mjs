@@ -35,6 +35,17 @@ try {
   await page.route(/\/slide\/ride\.js(?:\?|$)/,r=>r.fulfill({contentType:'text/javascript',body:script}));
   await page.goto(url);
   await page.addStyleTag({content:'body > :not(#world){display:none!important}#world{display:block!important}'});
+  if(short) {
+    await page.evaluate(async()=>{
+      const badge=document.createElement('div');
+      badge.style.cssText='position:fixed;z-index:10000;left:40px;top:32px;display:flex;align-items:center;gap:10px;padding:5px 16px 5px 6px;border-radius:36px;background:rgba(20,35,32,.80);color:#fff8e8;font:650 25px/1 "PingFang SC",sans-serif;letter-spacing:1px;pointer-events:none';
+      const logo=new Image(48,48);
+      logo.src='./bubble-city-logo.png';
+      await logo.decode();
+      badge.append(logo,document.createTextNode('泡泡星港'));
+      document.querySelector('#world').append(badge);
+    });
+  }
   await page.waitForFunction(()=>window.raceCapture||window.captureError,{},{timeout:90000});
   const error=await page.evaluate(()=>window.captureError);if(error)throw Error(error);
   const lighting=await page.evaluate(()=>window.raceCapture.lighting);
@@ -49,7 +60,12 @@ try {
       let allFour=0;
       for(let f=0;f<shot.frames;f++){
         const capture=!preview||[0,Math.floor(shot.frames/2),shot.frames-1].includes(f);
-        const {active}=await page.evaluate(([n,draw])=>window.raceCapture.draw(n,draw),[f,capture]);
+        const {active,muzzleExit}=await page.evaluate(([n,draw])=>window.raceCapture.draw(n,draw),[f,capture]);
+        if(muzzleExit) {
+          const event={frame:base+f,fps:30};
+          await writeFile(path.join(out,'muzzle-exit.json'),JSON.stringify(event)+'\n');
+          console.log('Muzzle exit',event);
+        }
         if(active===4)allFour++;
         if(capture){
           const {data}=await cdp.send('Page.captureScreenshot',{format:'jpeg',quality:91});

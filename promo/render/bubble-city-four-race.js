@@ -88,7 +88,8 @@ async function setup() {
       if(!fork)throw Error('No cannon on selected stage');
       shot.breech=new T.Vector3(...fork.cannon.breech);
       shot.direction=new T.Vector3(...fork.cannon.d).setY(0).normalize();
-      shot.launched=false;
+      shot.axis=new T.Vector3(...fork.cannon.d);
+      shot.launched=false;shot.exitFrame=null;
       const bear=show.players[0],i=fork.cannon.air[0]-5;
       Object.assign(bear.body,{x:path.x[i],y:path.y[i]+bear.body.r+.04,z:path.z[i],vx:0,vy:0,vz:0});
       bear.s=bear.safeS=path.s[i];bear.sampleIdx=i;bear.branchOf[fork.id]=fork.cannon.br;
@@ -173,12 +174,17 @@ async function setup() {
     }
     if(shot.cannon){
       const bear=riders[0].root.position.clone().addScaledVector(up,1.25);
-      const muzzle=shot.breech.clone().addScaledVector(shot.direction,3.3).addScaledVector(up,5.25);
-      const weight=.27+.65*T.MathUtils.smoothstep(bear.distanceTo(muzzle),1,12);
-      focus=muzzle.clone().lerp(bear,weight);
+      const muzzle=shot.breech.clone().addScaledVector(shot.axis,6.2);
+      const {x,y,z}=show.players[0].body;
+      const progress=new T.Vector3(x,y,z).sub(muzzle).dot(shot.axis);
+      if(shot.launched && progress>=0 && shot.exitFrame===null)shot.exitFrame=frame;
+      const follow=shot.exitFrame===null?0:T.MathUtils.smoothstep(frame-shot.exitFrame,0,10);
+      const aim=muzzle.clone().lerp(bear,.52);
+      focus=aim.lerp(bear,follow);
       const side=new T.Vector3(-shot.direction.z,0,shot.direction.x);
-      camera.position.copy(focus).addScaledVector(side,17).addScaledVector(shot.direction,6).addScaledVector(up,5);
-      if(frame===shot.frames-1&&!shot.launched)throw Error('Bear did not trigger the cannon');
+      camera.position.copy(focus).addScaledVector(side,10.8-2.5*follow)
+        .addScaledVector(shot.direction,4.8+2.0*follow).addScaledVector(up,3.4-.7*follow);
+      if(frame===shot.frames-1 && shot.exitFrame===null)throw Error('Bear did not clear the muzzle');
     }
     if(render) {
       camera.lookAt(focus);
@@ -186,7 +192,7 @@ async function setup() {
       course.illuminate(focus);course.update(shot.landmark?t*3:show.stageTime(),1/30,true);
       updateAcrylicBackdrop(course.mats.acrylic,film);film.render(1/30);
     }
-    return {active:riders.filter(r=>r.root.visible).length};
+    return {active:riders.filter(r=>r.root.visible).length,muzzleExit:shot.cannon && frame===shot.exitFrame};
   }
   film.resize();film.setFrameBudget(1/30,false);
   window.raceCapture={begin,draw,lighting:{room:prefs.room,background:scene.backgroundIntensity,environment:scene.environmentIntensity,sun:film.sun.intensity}};
