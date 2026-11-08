@@ -26,9 +26,11 @@ async function play(){
   const classic=params.get('mode')==='yard';
   const partyServer=document.querySelector('meta[name="party-endpoint"]');
   const party=partyServer && (params.get('mode')==='party'||params.has('room'));
-  if(!party && partyServer){
-    const rooms=document.createElement('a');
-    rooms.href='?mode=party';rooms.textContent='多人房间';
+  if(!party){
+    const rooms=document.createElement(partyServer?'a':'button');
+    rooms.textContent='多人房间';
+    if(partyServer)rooms.href='?mode=party';
+    else rooms.onclick=()=>document.querySelector('#party-help').showModal();
     document.querySelector('nav').prepend(rooms);
   }
   // The raised camera clears the classic chute walls.

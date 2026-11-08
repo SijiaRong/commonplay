@@ -4,3 +4,6 @@
 .character-summary{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:13px;font-size:13px}
 .character-summary>span{background:var(--paper);padding:6px 11px;border-radius:30px;box-shadow:0 2px 8px #33221522}
 #choose-character{border:1px solid var(--line);border-radius:30px;background:var(--paper);padding:6px 11px}
+
+#party-help{width:min(380px,90vw);padding:20px;border:1px solid var(--line);border-radius:18px;background:var(--paper);color:var(--ink)}
+#party-help h2{margin-top:0}#party-help pre{user-select:text;white-space:pre-wrap}#party-help button{padding:7px 16px;border-radius:16px}
