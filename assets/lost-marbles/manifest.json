@@ -1,0 +1,197 @@
+{
+  "seed": 20261108,
+  "poseSeconds": 2,
+  "images": [
+    {
+      "stage": 1,
+      "name": "The Bookshelf Drop",
+      "kind": "top",
+      "width": 3200,
+      "height": 4000,
+      "file": "stage-1-1-top.jpg"
+    },
+    {
+      "stage": 1,
+      "name": "The Bookshelf Drop",
+      "kind": "overview",
+      "width": 3200,
+      "height": 4000,
+      "file": "stage-1-2-overview.jpg"
+    },
+    {
+      "stage": 1,
+      "name": "The Bookshelf Drop",
+      "kind": "details",
+      "width": 3200,
+      "height": 4000,
+      "details": [
+        {
+          "name": "drum",
+          "title": "01 / THE DRUM — banked spiral"
+        },
+        {
+          "name": "fork",
+          "title": "02 / FIRST FORK — bumpers / trap / clear"
+        },
+        {
+          "name": "halfpipe",
+          "title": "03 / HALF-PIPE — curved walls"
+        }
+      ],
+      "file": "stage-1-3-details.jpg"
+    },
+    {
+      "stage": 2,
+      "name": "Crayon Canyon",
+      "kind": "top",
+      "width": 3200,
+      "height": 4000,
+      "file": "stage-2-1-top.jpg"
+    },
+    {
+      "stage": 2,
+      "name": "Crayon Canyon",
+      "kind": "overview",
+      "width": 3200,
+      "height": 4000,
+      "file": "stage-2-2-overview.jpg"
+    },
+    {
+      "stage": 2,
+      "name": "Crayon Canyon",
+      "kind": "details",
+      "width": 3200,
+      "height": 4000,
+      "details": [
+        {
+          "name": "plunge",
+          "title": "01 / THE PLUNGE — steep descent"
+        },
+        {
+          "name": "keys",
+          "title": "02 / PIANO KEYS — moving floor"
+        },
+        {
+          "name": "bowl",
+          "title": "03 / CHECKPOINT BOWL — funnel & drain"
+        }
+      ],
+      "file": "stage-2-3-details.jpg"
+    },
+    {
+      "stage": 3,
+      "name": "Pillow Pass",
+      "kind": "top",
+      "width": 3200,
+      "height": 4000,
+      "file": "stage-3-1-top.jpg"
+    },
+    {
+      "stage": 3,
+      "name": "Pillow Pass",
+      "kind": "overview",
+      "width": 3200,
+      "height": 4000,
+      "file": "stage-3-2-overview.jpg"
+    },
+    {
+      "stage": 3,
+      "name": "Pillow Pass",
+      "kind": "details",
+      "width": 3200,
+      "height": 4000,
+      "details": [
+        {
+          "name": "fork",
+          "title": "01 / FIRST FORK — loop / pegs"
+        },
+        {
+          "name": "fork",
+          "nth": 1,
+          "title": "02 / SECOND FORK — cannon / bumpers"
+        },
+        {
+          "name": "whirlpool",
+          "title": "03 / WHIRLPOOL — side funnel"
+        }
+      ],
+      "file": "stage-3-3-details.jpg"
+    },
+    {
+      "stage": 4,
+      "name": "Rug Rumble",
+      "kind": "top",
+      "width": 3200,
+      "height": 4000,
+      "file": "stage-4-1-top.jpg"
+    },
+    {
+      "stage": 4,
+      "name": "Rug Rumble",
+      "kind": "overview",
+      "width": 3200,
+      "height": 4000,
+      "file": "stage-4-2-overview.jpg"
+    },
+    {
+      "stage": 4,
+      "name": "Rug Rumble",
+      "kind": "details",
+      "width": 3200,
+      "height": 4000,
+      "details": [
+        {
+          "name": "hammers",
+          "title": "01 / HAMMERS — swinging obstacles"
+        },
+        {
+          "name": "helix",
+          "title": "02 / HELIX — descending spiral"
+        },
+        {
+          "name": "whirlpool",
+          "title": "03 / WHIRLPOOL — entry & exit"
+        }
+      ],
+      "file": "stage-4-3-details.jpg"
+    },
+    {
+      "stage": 5,
+      "name": "Toy Box Finale",
+      "kind": "top",
+      "width": 3200,
+      "height": 4000,
+      "file": "stage-5-1-top.jpg"
+    },
+    {
+      "stage": 5,
+      "name": "Toy Box Finale",
+      "kind": "overview",
+      "width": 3200,
+      "height": 4000,
+      "file": "stage-5-2-overview.jpg"
+    },
+    {
+      "stage": 5,
+      "name": "Toy Box Finale",
+      "kind": "details",
+      "width": 3200,
+      "height": 4000,
+      "details": [
+        {
+          "name": "plunge",
+          "title": "01 / THE PLUNGE — crest & run-out"
+        },
+        {
+          "name": "megaJump",
+          "title": "02 / MEGA JUMP — launch & landings"
+        },
+        {
+          "name": "bowl",
+          "title": "03 / FINAL BOWL — finish drain"
+        }
+      ],
+      "file": "stage-5-3-details.jpg"
+    }
+  ]
+}
