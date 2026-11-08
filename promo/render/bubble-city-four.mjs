@@ -14,7 +14,8 @@ const race=[
   [5,33,.24,.86,true,true],[5,442,-.48,.75,true,true],[5,'finish',3.15,.32]
 ];
 shots.push(...race.map(([stage,s,bearing,lift,jump,slow])=>({stage,s,bearing,lift,jump,slow,zoom:1,frames:120})));
-if(process.argv.includes('--short')) {
+const short=process.argv.includes('--short');
+if(short) {
   const cut=(id,frames)=>({...shots[id-1],frames});
   shots=[
     ...[1,2,3,4,5].map(id=>cut(id,60)),
@@ -29,12 +30,16 @@ const selected=process.env.SHOTS?.split(',').map(Number);
 const browser=await chromium.launch({channel:'chrome',args:['--use-angle=metal']});
 try {
   const page=await browser.newPage({viewport:{width:1600,height:900}});
+  if(short)await page.addInitScript(()=>localStorage.setItem('bubblecity-appearance-v1',JSON.stringify({room:15})));
   const script=await readFile(new URL('./bubble-city-four-race.js',import.meta.url),'utf8');
   await page.route(/\/slide\/ride\.js(?:\?|$)/,r=>r.fulfill({contentType:'text/javascript',body:script}));
   await page.goto(url);
   await page.addStyleTag({content:'body > :not(#world){display:none!important}#world{display:block!important}'});
   await page.waitForFunction(()=>window.raceCapture||window.captureError,{},{timeout:90000});
   const error=await page.evaluate(()=>window.captureError);if(error)throw Error(error);
+  const lighting=await page.evaluate(()=>window.raceCapture.lighting);
+  if(short && (lighting.room!==15 || lighting.background!==.15))throw Error('Unexpected scene brightness');
+  console.log('Game lighting',lighting);
   const cdp=await page.context().newCDPSession(page);
   await mkdir(out,{recursive:true});
   let base=0;

@@ -7,6 +7,7 @@ import {loadParkModels} from '../solo/js/render/park.js';
 import {updateAcrylicBackdrop} from '../solo/js/render/acrylic.js';
 import {createSlideFilm,focusRider} from './film/scene.js';
 import {loadDaylight,createContactShadow} from './daylight.js';
+import {prefs,applyRoom} from './preferences.js';
 import {GroundMotion} from './ground-motion.mjs';
 import {createRider} from './rider.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
@@ -28,6 +29,7 @@ async function setup() {
       return {root,shadow,rider,motion:new GroundMotion(name=>rider.duration(name))};
     })),loadDaylight(film),getMaterials(quality,renderer,{lite}).ready
   ]);
+  applyRoom(scene,film.sun,film.fill);
   const show=new CityPartyShow({seed:20261108,fieldSize:4,untimed:true,
     entrants:assets.map(def=>({name:def.name,bot:false}))});
   let course,shot,center,angle;
@@ -172,7 +174,7 @@ async function setup() {
     if(shot.cannon){
       const bear=riders[0].root.position.clone().addScaledVector(up,1.25);
       const muzzle=shot.breech.clone().addScaledVector(shot.direction,3.3).addScaledVector(up,5.25);
-      const weight=shot.launched?.76:.27;
+      const weight=.27+.65*T.MathUtils.smoothstep(bear.distanceTo(muzzle),1,12);
       focus=muzzle.clone().lerp(bear,weight);
       const side=new T.Vector3(-shot.direction.z,0,shot.direction.x);
       camera.position.copy(focus).addScaledVector(side,17).addScaledVector(shot.direction,6).addScaledVector(up,5);
@@ -187,6 +189,6 @@ async function setup() {
     return {active:riders.filter(r=>r.root.visible).length};
   }
   film.resize();film.setFrameBudget(1/30,false);
-  window.raceCapture={begin,draw};
+  window.raceCapture={begin,draw,lighting:{room:prefs.room,background:scene.backgroundIntensity,environment:scene.environmentIntensity,sun:film.sun.intensity}};
 }
 setup().catch(error=>{window.captureError=String(error);console.error(error);});
