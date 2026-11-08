@@ -8,6 +8,10 @@
 
 可直接打开 [本地浏览索引](index.html)；在 GitHub 上点击下方图片可查看原尺寸。
 
+## 独立路段模块
+
+新增[34 类完整路段模块图录](../../docs/lost-marbles-module-atlas.zh-CN.md)，每类一张 4096 × 3072 大图。也可查看[模块素材目录](modules/README.md)或下载后打开[模块浏览索引](modules/index.html)。
+
 ## 五关同场全景
 
 [斜向全景](full-overview.png) · [完整俯视](full-top.png) · [房间环境](full-room.png)

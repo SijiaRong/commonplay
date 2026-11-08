@@ -195,6 +195,18 @@ flowchart TD
 
 ![第 5 关 Toy Box Finale：完整路线与三个机关特写](../assets/lost-marbles/stage-5-3-details.jpg)
 
+<a id="module-atlas"></a>
+
+### 3.4 34 类独立路段模块图录
+
+除五关完整场景外，已将路段按 **22 类普通机关 + 3 类特殊路段 + 4 类岔路结构 + 3 类转弯 + 2 类终点** 分别渲染，每类一张 **4096 × 3072** 大图。每张同时展示完整立体路段、带 IN / OUT / GOAL 标记的路线俯视，以及另一侧机关结构。34 类采用研究分类口径，不包含起跑台与基础连接坡，也没有穷举岔路排列和参数变体。
+
+**[打开完整模块图录：34 张大图、逐类图注与索引](lost-marbles-module-atlas.zh-CN.md)**。按分类查看：[普通机关](lost-marbles-module-atlas.zh-CN.md#group-1)、[特殊路段](lost-marbles-module-atlas.zh-CN.md#group-2)、[岔路](lost-marbles-module-atlas.zh-CN.md#group-3)、[转弯](lost-marbles-module-atlas.zh-CN.md#group-4)、[终点](lost-marbles-module-atlas.zh-CN.md#group-5)。
+
+![34 类完整路段模块总览](../assets/lost-marbles/modules/contact-sheet.jpg)
+
+独立模块使用原构建函数、`CourseView` 与材质，统一通道宽度 16、种子 `20261108`、机关姿态 `t = 2s`；为完整展示落差，构建时按路径最低点抬高路段，安装高度与五关场景不同。每类展示一个代表配置，碗形与围栏终点采用非最终关参数。图片属于本地研究渲染，没有执行完整比赛或通关验证；[清单](../assets/lost-marbles/modules/manifest.json)记录各图参数及原生成器 SHA-256，[工具入口](../tools/render-lost-marbles-modules.cjs)可用于复现。
+
 ## 4. 画面为什么有真实玩具感
 
 ### 4.1 摄影背景与环境光

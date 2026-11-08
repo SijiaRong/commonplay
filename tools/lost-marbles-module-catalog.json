@@ -1,0 +1,240 @@
+[
+  {
+    "number": 1,
+    "id": "pegs",
+    "label": "钉柱阵",
+    "description": "在立柱之间穿行",
+    "category": "普通机关路段"
+  },
+  {
+    "number": 2,
+    "id": "spinners",
+    "label": "旋转拨杆",
+    "description": "转动横杆撞开弹珠",
+    "category": "普通机关路段"
+  },
+  {
+    "number": 3,
+    "id": "bumps",
+    "label": "凸块路",
+    "description": "连续小凸起",
+    "category": "普通机关路段"
+  },
+  {
+    "number": 4,
+    "id": "funnel",
+    "label": "收口漏斗",
+    "description": "宽路逐渐变窄",
+    "category": "普通机关路段"
+  },
+  {
+    "number": 5,
+    "id": "bumperField",
+    "label": "弹性碰撞阵",
+    "description": "弹性障碍改变行进方向",
+    "category": "普通机关路段"
+  },
+  {
+    "number": 6,
+    "id": "rollers",
+    "label": "横向滚筒",
+    "description": "滚动柱体制造颠簸",
+    "category": "普通机关路段"
+  },
+  {
+    "number": 7,
+    "id": "hills",
+    "label": "波浪坡",
+    "description": "连续起伏",
+    "category": "普通机关路段"
+  },
+  {
+    "number": 8,
+    "id": "hammers",
+    "label": "摆锤",
+    "description": "摆动障碍横扫赛道",
+    "category": "普通机关路段"
+  },
+  {
+    "number": 9,
+    "id": "gates",
+    "label": "活动闸门",
+    "description": "按时序开合",
+    "category": "普通机关路段"
+  },
+  {
+    "number": 10,
+    "id": "sweeper",
+    "label": "大扫杆",
+    "description": "跨赛道旋转扫击",
+    "category": "普通机关路段"
+  },
+  {
+    "number": 11,
+    "id": "trapFloor",
+    "label": "陷阱地板",
+    "description": "地板翻转，制造坠落风险",
+    "category": "普通机关路段"
+  },
+  {
+    "number": 12,
+    "id": "cliff",
+    "label": "小落差",
+    "description": "短距离掉落",
+    "category": "普通机关路段"
+  },
+  {
+    "number": 13,
+    "id": "bigAir",
+    "label": "腾空跳台",
+    "description": "起跳越过间隙",
+    "category": "普通机关路段"
+  },
+  {
+    "number": 14,
+    "id": "cascade",
+    "label": "阶梯瀑布",
+    "description": "连续台阶下落",
+    "category": "普通机关路段"
+  },
+  {
+    "number": 15,
+    "id": "seesaws",
+    "label": "跷跷板",
+    "description": "活动桥面改变坡度",
+    "category": "普通机关路段"
+  },
+  {
+    "number": 16,
+    "id": "keys",
+    "label": "钢琴键",
+    "description": "板块按波形上下运动",
+    "category": "普通机关路段"
+  },
+  {
+    "number": 17,
+    "id": "halfpipe",
+    "label": "半管道",
+    "description": "沿弧形侧壁滑行",
+    "category": "普通机关路段"
+  },
+  {
+    "number": 18,
+    "id": "hoopJump",
+    "label": "穿环跳",
+    "description": "越过间隙穿过圆环",
+    "category": "普通机关路段"
+  },
+  {
+    "number": 19,
+    "id": "hopscotch",
+    "label": "跳格子",
+    "description": "连续短平台与空隙",
+    "category": "普通机关路段"
+  },
+  {
+    "number": 20,
+    "id": "trampolines",
+    "label": "蹦床",
+    "description": "弹跳垫连接落点",
+    "category": "普通机关路段"
+  },
+  {
+    "number": 21,
+    "id": "plunge",
+    "label": "陡降滑槽",
+    "description": "翻过坡顶进入陡降段",
+    "category": "普通机关路段"
+  },
+  {
+    "number": 22,
+    "id": "spintop",
+    "label": "旋转陀螺",
+    "description": "旋转盘面改变弹珠运动",
+    "category": "普通机关路段"
+  },
+  {
+    "number": 23,
+    "id": "whirlpool",
+    "label": "小漩涡",
+    "description": "沿碗壁滑向中间排出口",
+    "category": "特殊大型路段"
+  },
+  {
+    "number": 24,
+    "id": "drum",
+    "label": "滚筒弯道",
+    "description": "绕中心柱沿侧壁转弯",
+    "category": "特殊大型路段"
+  },
+  {
+    "number": 25,
+    "id": "megaJump",
+    "label": "超级跳台",
+    "description": "多落点的长距离飞跃",
+    "category": "特殊大型路段"
+  },
+  {
+    "number": 26,
+    "id": "fork",
+    "label": "多路线岔路",
+    "description": "分成不同风险的并行路线",
+    "category": "岔路结构"
+  },
+  {
+    "number": 27,
+    "id": "loop",
+    "label": "垂直回环",
+    "description": "回环搭配平缓备用路",
+    "category": "岔路结构"
+  },
+  {
+    "number": 28,
+    "id": "cannon",
+    "label": "玩具大炮",
+    "description": "炮击飞跃搭配备用路",
+    "category": "岔路结构"
+  },
+  {
+    "number": 29,
+    "id": "split",
+    "label": "高低双路",
+    "description": "高处快路与低处安全路",
+    "category": "岔路结构"
+  },
+  {
+    "number": 30,
+    "id": "turn",
+    "label": "平面回头弯",
+    "description": "连接相邻两条下坡直道",
+    "category": "转弯连接段"
+  },
+  {
+    "number": 31,
+    "id": "bank",
+    "label": "倾斜回头弯",
+    "description": "带倾角的曲面转弯",
+    "category": "转弯连接段"
+  },
+  {
+    "number": 32,
+    "id": "helix",
+    "label": "螺旋下坡弯",
+    "description": "螺旋盘绕后进入下一条直道",
+    "category": "转弯连接段"
+  },
+  {
+    "number": 33,
+    "id": "bowl",
+    "label": "碗形终点",
+    "description": "沿碗壁滑向中央出口",
+    "category": "终点段"
+  },
+  {
+    "number": 34,
+    "id": "pen",
+    "label": "围栏终点",
+    "description": "进入围栏区域判定到达",
+    "category": "终点段"
+  }
+]

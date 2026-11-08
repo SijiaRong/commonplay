@@ -1,0 +1,72 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><style>html,body{margin:0;background:#f6f1e7}canvas{display:block;width:100vw;height:100vh}</style><script type="importmap">{"imports":{"three":"/vendor/three/three.module.js","three/addons/":"/vendor/three/addons/"}}</script><canvas id="webgl" style="display:none"></canvas><canvas id="output" width="4096" height="3072"></canvas><script type="module">
+import * as THREE from 'three';
+import {StageBuilder,PIECES,addPiece} from '/shared/course-research.js';
+import {makeRng} from '/shared/rng.js';
+import {CourseView} from '/js/render/courseView.js';
+import {getMaterials} from '/js/render/materials.js';
+import {HDRLoader} from 'three/addons/loaders/HDRLoader.js';
+const catalog=await fetch('/module-catalog.json').then(r=>r.json());
+if(catalog.length!==34||PIECES.length!==22)throw Error('Unexpected module catalog / source version');
+const renderer=new THREE.WebGLRenderer({canvas:document.querySelector('#webgl'),antialias:true,preserveDrawingBuffer:true});
+renderer.setPixelRatio(1);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.AgXToneMapping;renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+const scene=new THREE.Scene();scene.background=new THREE.Color('#e5e0d6');
+const sun=new THREE.DirectionalLight('#fff1dc',2.7);sun.castShadow=true;sun.shadow.mapSize.set(4096,4096);sun.shadow.bias=-.00015;sun.shadow.normalBias=.07;scene.add(sun,sun.target);
+scene.add(new THREE.HemisphereLight('#e4efff','#c5ae8b',.65));
+const hdr=await new HDRLoader().loadAsync('/assets/room_1k.hdr');hdr.mapping=THREE.EquirectangularReflectionMapping;const pmrem=new THREE.PMREMGenerator(renderer);const rt=pmrem.fromEquirectangular(hdr);scene.environment=rt.texture;scene.environmentIntensity=.85;hdr.dispose();pmrem.dispose();
+const floor=new THREE.Mesh(new THREE.PlaneGeometry(3000,3000),new THREE.MeshStandardMaterial({color:'#ded8cb',roughness:.94}));floor.rotation.x=-Math.PI/2;floor.position.y=-.1;floor.receiveShadow=true;scene.add(floor);await getMaterials('high',renderer).ready;
+const board=document.querySelector('#output'),ctx=board.getContext('2d');let view=null;
+function generate(id,height){
+ const b=new StageBuilder(makeRng(20261108),2,16);b.T.y=height;b.sCur=0;b.dropRoom=120;b.restLen=200;b.turnsLeft=1;
+ let terminal=null;
+ if(id==='fork')b.fork(34,2.8,['stairs','beam','spinner']);
+ else if(id==='loop')b.fork(34,2.8,['loop','clear']);
+ else if(id==='cannon')b.fork(46,2.8,['cannon','clear']);
+ else if(id==='split')b.fork(34,2.8,['high','low']);
+ else if(id==='turn')b.turn(1);
+ else if(id==='bank'||id==='helix')b.bankedTurn(1,id==='helix'?1:0);
+ else if(id==='bowl')terminal=b.bowl(false,1);
+ else if(id==='pen')terminal=b.pen(false);
+ else addPiece(b,id,.082,1);
+ return {b,terminal};
+}
+function label(text,x,y,size=30,color='#354a49'){ctx.fillStyle=color;ctx.font=`500 ${size}px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif`;ctx.fillText(text,x,y);}
+function pane(box,x,y,w,h,kind,azimuth=.7){
+ renderer.setSize(w,h,false);const center=box.getCenter(new THREE.Vector3()),size=box.getSize(new THREE.Vector3());let camera;
+ if(kind==='top'){
+ const span=Math.max(size.z*1.15,size.x*1.15/(w/h));camera=new THREE.OrthographicCamera(-span*w/h/2,span*w/h/2,span/2,-span/2,.1,2000);camera.position.copy(center).add(new THREE.Vector3(0,600,0));camera.up.set(0,0,-1);camera.lookAt(center);
+ }else{
+ camera=new THREE.PerspectiveCamera(35,w/h,.2,2400);const dir=new THREE.Vector3(Math.sin(azimuth),kind==='detail'?.85:1.0,Math.cos(azimuth)).normalize(),corners=[];
+ for(const xx of [box.min.x,box.max.x])for(const yy of [box.min.y,box.max.y])for(const zz of [box.min.z,box.max.z])corners.push(new THREE.Vector3(xx,yy,zz));
+ for(let d=4;d<1600;d+=.8){camera.position.copy(center).addScaledVector(dir,d);camera.lookAt(center);camera.updateMatrixWorld();if(corners.every(c=>{const p=c.clone().project(camera);return Math.abs(p.x)<.92&&Math.abs(p.y)<.92&&p.z<1;}))break;}
+ }
+ camera.updateProjectionMatrix();camera.updateMatrixWorld();renderer.render(scene,camera);ctx.drawImage(renderer.domElement,x,y,w,h);return camera;
+}
+function pin(p,text,camera,x,y,w,h){const q=new THREE.Vector3(...p).project(camera),px=x+(q.x+1)*w/2,py=y+(1-q.y)*h/2;ctx.beginPath();ctx.arc(px,py,27,0,Math.PI*2);ctx.fillStyle=text==='IN'?'#285b64':'#9b492f';ctx.fill();ctx.lineWidth=3;ctx.strokeStyle='#fff';ctx.stroke();ctx.textAlign='center';label(text,px,py+8,20,'#fff');ctx.textAlign='left';}
+window.renderModule=async function(index){
+ const row=catalog[index];if(view){scene.remove(view.group);view.dispose();}
+ const probe=generate(row.id,0).b;const minY=Math.min(0,...probe.samples.map(p=>p.y));const lift=8-minY;
+ const {b,terminal}=generate(row.id,lift);const entry=[0,lift,0],exit=b.pos();
+ view=new CourseView({index:2,colliders:b.colliders,visuals:b.visuals,supports:b.supports},'high');view.update(2,0,false);scene.add(view.group);
+ const box=new THREE.Box3().setFromObject(view.group),center=box.getCenter(new THREE.Vector3()),size=box.getSize(new THREE.Vector3());
+ if(box.isEmpty()||![...box.min,...box.max].every(Number.isFinite))throw Error('Invalid module geometry: '+row.id);
+ const span=Math.max(size.x,size.z)*.85+16;Object.assign(sun.shadow.camera,{left:-span,right:span,top:span,bottom:-span,near:1,far:1000});sun.shadow.camera.updateProjectionMatrix();sun.target.position.copy(center);sun.position.copy(center).add(new THREE.Vector3(180,300,150));sun.shadow.needsUpdate=true;
+ board.width=4096;board.height=3072;ctx.fillStyle='#f7f2e8';ctx.fillRect(0,0,4096,3072);
+ label('LOST MARBLES / 路段模块图录',95,92,32,'#707a6b');label(`${String(index+1).padStart(2,'0')}  ${row.label} · ${row.id}`,95,190,68);
+ label(row.category+'  /  '+row.description,95,254,33,'#626c61');
+ label('完整路段 · 立体全景',100,335,29);pane(box,80,365,2670,2520,'main',row.id==='megaJump'?1.05:.7);
+ label('完整路线俯视 · 入口与出口',2840,335,29);const map=pane(box,2820,365,1196,1160,'top');
+ const goal=row.id==='bowl'?b.bowlInfo.c:row.id==='pen'?terminal.finish.c:exit;
+ pin(entry,'IN',map,2820,365,1196,1160);pin(goal,terminal?'GOAL':'OUT',map,2820,365,1196,1160);
+ label('机关细节 · 另一侧视角',2840,1610,29);
+ // Keep the complete module in the secondary view: branches, landings and undersides remain legible.
+ pane(box,2820,1640,1196,1245,'detail',-1.05);
+ ctx.strokeStyle='#d7d0c4';ctx.lineWidth=2;ctx.strokeRect(80,365,2670,2520);ctx.strokeRect(2820,365,1196,1160);ctx.strokeRect(2820,1640,1196,1245);
+ label('种子 20261108  ·  通道宽度 16  ·  静态机关姿态 t = 2s  ·  独立模块示例，长度和布局可随参数变化',100,2980,28,'#77786c');
+ label('原生成器 + 原版材质 / 研究渲染 / 不含整场比赛模拟与原版景深后处理',100,3034,25,'#77786c');
+ return {...row,width:4096,height:3072,lift,colliders:b.colliders.length,visuals:b.visuals.length,supports:b.supports.length,bounds:{min:box.min.toArray(),max:box.max.toArray()},entry,exit:goal,branches:b.forks.map(f=>f.branches.map(v=>v.kind)),thumbnail:board.toDataURL('image/jpeg',.65)};
+};
+window.makeContact=async function(images){
+ const columns=4,w=600,h=520;board.width=columns*w;board.height=150+Math.ceil(images.length/columns)*h;ctx.fillStyle='#f7f2e8';ctx.fillRect(0,0,board.width,board.height);label('Lost Marbles · 34 类完整路段模块',60,90,46);
+ for(let i=0;i<images.length;i++){const img=new Image();img.src=images[i].thumbnail;await img.decode();const x=(i%columns)*w,y=150+Math.floor(i/columns)*h;ctx.drawImage(img,x+10,y,w-20,(w-20)*.75);label(`${String(i+1).padStart(2,'0')} ${images[i].label} / ${images[i].id}`,x+20,y+475,23);}
+};window.moduleCatalog=catalog;window.ready=true;
+</script></html>
