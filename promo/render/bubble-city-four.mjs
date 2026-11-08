@@ -14,13 +14,21 @@ const race=[
   [5,33,.24,.86,true,true],[5,442,-.48,.75,true,true],[5,'finish',3.15,.32]
 ];
 shots.push(...race.map(([stage,s,bearing,lift,jump,slow])=>({stage,s,bearing,lift,jump,slow,zoom:1,frames:120})));
-const short=process.argv.includes('--short');
+const teaser=process.argv.includes('--teaser');
+const short=teaser || process.argv.includes('--short');
 if(short) {
   const cut=(id,frames)=>({...shots[id-1],frames});
-  shots=[
+  const cannon={stage:3,s:203,cannon:true,slow:true,frames:180,bearing:0,lift:.5,zoom:1};
+  if(teaser) {
+    shots=[
+      ...[1,2,3,4,5].map(id=>cut(id,60)),
+      cut(6,60),cut(10,60),cut(15,60),cannon,
+      cut(19,60),cut(22,60),cut(23,60),cut(25,60)
+    ].map(shot=>({...shot,teaser:true}));
+  } else shots=[
     ...[1,2,3,4,5].map(id=>cut(id,60)),
     ...[6,8,10,12].map(id=>cut(id,75)),
-    {stage:3,s:203,cannon:true,slow:true,frames:180,bearing:0,lift:.5,zoom:1},
+    cannon,
     ...[19,20,22,23].map(id=>cut(id,75)),cut(25,120)
   ];
 }
@@ -46,6 +54,19 @@ try {
       document.querySelector('#world').append(badge);
     });
   }
+  if(teaser)await page.evaluate(async()=>{
+    const {stageNames}=await import('./solo/course-labels.js');
+    const title=document.createElement('div');
+    title.style.cssText='position:fixed;z-index:10001;bottom:48px;left:42px;border-left:5px solid #a4e6d9;padding:10px 58px 10px 18px;color:#fff9e8;background:linear-gradient(90deg,rgba(17,31,30,.90),rgba(17,31,30,.76) 68%,transparent);font-family:"PingFang SC",sans-serif;text-shadow:0 1px 3px #182321';
+    const number=document.createElement('div'),name=document.createElement('div');
+    number.style.cssText='font-weight:600;font-size:18px;letter-spacing:3px;color:#bcece0';
+    name.style.cssText='font-weight:700;font-size:41px;letter-spacing:2px;line-height:1.35';
+    title.append(number,name);document.querySelector('#world').append(title);
+    window.showCourseTitle=stage=>{
+      title.hidden=!stage;
+      if(stage){number.textContent='第 '+stage+' 关';name.textContent=stageNames[stage-1];}
+    };
+  });
   await page.waitForFunction(()=>window.raceCapture||window.captureError,{},{timeout:90000});
   const error=await page.evaluate(()=>window.captureError);if(error)throw Error(error);
   const lighting=await page.evaluate(()=>window.raceCapture.lighting);
@@ -56,7 +77,7 @@ try {
   let base=0;
   for(const [i,shot] of shots.entries()){
     if(i+1>=first && i+1<=last && (!selected || selected.includes(i+1))){
-      await page.evaluate(s=>window.raceCapture.begin(s),shot);
+      await page.evaluate(s=>{window.showCourseTitle?.(s.landmark?s.stage:null);window.raceCapture.begin(s);},shot);
       let allFour=0;
       for(let f=0;f<shot.frames;f++){
         const capture=!preview||[0,Math.floor(shot.frames/2),shot.frames-1].includes(f);

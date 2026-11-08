@@ -186,6 +186,24 @@ async function setup() {
         .addScaledVector(shot.direction,4.8+2.0*follow).addScaledVector(up,3.4-.7*follow);
       if(frame===shot.frames-1 && shot.exitFrame===null)throw Error('Bear did not clear the muzzle');
     }
+    if(shot.teaser) {
+      const ease=t*t*(3-2*t);
+      if(shot.landmark && [2,3,5].includes(shot.stage)) {
+        // Saturn switchback, cannon fork and the final jump each have a different camera path.
+        const rigs={
+          2:[503, .25, .97, 82, 56, 1.30],
+          3:[226, -1.65, -2.1, 29, 20, .58],
+          5:[285, 2.85, 3.5, 46, 31, .83]
+        };
+        const [s,from,to,wide,tight,lift]=rigs[shot.stage],i=nearest(s);
+        const yaw=Math.atan2(path.tx[i],path.tz[i])+from+(to-from)*ease;
+        focus.set(path.x[i],path.y[i]+1.4,path.z[i]);
+        const radius=T.MathUtils.lerp(wide,tight,ease);
+        camera.position.copy(focus).add(new T.Vector3(Math.sin(yaw)*radius,lift*radius,Math.cos(yaw)*radius));
+      }
+      const zoom=shot.landmark ? .94+.24*ease : shot.cannon ? 1+.10*ease : .96+.13*ease;
+      camera.zoom=zoom;camera.updateProjectionMatrix();
+    }
     if(render) {
       camera.lookAt(focus);
       focusRider(film,focus,1.4,'riding',true);
