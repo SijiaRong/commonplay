@@ -1,0 +1,70 @@
+{
+  "date": "2026-11-08",
+  "scope": "Structure and display geometry only; no collision, multiplayer, speed or playability certification.",
+  "records": [
+    {
+      "id": "flat",
+      "width": 19.2,
+      "centerlineLength": 72,
+      "maxSampleSlopeDegrees": 0,
+      "entry": [
+        0,
+        12,
+        0
+      ],
+      "exit": [
+        0,
+        12,
+        72
+      ],
+      "meshes": 159,
+      "invalidNumbers": 0,
+      "continuousSingleStrip": true,
+      "horizontalEntry": true,
+      "horizontalExit": true
+    },
+    {
+      "id": "slide",
+      "width": 19.2,
+      "centerlineLength": 90.72128078751966,
+      "maxSampleSlopeDegrees": 24.167686313217345,
+      "entry": [
+        0,
+        24,
+        0
+      ],
+      "exit": [
+        0,
+        8,
+        88
+      ],
+      "meshes": 537,
+      "invalidNumbers": 0,
+      "continuousSingleStrip": true,
+      "horizontalEntry": true,
+      "horizontalExit": true
+    },
+    {
+      "id": "turn",
+      "width": 19.2,
+      "centerlineLength": 103.3948593348511,
+      "maxSampleSlopeDegrees": 0,
+      "entry": [
+        0,
+        12,
+        0
+      ],
+      "exit": [
+        48,
+        12,
+        0
+      ],
+      "meshes": 241,
+      "invalidNumbers": 0,
+      "continuousSingleStrip": true,
+      "horizontalEntry": true,
+      "horizontalExit": true
+    }
+  ],
+  "pass": true
+}

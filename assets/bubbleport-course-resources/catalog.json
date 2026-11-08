@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-08",
+  "tracks": [
+    {
+      "id": "01-pendulums",
+      "title": "01 双摆锤廊",
+      "image": "tracks/01-pendulums/topdown.png",
+      "design": "tracks/01-pendulums/design.md",
+      "generation": "tracks/01-pendulums/generation.json",
+      "source": "bubbleport-segment-designs/topdown-v1/01-pendulums-v2.png"
+    },
+    {
+      "id": "02-sliding-doors",
+      "title": "02 星港移门",
+      "image": "tracks/02-sliding-doors/topdown.png",
+      "design": "tracks/02-sliding-doors/design.md",
+      "generation": "tracks/02-sliding-doors/generation.json",
+      "source": "bubbleport-segment-designs/topdown-v1/02-sliding-doors-v2.png"
+    },
+    {
+      "id": "03-peg-field",
+      "title": "03 气泡柱群",
+      "image": "tracks/03-peg-field/topdown.png",
+      "design": "tracks/03-peg-field/design.md",
+      "generation": "tracks/03-peg-field/generation.json",
+      "source": "bubbleport-segment-designs/topdown-v1/03-peg-field-v2.png"
+    },
+    {
+      "id": "04-straight-slide",
+      "title": "04 苏打直滑梯",
+      "image": "tracks/04-straight-slide/topdown.png",
+      "design": "tracks/04-straight-slide/design.md",
+      "generation": "tracks/04-straight-slide/generation.json",
+      "source": "bubbleport-segment-designs/topdown-v1/04-straight-slide-v2.png"
+    },
+    {
+      "id": "05-return-slide",
+      "title": "05 土星回旋滑梯",
+      "image": "tracks/05-return-slide/topdown.png",
+      "design": "tracks/05-return-slide/design.md",
+      "generation": "tracks/05-return-slide/generation.json",
+      "source": "bubbleport-segment-designs/topdown-v1/05-return-slide-v3.png"
+    },
+    {
+      "id": "06-wave-floor",
+      "title": "06 星浪踏板",
+      "image": "tracks/06-wave-floor/topdown.png",
+      "design": "tracks/06-wave-floor/design.md",
+      "generation": "tracks/06-wave-floor/generation.json",
+      "source": "bubbleport-segment-designs/topdown-v1/06-wave-floor-v2.png"
+    }
+  ],
+  "materials": [
+    {
+      "id": "road",
+      "name": "象牙路面",
+      "color": "#f4e8d1",
+      "presets": "materials/presets.json",
+      "textureFolder": "materials/textures/road"
+    },
+    {
+      "id": "mint",
+      "name": "薄荷树脂",
+      "color": "#8dc7ad",
+      "presets": "materials/presets.json",
+      "textureFolder": "materials/textures/mint"
+    },
+    {
+      "id": "peach",
+      "name": "蜜桃软胶",
+      "color": "#eca18a",
+      "presets": "materials/presets.json",
+      "textureFolder": "materials/textures/peach"
+    },
+    {
+      "id": "brass",
+      "name": "香槟黄铜",
+      "color": "#d1ac68",
+      "presets": "materials/presets.json",
+      "textureFolder": "materials/textures/brass"
+    },
+    {
+      "id": "silver",
+      "name": "拉丝铝",
+      "color": "#c3cfce",
+      "presets": "materials/presets.json",
+      "textureFolder": "materials/textures/silver"
+    },
+    {
+      "id": "acrylic",
+      "name": "薄荷亚克力",
+      "color": "#d0efdf",
+      "presets": "materials/presets.json",
+      "textureFolder": "materials/textures/acrylic"
+    },
+    {
+      "id": "amber",
+      "name": "暖琥珀灯",
+      "color": "#ffe3a1",
+      "presets": "materials/presets.json",
+      "textureFolder": "materials/textures/amber"
+    },
+    {
+      "id": "signal",
+      "name": "青绿指示灯",
+      "color": "#bcf9e0",
+      "presets": "materials/presets.json",
+      "textureFolder": "materials/textures/signal"
+    }
+  ],
+  "textureCount": 28,
+  "scope": "Adopted track images, three structural studies, material maps/presets and previews. Iteration drafts remain in original directories."
+}
