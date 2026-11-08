@@ -8,13 +8,16 @@ An open-source 3D party racing and obstacle-course game project started at AI Ha
 
 ## 当前状态
 
-截至 2026-11-08，已确认派对竞速闯关这一类型，已提供小熊滑梯、风港快递、泡泡星港和赛道实验室四个可运行原型。引擎、目标平台、实际人数、联网方案、是否采用弹珠角色及局内升级均未最终确定。
+截至 2026-11-08，已确认派对竞速闯关这一类型，已提供小熊滑梯、风港快递、泡泡星港和赛道实验室四个可运行原型。
+
+已确定：以小熊滑滑梯为主线，最终赛道做成泡泡星港风格；先做网页（含手机浏览器）；一个人也能开局，房间最多 16 人、首版 4 人；积分制，五关不淘汰；先在局域网运行，之后部署到国内服务器。玩法引擎、选卡与装备沿用现有实现。
 
 此前条件为开发时间半天、Hi3D 生成额度充足、团队可使用 Godot 或 Three.js；暂作为规划背景保留，不能据此承诺完整多人游戏的交付时间。此前 Godot 双人搬运、1v1 弹道对战等方案归档为历史候选，不再代表当前方向。
 
 ## 队友本地试玩
 
-- **小熊滑滑梯**：在仓库根目录运行 `python3 -m http.server 8080 --directory teddy-playground/dist`，打开 [localhost:8080](http://localhost:8080)。默认单人闯关使用 WASD 移动、空格跳跃、R 复位。第一关「玩具门廊」从软垫起跑，穿过移门和积木桩，沿直滑梯下到钟摆锤廊和波浪地板，再绕 180° 回旋滑梯下到矮栏和终点门廊。[关卡拆解与里程](docs/fall-beans-course.zh-CN.md)记录了参考来源。顶部「经典滑梯」可进入原版滑行。在起点点「换个人物」可从[十只玩偶](assets/toy-town-personas/README.md)中选择。
+- **小熊滑滑梯 · 多人派对版**：按[局域网服务器说明](teddy-playground/server/README.md)在一台电脑上运行 `npm install && npm start`，同一 Wi-Fi 下的手机和电脑打开终端里的地址，创建房间或输入房间码加入。1～4 人（可配到 16 人），可加机器人补位，五关积分制，支持手机触控。
+- **小熊滑滑梯 · 单人**：在仓库根目录运行 `python3 -m http.server 8080 --directory teddy-playground/dist`，打开 [localhost:8080](http://localhost:8080)。可选机器人陪跑；WASD 移动、空格跳跃、R 复位。第一关「玩具门廊」从软垫起跑，穿过移门和积木桩，沿直滑梯下到钟摆锤廊和波浪地板，再绕 180° 回旋滑梯下到矮栏和终点门廊。[关卡拆解与里程](docs/fall-beans-course.zh-CN.md)记录了参考来源。顶部「经典滑梯」可进入原版滑行。在起点点「换个人物」可从[十只玩偶](assets/toy-town-personas/README.md)中选择。
 - **风港快递**：按[局域网启动说明](rooftop/README.md)准备运行时、安装依赖并加入房间。
 - **泡泡星港**：在仓库根目录运行 `python3 -m http.server 8891 --directory bubbleport-demo/dist`，打开 [localhost:8891](http://localhost:8891)。独立测试错位障碍、摆锤、回环与旁路，支持 16 / 19.2 净宽对比，详见[试玩与物理检查](bubbleport-demo/README.md)。
 - **赛道实验室**：在仓库根目录运行 `python3 -m http.server 8892 --directory teddy-track-lab/dist`，打开 [localhost:8892](http://localhost:8892)。复用小熊角色与渲染，试玩三类程序路段，详见[操控与来源](teddy-track-lab/README.md)。

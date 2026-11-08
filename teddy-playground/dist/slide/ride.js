@@ -79,7 +79,7 @@ async function play(){
     button.append(portrait,title,description,state);choices.append(button);
     button.onclick=async()=>{
       if(switching||!definition.ready||!(mode==='ready'||mode==='finish'))return;
-      if(definition.id===selected.id){picker.close();soloGame?.start();return}
+      if(definition.id===selected.id){picker.close();soloGame?.picked?.();return}
       switching=true;go.disabled=true;$('#reset').disabled=true;
       pickerStatus.textContent='正在准备'+definition.name+'…';renderChoices();
       let candidate;
@@ -99,7 +99,7 @@ async function play(){
         // alive while browsing the roster; finishing a run still triggers a full reset.
         if(soloGame) rider.reset();
         else reset();
-        pickerStatus.textContent='';picker.close();soloGame?.start();
+        pickerStatus.textContent='';picker.close();soloGame?.picked?.();
       }catch(error){
         candidate?.dispose();console.error('角色切换失败',error);
         pickerStatus.textContent='这个人物暂时没准备好，请重试或选择其他人物。';
@@ -117,7 +117,8 @@ async function play(){
   renderChoices();
   if(!classic){
     const {startSolo}=await import('../solo/play.js');
-    soloGame=await startSolo({film,player,quality,lite,held,
+    soloGame=await startSolo({film,player,quality,lite,held,definitions,loader,createRider,createContactShadow,
+      character:()=>selected.id,
       rider:()=>rider,contact:()=>contact,blocked:()=>switching||picker.open,
       setMode:value=>{mode=value}
     });

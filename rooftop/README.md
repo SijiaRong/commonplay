@@ -6,7 +6,7 @@
 
 ## 模拟和渲染
 
-- Node 服务和静态试玩页共用 [SoloSession](../teddy-playground/dist/solo/backend.js) 与 [60 Hz 模拟循环](../teddy-playground/dist/solo/authority.js)。本地服务通过独立连接发送关卡和状态，静态托管使用浏览器 Web Worker 运行同一份逻辑。切换后台标签页会暂停该局。
+- 小熊的单人和多人现由 [PartySession](../teddy-playground/dist/solo/party.js)（积分制）与 [60 Hz 模拟循环](../teddy-playground/dist/solo/authority.js) 驱动；多人房间见 [派对服务器](../teddy-playground/server/README.md)。本目录的 Node 服务仍可提供单人页面。本地服务通过独立连接发送关卡和状态，静态托管使用浏览器 Web Worker 运行同一份逻辑。切换后台标签页会暂停该局。
 - 原版种子生成器、动态碰撞体、分岔、跳台、选卡和终点都来自共享运行时。场景直接显示模拟生成的关卡，动态机关按模拟时钟更新。小熊使用人形操控的松手制动、侧向抓地和反向刹车。
 - 单人验证保留五关和装备成长，取消补位机器人、玩家淘汰和比赛限时。可以停下来观察机关。角色外观使用现有骨骼模型，碰撞沿用赛道模拟的球形代理。
 - 旧风港局域网入口仍可显式启动，`GAME_MODE=lan-practice npm start` 用于局域网练习，`GAME_MODE=race npm start` 用于原多人赛。该入口和小熊共用模拟与人形操控模块，使用原风港画面。

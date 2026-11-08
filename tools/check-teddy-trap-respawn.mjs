@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
-import {SoloSession} from '../teddy-playground/dist/solo/backend.js';
+import {PartySession} from '../teddy-playground/dist/solo/party.js';
 
 // Stand on each moving tile and let the actual wave drop the runner.
-const session=new SoloSession(20261108);
+const session=new PartySession({seed:20261108,entrants:[{name:'玩家'}]});
 session.start();
 const show=session.show;
 for(const index of [0,2]){

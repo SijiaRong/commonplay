@@ -4,3 +4,4 @@
 !.env.example
 *.log
 .local/
+node_modules/
