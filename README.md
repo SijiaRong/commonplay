@@ -28,6 +28,7 @@ An open-source 3D party racing and obstacle-course game project started at AI Ha
 - [Hi3D 半天原型方案](docs/half-day-hi3d-plan.zh-CN.md)：最新约束下的首选与备选、资源清单、时间安排和验收标准。
 - [Poki 双人试玩清单](docs/browser-playlist.zh-CN.md)：仅保留 Poki，合作与对战分别列出，注明 3D / 2D 与设备要求。
 - [Punchers 技术栈分析](docs/punchers-tech-analysis.zh-CN.md)：从实际加载配置确认引擎与 Web 构建，并区分物理实现推断与未知项。
+- [Lost Marbles REA 逆向分析](docs/lost-marbles-rea-analysis.zh-CN.md)：公开交付脚本、程序化赛道、弹珠材质、物理与联机协议，以及真实浏览器和本地模拟验证。
 
 ## 本地获取
 
@@ -39,3 +40,5 @@ cd commonplay
 ## 参与与许可
 
 欢迎通过 Issue 提出玩法、原型反馈和技术建议。项目采用 [MIT License](LICENSE)；后续引入的第三方代码、美术和音频需分别核验许可。调研中的游戏名称及其素材归各权利人所有，仓库不包含这些游戏的资源。
+
+第三方游戏调研与逆向分析内容仅供学习、研究和技术交流使用，不作商业用途。相关游戏、商标、源码及素材的权利归各自权利人所有，本项目不主张对其拥有权利，也不通过本项目的 MIT 许可授予第三方内容的使用权。如认为相关内容涉及版权或其他权利问题，请随时通过 [GitHub Issues](https://github.com/SijiaRong/commonplay/issues) 联系我们，我们将及时核实并删除相关内容。
