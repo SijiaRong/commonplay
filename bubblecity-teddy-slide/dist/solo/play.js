@@ -1,3 +1,4 @@
+import {createMobileControls} from '../slide/mobile-controls.js';
 import {stageNames, pieceNames, courseSeed} from './course-labels.js';
 import {loadLostPack} from '../slide/lost-pack.js';
 import {materialEdits, applyGameEdits, woodFinishes, presetSources} from './material-edits.js';
@@ -48,8 +49,9 @@ export async function startSolo(host){
   $('.keys').innerHTML='<span><kbd>WASD</kbd> 移动</span><span><kbd>空格</kbd> 跳跃</span><span><kbd>R</kbd> 复位</span><span id="view-hint">点击场景控制视角</span><span id="ability-key" hidden><kbd>E</kbd> 技能</span>';
   const view=createViewInput(renderer.domElement,$('#view-hint'));
   let gamepad=null;
-  const pad=$('.pad');
-  pad.innerHTML='<div><button data-key="KeyA" aria-label="左移">◀</button><button data-key="KeyD" aria-label="右移">▶</button></div><div id="solo-actions"><button data-key="KeyR">复位</button><button data-key="KeyE" hidden>技能</button><button data-key="KeyS">后退</button><button data-key="KeyW">前进</button><button data-key="Space">跳跃</button></div>';
+  const mobile = createMobileControls(renderer.domElement, [['KeyR','复位'], ['KeyE','技能'], ['Space','跳跃']],
+    () => canMove(state?.phase) && !host.blocked());
+  const pad = mobile.buttons;
   const countdown=document.createElement('div');countdown.id='gate-countdown';countdown.hidden=true;
   countdown.setAttribute('role','timer');
   countdown.setAttribute('aria-label','开赛倒计时');
@@ -77,15 +79,15 @@ export async function startSolo(host){
   }
   function controls(force=false){
     if(!worker)return;
-    const f=clamp(Number(held.has('KeyW'))-Number(held.has('KeyS'))-(gamepad?.y||0),-1,1);
-    const r=clamp(Number(held.has('KeyD'))-Number(held.has('KeyA'))+(gamepad?.x||0),-1,1);
-    const heading=yaw+view.yaw;
+    const f=clamp(Number(held.has('KeyW'))-Number(held.has('KeyS'))-mobile.move.y-(gamepad?.y||0),-1,1);
+    const r=clamp(Number(held.has('KeyD'))-Number(held.has('KeyA'))+mobile.move.x+(gamepad?.x||0),-1,1);
+    const heading=yaw+view.yaw+mobile.yaw;
     const x=f*Math.sin(heading)-r*Math.cos(heading),z=f*Math.cos(heading)+r*Math.sin(heading);
     const btn=Number(held.has('Space')||!!gamepad?.jump)+2*Number(held.has('KeyE')||!!gamepad?.skill)+4*Number(held.has('KeyR')||!!gamepad?.reset);
     const key=[Math.round(x*100),Math.round(z*100),btn].join(',');
     if(force||key!==lastKeys){worker.postMessage({type:'input',x,z,btn});lastKeys=key}
   }
-  function release(){gamepad=null;held.clear();controls(true)}
+  function release(){mobile.clear();gamepad=null;held.clear();controls(true)}
   function reset(startOnReady=false){
     view.reset();gamepad=null;worker?.terminate();state=previous=null;snap=true;side=sit=0;lastPhase=lastKeys='';
     motion.reset();host.rider().reset();setAction('Idle',true);held.clear();host.setMode('ready');
@@ -172,6 +174,7 @@ export async function startSolo(host){
     button.onlostpointercapture=()=>{held.delete(button.dataset.key);controls()};
   }
   function draw(dt,now){
+    mobile.update(dt);
     if(!state||!course)return;
     const a=state,b=previous||a,ph=a.phase,rider=host.rider();
     const t=clamp((now-received)/34,0,1);
@@ -197,7 +200,7 @@ export async function startSolo(host){
       setAction(motion.action);
     }
     celebrating=finished&&a.grounded;
-    const steering=clamp(Number(held.has('KeyD'))-Number(held.has('KeyA'))+(gamepad?.x||0),-1,1);
+    const steering=clamp(Number(held.has('KeyD'))-Number(held.has('KeyA'))+mobile.move.x+(gamepad?.x||0),-1,1);
     side=lerp(side,steering,damping(8,dt));
     sit=finished?lerp(sit,action==='StandUp'?1-clamp(actionTime/rider.duration(action),0,1):0,damping(12,dt)):motion.seat;
     // Keep the visual upright on steep and inverted pieces; collisions are handled by Show.
@@ -212,9 +215,9 @@ export async function startSolo(host){
     const displayTime=a.clock+(ph==='race'?Math.min((now-received)/1000,.04):0);
     course.update(displayTime,dt,['race','cut','draft','podium','over'].includes(ph));
     const waiting=ph==='intro'||ph==='countdown';
-    const camYaw=yaw+(ready ? 1.12 : view.yaw),back=ready||waiting?8.5:6.6;
+    const camYaw=yaw+(ready ? 1.12 : view.yaw+mobile.yaw),back=ready||waiting?8.5:6.6;
     const baseHeight=waiting?6:ready?3.8:3.05;
-    const pitch=ready?0:view.pitch;
+    const pitch=ready?0:clamp(view.pitch+mobile.pitch,-.36,.85);
     const distance=back*Math.cos(pitch)-baseHeight*Math.sin(pitch);
     const height=baseHeight*Math.cos(pitch)+back*Math.sin(pitch);
     eye.set(worldPos.x-Math.sin(camYaw)*distance,worldPos.y+height,worldPos.z-Math.cos(camYaw)*distance);

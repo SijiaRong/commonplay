@@ -1,3 +1,4 @@
+import {createMobileControls} from '../slide/mobile-controls.js';
 import * as T from 'three';
 import {clone as cloneSkinned} from 'three/addons/utils/SkeletonUtils.js';
 import {openAuthority} from './transport.js';
@@ -55,38 +56,9 @@ export async function startSolo(host){
   const change=element('button',{textContent:'换赛道',onclick:()=>location.assign('?seed='+crypto.getRandomValues(new Uint32Array(1))[0])});
   $('nav').insertBefore(change,$('#reset'));
   $('.keys').innerHTML='<span><kbd>WASD</kbd> 移动</span><span><kbd>空格</kbd> 跳跃</span><span><kbd>R</kbd> 复位</span><span id="ability-key" hidden><kbd>E</kbd> 技能</span>';
-  // Touch: a floating stick anywhere on the left half, jump / skill / reset on the right.
-  const pad=$('.pad');
-  pad.innerHTML='<div id="stick-zone" aria-label="按住拖动来移动"><div id="stick-base" hidden><div id="stick-knob"></div></div><p id="stick-hint">左手按住拖动 · 移动</p></div><div id="touch-buttons"><button data-key="KeyR" class="small" aria-label="回到检查点">复位</button><button data-key="KeyE" class="skill" hidden>技能</button><button data-key="Space" class="jump" aria-label="跳跃">跳</button></div>';
-  const stick={x:0,y:0,id:null,ox:0,oy:0};
-  const stickZone=pad.querySelector('#stick-zone'),stickBase=pad.querySelector('#stick-base'),stickKnob=pad.querySelector('#stick-knob');
-  const STICK_RADIUS=46;
-  function moveStick(e){
-    let dx=e.clientX-stick.ox,dy=e.clientY-stick.oy;
-    const d=Math.hypot(dx,dy);
-    if(d>STICK_RADIUS){
-      // Drag past the rim and the base follows the thumb.
-      stick.ox+=dx*(1-STICK_RADIUS/d);stick.oy+=dy*(1-STICK_RADIUS/d);
-      dx=e.clientX-stick.ox;dy=e.clientY-stick.oy;
-      stickBase.style.left=stick.ox+'px';stickBase.style.top=stick.oy+'px';
-    }
-    const k=Math.min(1,Math.hypot(dx,dy)/STICK_RADIUS),dead=.12;
-    const scale=k<dead?0:(k-dead)/(1-dead)/Math.max(1e-6,k);
-    stick.x=dx/STICK_RADIUS*scale;stick.y=dy/STICK_RADIUS*scale;
-    stickKnob.style.transform=`translate(${dx}px,${dy}px)`;
-    controls();
-  }
-  stickZone.addEventListener('pointerdown',e=>{
-    if(stick.id!==null||!canMove(state?.phase)||you<0)return;
-    e.preventDefault();stickZone.setPointerCapture(e.pointerId);
-    stick.id=e.pointerId;stick.ox=e.clientX;stick.oy=e.clientY;
-    stickBase.style.left=stick.ox+'px';stickBase.style.top=stick.oy+'px';stickBase.hidden=false;
-    document.body.classList.add('stick-used');
-    moveStick(e);
-  });
-  stickZone.addEventListener('pointermove',e=>{if(e.pointerId===stick.id)moveStick(e)});
-  const dropStick=e=>{if(e.pointerId!==stick.id)return;stick.id=null;stick.x=stick.y=0;stickBase.hidden=true;stickKnob.style.transform='';controls()};
-  stickZone.addEventListener('pointerup',dropStick);stickZone.addEventListener('pointercancel',dropStick);stickZone.addEventListener('lostpointercapture',dropStick);
+  const mobile = createMobileControls(renderer.domElement, [['KeyR','复位'], ['KeyE','技能'], ['Space','跳跃']],
+    () => canMove(state?.phase) && !host.blocked() && you >= 0);
+  const pad = mobile.buttons;
   const countdown=element('div',{id:'gate-countdown',hidden:true},element('span',{textContent:'开闸倒计时'}),element('strong'));
   countdown.setAttribute('role','timer');
   const reveal=element('section',{id:'starter-reveal',hidden:true},element('h2',{textContent:'本局随机技能'}),element('ul'));
@@ -183,14 +155,15 @@ export async function startSolo(host){
   }
   function controls(force=false){
     if(!link||you<0)return;
-    let f=Number(held.has('KeyW'))-Number(held.has('KeyS'))-stick.y,r=Number(held.has('KeyD'))-Number(held.has('KeyA'))+stick.x;
+    let f=Number(held.has('KeyW'))-Number(held.has('KeyS'))-mobile.move.y,r=Number(held.has('KeyD'))-Number(held.has('KeyA'))+mobile.move.x;
     const length=Math.hypot(f,r);if(length>1){f/=length;r/=length}
-    const x=f*Math.sin(yaw)-r*Math.cos(yaw),z=f*Math.cos(yaw)+r*Math.sin(yaw);
+    const heading=yaw+mobile.yaw;
+    const x=f*Math.sin(heading)-r*Math.cos(heading),z=f*Math.cos(heading)+r*Math.sin(heading);
     const btn=Number(held.has('Space'))+2*Number(held.has('KeyE'))+4*Number(held.has('KeyR'));
     const key=[Math.round(x*100),Math.round(z*100),btn].join(',');
     if(force||key!==lastKeys){link.postMessage({type:'input',x:Math.round(x*100)/100,z:Math.round(z*100)/100,btn});lastKeys=key}
   }
-  function release(){held.clear();stick.x=stick.y=0;stick.id=null;stickBase.hidden=true;stickKnob.style.transform='';controls(true)}
+  function release(){held.clear();mobile.clear();controls(true)}
 
   function resetView(){
     state=null;buffer.length=0;clockOffset=null;snap=true;side=sit=0;lastPhase=lastKeys='';lastTp=-1;
@@ -497,6 +470,7 @@ export async function startSolo(host){
     }
   }
   function draw(dt,now){
+    mobile.update(dt);
     if(!state||!course||clockOffset==null)return;
     const timing=sample(now);
     const ph=state.phase,rider=host.rider();
@@ -510,7 +484,7 @@ export async function startSolo(host){
     const path=course.stage.path,idx=clamp(a.sample,0,path.n-1),trackYaw=Math.atan2(path.tx[idx],path.tz[idx]);
     yaw+=angle(yaw,trackYaw)*(snap?1:damping(6,dt));
     if(canMove(ph)){
-      if(host.blocked()){if(held.size||stick.id!==null)release()}else controls();
+      if(host.blocked()){if(held.size)release()}else controls();
     }
     // Your own runner.
     const speed=Math.hypot(a.vx,a.vz),motionHeading=Math.atan2(a.vx,a.vz);
@@ -560,11 +534,11 @@ export async function startSolo(host){
     // Tall phone screens pull the camera back and up so the course ahead stays in view.
     const portrait=clamp((1.25-camera.aspect)/.7,0,1);
     const fov=49+11*portrait;if(Math.abs(camera.fov-fov)>.05){camera.fov=fov;camera.updateProjectionMatrix()}
-    const camYaw=yaw+(ready ? 1.12 : waiting ? .38 : 0),back=(ready||waiting?8.5:6.6)*(1+.45*portrait);
+    const camYaw=yaw+(ready ? 1.12 : waiting ? .38 + mobile.yaw : mobile.yaw),back=(ready||waiting?8.5:6.6)*(1+.45*portrait);
     const seatedHeight=rider.seatedHeight;
-    eye.set(worldPos.x-Math.sin(camYaw)*back,worldPos.y+(waiting?6:ready?3.8:3.05)+portrait*(ready?1:2.2),worldPos.z-Math.cos(camYaw)*back);
+    eye.set(worldPos.x-Math.sin(camYaw)*back,worldPos.y+(waiting?6:ready?3.8:3.05)+portrait*(ready?1:2.2)+back*Math.sin(mobile.pitch),worldPos.z-Math.cos(camYaw)*back);
     focus.set(worldPos.x,worldPos.y-a.r+seatedHeight*.56,worldPos.z);
-    const dx=ready?0:Math.sin(yaw)*1.5,dz=ready?0:Math.cos(yaw)*1.5;
+    const dx=ready?0:Math.sin(camYaw)*1.5,dz=ready?0:Math.cos(camYaw)*1.5;
     if(snap){camera.position.copy(eye);look.copy(focus)}else{camera.position.lerp(eye,damping(10,dt));look.lerp(focus,damping(18,dt))}
     camera.lookAt(look.x+dx,look.y,look.z+dz);
     focusRider(film,focus,seatedHeight*.5,ready?'ready':finished?'finish':'riding',snap);snap=false;

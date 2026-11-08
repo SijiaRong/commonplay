@@ -1,3 +1,4 @@
+import {createMobileControls} from './mobile-controls.js';
 import {createPickerCamera} from './picker-camera.js';
 import * as T from 'three';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
@@ -138,7 +139,9 @@ export async function play(progress){
   });
   window.addEventListener('keyup',e=>held.delete(bindings[e.code]||e.code));
   window.addEventListener('blur',()=>held.clear());
-  document.querySelectorAll('[data-key]').forEach(btn=>{
+  const mobile = createMobileControls(canvas, [['Space','跳跃']],
+    () => mode !== 'ready' && mode !== 'finish' && !pickerBlocked() && !settingsOpen());
+  mobile.buttons.querySelectorAll('button').forEach(btn=>{
     btn.onpointerdown=e=>{e.preventDefault();btn.setPointerCapture(e.pointerId);press(btn.dataset.key)};
     btn.onlostpointercapture=()=>held.delete(btn.dataset.key);
   });
@@ -146,14 +149,14 @@ export async function play(progress){
     elapsed+=dt;phaseTime+=dt;
     const before=surface(s,lane),ahead=surface(s+1,lane);
     const grade=clamp(before.y-ahead.y,-.45,.7);
-    const slideSpeed=clamp(13+12*grade+(held.has('KeyW')?5:0)-(held.has('KeyS')?8:0),5,23);
+    const slideSpeed=clamp(13+12*grade+Math.max(0,-mobile.move.y)*5-Math.max(0,mobile.move.y)*8+(held.has('KeyW')?5:0)-(held.has('KeyS')?8:0),5,23);
     let targetSpeed=slideSpeed;
     if(mode==='approach')targetSpeed=5.5;
     if(mode==='entering')targetSpeed=mix(5.5,10,clamp(phaseTime,0,1));
     if(mode==='recovering')targetSpeed=4.8;
     if(mode==='runout')targetSpeed=Math.min(4.8,Math.max(0,(finish+16-s)*1.45));
     speed=mix(speed,targetSpeed,smooth(mode==='approach'?3.5:2.3,dt));
-    const steer=Number(held.has('KeyD'))-Number(held.has('KeyA'));
+    const steer=clamp(mobile.move.x+Number(held.has('KeyD'))-Number(held.has('KeyA')),-1,1);
     sideSpeed=mix(sideSpeed,steer*(mode==='riding'?8.4:3),smooth(7,dt));
     const previousLane=lane;
     lane=clamp(lane+sideSpeed*dt,-5.16,5.16);
@@ -207,10 +210,10 @@ export async function play(progress){
     const tight=section===2, back=tight?4.8:8.9, up=tight?3.55:5;
     framing=mix(framing,mode==='ready'||mode==='finish'?1:0,snap?1:smooth(2.5,dt));
     // Orbit around the rider when leaving the start or arriving at the finish.
-    const angle=framing*(mode==='finish'?2.13:1.13), distance=mix(back,12,framing);
+    const angle=mobile.yaw+framing*(mode==='finish'?2.13:1.13), distance=mix(back,12,framing);
     const ox=(-dx*Math.cos(angle)-dz*Math.sin(angle))*distance;
     const oz=(-dz*Math.cos(angle)+dx*Math.sin(angle))*distance;
-    eye.set(p.x+ox,p.y+up+framing*1.6+jumpHeight*.45,p.z+oz);
+    eye.set(p.x+ox,p.y+up+distance*Math.sin(mobile.pitch)+framing*1.6+jumpHeight*.45,p.z+oz);
     if(mode==='finish'){
       // Keep the celebration camera inside the rails, including a wide finish.
       const side=clamp(lane+Math.sin(angle)*distance,-3.5,3.5)-lane;
@@ -236,6 +239,7 @@ export async function play(progress){
   const clock=new T.Clock();
   renderer.setAnimationLoop(()=>{
     const dt=Math.min(clock.getDelta(),.08);
+    mobile.update(dt);
     if(settingsOpen()){held.clear();draw(0);film.render(0);return}
     if(mode!=='ready'&&mode!=='finish')simulate(dt);
     else if(mode==='finish'){
