@@ -15,13 +15,22 @@ const labels = {
   '08-service-robot':'服务机器人','09-bench':'广场长椅','10-lamp':'街灯','11-planter':'花池',
   '12-umbrella-table':'遮阳茶座','14-rocket-gantry':'火箭发射塔','15-ornamental-tree':'观赏树'
 };
+// Share in-flight loads across props, stages and race restarts.
+const modelLoads = new Map();
+function loadParkModel(name) {
+  if (!modelLoads.has(name)) {
+    const url = new URL('../../models/park/'+name+'.glb', import.meta.url);
+    modelLoads.set(name, new GLTFLoader().loadAsync(url.href).then(gltf => gltf.scene).catch(error => {
+      modelLoads.delete(name);
+      console.warn('星港景观未加载', name, error);
+      return null;
+    }));
+  }
+  return modelLoads.get(name);
+}
 export async function loadParkModels(stage) {
   const names = new Set([...(districts[stage] || districts.flat()), trees]);
-  return new Map(await Promise.all([...names].map(async name=>{
-    const url = new URL('../../models/park/'+name+'.glb',import.meta.url);
-    try { return [name,(await new GLTFLoader().loadAsync(url.href)).scene]; }
-    catch (error) { console.warn('星港景观未加载', name, error); return [name,null]; }
-  })));
+  return new Map(await Promise.all([...names].map(async name => [name, await loadParkModel(name)])));
 }
 
 // A softly bevelled, tiled promenade, with raised galleries beside the starting lane.
@@ -97,21 +106,34 @@ export function buildPark(view,models) {
 
   const district=districts[stage.index];
   function prop(name,id,px,py,pz,width,height,angle) {
-    const obj=models?.get(name)?.clone();
-    if(!obj)return;
-    obj.rotation.y=angle;
-    const box=new T.Box3().setFromObject(obj,true),size=box.getSize(new T.Vector3());
-    const scale=Math.min(width/Math.max(size.x,size.z),height/size.y);
-    obj.scale.multiplyScalar(scale);
-    box.setFromObject(obj,true);
-    const center=box.getCenter(new T.Vector3());
-    obj.position.add(new T.Vector3(px-center.x,py-box.min.y,pz-center.z));
-    let part=0;
-    obj.traverse(m=>{if(m.isMesh){
-      m.name=labels[name];m.userData.sharedParkAsset=true;
-      m.userData.component='park/'+id+'-'+part++;m.castShadow=m.receiveShadow=true;
-    }});
-    group.add(obj);
+    function place(template) {
+      if (!template || view.disposed) return;
+      const obj = template.clone();
+      obj.rotation.y=angle;
+      const box=new T.Box3().setFromObject(obj,true),size=box.getSize(new T.Vector3());
+      const scale=Math.min(width/Math.max(size.x,size.z),height/size.y);
+      obj.scale.multiplyScalar(scale);
+      box.setFromObject(obj,true);
+      const center=box.getCenter(new T.Vector3());
+      obj.position.add(new T.Vector3(px-center.x,py-box.min.y,pz-center.z));
+      let part=0;
+      obj.traverse(m=>{if(m.isMesh){
+        m.name=labels[name];m.userData.sharedParkAsset=true;
+        m.userData.component='park/'+id+'-'+part++;m.castShadow=m.receiveShadow=true;
+      }});
+      group.add(obj);
+    }
+    const template = models?.get(name);
+    if (template) place(template);
+    else {
+      // Decorations never block input, the first frame or the room connection.
+      // Start only assets referenced by this stage, after its first frame.
+      const load = () => { if (!view.disposed) loadParkModel(name).then(place); };
+      Promise.resolve(globalThis.gameLoading?.ready).then(() => {
+        if ('requestIdleCallback' in globalThis) requestIdleCallback(load, {timeout: 2000});
+        else setTimeout(load, 250);
+      });
+    }
   }
   prop(district[0],'landmark-model',x,upper,z(.68),22,31,.75);
   prop(district[1],'shop',x,lower+4,z(.26),18,20,-side*.8);

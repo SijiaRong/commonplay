@@ -1,3 +1,4 @@
+import {createMobileControls} from './slide/mobile-controls.js';
 import {createPickerCamera} from './slide/picker-camera.js';
 import {installSettings,settingsOpen} from './slide/settings.js';
 import * as THREE from 'three';
@@ -39,10 +40,10 @@ async function start(){
     const label={Idle:'待机',Run:'跑步',Jump:'跳跃'}[name];
     if(status.textContent!==label)status.textContent=label;
   }
-  const keys=new Set(),stick=new THREE.Vector2(),cameraTarget=new THREE.Vector3();
+  const keys=new Set(),cameraTarget=new THREE.Vector3();
   const cameraOffset=new THREE.Vector3(0,1.08,2.75);
   const pickerBlocked=installCharacterPicker(roster,{player,renderer,camera,scene,
-    onOpen(){keys.clear();stick.set(0,0);knob.style.transform=''},
+    onOpen(){keys.clear();mobile.clear()},
     replace(next){
       next.model.rotation.y=bear.rotation.y;
       player.remove(bear);rider.dispose();
@@ -59,22 +60,21 @@ async function start(){
     e.preventDefault();keys.add(e.code);if(e.code==='Space'&&!e.repeat)jump();
   });
   window.addEventListener('keyup',e=>keys.delete(e.code));
-  window.addEventListener('blur',()=>{keys.clear();stick.set(0,0);knob.style.transform=''});
-  const pad=document.querySelector('#pad'),knob=pad.firstElementChild;
-  function steer(e){const r=pad.getBoundingClientRect();stick.set((e.clientX-r.left-r.width/2)/32,(e.clientY-r.top-r.height/2)/32).clampLength(0,1);knob.style.transform='translate('+stick.x*24+'px,'+stick.y*24+'px)'}
-  pad.onpointerdown=e=>{pad.setPointerCapture(e.pointerId);steer(e)};
-  pad.onpointermove=e=>{if(pad.hasPointerCapture(e.pointerId))steer(e)};
-  pad.onlostpointercapture=()=>{stick.set(0,0);knob.style.transform=''};
-  document.querySelector('#leap').onclick=jump;
-  document.querySelector('#reset').onclick=e=>{keys.clear();stick.set(0,0);airTime=null;player.position.set(0,0,0);cameraTarget.set(0,0,0);bear.rotation.y=.28;pose('Idle');e.currentTarget.blur()};
+  window.addEventListener('blur',()=>{keys.clear();mobile.clear()});
+  const mobile = createMobileControls(renderer.domElement, [['Space','跳跃']], () => !pickerBlocked() && !settingsOpen());
+  mobile.buttons.firstElementChild.onpointerdown = e => { e.preventDefault(); jump(); };
+  document.querySelector('#reset').onclick=e=>{keys.clear();mobile.clear();airTime=null;player.position.set(0,0,0);cameraTarget.set(0,0,0);bear.rotation.y=.28;pose('Idle');e.currentTarget.blur()};
   function resize(){renderer.setSize(innerWidth,innerHeight);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix()}
   resize();window.addEventListener('resize',resize);pose('Idle');
   const clock=new THREE.Clock();
   renderer.setAnimationLoop(()=>{
     const dt=Math.min(clock.getDelta(),.05);
-    if(settingsOpen()){keys.clear();stick.set(0,0);renderer.render(scene,camera);return}
-    let x=stick.x+Number(keys.has('KeyD')||keys.has('ArrowRight'))-Number(keys.has('KeyA')||keys.has('ArrowLeft'));
-    let z=stick.y+Number(keys.has('KeyS')||keys.has('ArrowDown'))-Number(keys.has('KeyW')||keys.has('ArrowUp'));
+    mobile.update(dt);
+    if(settingsOpen()){keys.clear();mobile.clear();renderer.render(scene,camera);return}
+    let x=mobile.move.x+Number(keys.has('KeyD')||keys.has('ArrowRight'))-Number(keys.has('KeyA')||keys.has('ArrowLeft'));
+    let z=mobile.move.y+Number(keys.has('KeyS')||keys.has('ArrowDown'))-Number(keys.has('KeyW')||keys.has('ArrowUp'));
+    const cos=Math.cos(mobile.yaw),sin=Math.sin(mobile.yaw);
+    [x,z]=[x*cos+z*sin,z*cos-x*sin];
     const length=Math.hypot(x,z); x/=Math.max(1,length);z/=Math.max(1,length);
     if(length>.04){
       player.position.x+=x*1.8*dt;player.position.z+=z*1.8*dt;
@@ -92,7 +92,10 @@ async function start(){
     cameraTarget.x=THREE.MathUtils.lerp(cameraTarget.x,player.position.x,1-Math.exp(-8*dt));
     cameraTarget.z=THREE.MathUtils.lerp(cameraTarget.z,player.position.z,1-Math.exp(-8*dt));
     cameraTarget.y=player.position.y*.76;
-    camera.position.copy(cameraTarget).add(cameraOffset);
+    camera.position.copy(cameraTarget);
+    camera.position.x += sin * cameraOffset.z;
+    camera.position.z += cos * cameraOffset.z;
+    camera.position.y += cameraOffset.y + Math.sin(mobile.pitch) * cameraOffset.z;
     aim.set(cameraTarget.x,.52+cameraTarget.y,cameraTarget.z);
     framePicker(camera.position,aim,rider,dt);camera.lookAt(aim);
     sun.target.position.set(player.position.x,0,player.position.z);

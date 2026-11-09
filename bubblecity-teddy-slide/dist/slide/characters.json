@@ -5,10 +5,12 @@
       "name": "缝线小熊",
       "tagline": "熟悉的小伙伴，一起滑滑梯",
       "ready": true,
-      "model": "./teddy-bear-animated.glb",
+      "model": "./teddy-bear-startup.glb",
+      "fallbackModel": "./teddy-bear-fast.glb",
       "scale": 3.1,
       "material": "teddy-plush",
-      "preview": "./characters/teddy.jpg"
+      "preview": "./characters/teddy.jpg",
+      "modelBytes": 3780384
     },
     {
       "id": "pip",

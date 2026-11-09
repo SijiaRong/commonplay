@@ -1,3 +1,4 @@
+import {afterReady} from '../../../slide/progressive-assets.js';
 import {makeBeaconBase,makeBeaconLens,beaconColors} from '../../../slide/harbor-lights.js';
 import {createBubbleportMaterials} from '../../../vendor/bubbleport-materials.mjs';
 import {makePeachAcrylic} from './acrylic.js';
@@ -5,15 +6,33 @@ import * as THREE from 'three';
 import { chevronTexture, checkerTexture } from './textures.js';
 
 let cache = null;
+const surfaceUpgrades = [];
+function enableSurfaceUpgrades() {
+  if (navigator.connection?.saveData) return;
+  afterReady(async () => {
+    for (const upgrade of surfaceUpgrades.splice(0)) {
+      try { await upgrade(); } catch (error) { console.warn('保留轻量材质', error); }
+    }
+  });
+}
+let loadedSurfaces = 0;
+function surfaceLoaded() { globalThis.gameLoading?.set('materials', ++loadedSurfaces / 14); }
 
 async function loadSurface(loader, name, lite, anisotropy) {
   const files = {map: ['basecolor', 'jpg'], normalMap: ['normal', 'png'], roughnessMap: ['roughness', 'png']};
   const entries = await Promise.all(Object.entries(files).map(async ([slot, [layer, extension]]) => {
-    const file = layer + (lite ? '-512' : '') + '.' + extension;
+    const file = layer + '-startup.webp';
     const texture = await loader.loadAsync(new URL('../../../slide/surfaces/' + name + '/' + file, import.meta.url).href);
+    surfaceLoaded();
     texture.colorSpace = slot === 'map' ? THREE.SRGBColorSpace : THREE.NoColorSpace;
     texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
     texture.anisotropy = anisotropy;
+    surfaceUpgrades.push(async () => {
+      const full = await loader.loadAsync(new URL('../../../slide/surfaces/' + name + '/' + layer + (lite ? '-512' : '') + '.' + extension, import.meta.url).href);
+      texture.image = full.image;
+      texture.needsUpdate = true;
+      full.dispose();
+    });
     return [slot, texture];
   }));
   return Object.fromEntries(entries);
@@ -44,10 +63,10 @@ export function getMaterials(quality = 'high', renderer, {lite = false} = {}) {
     road: enamel, brass, lamp, coral, emblem, textures: { chevron, checker },
   };
   for (const [key,mat] of Object.entries(createBubbleportMaterials())) cache['lab-'+key]=mat;
-  const micro = name => loader.loadAsync(new URL('../../../slide/surfaces/' + name + '.png', import.meta.url).href);
+  const micro = () => loader.loadAsync(new URL('../../../slide/surfaces/metal-brush-startup.webp', import.meta.url).href).then(texture => { surfaceLoaded(); return texture; });
   cache.ready = Promise.all([
     loadSurface(loader, 'coral-enamel', lite, anisotropy).then(maps => Object.assign(coral, maps)),
-    loader.loadAsync(new URL('../../../slide/surfaces/coral-enamel/saturn-emblem.png', import.meta.url).href).then(map => { emblem.map = map; emblem.needsUpdate = true; }),
+    loader.loadAsync(new URL('../../../slide/surfaces/coral-enamel/saturn-emblem.png', import.meta.url).href).then(map => { emblem.map = map; emblem.needsUpdate = true; surfaceLoaded(); }),
     loadSurface(loader, 'ash-trim', lite, anisotropy).then(maps => Object.assign(trim, maps)),
     loadSurface(loader, 'ivory-enamel', lite, anisotropy).then(maps => Object.assign(enamel, maps)),
     loadSurface(loader, 'mint-resin', lite, anisotropy).then(maps => {
@@ -63,6 +82,7 @@ export function getMaterials(quality = 'high', renderer, {lite = false} = {}) {
       brass.roughnessMap = brass.bumpMap = map;
     })
   ]).then(()=>{
+    enableSurfaceUpgrades();
     cache.cityFinishes=Object.fromEntries(['road','resin','trim','paint'].map(key=>[key,cache[key].clone()]));
   });
   return cache;

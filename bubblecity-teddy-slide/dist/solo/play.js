@@ -1,3 +1,5 @@
+import {loadProgressModel, upgradeModelTextures} from '../slide/progressive-assets.js';
+import {createMobileControls} from '../slide/mobile-controls.js';
 import {stageNames, pieceNames, courseSeed} from './course-labels.js';
 import {loadLostPack} from '../slide/lost-pack.js';
 import {materialEdits, applyGameEdits, woodFinishes, presetSources} from './material-edits.js';
@@ -7,7 +9,6 @@ import {createViewInput} from './view-input.js';
 import {openAuthority} from './transport.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {updateAcrylicBackdrop} from './js/render/acrylic.js';
-import {loadParkModels} from './js/render/park.js';
 import {CourseView} from './js/render/courseView.js';
 import {focusRider} from '../slide/film/scene.js';
 import {GroundMotion} from '../slide/ground-motion.mjs';
@@ -31,6 +32,8 @@ const damping=(k,dt)=>1-Math.exp(-k*dt);
 const angle=(a,b)=>Math.atan2(Math.sin(b-a),Math.cos(b-a));
 
 export async function startSolo(host){
+  let firstFrame, firstFailure;
+  const firstReady = new Promise((resolve, reject) => {firstFrame = resolve;firstFailure = reject;});
   const {film,player,quality,held}=host,{scene,camera,renderer}=film;
   const style=document.createElement('link');style.rel='stylesheet';style.href='./solo/solo.css?v=start5';document.head.append(style);
   const seed=courseSeed(new URLSearchParams(location.search));
@@ -48,8 +51,9 @@ export async function startSolo(host){
   $('.keys').innerHTML='<span><kbd>WASD</kbd> 移动</span><span><kbd>空格</kbd> 跳跃</span><span><kbd>R</kbd> 复位</span><span id="view-hint">点击场景控制视角</span><span id="ability-key" hidden><kbd>E</kbd> 技能</span>';
   const view=createViewInput(renderer.domElement,$('#view-hint'));
   let gamepad=null;
-  const pad=$('.pad');
-  pad.innerHTML='<div><button data-key="KeyA" aria-label="左移">◀</button><button data-key="KeyD" aria-label="右移">▶</button></div><div id="solo-actions"><button data-key="KeyR">复位</button><button data-key="KeyE" hidden>技能</button><button data-key="KeyS">后退</button><button data-key="KeyW">前进</button><button data-key="Space">跳跃</button></div>';
+  const mobile = createMobileControls(renderer.domElement, [['KeyR','复位'], ['KeyE','技能'], ['Space','跳跃']],
+    () => canMove(state?.phase) && !host.blocked());
+  const pad = mobile.buttons;
   const countdown=document.createElement('div');countdown.id='gate-countdown';countdown.hidden=true;
   countdown.setAttribute('role','timer');
   countdown.setAttribute('aria-label','开赛倒计时');
@@ -57,11 +61,13 @@ export async function startSolo(host){
   reveal.setAttribute('aria-live','polite');
   reveal.innerHTML='<h2>本局随机技能</h2><ul></ul>';
   document.body.append(countdown,reveal);
-  const runwayUrl=new URL('./models/quilted-runway.glb',import.meta.url);
-  const [parkModels,runway]=await Promise.all([loadParkModels(),new GLTFLoader().loadAsync(runwayUrl.href).then(gltf=>gltf.scene).catch(error=>{
+  const runwayUrl=new URL('./models/quilted-runway-startup.glb',import.meta.url);
+  const parkModels = new Map();
+  const [runway]=await Promise.all([loadProgressModel(new GLTFLoader(),runwayUrl.href,'runway',637812).then(gltf=>{upgradeModelTextures(gltf.scene,runwayUrl.href);return gltf.scene}).catch(error=>{
       console.warn('软垫模型加载失败，使用本地软垫',error);
       return null;
     })]);
+  host.loading?.set('runway',1);
   runway?.traverse(mesh=>{if(mesh.isMesh){mesh.castShadow=true;mesh.receiveShadow=true}});
   const needsWood=stageNames.some((_,i)=>Object.values(materialEdits(seed,i).values).some(v=>Object.hasOwn(woodFinishes,v.preset)));
   const wood=needsWood ? await loadLostPack(renderer,host.lite) : null;
@@ -77,22 +83,22 @@ export async function startSolo(host){
   }
   function controls(force=false){
     if(!worker)return;
-    const f=clamp(Number(held.has('KeyW'))-Number(held.has('KeyS'))-(gamepad?.y||0),-1,1);
-    const r=clamp(Number(held.has('KeyD'))-Number(held.has('KeyA'))+(gamepad?.x||0),-1,1);
-    const heading=yaw+view.yaw;
+    const f=clamp(Number(held.has('KeyW'))-Number(held.has('KeyS'))-mobile.move.y-(gamepad?.y||0),-1,1);
+    const r=clamp(Number(held.has('KeyD'))-Number(held.has('KeyA'))+mobile.move.x+(gamepad?.x||0),-1,1);
+    const heading=yaw+view.yaw+mobile.yaw;
     const x=f*Math.sin(heading)-r*Math.cos(heading),z=f*Math.cos(heading)+r*Math.sin(heading);
     const btn=Number(held.has('Space')||!!gamepad?.jump)+2*Number(held.has('KeyE')||!!gamepad?.skill)+4*Number(held.has('KeyR')||!!gamepad?.reset);
     const key=[Math.round(x*100),Math.round(z*100),btn].join(',');
     if(force||key!==lastKeys){worker.postMessage({type:'input',x,z,btn});lastKeys=key}
   }
-  function release(){gamepad=null;held.clear();controls(true)}
+  function release(){mobile.clear();gamepad=null;held.clear();controls(true)}
   function reset(startOnReady=false){
     view.reset();gamepad=null;worker?.terminate();state=previous=null;snap=true;side=sit=0;lastPhase=lastKeys='';
     motion.reset();host.rider().reset();setAction('Idle',true);held.clear();host.setMode('ready');
     $('#launch').hidden=false;$('#result').textContent='';$('#go').disabled=true;
     reveal.hidden=countdown.hidden=true;
     worker=openAuthority();
-    worker.onerror=e=>{view.unlock();console.error(e);$('#launch').hidden=false;$('#result').textContent='模拟加载失败，请重新开始';$('#go').textContent='重新加载';$('#go').disabled=false;state=null};
+    worker.onerror=e=>{firstFailure?.(e.error || new Error('模拟加载失败'));view.unlock();console.error(e);$('#launch').hidden=false;$('#result').textContent='模拟加载失败，请重新开始';$('#go').textContent='重新加载';$('#go').disabled=false;state=null};
     worker.onmessage=({data:m})=>{
       if(m.type==='course'){
         if(course){restoreEdits();scene.remove(course.group);course.dispose()}
@@ -172,6 +178,7 @@ export async function startSolo(host){
     button.onlostpointercapture=()=>{held.delete(button.dataset.key);controls()};
   }
   function draw(dt,now){
+    mobile.update(dt);
     if(!state||!course)return;
     const a=state,b=previous||a,ph=a.phase,rider=host.rider();
     const t=clamp((now-received)/34,0,1);
@@ -197,7 +204,7 @@ export async function startSolo(host){
       setAction(motion.action);
     }
     celebrating=finished&&a.grounded;
-    const steering=clamp(Number(held.has('KeyD'))-Number(held.has('KeyA'))+(gamepad?.x||0),-1,1);
+    const steering=clamp(Number(held.has('KeyD'))-Number(held.has('KeyA'))+mobile.move.x+(gamepad?.x||0),-1,1);
     side=lerp(side,steering,damping(8,dt));
     sit=finished?lerp(sit,action==='StandUp'?1-clamp(actionTime/rider.duration(action),0,1):0,damping(12,dt)):motion.seat;
     // Keep the visual upright on steep and inverted pieces; collisions are handled by Show.
@@ -212,9 +219,9 @@ export async function startSolo(host){
     const displayTime=a.clock+(ph==='race'?Math.min((now-received)/1000,.04):0);
     course.update(displayTime,dt,['race','cut','draft','podium','over'].includes(ph));
     const waiting=ph==='intro'||ph==='countdown';
-    const camYaw=yaw+(ready ? 1.12 : view.yaw),back=ready||waiting?8.5:6.6;
+    const camYaw=yaw+(ready ? 1.12 : view.yaw+mobile.yaw),back=ready||waiting?8.5:6.6;
     const baseHeight=waiting?6:ready?3.8:3.05;
-    const pitch=ready?0:view.pitch;
+    const pitch=ready?0:clamp(view.pitch+mobile.pitch,-.36,.85);
     const distance=back*Math.cos(pitch)-baseHeight*Math.sin(pitch);
     const height=baseHeight*Math.cos(pitch)+back*Math.sin(pitch);
     eye.set(worldPos.x-Math.sin(camYaw)*distance,worldPos.y+height,worldPos.z-Math.cos(camYaw)*distance);
@@ -229,9 +236,11 @@ export async function startSolo(host){
     film.setFrameBudget(1/60,racing);
     updateAcrylicBackdrop(course.mats.acrylic,film);
     film.render(dt);
+    if(firstFrame){host.loading?.set('course',1);firstFrame();firstFrame=null;}
   }
   reset();film.resize();
   let last=performance.now();
   renderer.setAnimationLoop(now=>{const dt=Math.min(.08,(now-last)/1000);last=now;draw(dt,now)});
+  await firstReady;
   return {reset,start};
 }
