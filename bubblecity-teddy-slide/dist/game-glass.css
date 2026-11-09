@@ -68,3 +68,5 @@ body :is(button,a):focus-visible { outline: 3px solid var(--accent); outline-off
   }
   .character-summary { justify-content: flex-start; gap: 8px; }
 }
+
+body #appearance:has([data-lens])::backdrop { background: transparent; backdrop-filter: none; }

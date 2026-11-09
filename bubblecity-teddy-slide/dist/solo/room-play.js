@@ -392,6 +392,7 @@ export async function startSolo(host){
     e.preventDefault();if(down)held.add(k);else held.delete(k);controls();
   }
   window.addEventListener('keydown',e=>key(e,true));window.addEventListener('keyup',e=>key(e,false));window.addEventListener('blur',release);
+  window.addEventListener('scene-settings-change',release);
   document.addEventListener('visibilitychange',()=>{release();if(mode==='solo')link?.postMessage({type:'pause',value:document.hidden})});
   for(const button of pad.querySelectorAll('button')){
     button.onpointerdown=e=>{

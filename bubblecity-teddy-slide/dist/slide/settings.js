@@ -1,3 +1,4 @@
+import {bindLensSettings} from './lens-settings.js';
 import {bindBackgroundMusic} from './background-music.js';
 import {bindEnvironment} from './environment-controls.js';
 import {loadLostPack,applyTrackPack} from './lost-pack.js';
@@ -5,12 +6,14 @@ import {prefs, savePrefs, defaults, applyRoom} from './preferences.js';
 
 export const settingsOpen = () => !!document.querySelector('#appearance')?.open;
 
-export async function installSettings({scene,sun,renderer,fill}, materials, musicName) {
+export async function installSettings(film, materials, musicName) {
+  const {scene,sun,renderer,fill}=film;
   const dialog=document.createElement('dialog');
   dialog.id='appearance';
   dialog.setAttribute('aria-labelledby','settings-title');
   dialog.innerHTML=`<div class="appearance-title"><h2 id="settings-title">场景设置</h2><button type="button" aria-label="关闭设置" data-close>×</button></div>
     <label for="background-music">背景音乐<input id="background-music" type="checkbox"></label>
+    ${film.dofMat ? '<div data-lens></div>' : ''}
     <div data-environment></div>
     ${materials ? '<label for="lamp-bright">航标灯亮度 <output></output></label><input id="lamp-bright" type="range" min="0" max="180"><fieldset><legend>赛道材质包</legend><button data-pack="city">泡泡星港</button> <button data-pack="lost">Lost Marbles</button></fieldset><p>随包切换：路面、支架、饰条和涂色护栏。</p><p>固定：工作室背景、角色、软胶与软垫、星港灯具和装饰、赛道标记、布局与碰撞。</p>' : '<p>自由练习使用工作室背景和角色；赛道材质可在闯关或经典滑梯中切换。</p>'}
     <label for="touch-size">触控按钮大小 <output></output></label><input id="touch-size" type="range" min="85" max="125">
@@ -39,6 +42,7 @@ export async function installSettings({scene,sun,renderer,fill}, materials, musi
     input.oninput=()=>{prefs[key]=input.valueAsNumber;sync();apply();savePrefs();};
     ranges.push(sync);sync();
   }
+  const resetLens=film.dofMat ? bindLensSettings(dialog.querySelector('[data-lens]'),film) : null;
   const resetMusic=bindBackgroundMusic(dialog.querySelector('#background-music'), musicName);
   const resetEnvironment=bindEnvironment(dialog.querySelector('[data-environment]'),apply);
   range('#lamp-bright','lamps');range('#touch-size','buttons');apply();
@@ -65,7 +69,7 @@ export async function installSettings({scene,sun,renderer,fill}, materials, musi
     }
   }
   choices.forEach(button=>button.onclick=()=>switchPack(button.dataset.pack));
-  reset.onclick=async()=>{resetMusic();resetEnvironment();prefs.buttons=defaults.buttons;if(materials)prefs.lamps=defaults.lamps;
+  reset.onclick=async()=>{resetLens?.();resetMusic();resetEnvironment();prefs.buttons=defaults.buttons;if(materials)prefs.lamps=defaults.lamps;
     ranges.forEach(sync=>sync());apply();savePrefs();if(materials)await switchPack('city');};
   if(materials)await switchPack(prefs.pack);
 }

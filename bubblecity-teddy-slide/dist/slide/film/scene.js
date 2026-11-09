@@ -38,6 +38,7 @@ const DOF_FRAG = /* glsl */ `
   uniform sampler2D tDepth;
   uniform vec2 uTexel;
   uniform float uFocus;
+  uniform vec2 uClearRange;
   uniform float uAperture;
   uniform float uFgK;      // foreground blur relative to background (gentler in the chase view)
   uniform float uMaxBlur;
@@ -66,12 +67,14 @@ const DOF_FRAG = /* glsl */ `
     // Foreground blur is kept gentler than background blur so walls brushing past the lens don't smear the view.
     float k = z < uFocus ? uFgK : 1.0;
     float c = uAperture * k * abs(1.0 / uFocus - 1.0 / z);
-    return clamp(max(c, tiltCoc(uv)), 0.0, uMaxBlur);
+    float fade = smoothstep(uClearRange.x, uClearRange.y, z);
+    return fade * clamp(max(c, tiltCoc(uv)), 0.0, uMaxBlur);
   }
   void main() {
     float cz = linDepth(texture2D(tDepth, vUv).x);
     float cs = coc(cz, vUv);
     vec3 col = textureLod(tColor, vUv, 0.0).rgb;
+    if (cz <= uClearRange.x) { gl_FragColor = vec4(col, 0.0); return; }
     float tot = 1.0;
     // Interleaved gradient noise: a different spiral rotation and start radius for every pixel.
     float n = fract(52.9829189 * fract(dot(gl_FragCoord.xy, vec2(0.06711056, 0.00583715))));
@@ -104,6 +107,8 @@ const GRADE_FRAG = /* glsl */ `
   #include <tonemapping_pars_fragment>
   uniform sampler2D tColor;
   uniform sampler2D tBlur;
+  uniform sampler2D tDepth;
+  uniform float uClearDepth;
   uniform float uHalf;
   uniform vec2 uBlurTexel;
   uniform float uTime;
@@ -129,7 +134,7 @@ const GRADE_FRAG = /* glsl */ `
     c.r = texture2D(tColor, vUv - off).r;
     c.g = texture2D(tColor, vUv).g;
     c.b = texture2D(tColor, vUv + off).b;
-    if (uHalf > 0.5) {
+    if (uHalf > 0.5 && texture2D(tDepth, vUv).x > uClearDepth) {
       // Four bilinear taps (a tent filter) so the half-resolution blur upsamples smoothly instead of in blocks.
       vec2 h = uBlurTexel * 0.5;
       vec4 b = 0.25 * (texture2D(tBlur, vUv + vec2(-h.x, -h.y)) + texture2D(tBlur, vUv + vec2(h.x, -h.y))
@@ -192,7 +197,7 @@ export class Scene3D {
     this.dofMat = new THREE.ShaderMaterial({
       uniforms: {
         tColor: { value: null }, tDepth: { value: null }, uTexel: { value: new THREE.Vector2() }, uFocus: { value: 10 },
-        uAperture: { value: 100 }, uFgK: { value: 0.45 }, uMaxBlur: { value: 14 }, uNear: { value: 0.3 }, uFar: { value: 2400 }, uRadScale: { value: 2 },
+        uClearRange: { value: new THREE.Vector2() }, uAperture: { value: 100 }, uFgK: { value: 0.45 }, uMaxBlur: { value: 14 }, uNear: { value: 0.3 }, uFar: { value: 2400 }, uRadScale: { value: 2 },
         uTilt: { value: new THREE.Vector4(-0.2, 0.2, 0, 0) }, uTiltSpan: { value: new THREE.Vector2(0.85, 0.5) }, uAspect: { value: 1 },
         uCatEye: { value: 0.55 }, uLod: { value: 1 },
       },
@@ -200,7 +205,7 @@ export class Scene3D {
     });
     this.gradeMat = new THREE.ShaderMaterial({
       uniforms: {
-        tColor: { value: null }, tBlur: { value: null }, uHalf: { value: 0 }, uBlurTexel: { value: new THREE.Vector2(1, 1) }, toneMappingExposure: { value: 1 }, uTime: { value: 0 }, uVignette: { value: 0.55 },
+        tColor: { value: null }, tBlur: { value: null }, tDepth: { value: null }, uClearDepth: { value: -1 }, uHalf: { value: 0 }, uBlurTexel: { value: new THREE.Vector2(1, 1) }, toneMappingExposure: { value: 1 }, uTime: { value: 0 }, uVignette: { value: 0.55 },
         uGrain: { value: 0.035 }, uFringe: { value: 0.006 }, uMini: { value: 0 }, uRes: { value: new THREE.Vector2(1, 1) },
       },
       vertexShader: VERT, fragmentShader: GRADE_FRAG, depthTest: false, depthWrite: false,
@@ -384,21 +389,25 @@ export class Scene3D {
       this.gtao.render(r, this.rtA, this.sceneRT);
       src = this.rtA;
     }
-    if (Q.dof) {
+    const lens = this.lens;
+    const dofActive = Q.dof && (!lens || (lens.enabled && (lens.strength > 0 || lens.tilt > 0)));
+    if (dofActive) {
       const u = this.dofMat.uniforms;
       const H = this.sceneRT.height;
       u.tColor.value = src.texture;
       u.tDepth.value = this.sceneRT.depthTexture;
       u.uFocus.value = this.focusDist;
+      const clear = lens?.distance ?? 0;
+      u.uClearRange.value.set(clear, clear + (lens?.transition ?? 0.01));
       // Blur scales with resolution so the look is the same at any size.
       const px = H / 1080;
       u.uMaxBlur.value = Q.dof.max * px;
-      u.uAperture.value = 125 * this.aperture * px;
+      u.uAperture.value = 125 * this.aperture * px * ((lens?.strength ?? 100) / 100);
       u.uFgK.value = this.fgK ?? 0.45;
       u.uRadScale.value = Q.dof.step * Math.max(1, px);
       // Each tap covers about 2*pi*step square pixels of the disc; read the mip whose texel matches that spacing.
       u.uLod.value = Math.max(0, Math.log2(Math.sqrt(2 * Math.PI * u.uRadScale.value)) - 0.5);
-      u.uTilt.value.set(t.y, t.core, Math.min(Q.dof.max, 11 * t.amt) * px, t.roll);
+      u.uTilt.value.set(t.y, t.core, Math.min(Q.dof.max, 11 * t.amt * ((lens?.tilt ?? 100) / 100)) * px, t.roll);
       u.uTiltSpan.value.set(t.up, t.down);
       u.uNear.value = camera.near;
       u.uFar.value = camera.far;
@@ -411,12 +420,18 @@ export class Scene3D {
     if (this.bloom) this.bloom.render(r, null, src, dt, false);
     const g = this.gradeMat.uniforms;
     g.tColor.value = src.texture;
-    g.tBlur.value = this.rtDof ? this.rtDof.texture : null;
-    g.uHalf.value = this.rtDof ? 1 : 0;
-    if (this.rtDof) g.uBlurTexel.value.set(1 / this.rtDof.width, 1 / this.rtDof.height);
+    g.tBlur.value = dofActive && this.rtDof ? this.rtDof.texture : null;
+    g.uHalf.value = dofActive && this.rtDof ? 1 : 0;
+    if (dofActive && this.rtDof) {
+      // Test the original depth when upsampling so a distant blurred pixel cannot cover a nearby silhouette.
+      const clear = lens?.distance ?? 0;
+      g.tDepth.value = this.sceneRT.depthTexture;
+      g.uClearDepth.value = clear > 0 ? camera.far * (clear - camera.near) / (clear * (camera.far - camera.near)) : -1;
+      g.uBlurTexel.value.set(1 / this.rtDof.width, 1 / this.rtDof.height);
+    }
     g.toneMappingExposure.value = this.exposure;
     g.uTime.value = this.time;
-    g.uMini.value = Q.dof ? Math.min(1, t.amt) : 0;
+    g.uMini.value = dofActive ? Math.min(1, t.amt * ((lens?.tilt ?? 100) / 100)) : 0;
     g.uGrain.value = this.frozen ? 0 : this.quality === 'low' ? 0.02 : 0.032;
     this.fsq.material = this.gradeMat;
     r.setRenderTarget(null);

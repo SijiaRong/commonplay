@@ -1,3 +1,4 @@
+import {bindLensSettings} from './lens-settings.js';
 import * as T from 'three';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {Scene3D, focusRider} from './film/scene.js';
@@ -56,6 +57,16 @@ export async function play(progress){
   let contact=createContactShadow(rider.shadowRadius);scene.add(contact);
   const pose=(name,immediate=false)=>rider.pose(name,immediate);
   const held=new Set();
+  const settings=$('#lens-settings');
+  bindLensSettings(settings.querySelector('[data-lens]'), film);
+  $('#open-settings').onclick=()=>{
+    if(document.pointerLockElement)document.exitPointerLock();
+    held.clear();
+    settings.showModal();
+    window.dispatchEvent(new Event('scene-settings-change'));
+  };
+  settings.querySelector('[data-close]').onclick=()=>settings.close();
+  settings.onclose=()=>window.dispatchEvent(new Event('scene-settings-change'));
   let mode='ready',soloGame;
   const picker=$('#character-picker'), choices=$('#character-options'), choose=$('#choose-character');
   const pickerStatus=$('#character-status');
@@ -121,7 +132,7 @@ export async function play(progress){
     const {startSolo}=await import('../solo/play.js');
     soloGame=await startSolo({film,player,quality,lite,held,definitions,loader,createRider,createContactShadow,
       character:()=>selected.id,
-      rider:()=>rider,contact:()=>contact,blocked:()=>switching||picker.open,
+      rider:()=>rider,contact:()=>contact,blocked:()=>switching||picker.open||settings.open,
       setMode:value=>{mode=value}
     });
     return;
@@ -166,7 +177,7 @@ export async function play(progress){
   const keys=['KeyA','KeyD','KeyW','KeyS','Space','Enter'];
   window.addEventListener('keydown',e=>{
     const code=bindings[e.code]||e.code;
-    if(picker.open||switching)return;
+    if(picker.open||switching||settings.open)return;
     if(!keys.includes(code)||e.metaKey||e.ctrlKey||e.altKey)return;
     if((code==='Enter'||code==='Space')&&e.target.closest?.('button,a'))return;
     e.preventDefault();press(code,e.repeat);
@@ -264,6 +275,7 @@ export async function play(progress){
   const clock=new T.Clock();
   renderer.setAnimationLoop(()=>{
     const dt=Math.min(clock.getDelta(),.08);
+    if(settings.open){film.render(0);return}
     if(mode!=='ready'&&mode!=='finish')simulate(dt);
     else if(mode==='finish'){
       phaseTime+=dt;if(phaseTime>=rider.duration('FinishWave'))pose('Idle');

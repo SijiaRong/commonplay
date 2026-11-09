@@ -390,7 +390,13 @@ export async function startSolo(host){
     e.preventDefault();if(down)held.add(k);else held.delete(k);controls();
   }
   window.addEventListener('keydown',e=>key(e,true));window.addEventListener('keyup',e=>key(e,false));window.addEventListener('blur',release);
-  document.addEventListener('visibilitychange',()=>{release();if(mode==='solo')link?.postMessage({type:'pause',value:document.hidden})});
+  function updatePause(){
+    release();
+    if(mode==='solo')link?.postMessage({type:'pause',value:document.hidden||document.querySelector('#lens-settings').open});
+    if(state)updateUI();
+  }
+  window.addEventListener('scene-settings-change',updatePause);
+  document.addEventListener('visibilitychange',updatePause);
   for(const button of pad.querySelectorAll('button')){
     button.onpointerdown=e=>{
       if(!canMove(state?.phase))return;e.preventDefault();button.setPointerCapture(e.pointerId);held.add(button.dataset.key);controls();
