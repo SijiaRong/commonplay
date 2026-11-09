@@ -18,6 +18,7 @@ const clamp=T.MathUtils.clamp, mix=T.MathUtils.lerp;
 const smooth=(rate,dt)=>1-Math.exp(-rate*dt);
 
 export async function play(progress){
+  if (!progress?.set) progress = {set(){}};
   const canvas=document.createElement('canvas');
   $('#world').append(canvas);
   const {film,quality,lite}=createSlideFilm(canvas);
@@ -41,14 +42,16 @@ export async function play(progress){
     classic?fetch('./slide/path.json').then(r=>{if(!r.ok)throw Error('赛道路径读取失败');return r.json()}):null,
     loadDaylight(film), getMaterials(quality,renderer,{lite}).ready
   ]);
-  progress.value = 2;
+  progress.set('materials', 1);
+  progress.set('background', 1);
+  progress.set('character', 1);
   await installSettings(film, getMaterials(quality,renderer,{lite}), classic ? 'stardust-slalom' : 'orbital-sprint');
   if(classic){
   scene.add(course.scene);
   course.scene.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true}});
   await restoreCourseMaterials(course,renderer,{quality,lite});
   }
-  progress.value = 3;
+  if (classic) { progress.set('runway', 1); progress.set('course', 1); }
   const player=new T.Group();scene.add(player);
   let rider=roster.rider;
   let bear=rider.model, seatedOffset=rider.seatedOffset, seatedHeight=rider.seatedHeight;
@@ -73,18 +76,18 @@ export async function play(progress){
     const {startSolo}=party ? await import('../solo/room-play.js') : await import('../solo/play.js?v=start5');
     let roomOptions={};
     if(party){
-      const {loadParkModels}=await import('../solo/js/render/park.js');
       const {updateAcrylicBackdrop}=await import('../solo/js/render/acrylic.js');
       const {pieceNames}=await import('../solo/course-labels.js');
       roomOptions={partyOnly:true,definitions:roster.characters,character:()=>roster.selected.id,loader,createRider,
-        createContactShadow,pieceNames,parkModels:await loadParkModels(),partyStyles:'./solo/room.css',
+        createContactShadow,pieceNames,parkModels:new Map(),partyStyles:'./solo/room.css',
         lightCourse(course,position){course.illuminate(position);updateAcrylicBackdrop(course.mats.acrylic,film)}
       };
     }
-    game=await startSolo({...roomOptions,framePicker,film,player,quality,lite,held,
+    game=await startSolo({...roomOptions,framePicker,film,player,quality,lite,held,loading:progress,
       rider:()=>rider,contact:()=>contact,blocked:()=>pickerBlocked()||settingsOpen(),
       setMode:value=>{mode=value}
     });
+    progress.set('course', 1);
     enablePicker();
     return;
   }

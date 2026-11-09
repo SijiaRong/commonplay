@@ -346,6 +346,7 @@ export class CourseView {
   }
 
   dispose() {
+    this.disposed = true;
     // The loaded model is reused across resets.
     if (this.runway) this.group.remove(this.runway);
     this.group.traverse((o) => {

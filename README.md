@@ -8,7 +8,7 @@ Commonplay 是项目名称，主线游戏定名为《泡泡星港》。
 
 ## 正式部署版本
 
-**泡泡星城**是原「小熊滑滑梯」的正式名称。阿里云测试服使用本仓库 `teddy-playground/` 下的游戏和派对服务器，发布入口为 [泡泡星城](https://actionl.ink/bubbleport/)。`bubbleport-demo/` 是独立的「泡泡星港」赛道原型。更新测试服时，请从 `teddy-playground/server/` 运行服务，并将入口及其 WebSocket 请求转发到同一服务。[服务器运行说明](teddy-playground/server/README.md)
+**泡泡星城**是原「小熊滑滑梯」的正式名称。阿里云测试服的游戏页面来自 `bubblecity-teddy-slide/dist/`，派对服务器从 `teddy-playground/server/` 使用 `npm run bubblecity` 启动，发布入口为 [泡泡星城](https://actionl.ink/bubbleport/)。此版本保留高清载入图，显示载入百分比，并按需补齐正式游戏资源。`bubbleport-demo/` 是独立的「泡泡星港」赛道原型。发布时通过 `PORT` 指定服务端口，并将页面及其 WebSocket 请求转发到同一服务。[试玩与开服说明](bubblecity-teddy-slide/README.md)
 
 ## 当前状态
 

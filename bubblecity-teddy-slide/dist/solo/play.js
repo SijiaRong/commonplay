@@ -1,3 +1,4 @@
+import {loadProgressModel, upgradeModelTextures} from '../slide/progressive-assets.js';
 import {createMobileControls} from '../slide/mobile-controls.js';
 import {stageNames, pieceNames, courseSeed} from './course-labels.js';
 import {loadLostPack} from '../slide/lost-pack.js';
@@ -8,7 +9,6 @@ import {createViewInput} from './view-input.js';
 import {openAuthority} from './transport.js';
 import {GLTFLoader} from '../vendor/GLTFLoader.js';
 import {updateAcrylicBackdrop} from './js/render/acrylic.js';
-import {loadParkModels} from './js/render/park.js';
 import {CourseView} from './js/render/courseView.js';
 import {focusRider} from '../slide/film/scene.js';
 import {GroundMotion} from '../slide/ground-motion.mjs';
@@ -32,6 +32,8 @@ const damping=(k,dt)=>1-Math.exp(-k*dt);
 const angle=(a,b)=>Math.atan2(Math.sin(b-a),Math.cos(b-a));
 
 export async function startSolo(host){
+  let firstFrame, firstFailure;
+  const firstReady = new Promise((resolve, reject) => {firstFrame = resolve;firstFailure = reject;});
   const {film,player,quality,held}=host,{scene,camera,renderer}=film;
   const style=document.createElement('link');style.rel='stylesheet';style.href='./solo/solo.css?v=start5';document.head.append(style);
   const seed=courseSeed(new URLSearchParams(location.search));
@@ -59,11 +61,13 @@ export async function startSolo(host){
   reveal.setAttribute('aria-live','polite');
   reveal.innerHTML='<h2>本局随机技能</h2><ul></ul>';
   document.body.append(countdown,reveal);
-  const runwayUrl=new URL('./models/quilted-runway.glb',import.meta.url);
-  const [parkModels,runway]=await Promise.all([loadParkModels(),new GLTFLoader().loadAsync(runwayUrl.href).then(gltf=>gltf.scene).catch(error=>{
+  const runwayUrl=new URL('./models/quilted-runway-startup.glb',import.meta.url);
+  const parkModels = new Map();
+  const [runway]=await Promise.all([loadProgressModel(new GLTFLoader(),runwayUrl.href,'runway',637812).then(gltf=>{upgradeModelTextures(gltf.scene,runwayUrl.href);return gltf.scene}).catch(error=>{
       console.warn('软垫模型加载失败，使用本地软垫',error);
       return null;
     })]);
+  host.loading?.set('runway',1);
   runway?.traverse(mesh=>{if(mesh.isMesh){mesh.castShadow=true;mesh.receiveShadow=true}});
   const needsWood=stageNames.some((_,i)=>Object.values(materialEdits(seed,i).values).some(v=>Object.hasOwn(woodFinishes,v.preset)));
   const wood=needsWood ? await loadLostPack(renderer,host.lite) : null;
@@ -94,7 +98,7 @@ export async function startSolo(host){
     $('#launch').hidden=false;$('#result').textContent='';$('#go').disabled=true;
     reveal.hidden=countdown.hidden=true;
     worker=openAuthority();
-    worker.onerror=e=>{view.unlock();console.error(e);$('#launch').hidden=false;$('#result').textContent='模拟加载失败，请重新开始';$('#go').textContent='重新加载';$('#go').disabled=false;state=null};
+    worker.onerror=e=>{firstFailure?.(e.error || new Error('模拟加载失败'));view.unlock();console.error(e);$('#launch').hidden=false;$('#result').textContent='模拟加载失败，请重新开始';$('#go').textContent='重新加载';$('#go').disabled=false;state=null};
     worker.onmessage=({data:m})=>{
       if(m.type==='course'){
         if(course){restoreEdits();scene.remove(course.group);course.dispose()}
@@ -232,9 +236,11 @@ export async function startSolo(host){
     film.setFrameBudget(1/60,racing);
     updateAcrylicBackdrop(course.mats.acrylic,film);
     film.render(dt);
+    if(firstFrame){host.loading?.set('course',1);firstFrame();firstFrame=null;}
   }
   reset();film.resize();
   let last=performance.now();
   renderer.setAnimationLoop(now=>{const dt=Math.min(.08,(now-last)/1000);last=now;draw(dt,now)});
+  await firstReady;
   return {reset,start};
 }

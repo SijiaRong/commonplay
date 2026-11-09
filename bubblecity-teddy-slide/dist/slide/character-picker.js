@@ -1,3 +1,4 @@
+import {loadProgressModel, upgradeModelTextures} from './progressive-assets.js';
 import {TextureLoader, SRGBColorSpace} from 'three';
 import {createRider} from './rider.js?v=dock';
 
@@ -13,8 +14,12 @@ export async function loadRoster(loader, scale) {
   try { saved = localStorage.getItem(storageKey); } catch {}
   let selected = characters.find(character => character.id === saved && character.ready) || teddy;
   async function load(character) {
-    const gltf = await loader.loadAsync(character.model);
+    const gltf = await loadProgressModel(loader, character.model, 'character', character.modelBytes).catch(error => {
+      if (!character.fallbackModel) throw error;
+      return loader.loadAsync(character.fallbackModel);
+    });
     const rider = createRider(gltf, {...character, scale: scale ?? character.scale});
+    upgradeModelTextures(rider.model, character.model);
     rider.reset();
     return rider;
   }
@@ -67,7 +72,9 @@ export function installCharacterPicker(roster, {player, renderer, camera, scene,
     button.className = 'character-card';
     button.dataset.character = character.id;
     button.innerHTML = '<img alt=""><strong></strong><span class="character-state" aria-hidden="true"></span>';
-    button.querySelector('img').src = character.preview;
+    button.querySelector('img').loading = 'lazy';
+    button.querySelector('img').decoding = 'async';
+    button.querySelector('img').dataset.src = character.preview;
     button.querySelector('strong').textContent = character.name;
     button.title = character.tagline;
     choices.append(button);
@@ -104,6 +111,7 @@ export function installCharacterPicker(roster, {player, renderer, camera, scene,
     status.textContent = '';
     previousBackground = scene.background;
     dialog.showModal();
+    for (const image of choices.querySelectorAll('img[data-src]')) { image.src = image.dataset.src; image.removeAttribute('data-src'); }
     for (const object of scene.children) {
       if (object.visible && object !== player && !object.isLight) {
         hiddenScenery.push(object);

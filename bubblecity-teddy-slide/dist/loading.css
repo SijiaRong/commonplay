@@ -47,3 +47,7 @@
   color-scheme: dark;
 }
 #loading-progress[hidden] { display: none; }
+
+.loading-status { display:flex; justify-content:space-between; align-items:center; gap:24px; width:min(320px,100%); margin-top:14px; font-size:14px; }
+.loading-status[hidden] { display:none; }
+#loading-percent { font-weight:700; font-variant-numeric:tabular-nums; }
