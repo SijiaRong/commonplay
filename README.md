@@ -6,6 +6,12 @@ An open-source 3D party racing and obstacle-course game project started at AI Ha
 
 Commonplay 是项目名称，主线游戏定名为《泡泡星港》。
 
+## 当前版本与历史 demo
+
+当前游戏与美术参考以[已部署的泡泡星港版本](https://actionl.ink/bubbleport/)为准，页面当前显示名称为「泡泡星城」，发布目录为 `bubblecity-teddy-slide/dist/`。默认角色是缝线小熊。
+
+`bubbleport-circuit/`（环港线）是开发阶段的场景展示 demo 和中间产物，不是最终游戏，旧全港预览不作为当前游戏或最终画风的依据。`bubbleport-demo/`、`bubbleport-segment-designs/`、`bubbleport-material-lab/` 等属于历史原型或设计实验；其中的单个模型、材质和工具可以审核后复用，但不能将这些演示画面标为正式部署版本。
+
 ## 正式部署版本
 
 **泡泡星城**是原「小熊滑滑梯」的正式名称。阿里云测试服的游戏页面来自 `bubblecity-teddy-slide/dist/`，派对服务器从 `teddy-playground/server/` 使用 `npm run bubblecity` 启动，发布入口为 [泡泡星城](https://actionl.ink/bubbleport/)。此版本保留高清载入图，显示载入百分比，并按需补齐正式游戏资源。`bubbleport-demo/` 是独立的「泡泡星港」赛道原型。发布时通过 `PORT` 指定服务端口，并将页面及其 WebSocket 请求转发到同一服务。[试玩与开服说明](bubblecity-teddy-slide/README.md)

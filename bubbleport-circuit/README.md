@@ -1,5 +1,7 @@
 # 泡泡星港 · 环港线
 
+**版本状态：开发阶段场景展示 demo 和中间产物，不是最终游戏。** 本目录及其 `overview.jpg` 仅保留历史过程，不能作为已部署泡泡星港的游戏画面或最终美术基准。当前版本请查看[线上游戏](https://actionl.ink/bubbleport/)和[发布目录说明](../bubblecity-teddy-slide/README.md)。模型和材质可逐项审核复用，版本状态不等于素材被全部废弃。
+
 在仓库根目录运行 `python3 -m http.server 8893 --bind 127.0.0.1`，打开[环港线场景](http://127.0.0.1:8893/bubbleport-circuit/)。拖动旋转、滚轮缩放；底部可选全港、三个分区和约 48 秒的沿线漫游。
 
 ![全港预览](overview.jpg)
