@@ -233,7 +233,7 @@ export async function startSolo(host){
     camera.lookAt(look);
     focus.set(worldPos.x,player.position.y+rider.seatedHeight*.56,worldPos.z);
     focusRider(film,focus,rider.seatedHeight*.5,ready?'ready':finished?'finish':'riding',snap);snap=false;
-    film.setFrameBudget(1/60,racing);
+    film.setFrameBudget(1/60,!host.blocked());
     updateAcrylicBackdrop(course.mats.acrylic,film);
     film.render(dt);
     if(firstFrame){host.loading?.set('course',1);firstFrame();firstFrame=null;}

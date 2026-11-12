@@ -545,7 +545,7 @@ export async function startSolo(host){
     if(snap){camera.position.copy(eye);look.copy(focus)}else{camera.position.lerp(eye,damping(10,dt));look.lerp(focus,damping(18,dt))}
     camera.lookAt(look.x+dx,look.y,look.z+dz);
     focusRider(film,focus,seatedHeight*.5,ready?'ready':finished?'finish':'riding',snap);snap=false;
-    film.setFrameBudget(1/60,racing);film.render(dt);
+    film.setFrameBudget(1/60,!host.blocked());film.render(dt);
   }
 
   // Pick up an invitation link, otherwise open the solo menu.

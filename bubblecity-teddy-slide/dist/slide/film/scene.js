@@ -8,11 +8,12 @@ import * as THREE from 'three';
 import { FullScreenQuad } from 'three/addons/postprocessing/Pass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
+import { SpatialUpscaler } from './spatial-upscaler.js';
 
 export const QUALITY = {
   // dof: largest blur (px at 1080p) and the spiral step; a bigger step means fewer taps (about max^2 / 2step).
   // half: blur at half resolution and blend it over the sharp frame by focus, a quarter of the cost.
-  high: { pixelRatio: 1.5, shadow: 4096, shadowSpan: 50, msaa: 4, ao: true, dof: { max: 16, step: 2.2 }, bloom: true },
+  high: { pixelRatio: 2, shadow: 4096, shadowSpan: 50, msaa: 4, ao: true, dof: { max: 16, step: 2.2 }, bloom: true },
   medium: { pixelRatio: 1.25, shadow: 2048, shadowSpan: 50, msaa: 4, ao: false, dof: { max: 15, step: 2.4, half: true }, bloom: true },
   // shadowEvery: redraw the sun's shadow map every Nth frame (see render()).
   low: { pixelRatio: 1, shadow: 1024, shadowSpan: 42, shadowEvery: 2, msaa: 0, ao: false, dof: { max: 10, step: 2.8, half: true }, bloom: false },
@@ -190,7 +191,12 @@ export class Scene3D {
     this.tilt = { y: -0.2, core: 0.2, amt: 0, roll: 0, yT: -0.2, coreT: 0.2, amtT: 0, rollT: 0, up: 0.85, down: 0.5 };
     this.tiltPref = 1; // user setting: 0 off, 1 on, 1.4 strong
     this.quality = null;
+    // Keep presentation at the starting preset's density when the 3D scene
+    // scales down. Desktop starts at up to DPR 2; touch retains its lighter cap.
+    this.maxQuality = QUALITY[quality] ? quality : 'medium';
+    this.presentationCap = QUALITY[this.maxQuality].pixelRatio;
     this.resScale = 1;
+    this.upscaler = new SpatialUpscaler();
     this.time = 0;
     this.exposure = 1.0;
     this.fsq = new FullScreenQuad(null);
@@ -229,6 +235,16 @@ export class Scene3D {
     this.frameNo = 0;
     this.shadowFocus = new THREE.Vector3(Infinity, 0, 0);
     this._v = [new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()];
+    // Opt-in diagnostics, useful on a TV where its output mode alone cannot
+    // tell us the scene's real resolution or frame rate.
+    if (new URLSearchParams(location.search).has('fps')) {
+      this.meter = document.createElement('output');
+      this.meter.id = 'render-meter';
+      this.meter.style.cssText = 'position:fixed;left:12px;bottom:48px;z-index:1000;padding:5px 8px;border-radius:6px;background:#14251ed9;color:white;font:12px/1.5 monospace;pointer-events:none';
+      document.body.append(this.meter);
+      this.meterFrames = 0;
+      this.meterSince = null;
+    }
   }
 
   get Q() {
@@ -242,8 +258,6 @@ export class Scene3D {
     // The shadow map is recreated below: force a redraw on the next frame, whatever its parity.
     if (this.shadowFocus) this.shadowFocus.set(Infinity, 0, 0);
     const Q = QUALITY[q];
-    const r = this.renderer;
-    r.setPixelRatio(Math.min(window.devicePixelRatio || 1, Q.pixelRatio) * this.resScale);
     const s = this.sun.shadow;
     if (s.map) {
       s.map.dispose();
@@ -262,7 +276,7 @@ export class Scene3D {
     for (const t of [this.sceneRT, this.rtA, this.rtB, this.rtDof]) if (t) t.dispose();
     if (this.gtao) this.gtao.dispose();
     if (this.bloom) this.bloom.dispose();
-    const size = this.renderer.getDrawingBufferSize(new THREE.Vector2());
+    const size = this.getRenderSize();
     const w = Math.max(1, size.x), h = Math.max(1, size.y);
     const depth = new THREE.DepthTexture(w, h);
     depth.type = THREE.UnsignedIntType;
@@ -286,12 +300,23 @@ export class Scene3D {
     this.resize();
   }
 
+  getRenderSize() {
+    const ratio = Math.min(window.devicePixelRatio || 1, this.Q.pixelRatio) * this.resScale;
+    return new THREE.Vector2(Math.max(1, Math.floor(this.canvas.clientWidth * ratio)),
+      Math.max(1, Math.floor(this.canvas.clientHeight * ratio)));
+  }
+
   resize() {
     const w = Math.max(1, this.canvas.clientWidth), h = Math.max(1, this.canvas.clientHeight);
-    this.renderer.setSize(w, h, false);
+    // Re-read DPR on resize, including moves between monitors with different scaling.
+    const ratio = Math.min(window.devicePixelRatio || 1, this.presentationCap);
+    if (this.renderer.getPixelRatio() !== ratio) this.renderer.setPixelRatio(ratio);
+    const display = this.renderer.getSize(new THREE.Vector2());
+    // Changing only the scene scale must not clear/resize the presentation canvas.
+    if (display.x !== w || display.y !== h) this.renderer.setSize(w, h, false);
     this.camera.aspect = w / Math.max(1, h);
     this.camera.updateProjectionMatrix();
-    const size = this.renderer.getDrawingBufferSize(new THREE.Vector2());
+    const size = this.getRenderSize();
     const W = Math.max(1, size.x), H = Math.max(1, size.y);
     if (this.sceneRT && (this.sceneRT.width !== W || this.sceneRT.height !== H)) {
       this.sceneRT.setSize(W, H);
@@ -304,6 +329,7 @@ export class Scene3D {
     this.dofMat.uniforms.uTexel.value.set(1 / W, 1 / H);
     this.dofMat.uniforms.uAspect.value = W / H;
     this.gradeMat.uniforms.uRes.value.set(W, H);
+    this.upscaler.resize(W, H, W < this.canvas.width || H < this.canvas.height);
   }
 
   // Keeps the shadow frustum centered on what the camera looks at, snapped to texels to avoid shimmer.
@@ -434,32 +460,49 @@ export class Scene3D {
     g.uMini.value = dofActive ? Math.min(1, t.amt * ((lens?.tilt ?? 100) / 100)) : 0;
     g.uGrain.value = this.frozen ? 0 : this.quality === 'low' ? 0.02 : 0.032;
     this.fsq.material = this.gradeMat;
-    r.setRenderTarget(null);
+    // SGSR consumes the graded LDR image, before the browser's DOM UI. At
+    // native resolution bypass both the intermediate target and the upscale pass.
+    r.setRenderTarget(this.upscaler.target);
     this.fsq.render(r);
+    if (this.upscaler.target) this.upscaler.render(r, this.fsq);
+    if (this.meter) {
+      const now = performance.now();
+      this.meterSince ??= now;
+      this.meterFrames++;
+      if (now - this.meterSince >= 1000) {
+        const fps = Math.round(this.meterFrames * 1000 / (now - this.meterSince));
+        const size = `${this.sceneRT.width}×${this.sceneRT.height}`;
+        this.meter.value = `${fps} fps · ${size}` + (this.upscaler.target ?
+          ` → ${this.canvas.width}×${this.canvas.height} · ${this.upscaler.enhanced ? 'SGSR 1' : '标准放大'}` : ' · 原生');
+        this.meterFrames = 0;
+        this.meterSince = now;
+      }
+    }
     this.trackPerf(dt);
   }
 
   // Dynamic resolution: when frames run long (a heavy view, a warm phone throttling its GPU), render fewer pixels,
   // and creep back up once there is headroom. Only at the lowest scale does auto quality drop a whole level.
   trackPerf(dt) {
-    if (!this.adaptive) return;
+    if (!this.adaptive || dt <= 0 || !Number.isFinite(dt) || document.hidden) return;
     const ft = this.frameTimes;
     ft.push(Math.min(dt, 0.1));
-    if (ft.length > 90) ft.shift();
+    if (ft.length > 60) ft.shift();
     const now = performance.now();
-    if (ft.length < 90 || now - this.lastResChange < 1500) return;
-    // Ignore the slowest tenth (shader compiles, uploads, tab switches): they are hitches, not load.
+    if (ft.length < 30 || now - this.lastResChange < 1000) return;
+    // Ignore isolated uploads/compiles, but keep recurring missed refreshes.
     const sorted = ft.slice().sort((a, b) => a - b);
+    const count = Math.ceil(sorted.length * 0.95);
     let sum = 0;
-    for (let i = 0; i < 81; i++) sum += sorted[i];
-    const avg = sum / 81;
+    for (let i = 0; i < count; i++) sum += sorted[i];
+    const avg = sum / count;
     const B = this.frameBudget;
     if (avg <= B * 1.33) this.slowStrikes = 0;
-    if (avg > B * 1.2) {
+    if (avg > B * 1.05) {
       if (this.resScale > RES_MIN + 0.01) {
         this.setResScale(Math.max(RES_MIN, this.resScale * 0.87));
         this.upWait = Math.min(30000, this.upWait * 2);
-      } else if (this.autoQuality && this.quality !== 'low' && now - this.lastDowngrade > 8000) {
+      } else if (this.autoQuality && this.quality !== 'low' && now - this.lastDowngrade > 4000) {
         const next = this.quality === 'high' ? 'medium' : 'low';
         this.lastDowngrade = now;
         this.resScale = 0.87;
@@ -467,6 +510,12 @@ export class Scene3D {
         this.lastResChange = now;
         ft.length = 0;
         if (this.onQualityChange) this.onQualityChange(next);
+      } else if ((this.quality === 'low' || !this.autoQuality) && this.upscaler.target && this.upscaler.enhanced && avg > B * 1.15) {
+        // On very slow devices the full-size reconstruction can itself be
+        // significant. Prefer the cheaper bilinear pass before giving up frames.
+        this.upscaler.enhanced = false;
+        this.lastResChange = now;
+        ft.length = 0;
       } else if (this.onSustainedSlow && (this.quality === 'low' || !this.autoQuality) && avg > B * 1.33) {
         // Nothing left to turn down and still under ~45 fps: two checks in a row and main.js may lock to 30 fps,
         // which paces evenly and runs the phone cooler than an uneven 35-45.
@@ -477,9 +526,21 @@ export class Scene3D {
           fn();
         }
       }
-    } else if (avg < B * 1.05 && this.resScale < 1 && now - this.lastResChange > this.upWait) {
-      this.setResScale(Math.min(1, this.resScale / 0.87));
+    } else if (avg <= B * 1.02 && this.resScale < 1 && now - this.lastResChange > this.upWait) {
+      this.setResScale(Math.min(1, this.resScale / 0.94));
       this.upWait = Math.max(4000, this.upWait / 2);
+    } else if (avg <= B * 1.02 && this.resScale === 1 && this.autoQuality && this.Q.pixelRatio < QUALITY[this.maxQuality].pixelRatio &&
+        now - Math.max(this.lastDowngrade, this.lastResChange) > 20000) {
+      // Probe the next preset slowly, keeping almost the same scene pixel
+      // count. A lighter later stage can eventually return to native desktop 4K.
+      const next = this.quality === 'low' ? 'medium' : 'high';
+      const dpr = window.devicePixelRatio || 1;
+      this.resScale = Math.max(RES_MIN, Math.min(dpr, this.Q.pixelRatio) / Math.min(dpr, QUALITY[next].pixelRatio));
+      this.lastDowngrade = this.lastResChange = now;
+      this.upscaler.enhanced = true;
+      this.setQuality(next);
+      ft.length = 0;
+      if (this.onQualityChange) this.onQualityChange(next);
     }
   }
 
@@ -495,8 +556,7 @@ export class Scene3D {
   }
 
   setResScale(k) {
-    this.resScale = k;
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, this.Q.pixelRatio) * k);
+    this.resScale = Math.max(RES_MIN, Math.min(1, k));
     this.resize();
     this.lastResChange = performance.now();
     this.frameTimes.length = 0;

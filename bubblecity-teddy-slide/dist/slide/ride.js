@@ -249,7 +249,7 @@ export async function play(progress){
       phaseTime+=dt;if(phaseTime>=rider.duration('FinishWave'))pose('Idle');
     }
     rider.animate(dt,steering,speed);draw(dt);
-    film.setFrameBudget(1/60,mode==='riding');
+    film.setFrameBudget(1/60,!pickerBlocked());
     film.render(dt);
   });
 }
